@@ -5,6 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/misterdortnal/CLionProjects/Inanna/Assets/Resources.cpp" "/home/misterdortnal/CLionProjects/Inanna/cmake-build-debug/CMakeFiles/Inanna.dir/Assets/Resources.cpp.o"
+  "/home/misterdortnal/CLionProjects/Inanna/Server/GameAdapter.cpp" "/home/misterdortnal/CLionProjects/Inanna/cmake-build-debug/CMakeFiles/Inanna.dir/Server/GameAdapter.cpp.o"
+  "/home/misterdortnal/CLionProjects/Inanna/Server/GameServer.cpp" "/home/misterdortnal/CLionProjects/Inanna/cmake-build-debug/CMakeFiles/Inanna.dir/Server/GameServer.cpp.o"
   "/home/misterdortnal/CLionProjects/Inanna/main.cpp" "/home/misterdortnal/CLionProjects/Inanna/cmake-build-debug/CMakeFiles/Inanna.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
@@ -13,6 +15,8 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/SDL2"
   "/usr/include/Box2D"
+  "/usr/local/include"
+  "/usr/local/include/flatbuffers"
   "../src"
   )
 

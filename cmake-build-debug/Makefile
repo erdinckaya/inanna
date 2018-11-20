@@ -150,6 +150,60 @@ Assets/Resources.cpp.s:
 	$(MAKE) -f CMakeFiles/Inanna.dir/build.make CMakeFiles/Inanna.dir/Assets/Resources.cpp.s
 .PHONY : Assets/Resources.cpp.s
 
+Server/GameAdapter.o: Server/GameAdapter.cpp.o
+
+.PHONY : Server/GameAdapter.o
+
+# target to build an object file
+Server/GameAdapter.cpp.o:
+	$(MAKE) -f CMakeFiles/Inanna.dir/build.make CMakeFiles/Inanna.dir/Server/GameAdapter.cpp.o
+.PHONY : Server/GameAdapter.cpp.o
+
+Server/GameAdapter.i: Server/GameAdapter.cpp.i
+
+.PHONY : Server/GameAdapter.i
+
+# target to preprocess a source file
+Server/GameAdapter.cpp.i:
+	$(MAKE) -f CMakeFiles/Inanna.dir/build.make CMakeFiles/Inanna.dir/Server/GameAdapter.cpp.i
+.PHONY : Server/GameAdapter.cpp.i
+
+Server/GameAdapter.s: Server/GameAdapter.cpp.s
+
+.PHONY : Server/GameAdapter.s
+
+# target to generate assembly for a file
+Server/GameAdapter.cpp.s:
+	$(MAKE) -f CMakeFiles/Inanna.dir/build.make CMakeFiles/Inanna.dir/Server/GameAdapter.cpp.s
+.PHONY : Server/GameAdapter.cpp.s
+
+Server/GameServer.o: Server/GameServer.cpp.o
+
+.PHONY : Server/GameServer.o
+
+# target to build an object file
+Server/GameServer.cpp.o:
+	$(MAKE) -f CMakeFiles/Inanna.dir/build.make CMakeFiles/Inanna.dir/Server/GameServer.cpp.o
+.PHONY : Server/GameServer.cpp.o
+
+Server/GameServer.i: Server/GameServer.cpp.i
+
+.PHONY : Server/GameServer.i
+
+# target to preprocess a source file
+Server/GameServer.cpp.i:
+	$(MAKE) -f CMakeFiles/Inanna.dir/build.make CMakeFiles/Inanna.dir/Server/GameServer.cpp.i
+.PHONY : Server/GameServer.cpp.i
+
+Server/GameServer.s: Server/GameServer.cpp.s
+
+.PHONY : Server/GameServer.s
+
+# target to generate assembly for a file
+Server/GameServer.cpp.s:
+	$(MAKE) -f CMakeFiles/Inanna.dir/build.make CMakeFiles/Inanna.dir/Server/GameServer.cpp.s
+.PHONY : Server/GameServer.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -189,6 +243,12 @@ help:
 	@echo "... Assets/Resources.o"
 	@echo "... Assets/Resources.i"
 	@echo "... Assets/Resources.s"
+	@echo "... Server/GameAdapter.o"
+	@echo "... Server/GameAdapter.i"
+	@echo "... Server/GameAdapter.s"
+	@echo "... Server/GameServer.o"
+	@echo "... Server/GameServer.i"
+	@echo "... Server/GameServer.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

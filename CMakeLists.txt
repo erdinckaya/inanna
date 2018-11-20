@@ -12,6 +12,11 @@ find_package(SDL2_ttf REQUIRED)
 find_package(BOX2D REQUIRED)
 find_package(Glew REQUIRED)
 find_package(Glut REQUIRED)
+find_package(Entityx REQUIRED)
+find_package(flatbuffers REQUIRED)
+find_package(Yojimbo REQUIRED)
+find_package(Mbedtls REQUIRED)
+find_package(Sodium REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIR}
         ${SDL2_IMAGE_INCLUDE_DIR}
@@ -20,9 +25,13 @@ include_directories(${SDL2_INCLUDE_DIR}
         ${OPENGL_INCLUDE_DIR}
         ${GLEW_INCLUDE_DIR}
         ${GLUT_INCLUDE_DIR}
+        ${ENTITYX_INCLUDE_DIR}
+        ${FLATBUFFERS_INCLUDE_DIR}
+        ${MBEDTLS_INCLUDE_DIRS}
+        ${SODIUM_INCLUDE_DIR}
         src)
 
-add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp)
+add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Server/GameServer.cpp Server/GameServer.h Server/GameAdapter.cpp Server/GameAdapter.h Server/GameChannel.h Server/GameConnectionConfig.h Server/GameMessageFactory.h Server/GameMessageType.h Server/MyMessage.h)
 
 
 target_link_libraries(Inanna ${SDL2_LIBRARY}
@@ -32,4 +41,9 @@ target_link_libraries(Inanna ${SDL2_LIBRARY}
         ${GLUT_glut_LIBRARY}
         ${GLEW_LIBRARY}
         ${BOX2D_LIBRARY}
+        ${ENTITYX_LIBRARY}
+        ${FLATBUFFERS_LIBRARY}
+        ${YOJIMBO_LIBRARY}
+        ${MBEDTLS_LIBRARIES}
+        ${SODIUM_LIBRARY}
         )

@@ -4,6 +4,46 @@
 CMakeFiles/Inanna.dir/Assets/Resources.cpp.o
  /home/misterdortnal/CLionProjects/Inanna/Assets/Resources.cpp
  /home/misterdortnal/CLionProjects/Inanna/Assets/Resources.h
+CMakeFiles/Inanna.dir/Server/GameAdapter.cpp.o
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameAdapter.cpp
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameAdapter.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameChannel.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameConnectionConfig.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameMessageFactory.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameMessageType.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameServer.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/MyMessage.h
+ /usr/local/include/shared.h
+ /usr/local/include/yojimbo.h
+CMakeFiles/Inanna.dir/Server/GameServer.cpp.o
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameAdapter.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameChannel.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameConnectionConfig.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameMessageFactory.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameMessageType.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameServer.cpp
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameServer.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/MyMessage.h
+ /usr/local/include/shared.h
+ /usr/local/include/yojimbo.h
 CMakeFiles/Inanna.dir/main.cpp.o
  /home/misterdortnal/CLionProjects/Inanna/Assets/Resources.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameAdapter.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameChannel.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameConnectionConfig.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameMessageFactory.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameMessageType.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/GameServer.h
+ /home/misterdortnal/CLionProjects/Inanna/Server/MyMessage.h
  /home/misterdortnal/CLionProjects/Inanna/main.cpp
+ /usr/local/include/entityx/3rdparty/simplesignal.h
+ /usr/local/include/entityx/Entity.h
+ /usr/local/include/entityx/Event.h
+ /usr/local/include/entityx/System.h
+ /usr/local/include/entityx/config.h
+ /usr/local/include/entityx/entityx.h
+ /usr/local/include/entityx/help/NonCopyable.h
+ /usr/local/include/entityx/help/Pool.h
+ /usr/local/include/entityx/quick.h
+ /usr/local/include/shared.h
+ /usr/local/include/yojimbo.h

@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/include/SDL2 -I/usr/include/Box2D -I/home/misterdortnal/CLionProjects/Inanna/src 
+CXX_INCLUDES = -I/usr/include/SDL2 -I/usr/include/Box2D -I/usr/local/include -I/usr/local/include/flatbuffers -I/home/misterdortnal/CLionProjects/Inanna/src 
 

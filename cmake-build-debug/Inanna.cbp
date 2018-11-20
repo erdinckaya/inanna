@@ -46,12 +46,13 @@
 				<Compiler>
 					<Add directory="/usr/include/SDL2"/>
 					<Add directory="/usr/include/Box2D"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/flatbuffers"/>
 					<Add directory="/home/misterdortnal/CLionProjects/Inanna/src"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
@@ -72,12 +73,13 @@
 				<Compiler>
 					<Add directory="/usr/include/SDL2"/>
 					<Add directory="/usr/include/Box2D"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/include/flatbuffers"/>
 					<Add directory="/home/misterdortnal/CLionProjects/Inanna/src"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
@@ -96,6 +98,33 @@
 		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/Assets/Resources.h">
 			<Option target="Inanna"/>
 		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/Server/GameAdapter.cpp">
+			<Option target="Inanna"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/Server/GameAdapter.h">
+			<Option target="Inanna"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/Server/GameChannel.h">
+			<Option target="Inanna"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/Server/GameConnectionConfig.h">
+			<Option target="Inanna"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/Server/GameMessageFactory.h">
+			<Option target="Inanna"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/Server/GameMessageType.h">
+			<Option target="Inanna"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/Server/GameServer.cpp">
+			<Option target="Inanna"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/Server/GameServer.h">
+			<Option target="Inanna"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/Server/MyMessage.h">
+			<Option target="Inanna"/>
+		</Unit>
 		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/main.cpp">
 			<Option target="Inanna"/>
 		</Unit>
@@ -105,10 +134,16 @@
 		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/cmake/FindBOX2D.cmake">
 			<Option virtualFolder="CMake Files\cmake\"/>
 		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/cmake/FindEntityx.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
 		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/cmake/FindGlew.cmake">
 			<Option virtualFolder="CMake Files\cmake\"/>
 		</Unit>
 		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/cmake/FindGlut.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/cmake/FindMbedtls.cmake">
 			<Option virtualFolder="CMake Files\cmake\"/>
 		</Unit>
 		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/cmake/FindOpenGL.cmake">
@@ -121,6 +156,15 @@
 			<Option virtualFolder="CMake Files\cmake\"/>
 		</Unit>
 		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/cmake/FindSDL2_ttf.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/cmake/FindSodium.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/cmake/FindYojimbo.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/home/misterdortnal/CLionProjects/Inanna/cmake/Findflatbuffers.cmake">
 			<Option virtualFolder="CMake Files\cmake\"/>
 		</Unit>
 	</Project>
