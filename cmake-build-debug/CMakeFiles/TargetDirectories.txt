@@ -1,3 +1,0 @@
-/home/misterdortnal/CLionProjects/Inanna/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/misterdortnal/CLionProjects/Inanna/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/misterdortnal/CLionProjects/Inanna/cmake-build-debug/CMakeFiles/Inanna.dir
