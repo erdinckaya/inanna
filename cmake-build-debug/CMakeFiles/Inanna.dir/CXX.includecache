@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/misterdortnal/CLionProjects/Inanna/Assets/Resources.cpp
+Resources.h
+/home/misterdortnal/CLionProjects/Inanna/Assets/Resources.h
+
+/home/misterdortnal/CLionProjects/Inanna/Assets/Resources.h
+
+/home/misterdortnal/CLionProjects/Inanna/main.cpp
+iostream
+-
+Assets/Resources.h
+/home/misterdortnal/CLionProjects/Inanna/Assets/Resources.h
+
