@@ -21,9 +21,7 @@ Inanna::World::~World() {
 
 void Inanna::World::Start() {
 
-#ifdef GRAPHICS_TEST
-    OnTest();
-#endif
+
 
     SDL_Event event{};
     while (isExist) {
@@ -35,6 +33,10 @@ void Inanna::World::Start() {
 //        }
 
 //        OnLoop();
+#ifdef GRAPHICS_TEST
+        OnTest();
+#endif
+
         OnRender(FPS);
 //        physics->Update(kFps);
         const auto ms_per_frame = static_cast<const Uint32>(1000/*ms*/ / FPS);
@@ -54,7 +56,18 @@ void Inanna::World::BringDoom() {
 }
 
 void Inanna::World::OnTest() {
+    auto blue = Resources::PIECES.PIECES_BLUE;
+    Rectf clip = {
+            0.0f, 0.0f,
+            blue.w, blue.h
+    };
 
+    Rectf pos = {
+            0.0f, 0.0f,
+            blue.w, blue.h
+    };
+
+    graphics->DrawTexture(Resources::PIECES.PIECES_BLUE, clip, pos);
 }
 
 void Inanna::World::OnRender(float dt) {

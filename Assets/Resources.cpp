@@ -7,4 +7,4 @@ Pieces Resources::PIECES;
 
 int Resources::SheetCount = 1;
 
-const std::string Resources::Sheets[1] = {Resources::PIECES.name};
+const Sheet Resources::Sheets[1] = {Sheet(Resources::PIECES.name, Resources::PIECES.path)};

@@ -33,6 +33,15 @@ image_class_str = \
 #define RESOURCEMANAGER_RESOURCES_H
 
 #include<string>
+
+struct Sheet {
+public:
+    Sheet(const char* name, const char* path) : name(name), path(path) {}
+    
+    const char* name;
+    const char* path;
+};
+
     
 struct ImageAsset {
 public:
@@ -71,7 +80,7 @@ result_str += image_class_str
 
 assets_assets_class_str = """
 
-struct %s {
+struct %s : public Sheet {
 
 public:
     %s() :
@@ -119,17 +128,20 @@ for resource in resources:
         assets_values_class_str += "\t\t%s(\"%s\", %ff, %ff, %ff, %ff, %ff, %ff, \"%s\", \"%s\")%s\n" % (id.upper(), id, x, y, w, h, sheet_width, sheet_height, name, sheet_format, comma)
 
 
-    assets_values_class_str += "\t\tpath(\"%s\"),\n" % path
-    asset_definition_class_str += "\tconst char* path;\n"
-    assets_values_class_str += "\t\tname(\"%s\")\n" % name
-    asset_definition_class_str += "\tconst char* name;\n"
+    # assets_values_class_str += "\t\tpath(\"%s\"),\n" % path
+    assets_values_class_str += "\t\tSheet(\"%s\", \"%s\")\n" % (name, path)
+    # asset_definition_class_str += "\tconst char* path;\n"
+
+    # assets_values_class_str += "\t\tname(\"%s\")\n" % name
+    # asset_definition_class_str += "\tconst char* name;\n"
+
     result_str += assets_assets_class_str % (name.title(), name.title(), assets_values_class_str, asset_definition_class_str)
     atlas_class_str += "\tstatic %s %s;\n" % (name.title(), name.upper())
 
     cpp_file_value_str += "%s Resources::%s;\n" % (name.title(), name.upper())
 
     s_comma = ", " if len(resources) != resource_count else ""
-    sheet_arr_str += "Resources::%s.name" % (name.upper())
+    sheet_arr_str += "Sheet(Resources::%s.name, Resources::%s.path)%s" % (name.upper(), name.upper(), s_comma)
 
 
 
@@ -139,7 +151,7 @@ public:
 %s
 
 \tstatic int SheetCount;
-\tstatic const std::string Sheets[%d];
+\tstatic const Sheet Sheets[%d];
 };
 
 
@@ -159,7 +171,7 @@ cpp_file_str = """
 
 int Resources::SheetCount = %d;
 
-const std::string Resources::Sheets[%d] = {%s};
+const Sheet Resources::Sheets[%d] = {%s};
 """ % (cpp_file_value_str, len(resources), len(resources), sheet_arr_str)
 
 

@@ -3,6 +3,15 @@
 #define RESOURCEMANAGER_RESOURCES_H
 
 #include<string>
+
+struct Sheet {
+public:
+    Sheet(const char* name, const char* path) : name(name), path(path) {}
+    
+    const char* name;
+    const char* path;
+};
+
     
 struct ImageAsset {
 public:
@@ -37,7 +46,7 @@ public:
 
 
 
-struct Pieces {
+struct Pieces : public Sheet {
 
 public:
     Pieces() :
@@ -49,8 +58,7 @@ public:
 		PIECES_PURPLE("pieces_purple", 512.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
 		PIECES_RED("pieces_red", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
 		PIECES_YELLOW("pieces_yellow", 256.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		path("/home/misterdortnal/CLionProjects/Inanna/Resources/pieces.png"),
-		name("pieces")
+		Sheet("pieces", "/home/misterdortnal/CLionProjects/Inanna/Resources/pieces.png")
 
     {}
 
@@ -62,8 +70,6 @@ public:
 	ImageAsset PIECES_PURPLE;
 	ImageAsset PIECES_RED;
 	ImageAsset PIECES_YELLOW;
-	const char* path;
-	const char* name;
 
 
 };
@@ -74,7 +80,7 @@ public:
 
 
 	static int SheetCount;
-	static const std::string Sheets[1];
+	static const Sheet Sheets[1];
 };
 
 

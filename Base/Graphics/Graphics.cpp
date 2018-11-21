@@ -2,13 +2,13 @@
 // Created by misterdortnal on 21.11.2018.
 //
 
-#include <GLES2/gl2.h>
-#include <GL/gl.h>
+
 #include "Graphics.h"
 
 
-Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags), window(width, height),
-                                                                                     context(window) {
+Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags),
+                                                                                             window(width, height),
+                                                                                             context(window) {
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
@@ -19,7 +19,7 @@ Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFl
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    initResources();
+    InitResources();
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -35,8 +35,39 @@ Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFl
 Inanna::Graphics::~Graphics() = default;
 
 
-void Inanna::Graphics::initResources() {
+void Inanna::Graphics::InitResources() {
+    auto sheetCount = Resources::SheetCount;
+    auto sheets = Resources::Sheets;
+    for (int i = 0; i < sheetCount; ++i) {
+        auto sheet = sheets[i];
+        spriteSheets.insert({sheet.name, std::make_unique<SDLSurface>(sheet.path)});
+    }
+}
 
+void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destination) {
+    glEnable(GL_TEXTURE_2D);
+
+    SDLSurface &surface = *spriteSheets[image.parent];
+    surface.Bind();
+
+    float part_x = (image.x + clip.x) / surface.Width();
+    float part_w = part_x + (clip.w / surface.Width());
+    float part_y = (image.y + clip.y) / surface.Height();
+    float part_h = part_y + (clip.h / surface.Height());
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glBegin(GL_QUADS);
+    glTexCoord2f(part_x, part_h);
+    glVertex2f(destination.x, destination.y + destination.h);
+    glTexCoord2f(part_w, part_h);
+    glVertex2f(destination.x + destination.w, destination.y + destination.h);
+    glTexCoord2f(part_w, part_y);
+    glVertex2f(destination.x + destination.w, destination.y);
+    glTexCoord2f(part_x, part_y);
+    glVertex2f(destination.x, destination.y);
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
 }
 
 void Inanna::Graphics::Update(float dt) {
