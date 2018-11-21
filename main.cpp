@@ -1,11 +1,16 @@
 #include <iostream>
 #include "Assets/Resources.h"
 #include "Server/GameServer.h"
+#include "Base/World.h"
 
 #include <entityx/entityx.h>
 #include <yojimbo.h>
 #include <thread>
 #include <shared.h>
+
+//#define START_SERVER
+#define START_WORLD
+
 
 void startServer() {
     printf("\n");
@@ -33,8 +38,16 @@ void startServer() {
 
 int main() {
 
+#ifdef START_SERVER
     printf("Piece id %s parent %s\n", Resources::PIECES.CYAN.id, Resources::PIECES.CYAN.parent);
     auto server = std::make_unique<std::thread>(std::thread(startServer));
     server->join();
+#endif
+
+#ifdef START_WORLD
+    Inanna::World word;
+    word.Start();
+#endif
+
     return 0;
 }

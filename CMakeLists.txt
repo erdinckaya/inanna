@@ -28,10 +28,9 @@ include_directories(${SDL2_INCLUDE_DIR}
         ${ENTITYX_INCLUDE_DIR}
         ${FLATBUFFERS_INCLUDE_DIR}
         ${MBEDTLS_INCLUDE_DIRS}
-        ${SODIUM_INCLUDE_DIR}
-        src)
+        ${SODIUM_INCLUDE_DIR})
 
-add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Server/GameServer.cpp Server/GameServer.h Server/GameAdapter.cpp Server/GameAdapter.h Server/GameChannel.h Server/GameConnectionConfig.h Server/GameMessageFactory.h Server/GameMessageType.h Server/MyMessage.h)
+add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Server/GameServer.cpp Server/GameServer.h Server/GameAdapter.cpp Server/GameAdapter.h Server/GameChannel.h Server/GameConnectionConfig.h Server/GameMessageFactory.h Server/GameMessageType.h Server/MyMessage.h Base/World.cpp Base/World.h Base/UI/WindowManager.cpp Base/UI/WindowManager.h Base/Graphics/Graphics.cpp Base/Graphics/Graphics.h Base/Graphics/SDL.cpp Base/Graphics/SDL.h Base/Graphics/SDLWindow.cpp Base/Graphics/SDLWindow.h Base/Graphics/SDLContext.cpp Base/Graphics/SDLContext.h Base/Graphics/SDLSurface.cpp Base/Graphics/SDLSurface.h Base/Test/GraphicsTest.h Base/Time/Time.cpp Base/Time/Time.h Base/Util/Math/Vec2.h Base/Util/Math/Rect.h)
 
 
 target_link_libraries(Inanna ${SDL2_LIBRARY}

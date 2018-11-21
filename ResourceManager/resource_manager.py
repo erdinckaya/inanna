@@ -33,10 +33,10 @@ image_class_str = \
 #define RESOURCEMANAGER_RESOURCES_H
     
     
-struct Image {
+struct ImageAsset {
 public:
 
-    Image(const char* id, float x, float y, float w, float h, float parent_w, float parent_h, const char* parent, const char* format)
+    ImageAsset(const char* id, float x, float y, float w, float h, float parent_w, float parent_h, const char* parent, const char* format)
     {
         this->id = id;
         this->x = x;
@@ -107,7 +107,7 @@ for resource in resources:
         y = frame["frame"]["y"]
         w = frame["frame"]["w"]
         h = frame["frame"]["h"]
-        asset_definition_class_str += "\tImage %s;\n" % (id.upper())
+        asset_definition_class_str += "\tImageAsset %s;\n" % (id.upper())
 
         comma = "," if len(frames) != frame_count else ""
         assets_values_class_str += "\t\t%s(\"%s\", %ff, %ff, %ff, %ff, %ff, %ff, \"%s\", \"%s\")%s\n" % (id.upper(), id, x, y, w, h, sheet_width, sheet_height, name, sheet_format, comma)
