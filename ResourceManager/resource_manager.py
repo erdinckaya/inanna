@@ -2,9 +2,9 @@ import os
 import json
 
 resource_path = "Resources"
-output_path = os.path.join("..", "Assets", "Resources.h")
-output_path_cpp = os.path.join("..", "Assets", "Resources.cpp")
-atlas_path = os.path.join("..", "Resources")
+output_path = os.path.join("/home/misterdortnal/CLionProjects/Inanna/Assets", "Resources.h")
+output_path_cpp = os.path.join("/home/misterdortnal/CLionProjects/Inanna/Assets", "Resources.cpp")
+atlas_path = os.path.join("/home/misterdortnal/CLionProjects/Inanna", "Resources")
 
 
 class Resource:
@@ -31,7 +31,8 @@ image_class_str = \
     """
 #ifndef RESOURCEMANAGER_RESOURCES_H
 #define RESOURCEMANAGER_RESOURCES_H
-    
+
+#include<string>
     
 struct ImageAsset {
 public:
@@ -78,6 +79,7 @@ public:
     {}
 
 %s
+
 };
 
 """
@@ -85,9 +87,12 @@ public:
 
 
 cpp_file_value_str = ""
-
+sheet_arr_count = ""
+sheet_arr_str = ""
 atlas_class_str = ""
+resource_count = 0
 for resource in resources:
+    resource_count += 1
     sheet_data = None
     with open(resource.data, 'r') as f:
         sheet_data = json.load(f)
@@ -96,26 +101,35 @@ for resource in resources:
     sheet_format = sheet_data["meta"]["format"]
     sheet_width = sheet_data["meta"]["size"]["w"]
     sheet_height = sheet_data["meta"]["size"]["h"]
+    path = resource.path
 
     asset_definition_class_str = ""
     assets_values_class_str = ""
     frame_count = 0
     for frame in frames:
         frame_count += 1
-        id = frame["filename"].split(".")[0]
+        id = "%s_%s" % (name, frame["filename"].split(".")[0])
         x = frame["frame"]["x"]
         y = frame["frame"]["y"]
         w = frame["frame"]["w"]
         h = frame["frame"]["h"]
         asset_definition_class_str += "\tImageAsset %s;\n" % (id.upper())
 
-        comma = "," if len(frames) != frame_count else ""
+        comma = "," #if len(frames) != frame_count else ""
         assets_values_class_str += "\t\t%s(\"%s\", %ff, %ff, %ff, %ff, %ff, %ff, \"%s\", \"%s\")%s\n" % (id.upper(), id, x, y, w, h, sheet_width, sheet_height, name, sheet_format, comma)
 
+
+    assets_values_class_str += "\t\tpath(\"%s\"),\n" % path
+    asset_definition_class_str += "\tconst char* path;\n"
+    assets_values_class_str += "\t\tname(\"%s\")\n" % name
+    asset_definition_class_str += "\tconst char* name;\n"
     result_str += assets_assets_class_str % (name.title(), name.title(), assets_values_class_str, asset_definition_class_str)
-    atlas_class_str += "\t static %s %s;\n" % (name.title(), name.upper())
+    atlas_class_str += "\tstatic %s %s;\n" % (name.title(), name.upper())
 
     cpp_file_value_str += "%s Resources::%s;\n" % (name.title(), name.upper())
+
+    s_comma = ", " if len(resources) != resource_count else ""
+    sheet_arr_str += "Resources::%s.name" % (name.upper())
 
 
 
@@ -123,6 +137,9 @@ resources_class_str = \
     """struct Resources {
 public:
 %s
+
+\tstatic int SheetCount;
+\tstatic const std::string* Sheets;
 };
 
 
@@ -140,7 +157,11 @@ cpp_file_str = """
 
 %s
 
-""" % cpp_file_value_str
+int Resources::SheetCount = %d;
+
+static const std::string TMP_Sheets[] = {%s};
+const std::string* Resources::Sheets = TMP_Sheets;
+""" % (cpp_file_value_str, len(resources), sheet_arr_str)
 
 
 with open(output_path, 'w') as the_file:

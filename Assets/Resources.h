@@ -1,12 +1,13 @@
 
 #ifndef RESOURCEMANAGER_RESOURCES_H
 #define RESOURCEMANAGER_RESOURCES_H
+
+#include<string>
     
-    
-struct Image {
+struct ImageAsset {
 public:
 
-    Image(const char* id, float x, float y, float w, float h, float parent_w, float parent_h, const char* parent, const char* format)
+    ImageAsset(const char* id, float x, float y, float w, float h, float parent_w, float parent_h, const char* parent, const char* format)
     {
         this->id = id;
         this->x = x;
@@ -40,32 +41,40 @@ struct Pieces {
 
 public:
     Pieces() :
-		BLUE("blue", 0.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		CYAN("cyan", 256.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		DARK_PURPLE("dark_purple", 512.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		GHOST("ghost", 0.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		GREEN("green", 256.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		PURPLE("purple", 512.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		RED("red", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		YELLOW("yellow", 256.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888")
+		PIECES_BLUE("pieces_blue", 0.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		PIECES_CYAN("pieces_cyan", 256.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		PIECES_DARK_PURPLE("pieces_dark_purple", 512.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		PIECES_GHOST("pieces_ghost", 0.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		PIECES_GREEN("pieces_green", 256.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		PIECES_PURPLE("pieces_purple", 512.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		PIECES_RED("pieces_red", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		PIECES_YELLOW("pieces_yellow", 256.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		path("/home/misterdortnal/CLionProjects/Inanna/Resources/pieces.png"),
+		name("pieces")
 
     {}
 
-	Image BLUE;
-	Image CYAN;
-	Image DARK_PURPLE;
-	Image GHOST;
-	Image GREEN;
-	Image PURPLE;
-	Image RED;
-	Image YELLOW;
+	ImageAsset PIECES_BLUE;
+	ImageAsset PIECES_CYAN;
+	ImageAsset PIECES_DARK_PURPLE;
+	ImageAsset PIECES_GHOST;
+	ImageAsset PIECES_GREEN;
+	ImageAsset PIECES_PURPLE;
+	ImageAsset PIECES_RED;
+	ImageAsset PIECES_YELLOW;
+	const char* path;
+	const char* name;
+
 
 };
 
 struct Resources {
 public:
-	 static Pieces PIECES;
+	static Pieces PIECES;
 
+
+	static int SheetCount;
+	static const std::string* Sheets;
 };
 
 

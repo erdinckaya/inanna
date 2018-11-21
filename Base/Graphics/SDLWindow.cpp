@@ -6,7 +6,7 @@
 
 
 Inanna::SDLWindow::SDLWindow(unsigned int width, unsigned int height)
-        : window(SDL_CreateWindow("The Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height,
+        : window(SDL_CreateWindow("Inanna", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height,
                                   SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL), (void (&&)(SDL_Window *)) SDL_DestroyWindow) {
     if (window == nullptr) {
         throw std::runtime_error(std::string("Error creating window: ") + SDL_GetError());
