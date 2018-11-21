@@ -139,12 +139,12 @@ public:
 %s
 
 \tstatic int SheetCount;
-\tstatic const std::string* Sheets;
+\tstatic const std::string Sheets[%d];
 };
 
 
 #endif //RESOURCEMANAGER_RESOURCES_H
-""" % atlas_class_str
+""" % (atlas_class_str, len(resources))
 
 result_str += resources_class_str
 
@@ -159,9 +159,8 @@ cpp_file_str = """
 
 int Resources::SheetCount = %d;
 
-static const std::string TMP_Sheets[] = {%s};
-const std::string* Resources::Sheets = TMP_Sheets;
-""" % (cpp_file_value_str, len(resources), sheet_arr_str)
+const std::string Resources::Sheets[%d] = {%s};
+""" % (cpp_file_value_str, len(resources), len(resources), sheet_arr_str)
 
 
 with open(output_path, 'w') as the_file:

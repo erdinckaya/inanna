@@ -74,7 +74,7 @@ public:
 
 
 	static int SheetCount;
-	static const std::string* Sheets;
+	static const std::string Sheets[1];
 };
 
 
