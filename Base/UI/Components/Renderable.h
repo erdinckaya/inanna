@@ -15,7 +15,11 @@ namespace Inanna {
                             const Vecf &scale = Vecf(1, 1), const float &rotation = 0) : target(target), pos(pos),
                                                                                          size(size),
                                                                                          scale(scale),
-                                                                                         rotation(rotation) {}
+                                                                                         rotation(rotation) {
+            if (this->size == Vecf(0, 0)) {
+                this->size = Vecf(target.w, target.h);
+            }
+        }
 
         ImageAsset target;
         Vecf pos;

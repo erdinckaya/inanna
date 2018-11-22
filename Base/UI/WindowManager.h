@@ -18,7 +18,7 @@ namespace Inanna {
 
         void Update(entityx::TimeDelta dt);
 
-        void Test();
+        void Test(SDL_Keycode code);
 
         float width;
         float height;

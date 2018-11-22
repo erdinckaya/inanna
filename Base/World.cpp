@@ -77,7 +77,7 @@ void Inanna::World::OnEvent(SDL_Event *event) {
         }
         case SDL_KEYDOWN: {
 #ifdef GRAPHICS_TEST
-            OnTest();
+            OnTest(event->key.keysym.sym);
 #endif
             break;
         }
@@ -96,8 +96,8 @@ void Inanna::World::BringDoom() {
     SDL_Quit();
 }
 
-void Inanna::World::OnTest() {
-    windowManager->Test();
+void Inanna::World::OnTest(SDL_Keycode code) {
+    windowManager->Test(code);
 }
 
 void Inanna::World::OnRender(float dt) {

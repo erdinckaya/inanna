@@ -31,7 +31,7 @@ namespace Inanna {
 
         void BringDoom();
 
-        void OnTest();
+        void OnTest(SDL_Keycode code);
 
         void OnRender(float dt);
     };

@@ -84,6 +84,11 @@ namespace Inanna {
             return *this;
         }
 
+
+        friend inline bool operator==(const Vec2& lhs, const Vec2& rhs) {
+            return lhs.x == rhs.x && lhs.y == rhs.y;
+        }
+
         inline void Set(T x, T y) {
             this->x = x;
             this->y = y;

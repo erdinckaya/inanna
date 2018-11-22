@@ -12,25 +12,18 @@
 namespace Inanna {
     class RenderSystem : public entityx::System<RenderSystem> {
     public:
-        explicit RenderSystem(Graphics* graphics) : graphics(graphics) {}
+        explicit RenderSystem(Graphics *graphics) : graphics(graphics) {}
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Renderable>([this](entityx::Entity entity, Renderable &renderable){
-                Rectf clip = {
-                        0.0f, 0.0f,
-                        renderable.target.w, renderable.target.h
-                };
-
-                Rectf pos = {
-                        0.0f, 0.0f,
-                        renderable.target.w, renderable.target.h
-                };
+            entities.each<Renderable>([this](entityx::Entity entity, Renderable &renderable) {
+                Rectf clip = {0, 0, renderable.target.w, renderable.target.h};
+                Rectf pos = {renderable.pos.x, renderable.pos.y, renderable.size.x, renderable.size.y};
                 graphics->DrawTexture(renderable.target, clip, pos, renderable.rotation, renderable.scale);
             });
         }
 
     private:
-        Graphics* graphics;
+        Graphics *graphics;
     };
 }
 
