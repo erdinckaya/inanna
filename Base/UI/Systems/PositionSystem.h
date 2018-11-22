@@ -14,7 +14,7 @@ namespace Inanna {
 
     class PositionSystem : public entityx::System<PositionSystem> {
     public:
-        explicit PositionSystem() {}
+        explicit PositionSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Position>([this](entityx::Entity entity, Position &position){

@@ -14,7 +14,7 @@ namespace Inanna {
 
     class SizeSystem : public entityx::System<SizeSystem> {
     public:
-        explicit SizeSystem() {}
+        explicit SizeSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Sizable>([this](entityx::Entity entity, Sizable &sizable){

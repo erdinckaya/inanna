@@ -14,7 +14,7 @@ namespace Inanna {
 
     class RotationSystem : public entityx::System<RotationSystem> {
     public:
-        explicit RotationSystem() {}
+        explicit RotationSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Rotation>([this](entityx::Entity entity, Rotation &rotation){

@@ -13,7 +13,7 @@ namespace Inanna {
 
     class ScaleSystem : public entityx::System<ScaleSystem> {
     public:
-        explicit ScaleSystem() {}
+        explicit ScaleSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Scalable>([this](entityx::Entity entity, Scalable &scalable){
