@@ -1,4 +1,7 @@
 
+#ifndef INANNA_VEC2_H
+#define INANNA_VEC2_H
+
 #include <cmath>
 
 namespace Inanna {
@@ -135,3 +138,5 @@ namespace Inanna {
     typedef Vec2<int> Veci;
 
 }
+
+#endif

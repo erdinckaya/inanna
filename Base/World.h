@@ -6,6 +6,7 @@
 #define INANNA_WORLD_H
 
 #include "Graphics/Graphics.h"
+#include "UI/WindowManager.h"
 
 namespace Inanna {
     const unsigned int WIDTH = 900;
@@ -26,10 +27,11 @@ namespace Inanna {
         bool isExist;
 
         std::unique_ptr<Graphics> graphics;
+        std::unique_ptr<WindowManager> windowManager;
 
         void BringDoom();
 
-        void OnTest(float angle);
+        void OnTest();
 
         void OnRender(float dt);
     };

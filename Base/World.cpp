@@ -12,6 +12,7 @@
 
 Inanna::World::World() : isExist(true) {
     graphics = std::make_unique<Graphics>(WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
+    windowManager = std::make_unique<WindowManager>(WIDTH, HEIGHT, graphics.get());
 }
 
 Inanna::World::~World() {
@@ -20,10 +21,6 @@ Inanna::World::~World() {
 
 
 void Inanna::World::Start() {
-
-#ifdef GRAPHICS_TEST
-    float angle = 0.0f;
-#endif
 
     SDL_Event event{};
     while (isExist) {
@@ -35,11 +32,8 @@ void Inanna::World::Start() {
         }
 
 //        OnLoop();
-#ifdef GRAPHICS_TEST
-        OnTest(angle);
-        angle += 0.01f;
-#endif
 
+        windowManager->Update(1000/*ms*/ / FPS);
         OnRender(FPS);
 //        physics->Update(kFps);
         const auto ms_per_frame = static_cast<const Uint32>(1000/*ms*/ / FPS);
@@ -82,7 +76,9 @@ void Inanna::World::OnEvent(SDL_Event *event) {
             break;
         }
         case SDL_KEYDOWN: {
-
+#ifdef GRAPHICS_TEST
+            OnTest();
+#endif
             break;
         }
         case SDL_QUIT: {
@@ -100,18 +96,8 @@ void Inanna::World::BringDoom() {
     SDL_Quit();
 }
 
-void Inanna::World::OnTest(float angle) {
-    auto blue = Resources::PIECES.PIECES_BLUE;
-    Rectf clip = {
-            0.0f, 0.0f,
-            blue.w, blue.h
-    };
-
-    Rectf pos = {
-            0.0f, 0.0f,
-            blue.w, blue.h
-    };
-    graphics->DrawTexture(Resources::PIECES.PIECES_BLUE, clip, pos, 0, Vecf(1 + sin(angle), 1 + sin(angle)));
+void Inanna::World::OnTest() {
+    windowManager->Test();
 }
 
 void Inanna::World::OnRender(float dt) {

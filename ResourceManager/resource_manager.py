@@ -117,7 +117,8 @@ for resource in resources:
     frame_count = 0
     for frame in frames:
         frame_count += 1
-        id = "%s_%s" % (name, frame["filename"].split(".")[0])
+        # id = "%s_%s" % (name, frame["filename"].split(".")[0])
+        id = frame["filename"].split(".")[0]
         x = frame["frame"]["x"]
         y = frame["frame"]["y"]
         w = frame["frame"]["w"]

@@ -91,3 +91,4 @@ void Inanna::Graphics::Update(float dt) {
     SDL_GL_SwapWindow(window);
     glClear(GL_COLOR_BUFFER_BIT);
 }
+
