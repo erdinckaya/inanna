@@ -130,8 +130,8 @@ namespace Inanna {
         }
     };
 
-    typedef Vec2<float> Vectorf;
-    typedef Vec2<double> Vectord;
-    typedef Vec2<int> Vectori;
+    typedef Vec2<float> Vecf;
+    typedef Vec2<double> Vecd;
+    typedef Vec2<int> Veci;
 
 }

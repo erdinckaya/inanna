@@ -11,8 +11,8 @@
 #include "SDL.h"
 #include "SDLSurface.h"
 
-#include <GLES2/gl2.h>
-#include <GL/gl.h>
+
+#include <SDL_opengl.h>
 #include "../../Assets/Resources.h"
 #include "../Util/Math/Rect.h"
 
@@ -23,7 +23,7 @@ namespace Inanna {
 
         ~Graphics();
 
-        void DrawTexture(ImageAsset image, Rectf clip, Rectf destination);
+        void DrawTexture(ImageAsset image, Rectf clip, Rectf destination, float angle, Vecf scale);
 
         void Update(float dt);
 

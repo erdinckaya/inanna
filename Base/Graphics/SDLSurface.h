@@ -7,8 +7,9 @@
 
 #include <SDL_surface.h>
 #include <SDL_image.h>
-#include <GLES2/gl2.h>
+#include <SDL_opengl.h>
 #include <memory>
+#include <iostream>
 
 namespace Inanna {
     class SDLSurface {

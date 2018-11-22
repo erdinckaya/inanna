@@ -8,6 +8,7 @@
 set(YOJIMBO_PATHS
         ${YOJIMBO_ROOT}
         $ENV{YOJIMBO_ROOT}
+        /usr/local/include
         /usr/local/lib/yojimbo
         )
 

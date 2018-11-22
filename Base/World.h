@@ -8,8 +8,8 @@
 #include "Graphics/Graphics.h"
 
 namespace Inanna {
-    const float WIDTH = 900;
-    const float HEIGHT = 900;
+    const unsigned int WIDTH = 900;
+    const unsigned int HEIGHT = 900;
     const float FPS = 60;
 
     class World {
@@ -20,6 +20,8 @@ namespace Inanna {
 
         void Start();
 
+        void OnEvent(SDL_Event *event);
+
     private:
         bool isExist;
 
@@ -27,7 +29,7 @@ namespace Inanna {
 
         void BringDoom();
 
-        void OnTest();
+        void OnTest(float angle);
 
         void OnRender(float dt);
     };

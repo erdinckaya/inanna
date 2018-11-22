@@ -7,7 +7,9 @@
 
 
 #include <memory>
-#include <SDL.h>
+
+#include <SDL_video.h>
+#include <iostream>
 
 struct SDL_Window;
 
