@@ -45,7 +45,7 @@ public:
     
 struct ImageAsset {
 public:
-
+    explicit ImageAsset() = default;
     ImageAsset(const char* id, float x, float y, float w, float h, float parent_w, float parent_h, const char* parent, const char* format)
     {
         this->id = id;

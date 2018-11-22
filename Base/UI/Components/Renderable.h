@@ -11,7 +11,7 @@
 
 namespace Inanna {
     struct Renderable {
-        explicit Renderable(const ImageAsset &target, const Vecf &pos = Vecf(0, 0), const Vecf &size = Vecf(0, 0),
+        explicit Renderable(const ImageAsset &target = ImageAsset(), const Vecf &pos = Vecf(0, 0), const Vecf &size = Vecf(0, 0),
                             const Vecf &scale = Vecf(1, 1), const float &rotation = 0) : target(target), pos(pos),
                                                                                          size(size),
                                                                                          scale(scale),

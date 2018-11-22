@@ -2,15 +2,19 @@
 // Created by misterdortnal on 21.11.2018.
 //
 
+#include "entityx/deps/Dependencies.h"
+
 #include "WindowManager.h"
 #include "Systems/RenderSystem.h"
 #include "Systems/ScaleSystem.h"
 #include "Systems/SizeSystem.h"
 #include "Systems/PositionSystem.h"
 #include "Systems/RotationSystem.h"
+#include "Components/Widget.h"
 
 Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphics)
         : width(width), height(height), graphics(graphics) {
+
     systems.add<RenderSystem>(graphics);
     systems.add<PositionSystem>();
     systems.add<SizeSystem>();
@@ -54,6 +58,15 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             entityx::Entity entity = entities.create();
             entity.assign<Renderable>(Resources::PIECES.BLUE);
             entity.assign<Rotation>(45);
+            break;
+        }
+        case SDLK_w: {
+            entityx::Entity entity = entities.create();
+            entity.assign<Widget>();
+            entity.assign<Renderable>(Resources::PIECES.BLUE);
+            entity.assign<Rotation>(45);
+            entity.assign<Position>(Vecf(100, 100));
+            entity.assign<Scalable>(Vecf(1, 1));
             break;
         }
         default:
