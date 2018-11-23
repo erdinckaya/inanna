@@ -19,11 +19,16 @@ namespace Inanna {
         void Update(entityx::TimeDelta dt);
 
         void Test(SDL_Keycode code);
-
+    private:
         float width;
         float height;
-    private:
+
         Graphics* graphics;
+
+#ifdef WINDOW_MANAGER_TEST
+        entityx::Entity parent;
+        entityx::Entity child;
+#endif
     };
 }
 
