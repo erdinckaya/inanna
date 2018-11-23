@@ -83,7 +83,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             entityx::Entity child = entities.create();
             child.assign<Widget>();
             child.assign<Renderable>(Resources::PIECES.RED);
-            child.assign<Position>(Vecf(200, 200));
+            child.assign<Position>(Vecf(10, 10));
             child.assign<Scalable>(Vecf(1, 1));
 
             events.emit<ChildEvent>(parent, child, true);

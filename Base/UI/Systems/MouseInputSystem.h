@@ -81,7 +81,7 @@ namespace Inanna {
             entities.clear();
         }
 
-        void ProcessInput(MouseButton &button) {
+        void ProcessMouseButtonInput(MouseButton &button) {
             switch ((int) button.event.button) {
                 case SDL_BUTTON_LEFT: {
                     if (button.event.type == SDL_MOUSEBUTTONDOWN) {
@@ -108,7 +108,7 @@ namespace Inanna {
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<MouseButton>([&](entityx::Entity entity, MouseButton &event) {
                 AssignWidget(entities, Vecf(event.event.x, event.event.y));
-                ProcessInput(event);
+                ProcessMouseButtonInput(event);
                 entity.destroy();
             });
 

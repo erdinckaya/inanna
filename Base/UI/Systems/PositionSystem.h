@@ -9,6 +9,7 @@
 #include <entityx/System.h>
 #include "../Components/Renderable.h"
 #include "../Components/Position.h"
+#include "../Components/Widget.h"
 
 namespace Inanna {
 
@@ -16,10 +17,23 @@ namespace Inanna {
     public:
         explicit PositionSystem() = default;
 
+        void CalculateRealPosition(entityx::Entity entity, Position &position) {
+            auto isWidget = entity.has_component<Widget>();
+            if (isWidget) {
+                auto widget = entity.component<Widget>();
+                if (widget->HasParent()) {
+                    position.global = position.position + widget->parent.component<Position>()->global;
+                } else {
+                    position.global = position.position;
+                }
+            }
+        }
+
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Position>([this](entityx::Entity entity, Position &position){
                 auto renderable = entity.component<Renderable>();
-                renderable->pos = position.position;
+                CalculateRealPosition(entity, position);
+                renderable->pos = position.global;
             });
         }
     };
