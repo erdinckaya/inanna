@@ -14,20 +14,14 @@ namespace Inanna {
     struct Widget {
         explicit Widget() {}
 
-        explicit Widget(const entityx::Entity &parent, const Vecf &depth): depth(depth), parent(parent), hasParent(false) {}
+        explicit Widget(const entityx::Entity &parent, const Veci &depth) : depth(depth), parent(parent) {}
 
-        Vecf depth;
+        Veci depth;
         entityx::Entity parent;
         std::vector<entityx::Entity> children;
-        bool hasParent;
 
         void SetParent(const entityx::Entity parent) {
             this->parent = parent;
-            hasParent = true;
-        }
-
-        void RemoveParent() {
-            hasParent = false;
         }
 
         void RemoveChild(const entityx::Entity child) {
@@ -40,6 +34,10 @@ namespace Inanna {
             }
         }
 
+        bool HasParent() {
+            return parent.valid();
+        }
+
         void AddChild(const entityx::Entity child) {
             children.emplace_back(child);
         }
@@ -49,6 +47,10 @@ namespace Inanna {
                 return children[index];
             }
             return entityx::Entity();
+        }
+
+        int ChildCount() {
+            return static_cast<int>(children.size());
         }
     };
 }

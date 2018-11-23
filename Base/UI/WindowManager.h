@@ -19,6 +19,9 @@ namespace Inanna {
         void Update(entityx::TimeDelta dt);
 
         void Test(SDL_Keycode code);
+        void TestMouseButton(SDL_MouseButtonEvent event);
+        void TestMouseMotion(SDL_MouseMotionEvent event);
+        void TestMouseWheel(SDL_MouseWheelEvent event);
     private:
         float width;
         float height;

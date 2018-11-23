@@ -11,6 +11,8 @@
 #include "Components/Widget.h"
 #include "Events/ChildEvent.h"
 #include "Systems/ChildSystem.h"
+#include "Systems/DepthSystem.h"
+#include "Systems/MouseInputSystem.h"
 
 Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphics)
         : width(width), height(height), graphics(graphics) {
@@ -21,6 +23,10 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
     systems.add<ScaleSystem>();
     systems.add<RotationSystem>();
     systems.add<ChildSystem>();
+    systems.add<DepthSystem>();
+
+
+    systems.add<MouseInputSystem>();
 
     systems.configure();
 }
@@ -36,11 +42,6 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             entityx::Entity entity = entities.create();
             entity.assign<Renderable>(Resources::PIECES.BLUE);
             entity.assign<Scalable>(Vecf(1.5f, 1.5f));
-            break;
-        }
-        case SDLK_c: {
-            entityx::Entity entity = entities.create();
-            entity.assign<Renderable>(Resources::PIECES.BLUE);
             break;
         }
         case SDLK_a: {
@@ -72,6 +73,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
         }
         case SDLK_y: {
             entityx::Entity parent = entities.create();
+            parent.assign<Root>();
             parent.assign<Widget>();
             parent.assign<Renderable>(Resources::PIECES.BLUE);
             parent.assign<Position>(Vecf(100, 100));
@@ -90,6 +92,10 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             this->child =child;
             break;
         }
+        case SDLK_c: {
+            events.emit<ClearAllEvent>();
+            break;
+        }
         case SDLK_u: {
             events.emit<ChildEvent>(parent, child, false);
             break;
@@ -100,3 +106,19 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
 
 #endif
 }
+
+void Inanna::WindowManager::TestMouseButton(SDL_MouseButtonEvent event) {
+    entityx::Entity input = entities.create();
+    input.assign<MouseButton>(event);
+}
+
+void Inanna::WindowManager::TestMouseMotion(SDL_MouseMotionEvent event) {
+    entityx::Entity input = entities.create();
+    input.assign<MouseMotion>(event);
+}
+
+void Inanna::WindowManager::TestMouseWheel(SDL_MouseWheelEvent event) {
+    entityx::Entity input = entities.create();
+    input.assign<MouseWheel>(event);
+}
+

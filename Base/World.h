@@ -17,11 +17,18 @@ namespace Inanna {
 
     public:
         World();
+
         ~World();
 
         void Start();
 
         void OnEvent(SDL_Event *event);
+
+        void OnMouseEvent(SDL_MouseButtonEvent event);
+
+        void OnMouseMotionEvent(SDL_MouseMotionEvent event);
+
+        void OnMouseWheelEvent(SDL_MouseWheelEvent event);
 
     private:
         bool isExist;

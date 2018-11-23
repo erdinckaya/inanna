@@ -23,6 +23,8 @@ namespace Inanna {
         T w;
         T h;
 
+        inline bool ValueInRange(T value, T min, T max) { return (value >= min) && (value <= max); }
+
         inline bool IsPointIn(Vec2<T> point) {
             return ValueInRange(point.x, x, x + w)
                    && ValueInRange(point.y, y, y + h);

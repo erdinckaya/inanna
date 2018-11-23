@@ -58,21 +58,28 @@ void Inanna::World::OnEvent(SDL_Event *event) {
 //                rigidBodies.push_back(new RigidBody(physics->CreateRectBody(event->button.x, event->button.y, 20, 20, true)));
 //            }
 //            windowManager->OnMouseButtonDownEvent(event->button);
+//            printf("Button down\n");
+            OnMouseEvent(event->button);
             break;
         }
         case SDL_FINGERUP:
         case SDL_MOUSEBUTTONUP: {
 //            rigidBodies.push_back(new RigidBody(physics->CreateRectBody(event->button.x, event->button.y, 20, 20, true)));
 //            windowManager->OnMouseButtonUpEvent(event->button);
+//            printf("Button up\n");
+            OnMouseEvent(event->button);
             break;
         }
         case SDL_FINGERMOTION:
         case SDL_MOUSEMOTION: {
 //            windowManager->OnMouseMotionEvent(event->motion);
+//            printf("Button move\n");
+            OnMouseMotionEvent(event->motion);
             break;
         }
         case SDL_MOUSEWHEEL: {
 //            windowManager->OnMouseWheelEvent(event->wheel);
+            OnMouseWheelEvent(event->wheel);
             break;
         }
         case SDL_KEYDOWN: {
@@ -102,4 +109,16 @@ void Inanna::World::OnTest(SDL_Keycode code) {
 
 void Inanna::World::OnRender(float dt) {
     graphics->Update(dt);
+}
+
+void Inanna::World::OnMouseEvent(SDL_MouseButtonEvent event) {
+    windowManager->TestMouseButton(event);
+}
+
+void Inanna::World::OnMouseMotionEvent(SDL_MouseMotionEvent event) {
+    windowManager->TestMouseMotion(event);
+}
+
+void Inanna::World::OnMouseWheelEvent(SDL_MouseWheelEvent event) {
+    windowManager->TestMouseWheel(event);
 }
