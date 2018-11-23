@@ -13,26 +13,38 @@
 #include "Systems/ChildSystem.h"
 #include "Systems/DepthSystem.h"
 #include "Systems/MouseInputSystem.h"
+#include "Components/Interaction.h"
 
 Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphics)
         : width(width), height(height), graphics(graphics) {
-
-    systems.add<RenderSystem>(graphics);
-    systems.add<PositionSystem>();
-    systems.add<SizeSystem>();
-    systems.add<ScaleSystem>();
-    systems.add<RotationSystem>();
+    
     systems.add<ChildSystem>();
     systems.add<DepthSystem>();
 
-
     systems.add<MouseInputSystem>();
+
+    systems.add<SizeSystem>();
+    systems.add<ScaleSystem>();
+    systems.add<RotationSystem>();
+    systems.add<PositionSystem>();
+    systems.add<RenderSystem>(graphics);
+
 
     systems.configure();
 }
 
 void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
-    systems.update_all(dt);
+    systems.update<ChildSystem>(dt);
+    systems.update<DepthSystem>(dt);
+
+    systems.update<MouseInputSystem>(dt);
+
+    systems.update<SizeSystem>(dt);
+    systems.update<ScaleSystem>(dt);
+    systems.update<RotationSystem>(dt);
+    systems.update<PositionSystem>(dt);
+
+    systems.update<RenderSystem>(dt);
 }
 
 void Inanna::WindowManager::Test(SDL_Keycode code) {
@@ -41,24 +53,28 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
         case SDLK_k: {
             entityx::Entity entity = entities.create();
             entity.assign<Renderable>(Resources::PIECES.BLUE);
+            entity.assign<Interaction>();
             entity.assign<Scalable>(Vecf(1.5f, 1.5f));
             break;
         }
         case SDLK_a: {
             entityx::Entity entity = entities.create();
             entity.assign<Renderable>(Resources::PIECES.BLUE);
+            entity.assign<Interaction>();
             entity.assign<Position>(Vecf(100, 100));
             break;
         }
         case SDLK_b: {
             entityx::Entity entity = entities.create();
             entity.assign<Renderable>(Resources::PIECES.BLUE);
+            entity.assign<Interaction>();
             entity.assign<Sizable>(Vecf(100, 100));
             break;
         }
         case SDLK_r: {
             entityx::Entity entity = entities.create();
             entity.assign<Renderable>(Resources::PIECES.BLUE);
+            entity.assign<Interaction>();
             entity.assign<Rotation>(45);
             break;
         }
@@ -66,6 +82,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             entityx::Entity entity = entities.create();
             entity.assign<Widget>();
             entity.assign<Renderable>(Resources::PIECES.BLUE);
+            entity.assign<Interaction>();
             entity.assign<Rotation>(45);
             entity.assign<Position>(Vecf(100, 100));
             entity.assign<Scalable>(Vecf(1, 1));
@@ -73,20 +90,26 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
         }
         case SDLK_y: {
             entityx::Entity parent = entities.create();
+            entityx::Entity child = entities.create();
+
+
             parent.assign<Root>();
             parent.assign<Widget>();
             parent.assign<Renderable>(Resources::PIECES.BLUE);
+            parent.assign<Interaction>();
             parent.assign<Position>(Vecf(100, 100));
             parent.assign<Scalable>(Vecf(1, 1));
 
 
-            entityx::Entity child = entities.create();
+
             child.assign<Widget>();
             child.assign<Renderable>(Resources::PIECES.RED);
+            child.assign<Interaction>();
             child.assign<Position>(Vecf(10, 10));
             child.assign<Scalable>(Vecf(1, 1));
 
             events.emit<ChildEvent>(parent, child, true);
+
 
             this->parent =parent;
             this->child =child;

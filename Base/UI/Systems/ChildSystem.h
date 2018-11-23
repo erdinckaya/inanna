@@ -21,19 +21,7 @@ namespace Inanna {
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Widget>([this](entityx::Entity entity, Widget &widget) {
-//                if (widget.HasParent()) {
-//                    printf("Parent name %s\n", widget.parent.component<Renderable>()->target.id);
-//                } else {
-//                    auto firstChild = widget.GetChild(0);
-//                    if (firstChild.valid()) {
-//                        printf("Child name %s depth is %d, %d\n",
-//                               firstChild.component<Renderable>()->target.id,
-//                               static_cast<int>(firstChild.component<Widget>()->depth.x),
-//                               static_cast<int>(firstChild.component<Widget>()->depth.y));
-//                    }
-//                }
-            });
+
         }
 
         void receive(const ChildEvent &childEvent) {

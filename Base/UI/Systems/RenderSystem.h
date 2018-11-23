@@ -11,6 +11,7 @@
 #include "../Components/Root.h"
 #include "../Events/ClearAllEvent.h"
 #include "../Components/Widget.h"
+#include "../Components/Interaction.h"
 
 namespace Inanna {
     class RenderSystem : public entityx::System<RenderSystem>, public entityx::Receiver<RenderSystem> {
@@ -36,13 +37,17 @@ namespace Inanna {
         }
 
         void Traverse(entityx::Entity entity) {
-            Render(*entity.component<Renderable>());
-            auto isWidget = entity.has_component<Widget>();
-            if (isWidget) {
-                auto widget = entity.component<Widget>();
-                int size = widget->ChildCount();
-                for (int i = 0; i < size; ++i) {
-                    Traverse(widget->GetChild(i));
+            auto interaction = entity.component<Interaction>();
+            if (interaction->visible) {
+                Render(*entity.component<Renderable>());
+                auto isWidget = entity.has_component<Widget>();
+                if (isWidget) {
+                    auto widget = entity.component<Widget>();
+
+                    int size = widget->ChildCount();
+                    for (int i = 0; i < size; ++i) {
+                        Traverse(widget->GetChild(i));
+                    }
                 }
             }
         }
@@ -50,8 +55,9 @@ namespace Inanna {
         void Render(const Renderable &renderable) const {
             Rectf clip = {0, 0, renderable.target.w, renderable.target.h};
             Rectf pos = {renderable.pos.x, renderable.pos.y, renderable.size.x, renderable.size.y};
-            graphics->DrawTexture(renderable.target, clip, pos, renderable.rotation, renderable.scale);
-
+            if (renderable.target.valid()) {
+                graphics->DrawTexture(renderable.target, clip, pos, renderable.rotation, renderable.scale);
+            }
         }
 
         void receive(const ClearAllEvent &event) {

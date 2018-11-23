@@ -12,6 +12,7 @@
 #include "../Components/MouseMotion.h"
 #include "../Components/Renderable.h"
 #include "../Components/Widget.h"
+#include "../Components/Interaction.h"
 #include "../../Util/Math/Rect.h"
 
 namespace Inanna {
@@ -27,13 +28,14 @@ namespace Inanna {
 
         void AssignWidget(entityx::EntityManager &manager, const Vecf &mouse) {
             std::vector<entityx::Entity> entities;
-            manager.each<Renderable>([&](entityx::Entity entity, Renderable &renderable) {
-                Rectf box = { renderable.pos.x, renderable.pos.y, renderable.size.x, renderable.size.x };
-                bool isPointIn = box.IsPointIn(mouse);
-                if (isPointIn) {
-                    entities.emplace_back(entity);
-                }
-            });
+            manager.each<Renderable, Interaction>(
+                    [&](entityx::Entity entity, Renderable &renderable, Interaction &interaction) {
+                        Rectf box = {renderable.pos.x, renderable.pos.y, renderable.size.x, renderable.size.x};
+                        bool isPointIn = box.IsPointIn(mouse) && interaction.mouse;
+                        if (isPointIn) {
+                            entities.emplace_back(entity);
+                        }
+                    });
 
             // No UI clicked!
             if (entities.empty()) {
@@ -87,8 +89,8 @@ namespace Inanna {
                     if (button.event.type == SDL_MOUSEBUTTONDOWN) {
                         if (current.valid()) {
                             printf("Clicked Widget is %s\n", current.component<Renderable>()->target.id);
-                        }
-                        else {
+//                            current.component<Interaction>()->mouse = false;
+                        } else {
                             printf("NonValid Click\n");
                         }
                     }

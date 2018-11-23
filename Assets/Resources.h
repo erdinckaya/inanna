@@ -3,6 +3,7 @@
 #define RESOURCEMANAGER_RESOURCES_H
 
 #include<string>
+#include<string.h>
 
 struct Sheet {
 public:
@@ -15,7 +16,7 @@ public:
     
 struct ImageAsset {
 public:
-    explicit ImageAsset() = default;
+    explicit ImageAsset() : id("") {}
     ImageAsset(const char* id, float x, float y, float w, float h, float parent_w, float parent_h, const char* parent, const char* format)
     {
         this->id = id;
@@ -40,6 +41,10 @@ public:
     
     const char* parent;
     const char* format;
+    
+    bool valid() const {
+        return strcmp(id, "") != 0;
+    }
 };
 
 
