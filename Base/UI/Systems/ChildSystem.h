@@ -21,7 +21,20 @@ namespace Inanna {
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
+            int size = static_cast<int>(orphans.size());
+            for (int i = size - 1; i > -1; --i) {
+                orphans[i].destroy();
+                orphans.erase(orphans.begin() + i);
+            }
+        }
 
+        void RemoveChildEntites(entityx::Entity entity) {
+            orphans.emplace_back(entity);
+            auto widget = entity.component<Widget>();
+            int size = widget->ChildCount();
+            for (int i = 0; i < size; ++i) {
+                RemoveChildEntites(widget->GetChild(i));
+            }
         }
 
         void receive(const ChildEvent &childEvent) {
@@ -36,8 +49,12 @@ namespace Inanna {
             } else {
                 child->SetParent(ex::Entity());
                 parent->RemoveChild(child.entity());
+                RemoveChildEntites(event.child);
             }
         }
+
+    private:
+        std::vector<entityx::Entity> orphans;
     };
 }
 

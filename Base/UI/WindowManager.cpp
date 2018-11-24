@@ -126,6 +126,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
         default:
             break;
     }
+    printf("Entity count %d\n", static_cast<int>(entities.size()));
 
 #endif
 }
