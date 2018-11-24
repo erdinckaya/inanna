@@ -12,13 +12,9 @@
 namespace Inanna {
 
     struct Widget {
-        explicit Widget() {}
+        explicit Widget() = default;
 
         explicit Widget(const entityx::Entity &parent, const Veci &depth) : depth(depth), parent(parent) {}
-
-        Veci depth;
-        entityx::Entity parent;
-        std::vector<entityx::Entity> children;
 
         void SetParent(const entityx::Entity parent) {
             this->parent = parent;
@@ -52,6 +48,11 @@ namespace Inanna {
         int ChildCount() {
             return static_cast<int>(children.size());
         }
+
+
+        Veci depth;
+        entityx::Entity parent;
+        std::vector<entityx::Entity> children;
     };
 }
 

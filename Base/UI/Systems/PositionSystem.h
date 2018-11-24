@@ -10,6 +10,7 @@
 #include "../Components/Renderable.h"
 #include "../Components/Position.h"
 #include "../Components/Widget.h"
+#include "../Components/Root.h"
 
 namespace Inanna {
 
@@ -17,23 +18,30 @@ namespace Inanna {
     public:
         explicit PositionSystem() = default;
 
-        void CalculateRealPosition(entityx::Entity entity, Position &position) {
+        void CalculateRealPosition(entityx::Entity entity) {
+            auto isRoot = entity.has_component<Root>();
             auto isWidget = entity.has_component<Widget>();
             if (isWidget) {
                 auto widget = entity.component<Widget>();
+                auto position = entity.component<Position>();
                 if (widget->HasParent()) {
-                    position.global = position.position + widget->parent.component<Position>()->global;
+                    position->global = position->position + widget->parent.component<Position>()->global;
                 } else {
-                    position.global = position.position;
+                    position->global = position->position;
+                }
+                entity.component<Renderable>()->pos = position->global;
+                auto size = widget->ChildCount();
+                for (int i = 0; i < size; ++i) {
+                    auto child = widget->GetChild(i);
+                    CalculateRealPosition(child);
                 }
             }
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Position>([this](entityx::Entity entity, Position &position){
-                auto renderable = entity.component<Renderable>();
-                CalculateRealPosition(entity, position);
-                renderable->pos = position.global;
+            entities.each<Root>([this](entityx::Entity entity, Root &position) {
+                auto renderable = entity.component<Root>();
+                CalculateRealPosition(entity);
             });
         }
     };
