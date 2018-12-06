@@ -8,7 +8,6 @@
 #include <SDL_events.h>
 
 namespace Inanna {
-    // Unique
     struct MouseButton {
         explicit MouseButton() = default;
 

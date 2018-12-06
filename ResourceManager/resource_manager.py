@@ -2,9 +2,9 @@ import os
 import json
 
 resource_path = "Resources"
-output_path = os.path.join("/home/misterdortnal/CLionProjects/Inanna/Assets", "Resources.h")
-output_path_cpp = os.path.join("/home/misterdortnal/CLionProjects/Inanna/Assets", "Resources.cpp")
-atlas_path = os.path.join("/home/misterdortnal/CLionProjects/Inanna", "Resources")
+output_path = os.path.join("/Users/always/CLionProjects/inanna/Assets", "Resources.h")
+output_path_cpp = os.path.join("/Users/always/CLionProjects/inanna/Assets", "Resources.cpp")
+atlas_path = os.path.join("/Users/always/CLionProjects/inanna", "Resources")
 
 
 class Resource:

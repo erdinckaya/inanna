@@ -14,6 +14,9 @@
 #include "Systems/DepthSystem.h"
 #include "Systems/MouseInputSystem.h"
 #include "Components/Interaction.h"
+#include "Systems/MouseEventDispatcherSystem.h"
+#include "MouseEventComponents/MouseDown.h"
+#include "MouseEventComponents/MouseUp.h"
 
 Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphics)
         : width(width), height(height), graphics(graphics) {
@@ -22,6 +25,7 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
     systems.add<DepthSystem>();
 
     systems.add<MouseInputSystem>();
+    systems.add<MouseEventDispatcherSystem>();
 
     systems.add<SizeSystem>();
     systems.add<ScaleSystem>();
@@ -38,6 +42,7 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
     systems.update<DepthSystem>(dt);
 
     systems.update<MouseInputSystem>(dt);
+    systems.update<MouseEventDispatcherSystem>(dt);
 
     systems.update<SizeSystem>(dt);
     systems.update<ScaleSystem>(dt);
@@ -107,6 +112,16 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             child.assign<Interaction>();
             child.assign<Position>(Vecf(10, 10));
             child.assign<Scalable>();
+            child.assign<MouseDragStart>([](entityx::Entity entity, SDL_MouseMotionEvent event) {
+                printf("MouseDragStart %s\n", entity.component<Renderable>()->target.id);
+            });
+            child.assign<MouseDrag>([](entityx::Entity entity, SDL_MouseMotionEvent event) {
+                Vecf pos = entity.component<Position>()->position;
+                entity.component<Position>()->position = Vecf(pos.x + event.xrel, pos.y + event.yrel);
+            });
+            child.assign<MouseDragEnd>([](entityx::Entity entity, SDL_MouseMotionEvent event) {
+                printf("MouseDragEnd %s\n", entity.component<Renderable>()->target.id);
+            });
 
             events.emit<ChildEvent>(parent, child, true);
 
