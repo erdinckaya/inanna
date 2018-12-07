@@ -10,6 +10,8 @@
 #include "Graphics/Graphics.h"
 #include "UI/WindowManager.h"
 
+Inanna::KeyInput Inanna::World::Input;
+
 Inanna::World::World() : isExist(true) {
     graphics = std::make_unique<Graphics>(WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
     windowManager = std::make_unique<WindowManager>(WIDTH, HEIGHT, graphics.get());
@@ -26,7 +28,7 @@ void Inanna::World::Start() {
     while (isExist) {
 
         const Uint32 start_time_ms = SDL_GetTicks();
-//        input.beginNewFrame();
+        Input.BeginNewFrame();
         while (SDL_PollEvent(&event)) {
             OnEvent(&event);
         }
@@ -50,42 +52,35 @@ void Inanna::World::Start() {
 
 
 void Inanna::World::OnEvent(SDL_Event *event) {
-//    EventManager::OnEvent(event);
     switch (event->type) {
         case SDL_FINGERDOWN:
         case SDL_MOUSEBUTTONDOWN: {
-//            for (int i = 0; i < 100; ++i) {
-//                rigidBodies.push_back(new RigidBody(physics->CreateRectBody(event->button.x, event->button.y, 20, 20, true)));
-//            }
-//            windowManager->OnMouseButtonDownEvent(event->button);
-//            printf("Button down\n");
             OnMouseEvent(event->button);
             break;
         }
         case SDL_FINGERUP:
         case SDL_MOUSEBUTTONUP: {
-//            rigidBodies.push_back(new RigidBody(physics->CreateRectBody(event->button.x, event->button.y, 20, 20, true)));
-//            windowManager->OnMouseButtonUpEvent(event->button);
-//            printf("Button up\n");
             OnMouseEvent(event->button);
             break;
         }
         case SDL_FINGERMOTION:
         case SDL_MOUSEMOTION: {
-//            windowManager->OnMouseMotionEvent(event->motion);
-//            printf("Button move\n");
             OnMouseMotionEvent(event->motion);
             break;
         }
         case SDL_MOUSEWHEEL: {
-//            windowManager->OnMouseWheelEvent(event->wheel);
             OnMouseWheelEvent(event->wheel);
             break;
         }
         case SDL_KEYDOWN: {
+            Input.KeyDownEvent(*event);
 #ifdef GRAPHICS_TEST
             OnTest(event->key.keysym.sym);
 #endif
+            break;
+        }
+        case SDL_KEYUP: {
+            Input.KeyUpEvent(*event);
             break;
         }
         case SDL_QUIT: {

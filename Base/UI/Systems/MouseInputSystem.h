@@ -154,8 +154,8 @@ namespace Inanna {
         entityx::Entity current;
         entityx::Entity lastMouseDownEntity;
         entityx::Entity dragEntity;
-        SDL_MouseButtonEvent mouseButtonEvent;
-        SDL_MouseMotionEvent mouseMotionEvent;
+        SDL_MouseButtonEvent mouseButtonEvent{};
+        SDL_MouseMotionEvent mouseMotionEvent{};
         Uint32 lastMouseDownTime;
 
         const Uint32 ClickDiff;

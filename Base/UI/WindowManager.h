@@ -34,11 +34,6 @@ namespace Inanna {
         float height;
 
         Graphics *graphics;
-
-#ifdef WINDOW_MANAGER_TEST
-        entityx::Entity parent;
-        entityx::Entity child;
-#endif
     };
 }
 

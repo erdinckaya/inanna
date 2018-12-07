@@ -7,6 +7,7 @@
 
 #include "Graphics/Graphics.h"
 #include "UI/WindowManager.h"
+#include "KeyInput/KeyInput.h"
 
 namespace Inanna {
     const unsigned int WIDTH = 900;
@@ -30,11 +31,15 @@ namespace Inanna {
 
         void OnMouseWheelEvent(SDL_MouseWheelEvent event);
 
+
+        static KeyInput Input;
+
     private:
         bool isExist;
 
         std::unique_ptr<Graphics> graphics;
         std::unique_ptr<WindowManager> windowManager;
+
 
         void BringDoom();
 

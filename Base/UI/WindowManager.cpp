@@ -57,44 +57,6 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
 void Inanna::WindowManager::Test(SDL_Keycode code) {
 #ifdef WINDOW_MANAGER_TEST
     switch (code) {
-        case SDLK_k: {
-            entityx::Entity entity = uiFactory.entities.create();
-            entity.assign<Renderable>(Resources::PIECES.BLUE);
-            entity.assign<Interaction>();
-            entity.assign<Scalable>(Vecf(1.5f, 1.5f));
-            break;
-        }
-        case SDLK_a: {
-            entityx::Entity entity = uiFactory.entities.create();
-            entity.assign<Renderable>(Resources::PIECES.BLUE);
-            entity.assign<Interaction>();
-            entity.assign<Position>(Vecf(100, 100));
-            break;
-        }
-        case SDLK_b: {
-            entityx::Entity entity = uiFactory.entities.create();
-            entity.assign<Renderable>(Resources::PIECES.BLUE);
-            entity.assign<Interaction>();
-            entity.assign<Sizable>(Vecf(100, 100));
-            break;
-        }
-        case SDLK_r: {
-            entityx::Entity entity = uiFactory.entities.create();
-            entity.assign<Renderable>(Resources::PIECES.BLUE);
-            entity.assign<Interaction>();
-            entity.assign<Rotation>(45);
-            break;
-        }
-        case SDLK_w: {
-            entityx::Entity entity = uiFactory.entities.create();
-            entity.assign<Widget>();
-            entity.assign<Renderable>(Resources::PIECES.BLUE);
-            entity.assign<Interaction>();
-            entity.assign<Rotation>(45);
-            entity.assign<Position>(Vecf(100, 100));
-            entity.assign<Scalable>(Vecf(1, 1));
-            break;
-        }
         case SDLK_y: {
             entityx::Entity parent = uiFactory.CreateCanvas(Vecf(100, 100));
             entityx::Entity child = uiFactory.CreateCanvas(Vecf(10, 10));
@@ -110,30 +72,15 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             child.assign<MouseClick>([](entityx::Entity entity, SDL_MouseButtonEvent event) {
                 printf("MouseClick %s\n", entity.component<Renderable>()->target.id);
             });
-//            child.assign<MouseDragStart>([](entityx::Entity entity, SDL_MouseMotionEvent event) {
-//                printf("MouseDragStart %s\n", entity.component<Renderable>()->target.id);
-//            });
-//            child.assign<MouseDrag>([](entityx::Entity entity, SDL_MouseMotionEvent event) {
-//                Vecf pos = entity.component<Position>()->position;
-//                entity.component<Position>()->position = Vecf(pos.x + event.xrel, pos.y + event.yrel);
-//            });
-//            child.assign<MouseDragEnd>([](entityx::Entity entity, SDL_MouseMotionEvent event) {
-//                printf("MouseDragEnd %s\n", entity.component<Renderable>()->target.id);
-//            });
 
             uiFactory.events.emit<ChildEvent>(parent, child, true);
-
-
-            this->parent = parent;
-            this->child = child;
+            break;
+        }
+        case SDLK_p: {
             break;
         }
         case SDLK_c: {
             uiFactory.events.emit<ClearAllEvent>();
-            break;
-        }
-        case SDLK_u: {
-            uiFactory.events.emit<ChildEvent>(parent, child, false);
             break;
         }
         default:
