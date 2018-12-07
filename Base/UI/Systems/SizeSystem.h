@@ -19,6 +19,9 @@ namespace Inanna {
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Sizable>([this](entityx::Entity entity, Sizable &sizable){
                 auto renderable = entity.component<Renderable>();
+                if (renderable->target.valid() && sizable.nativeSize) {
+                    sizable.size = Vecf(renderable->target.w, renderable->target.h);
+                }
                 renderable->size = sizable.size;
             });
         }

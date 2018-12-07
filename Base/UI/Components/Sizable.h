@@ -8,8 +8,9 @@
 
 namespace Inanna {
     struct Sizable {
-        explicit Sizable(const Vecf &size = Vecf(0, 0)) : size(size) {}
+        explicit Sizable(const Vecf &size = Vecf(0, 0)) : size(size), nativeSize(true) {}
         Vecf size;
+        bool nativeSize;
     };
 }
 #endif //INANNA_SIZE_H

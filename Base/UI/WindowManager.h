@@ -9,24 +9,31 @@
 
 #include <entityx/entityx.h>
 #include "../Graphics/Graphics.h"
+#include "UIFactory.h"
 
 
 namespace Inanna {
-    class WindowManager : public entityx::EntityX {
+    class WindowManager {
     public:
-        explicit WindowManager(float width, float height, Graphics* graphics);
+        explicit WindowManager(float width, float height, Graphics *graphics);
 
         void Update(entityx::TimeDelta dt);
 
         void Test(SDL_Keycode code);
+
         void TestMouseButton(SDL_MouseButtonEvent event);
+
         void TestMouseMotion(SDL_MouseMotionEvent event);
+
         void TestMouseWheel(SDL_MouseWheelEvent event);
+
+
+        static UIFactory uiFactory;
     private:
         float width;
         float height;
 
-        Graphics* graphics;
+        Graphics *graphics;
 
 #ifdef WINDOW_MANAGER_TEST
         entityx::Entity parent;
@@ -34,8 +41,6 @@ namespace Inanna {
 #endif
     };
 }
-
-
 
 
 #endif //INANNA_WINDOWMANAGER_H
