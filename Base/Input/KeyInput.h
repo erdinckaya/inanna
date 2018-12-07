@@ -28,6 +28,8 @@ namespace Inanna {
 
         void PrintKeys();
 
+        static KeyInput Instance;
+
     private:
         std::map<SDL_Scancode, bool> heldKeys;
         std::map<SDL_Scancode, bool> pressedKeys;

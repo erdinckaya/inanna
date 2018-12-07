@@ -5,9 +5,12 @@
 #ifndef INANNA_WORLD_H
 #define INANNA_WORLD_H
 
+#include <SDL.h>
+
 #include "Graphics/Graphics.h"
 #include "UI/WindowManager.h"
-#include "KeyInput/KeyInput.h"
+#include "Input/KeyInput.h"
+#include "Input/MouseInput.h"
 
 namespace Inanna {
     const unsigned int WIDTH = 900;
@@ -30,9 +33,6 @@ namespace Inanna {
         void OnMouseMotionEvent(SDL_MouseMotionEvent event);
 
         void OnMouseWheelEvent(SDL_MouseWheelEvent event);
-
-
-        static KeyInput Input;
 
     private:
         bool isExist;

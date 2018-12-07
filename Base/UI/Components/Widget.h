@@ -14,7 +14,7 @@ namespace Inanna {
     struct Widget {
         explicit Widget() = default;
 
-        explicit Widget(const entityx::Entity &parent, const Veci &depth) : depth(depth), parent(parent) {}
+        explicit Widget(const entityx::Entity &parent, const Veci &depth) : depth(depth), parent(parent), mouseWidget(false) {}
 
         void SetParent(const entityx::Entity parent) {
             this->parent = parent;
@@ -53,6 +53,7 @@ namespace Inanna {
         Veci depth;
         entityx::Entity parent;
         std::vector<entityx::Entity> children;
+        bool mouseWidget;
     };
 }
 

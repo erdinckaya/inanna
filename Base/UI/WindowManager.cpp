@@ -3,20 +3,8 @@
 //
 
 #include "WindowManager.h"
-#include "Systems/RenderSystem.h"
-#include "Systems/ScaleSystem.h"
-#include "Systems/SizeSystem.h"
-#include "Systems/PositionSystem.h"
-#include "Systems/RotationSystem.h"
-#include "Components/Widget.h"
-#include "Events/ChildEvent.h"
-#include "Systems/ChildSystem.h"
-#include "Systems/DepthSystem.h"
-#include "Systems/MouseInputSystem.h"
-#include "Components/Interaction.h"
-#include "Systems/MouseEventDispatcherSystem.h"
-#include "MouseEventComponents/MouseDown.h"
-#include "MouseEventComponents/MouseUp.h"
+#include "../World.h"
+
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
 
@@ -28,6 +16,8 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
 
     uiFactory.systems.add<MouseInputSystem>();
     uiFactory.systems.add<MouseEventDispatcherSystem>();
+
+    uiFactory.systems.add<ButtonSystem>();
 
     uiFactory.systems.add<SizeSystem>();
     uiFactory.systems.add<ScaleSystem>();
@@ -45,6 +35,8 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
 
     uiFactory.systems.update<MouseInputSystem>(dt);
     uiFactory.systems.update<MouseEventDispatcherSystem>(dt);
+
+    uiFactory.systems.update<ButtonSystem>(dt);
 
     uiFactory.systems.update<SizeSystem>(dt);
     uiFactory.systems.update<ScaleSystem>(dt);
@@ -77,6 +69,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             break;
         }
         case SDLK_p: {
+            MouseInput::Instance.PrintKeys();
             break;
         }
         case SDLK_c: {

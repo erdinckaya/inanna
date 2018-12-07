@@ -5,12 +5,8 @@
 
 #define GRAPHICS_TEST
 
-#include <SDL.h>
 #include "World.h"
-#include "Graphics/Graphics.h"
-#include "UI/WindowManager.h"
 
-Inanna::KeyInput Inanna::World::Input;
 
 Inanna::World::World() : isExist(true) {
     graphics = std::make_unique<Graphics>(WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
@@ -28,7 +24,8 @@ void Inanna::World::Start() {
     while (isExist) {
 
         const Uint32 start_time_ms = SDL_GetTicks();
-        Input.BeginNewFrame();
+        KeyInput::Instance.BeginNewFrame();
+        MouseInput::Instance.BeginNewFrame();
         while (SDL_PollEvent(&event)) {
             OnEvent(&event);
         }
@@ -55,11 +52,13 @@ void Inanna::World::OnEvent(SDL_Event *event) {
     switch (event->type) {
         case SDL_FINGERDOWN:
         case SDL_MOUSEBUTTONDOWN: {
+            MouseInput::Instance.MouseDownEvent(*event);
             OnMouseEvent(event->button);
             break;
         }
         case SDL_FINGERUP:
         case SDL_MOUSEBUTTONUP: {
+            MouseInput::Instance.MouseUpEvent(*event);
             OnMouseEvent(event->button);
             break;
         }
@@ -73,14 +72,14 @@ void Inanna::World::OnEvent(SDL_Event *event) {
             break;
         }
         case SDL_KEYDOWN: {
-            Input.KeyDownEvent(*event);
+            KeyInput::Instance.KeyDownEvent(*event);
 #ifdef GRAPHICS_TEST
             OnTest(event->key.keysym.sym);
 #endif
             break;
         }
         case SDL_KEYUP: {
-            Input.KeyUpEvent(*event);
+            KeyInput::Instance.KeyUpEvent(*event);
             break;
         }
         case SDL_QUIT: {

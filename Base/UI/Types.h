@@ -11,6 +11,26 @@
 namespace Inanna {
     typedef std::function<void(entityx::Entity, SDL_MouseButtonEvent)> MouseButtonCallback;
     typedef std::function<void(entityx::Entity, SDL_MouseMotionEvent)> MouseMotionCallback;
+
+    enum ButtonState {
+        None = -1,
+        Idle = 0,
+        Over = 1,
+        Pressed = 2,
+        Disable = 3,
+        Count = 4,
+    };
+
+    enum MouseButtonState {
+        FingerDown,
+        FingerUp,
+        MouseLeftDown,
+        MouseLeftUp,
+        MouseRightDown,
+        MouseRightUp,
+        MouseMiddleDown,
+        MouseMiddleUp,
+    };
 }
 
 #endif //INANNA_TYPES_H

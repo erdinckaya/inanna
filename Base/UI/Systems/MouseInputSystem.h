@@ -35,6 +35,14 @@ namespace Inanna {
         }
 
 
+        void SetCurrent(entityx::Entity &entity) {
+            if (current.valid()) {
+                current.component<Widget>()->mouseWidget = false;
+            }
+            current = entity;
+            current.component<Widget>()->mouseWidget = true;
+        }
+
         void AssignWidget(entityx::EntityManager &manager, const Vecf &mouse) {
             std::vector<entityx::Entity> entities;
             manager.each<Renderable, Interaction>(
@@ -84,7 +92,7 @@ namespace Inanna {
             for (int i = 0; i < size; ++i) {
                 auto depth = entities[i].component<Widget>()->depth;
                 if (depth.x == x && depth.y == y) {
-                    current = entities[i];
+                    SetCurrent(entities[i]);
                 }
             }
 

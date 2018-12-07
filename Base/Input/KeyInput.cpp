@@ -4,6 +4,7 @@
 
 #include "KeyInput.h"
 
+Inanna::KeyInput Inanna::KeyInput::Instance;
 
 void Inanna::KeyInput::BeginNewFrame() {
     pressedKeys.clear();

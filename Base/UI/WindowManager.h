@@ -11,8 +11,25 @@
 #include "../Graphics/Graphics.h"
 #include "UIFactory.h"
 
+#include "Systems/RenderSystem.h"
+#include "Systems/ScaleSystem.h"
+#include "Systems/SizeSystem.h"
+#include "Systems/PositionSystem.h"
+#include "Systems/RotationSystem.h"
+#include "Components/Widget.h"
+#include "Events/ChildEvent.h"
+#include "Systems/ChildSystem.h"
+#include "Systems/DepthSystem.h"
+#include "Systems/MouseInputSystem.h"
+#include "Components/Interaction.h"
+#include "Systems/MouseEventDispatcherSystem.h"
+#include "MouseEventComponents/MouseDown.h"
+#include "MouseEventComponents/MouseUp.h"
+#include "Systems/ButtonSystem.h"
+
 
 namespace Inanna {
+
     class WindowManager {
     public:
         explicit WindowManager(float width, float height, Graphics *graphics);

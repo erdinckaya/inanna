@@ -2,8 +2,8 @@
 // Created by Erdınc Kaya on 23.11.2018.
 //
 
-#ifndef INANNA_MOUSEINPUT_H
-#define INANNA_MOUSEINPUT_H
+#ifndef INANNA_MOUSEBUTTON_H
+#define INANNA_MOUSEBUTTON_H
 
 #include <SDL_events.h>
 
@@ -17,4 +17,4 @@ namespace Inanna {
     };
 }
 
-#endif //INANNA_MOUSEINPUT_H
+#endif //INANNA_MOUSEBUTTON_H
