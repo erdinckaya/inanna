@@ -60,12 +60,19 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             });
 
 
-            child.component<Renderable>()->target = Resources::PIECES.RED;
+//            child.component<Renderable>()->target = Resources::PIECES.RED;
+            auto button = child.assign<Button>();
+            button->SetStateAsset(ButtonState::Idle, Resources::PIECES.RED)
+                    ->SetStateAsset(ButtonState::Over, Resources::PIECES.YELLOW)
+                    ->SetStateAsset(ButtonState::Disable, Resources::PIECES.GREEN)
+                    ->SetStateAsset(ButtonState::Pressed, Resources::PIECES.DARK_PURPLE);
             child.assign<MouseClick>([](entityx::Entity entity, SDL_MouseButtonEvent event) {
                 printf("MouseClick %s\n", entity.component<Renderable>()->target.id);
             });
 
             uiFactory.events.emit<ChildEvent>(parent, child, true);
+
+
             break;
         }
         case SDLK_p: {

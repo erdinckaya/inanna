@@ -17,6 +17,7 @@
 #include "Components/Position.h"
 #include "Components/Sizable.h"
 #include "Components/Widget.h"
+#include "Widgets/Button.h"
 
 
 namespace Inanna {
@@ -25,6 +26,7 @@ namespace Inanna {
         UIFactory() = default;
 
         entityx::Entity CreateCanvas(Vecf pos = Vecf(0, 0), Vecf size = Vecf(100, 100));
+        entityx::Entity CreateButton(Vecf pos = Vecf(0, 0), Vecf size = Vecf(100, 100));
     };
 }
 

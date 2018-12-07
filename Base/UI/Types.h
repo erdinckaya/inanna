@@ -22,14 +22,10 @@ namespace Inanna {
     };
 
     enum MouseButtonState {
-        FingerDown,
-        FingerUp,
-        MouseLeftDown,
-        MouseLeftUp,
-        MouseRightDown,
-        MouseRightUp,
-        MouseMiddleDown,
-        MouseMiddleUp,
+        Finger,
+        MouseLeft,
+        MouseRight,
+        MouseMiddle,
     };
 }
 

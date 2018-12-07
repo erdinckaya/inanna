@@ -18,6 +18,26 @@ namespace Inanna {
             }
         };
 
+
+
+        Button* SetStateAsset(const ButtonState &state, const ImageAsset asset) {
+            states[state] = asset;
+            return this;
+        }
+
+        ImageAsset GetStateAsset(const ButtonState &state) {
+            return states[state];
+        }
+
+        void SetActive(bool value) {
+            isActive = value;
+        }
+
+        bool GetActive() {
+            return isActive;
+        }
+
+    private:
         bool isActive;
         ImageAsset states[ButtonState::Count];
     };

@@ -8,6 +8,7 @@
 #include <entityx/System.h>
 #include <entityx/Entity.h>
 #include "../Widgets/Button.h"
+#include "../../Input/MouseInput.h"
 
 namespace Inanna {
 
@@ -16,10 +17,25 @@ namespace Inanna {
         explicit ButtonSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Button, Widget>([this](entityx::Entity entity, Button &button, Widget &widget) {
-                bool isOver = widget.mouseWidget;
-//                bool isMouseDown = World::InputMouse.WasPressed(MouseButtonState::MouseLeftDown);
-            });
+            entities.each<Button, Widget, Renderable>(
+                    [this](entityx::Entity entity, Button &button, Widget &widget, Renderable &renderable) {
+                        bool isOver = widget.mouseWidget;
+                        bool isHolding = MouseInput::Instance.IsMouseHeld(MouseButtonState::MouseLeft) ||
+                                           MouseInput::Instance.IsMouseHeld(MouseButtonState::Finger);
+                        if (button.GetActive()) {
+                            if (isOver) {
+                                if (isHolding) {
+                                    renderable.target = button.GetStateAsset(ButtonState::Pressed);
+                                } else {
+                                    renderable.target = button.GetStateAsset(ButtonState::Over);
+                                }
+                            } else {
+                                renderable.target = button.GetStateAsset(ButtonState::Idle);
+                            }
+                        } else {
+                            renderable.target = button.GetStateAsset(ButtonState::Disable);
+                        }
+                    });
         }
     };
 }

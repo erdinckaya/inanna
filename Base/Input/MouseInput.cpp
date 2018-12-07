@@ -11,18 +11,18 @@ void Inanna::MouseInput::BeginNewFrame() {
     releasedKeys.clear();
 }
 
-void Inanna::MouseInput::MouseUpEvent(const SDL_Event &event) {
-    Inanna::MouseButtonState state = GetState(event);
-
-    releasedKeys[state] = true;
-    heldKeys[state] = false;
-}
-
 void Inanna::MouseInput::MouseDownEvent(const SDL_Event &event) {
     Inanna::MouseButtonState state = GetState(event);
 
     pressedKeys[state] = true;
     heldKeys[state] = true;
+}
+
+void Inanna::MouseInput::MouseUpEvent(const SDL_Event &event) {
+    Inanna::MouseButtonState state = GetState(event);
+
+    releasedKeys[state] = true;
+    heldKeys[state] = false;
 }
 
 bool Inanna::MouseInput::WasMousePressed(const Inanna::MouseButtonState &key) {
@@ -56,33 +56,30 @@ void Inanna::MouseInput::PrintKeys() {
 
 
 Inanna::MouseButtonState Inanna::MouseInput::GetState(const SDL_Event &event) const {
-    Inanna::MouseButtonState state = Inanna::FingerDown;
+    Inanna::MouseButtonState state = Inanna::Finger;
     switch (event.type) {
+        case SDL_FINGERUP:
         case SDL_FINGERDOWN: {
-            state = Inanna::FingerDown;
-            break;
-        }
-        case SDL_FINGERUP: {
-            state = Inanna::FingerUp;
+            state = Inanna::Finger;
             break;
         }
         case SDL_MOUSEBUTTONDOWN: {
             if (event.button.button == SDL_BUTTON_LEFT) {
-                state = Inanna::MouseLeftDown;
+                state = Inanna::MouseLeft;
             } else if (event.button.button == SDL_BUTTON_RIGHT) {
-                state = Inanna::MouseRightDown;
+                state = Inanna::MouseRight;
             } else if (event.button.button == SDL_BUTTON_MIDDLE){
-                state = Inanna::MouseMiddleDown;
+                state = Inanna::MouseMiddle;
             }
             break;
         }
         case SDL_MOUSEBUTTONUP: {
             if (event.button.button == SDL_BUTTON_LEFT) {
-                state = Inanna::MouseLeftUp;
+                state = Inanna::MouseLeft;
             } else if (event.button.button == SDL_BUTTON_RIGHT) {
-                state = Inanna::MouseRightUp;
+                state = Inanna::MouseRight;
             } else if (event.button.button == SDL_BUTTON_MIDDLE){
-                state = Inanna::MouseMiddleUp;
+                state = Inanna::MouseMiddle;
             }
             break;
         }

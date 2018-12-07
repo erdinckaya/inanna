@@ -29,18 +29,30 @@ namespace Inanna {
         explicit MouseInputSystem(): ClickDiff(100), lastMouseDownTime(0) {};
 
         void configure(entityx::EventManager &events) override {
-            current = entityx::Entity();
+            clickEntity = entityx::Entity();
+            overEntity = entityx::Entity();
             lastMouseDownEntity = entityx::Entity();
             dragEntity = entityx::Entity();
         }
 
 
-        void SetCurrent(entityx::Entity &entity) {
-            if (current.valid()) {
-                current.component<Widget>()->mouseWidget = false;
+        void SetClickEntity(entityx::Entity &entity) {
+            clickEntity = entity;
+        }
+
+        void SetOverEntity(entityx::Entity &entity) {
+            if (overEntity.valid()) {
+                overEntity.component<Widget>()->mouseWidget = false;
             }
-            current = entity;
-            current.component<Widget>()->mouseWidget = true;
+            overEntity = entity;
+            overEntity.component<Widget>()->mouseWidget = true;
+        }
+
+        void ReleaseOverEntity() {
+            if (overEntity.valid()) {
+                overEntity.component<Widget>()->mouseWidget = false;
+            }
+            overEntity = entityx::Entity();
         }
 
         void AssignWidget(entityx::EntityManager &manager, const Vecf &mouse) {
@@ -56,7 +68,7 @@ namespace Inanna {
 
             // No UI clicked!
             if (entities.empty()) {
-                current = entityx::Entity();
+                clickEntity = entityx::Entity();
                 return;
             }
 
@@ -92,7 +104,64 @@ namespace Inanna {
             for (int i = 0; i < size; ++i) {
                 auto depth = entities[i].component<Widget>()->depth;
                 if (depth.x == x && depth.y == y) {
-                    SetCurrent(entities[i]);
+                    SetClickEntity(entities[i]);
+                }
+            }
+
+            // Clear it
+            entities.clear();
+        }
+
+        void AssignOverWidget(entityx::EntityManager &manager, const Vecf &mouse) {
+            std::vector<entityx::Entity> entities;
+            manager.each<Renderable, Interaction>(
+                    [&](entityx::Entity entity, Renderable &renderable, Interaction &interaction) {
+                        Rectf box = {renderable.pos.x, renderable.pos.y, renderable.size.x, renderable.size.x};
+                        bool isPointIn = box.IsPointIn(mouse) && interaction.mouse;
+                        if (isPointIn) {
+                            entities.emplace_back(entity);
+                        }
+                    });
+
+            // No UI clicked!
+            if (entities.empty()) {
+                ReleaseOverEntity();
+                return;
+            }
+
+            // Find Deepest Widget
+            int x = -1;
+            int size = static_cast<int>(entities.size());
+            for (int i = 0; i < size; ++i) {
+                auto depth = entities[i].component<Widget>()->depth;
+                if (depth.x > x) {
+                    x = depth.x;
+                }
+            }
+
+            // Prune Others
+            for (int i = size - 1; i > -1; --i) {
+                auto depth = entities[i].component<Widget>()->depth;
+                if (depth.x < x) {
+                    entities.erase(entities.begin() + i);
+                }
+            }
+
+            // Find Last render order.
+            int y = -1;
+            size = static_cast<int>(entities.size());
+            for (int i = 0; i < size; ++i) {
+                auto depth = entities[i].component<Widget>()->depth;
+                if (depth.y > y) {
+                    y = depth.y;
+                }
+            }
+
+            // Assign the entity;
+            for (int i = 0; i < size; ++i) {
+                auto depth = entities[i].component<Widget>()->depth;
+                if (depth.x == x && depth.y == y) {
+                    SetOverEntity(entities[i]);
                 }
             }
 
@@ -103,13 +172,13 @@ namespace Inanna {
         void ProcessMouseButtonInput(MouseButton &button, entityx::EventManager &events) {
             mouseButtonEvent = button.event;
 
-            if (current.valid()) {
+            if (clickEntity.valid()) {
                 if (mouseButtonEvent.type == SDL_MOUSEBUTTONUP) {
-                    events.emit<MouseUpEvent>(current, mouseButtonEvent);
+                    events.emit<MouseUpEvent>(clickEntity, mouseButtonEvent);
 
                     auto diff= mouseButtonEvent.timestamp - lastMouseDownTime;
-                    if (current == lastMouseDownEntity && diff <= ClickDiff) {
-                        events.emit<MouseClickEvent>(current, mouseButtonEvent);
+                    if (clickEntity == lastMouseDownEntity && diff <= ClickDiff) {
+                        events.emit<MouseClickEvent>(clickEntity, mouseButtonEvent);
                     }
 
                     if (dragEntity.valid() && dragEntity.has_component<MouseDrag>()) {
@@ -117,11 +186,11 @@ namespace Inanna {
                         dragEntity.invalidate();
                     }
                 } else {
-                    lastMouseDownEntity = current;
+                    lastMouseDownEntity = clickEntity;
                     lastMouseDownTime = mouseButtonEvent.timestamp;
 
-                    if (!dragEntity.valid() && current.has_component<MouseDrag>()) {
-                        dragEntity = current;
+                    if (!dragEntity.valid() && clickEntity.has_component<MouseDrag>()) {
+                        dragEntity = clickEntity;
                         events.emit<MouseDragStartEvent>(dragEntity, mouseMotionEvent);
                     }
                 }
@@ -145,6 +214,7 @@ namespace Inanna {
 
 
             entities.each<MouseMotion>([&](entityx::Entity entity, MouseMotion &event) {
+                AssignOverWidget(entities, Vecf(event.event.x, event.event.y));
                 ProcessMouseMotionInput(event, events);
                 entity.destroy();
             });
@@ -153,13 +223,14 @@ namespace Inanna {
                 entity.destroy();
             });
 
-            if (mouseButtonEvent.type == SDL_MOUSEBUTTONDOWN && current.valid()) {
-                events.emit<MouseDownEvent>(current, mouseButtonEvent);
+            if (mouseButtonEvent.type == SDL_MOUSEBUTTONDOWN && clickEntity.valid()) {
+                events.emit<MouseDownEvent>(clickEntity, mouseButtonEvent);
             }
         }
 
     private:
-        entityx::Entity current;
+        entityx::Entity clickEntity;
+        entityx::Entity overEntity;
         entityx::Entity lastMouseDownEntity;
         entityx::Entity dragEntity;
         SDL_MouseButtonEvent mouseButtonEvent{};
