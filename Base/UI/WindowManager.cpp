@@ -5,6 +5,7 @@
 #include "WindowManager.h"
 #include "../World.h"
 #include "Systems/LayoutSystem.h"
+#include "Systems/StackSystem.h"
 
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
@@ -27,6 +28,7 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
     // Layouts
     uiFactory.systems.add<LayoutSystem>();
 
+    uiFactory.systems.add<StackSystem>();
     uiFactory.systems.add<PositionSystem>();
 
 
@@ -46,12 +48,17 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
 
     uiFactory.systems.update<ButtonSystem>(dt);
 
+    uiFactory.systems.update<StackSystem>(dt);
+
+
     uiFactory.systems.update<SizeSystem>(dt);
     uiFactory.systems.update<ScaleSystem>(dt);
     uiFactory.systems.update<RotationSystem>(dt);
 
     uiFactory.systems.update<LayoutSystem>(dt);
+
     uiFactory.systems.update<PositionSystem>(dt);
+
 
 
 
@@ -63,7 +70,8 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
     switch (code) {
         case SDLK_y: {
             entityx::Entity parent = uiFactory.CreateCanvas(Vecf(100, 100), Vecf(600, 600));
-            entityx::Entity child = uiFactory.CreateCanvas(Vecf(10, 10));
+            entityx::Entity stack = uiFactory.CreateCanvas();
+            entityx::Entity child = uiFactory.CreateCanvas();
 
             parent.assign<Root>();
             parent.component<Renderable>()->target = Resources::PIECES.BLUE;
@@ -82,11 +90,22 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
                 printf("MouseClick %s\n", entity.component<Renderable>()->target.id);
             });
 
-            std::pair<LayoutType, float> left = {LayoutType::LT_LEFT, 0};
-            std::pair<LayoutType, float> vCenter = {LayoutType::LT_VERTICAL_CENTER, 0};
-            child.assign<Layout>(left, vCenter);
 
-            uiFactory.events.emit<ChildEvent>(parent, child, true);
+            std::pair<LayoutType, float> center = {LayoutType::LT_CENTER, 0};
+            stack.assign<Layout>(center);
+            stack.assign<Stack>(DirectionType::Vertical);
+
+            uiFactory.events.emit<ChildEvent>(parent, stack, true);
+
+            uiFactory.events.emit<ChildEvent>(stack, child, true);
+
+            entityx::Entity child1 = uiFactory.CreateCanvas();
+            child1.component<Renderable>()->target = Resources::PIECES.GREEN;
+            uiFactory.events.emit<ChildEvent>(stack, child1, true);
+
+            entityx::Entity child2 = uiFactory.CreateCanvas();
+            child2.component<Renderable>()->target = Resources::PIECES.DARK_PURPLE;
+            uiFactory.events.emit<ChildEvent>(stack, child2, true);
 
 
             break;

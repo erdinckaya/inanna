@@ -37,6 +37,11 @@ namespace Inanna {
         LT_TOP,
         LT_BOTTOM,
     };
+
+    enum DirectionType {
+        Horizontal,
+        Vertical
+    };
 }
 
 #endif //INANNA_TYPES_H
