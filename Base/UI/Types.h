@@ -27,6 +27,16 @@ namespace Inanna {
         MouseRight,
         MouseMiddle,
     };
+
+    enum LayoutType {
+        LT_LEFT,
+        LT_RIGHT,
+        LT_CENTER,
+        LT_HORIZONTAL_lCENTER,
+        LT_VERTICAL_CENTER,
+        LT_TOP,
+        LT_BOTTOM,
+    };
 }
 
 #endif //INANNA_TYPES_H

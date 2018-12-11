@@ -25,8 +25,8 @@ namespace Inanna {
     public:
         UIFactory() = default;
 
-        entityx::Entity CreateCanvas(Vecf pos = Vecf(0, 0), Vecf size = Vecf(100, 100));
-        entityx::Entity CreateButton(Vecf pos = Vecf(0, 0), Vecf size = Vecf(100, 100));
+        entityx::Entity CreateCanvas(Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
+        entityx::Entity CreateButton(Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
     };
 }
 

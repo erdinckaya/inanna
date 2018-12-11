@@ -4,6 +4,7 @@
 
 #include "WindowManager.h"
 #include "../World.h"
+#include "Systems/LayoutSystem.h"
 
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
@@ -22,7 +23,14 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
     uiFactory.systems.add<SizeSystem>();
     uiFactory.systems.add<ScaleSystem>();
     uiFactory.systems.add<RotationSystem>();
+
+    // Layouts
+    uiFactory.systems.add<LayoutSystem>();
+
     uiFactory.systems.add<PositionSystem>();
+
+
+
     uiFactory.systems.add<RenderSystem>(graphics);
 
 
@@ -41,7 +49,11 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
     uiFactory.systems.update<SizeSystem>(dt);
     uiFactory.systems.update<ScaleSystem>(dt);
     uiFactory.systems.update<RotationSystem>(dt);
+
+    uiFactory.systems.update<LayoutSystem>(dt);
     uiFactory.systems.update<PositionSystem>(dt);
+
+
 
     uiFactory.systems.update<RenderSystem>(dt);
 }
@@ -50,7 +62,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
 #ifdef WINDOW_MANAGER_TEST
     switch (code) {
         case SDLK_y: {
-            entityx::Entity parent = uiFactory.CreateCanvas(Vecf(100, 100));
+            entityx::Entity parent = uiFactory.CreateCanvas(Vecf(100, 100), Vecf(600, 600));
             entityx::Entity child = uiFactory.CreateCanvas(Vecf(10, 10));
 
             parent.assign<Root>();
@@ -69,6 +81,10 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             child.assign<MouseClick>([](entityx::Entity entity, SDL_MouseButtonEvent event) {
                 printf("MouseClick %s\n", entity.component<Renderable>()->target.id);
             });
+
+            std::pair<LayoutType, float> left = {LayoutType::LT_LEFT, 0};
+            std::pair<LayoutType, float> vCenter = {LayoutType::LT_VERTICAL_CENTER, 0};
+            child.assign<Layout>(left, vCenter);
 
             uiFactory.events.emit<ChildEvent>(parent, child, true);
 
