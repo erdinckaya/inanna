@@ -26,7 +26,7 @@ namespace Inanna {
 
     class MouseInputSystem : public entityx::System<MouseInputSystem> {
     public:
-        explicit MouseInputSystem(): ClickDiff(100), lastMouseDownTime(0) {};
+        explicit MouseInputSystem(): ClickDiff(500), lastMouseDownTime(0) {};
 
         void configure(entityx::EventManager &events) override {
             clickEntity = entityx::Entity();
@@ -59,7 +59,9 @@ namespace Inanna {
             std::vector<entityx::Entity> entities;
             manager.each<Renderable, Interaction>(
                     [&](entityx::Entity entity, Renderable &renderable, Interaction &interaction) {
-                        Rectf box = {renderable.pos.x, renderable.pos.y, renderable.size.x, renderable.size.x};
+//                        Rectf box = {renderable.pos.x, renderable.pos.y, renderable.size.x, renderable.size.x};
+                        Rectf box = renderable.renderContext;
+//                        printf("Box x: %f, y: %f, w: %f, h: %f\n", box.x, box.y, box.w, box.h);
                         bool isPointIn = box.IsPointIn(mouse) && interaction.mouse;
                         if (isPointIn) {
                             entities.emplace_back(entity);
@@ -116,7 +118,8 @@ namespace Inanna {
             std::vector<entityx::Entity> entities;
             manager.each<Renderable, Interaction>(
                     [&](entityx::Entity entity, Renderable &renderable, Interaction &interaction) {
-                        Rectf box = {renderable.pos.x, renderable.pos.y, renderable.size.x, renderable.size.x};
+//                        Rectf box = {renderable.pos.x, renderable.pos.y, renderable.size.x, renderable.size.x};
+                        Rectf box = renderable.renderContext;
                         bool isPointIn = box.IsPointIn(mouse) && interaction.mouse;
                         if (isPointIn) {
                             entities.emplace_back(entity);
@@ -172,11 +175,11 @@ namespace Inanna {
         void ProcessMouseButtonInput(MouseButton &button, entityx::EventManager &events) {
             mouseButtonEvent = button.event;
 
-            if (clickEntity.valid()) {
+            if (clickEntity.valid() && mouseButtonEvent.button == SDL_BUTTON_LEFT) {
                 if (mouseButtonEvent.type == SDL_MOUSEBUTTONUP) {
                     events.emit<MouseUpEvent>(clickEntity, mouseButtonEvent);
 
-                    auto diff= mouseButtonEvent.timestamp - lastMouseDownTime;
+                    auto diff = mouseButtonEvent.timestamp - lastMouseDownTime;
                     if (clickEntity == lastMouseDownEntity && diff <= ClickDiff) {
                         events.emit<MouseClickEvent>(clickEntity, mouseButtonEvent);
                     }
@@ -238,7 +241,6 @@ namespace Inanna {
         Uint32 lastMouseDownTime;
 
         const Uint32 ClickDiff;
-
     };
 }
 

@@ -6,6 +6,7 @@
 #include "../World.h"
 #include "Systems/LayoutSystem.h"
 #include "Systems/StackSystem.h"
+#include "Systems/RenderFrameSystem.h"
 
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
@@ -33,6 +34,7 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
 
 
 
+    uiFactory.systems.add<RenderFrameSystem>();
     uiFactory.systems.add<RenderSystem>(graphics);
 
 
@@ -62,6 +64,7 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
 
 
 
+    uiFactory.systems.update<RenderFrameSystem>(dt);
     uiFactory.systems.update<RenderSystem>(dt);
 }
 
@@ -74,6 +77,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             entityx::Entity child = uiFactory.CreateCanvas();
 
             parent.assign<Root>();
+            parent.assign<RenderFrame>(Rectf(Vecf(0, 0), Vecf(600, 600)));
             parent.component<Renderable>()->target = Resources::PIECES.BLUE;
             parent.assign<MouseClick>([](entityx::Entity entity, SDL_MouseButtonEvent event) {
                 printf("MouseClick %s\n", entity.component<Renderable>()->target.id);

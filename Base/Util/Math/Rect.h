@@ -16,6 +16,8 @@ namespace Inanna {
 
         Rect(T x, T y, T w, T h) : x(x), y(y), w(w), h(h) {}
 
+        Rect(Vec2<T> pos, Vec2<T> size) : x(pos.x), y(pos.y), w(size.x), h(size.y) {}
+
         ~Rect() = default;
 
         T x;
@@ -32,6 +34,15 @@ namespace Inanna {
 
         inline bool IsIntersect(Rect<T> second) {
             return !(x > second.x + second.w || x + w < second.x || y > second.y + second.h || y + h < second.y);
+        }
+
+
+        friend inline bool operator==(const Rect& lhs, const Rect& rhs) {
+            return lhs.x == rhs.x && lhs.y == rhs.y && lhs.w == rhs.w && lhs.h == rhs.h;
+        }
+
+        friend inline bool operator!=(const Rect& lhs, const Rect& rhs) {
+            return !(lhs == rhs);
         }
 
         inline static std::pair<bool, Rect<T>> GetIntersect(Rect<T> first, Rect<T> second) {

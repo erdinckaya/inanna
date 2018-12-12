@@ -52,11 +52,36 @@ namespace Inanna {
             }
         }
 
-        void Render(const Renderable &renderable) const {
+        void Render(Renderable &renderable) const {
+            if (renderable.hasFrame) {
+                FrameRender(renderable);
+            } else {
+                NormalRender(renderable);
+            }
+        }
+
+        void NormalRender(Renderable &renderable) const {
             Rectf clip = {0, 0, renderable.target.w, renderable.target.h};
             Rectf pos = {renderable.pos.x, renderable.pos.y, renderable.size.x, renderable.size.y};
             if (renderable.target.valid()) {
                 graphics->DrawTexture(renderable.target, clip, pos, renderable.rotation, renderable.scale);
+            }
+            renderable.renderContext = pos;
+        }
+
+        void FrameRender(Renderable &renderable) const {
+            auto frame = renderable.frame;
+            auto result = Rectf::GetIntersect(frame, Rectf(renderable.pos, renderable.size));
+            if (result.first) {
+                Rectf intersect = result.second;
+                Rectf clip = Rectf(intersect.x - renderable.pos.x, intersect.y - renderable.pos.y, intersect.w, intersect.h);
+                Rectf pos = intersect;
+                if (renderable.target.valid()) {
+                    graphics->DrawTexture(renderable.target, clip, pos, renderable.rotation, renderable.scale);
+                }
+                renderable.renderContext = intersect;
+            } else {
+                NormalRender(renderable);
             }
         }
 

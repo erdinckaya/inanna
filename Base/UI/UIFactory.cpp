@@ -3,6 +3,7 @@
 //
 
 #include "UIFactory.h"
+#include "Components/RenderFrame.h"
 
 
 entityx::Entity Inanna::UIFactory::CreateCanvas(Vecf pos, Vecf size) {
