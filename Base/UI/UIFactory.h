@@ -17,6 +17,8 @@
 #include "Components/Position.h"
 #include "Components/Sizable.h"
 #include "Components/Widget.h"
+#include "Components/RenderFrame.h"
+#include "Widgets/Stack.h"
 #include "Widgets/Button.h"
 
 
@@ -26,7 +28,10 @@ namespace Inanna {
         UIFactory() = default;
 
         entityx::Entity CreateCanvas(Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
+
         entityx::Entity CreateButton(Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
+
+//        entityx::Entity CreateStack(Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
     };
 }
 

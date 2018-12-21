@@ -9,7 +9,7 @@
 #include <entityx/System.h>
 #include "../Components/Widget.h"
 #include "../Components/Root.h"
-#include "../Components/Stack.h"
+#include "../Widgets/Stack.h"
 #include "../Components/Position.h"
 #include "../Components/Sizable.h"
 

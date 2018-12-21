@@ -12,7 +12,6 @@ class GraphicsTest {
 public:
 
 
-
     void Test() {
         SDL_Event event{};
         while (true) {
@@ -29,7 +28,6 @@ public:
 
     void TestInit() {
         Inanna::Graphics graphics(900, 900, SDL_WINDOW_OPENGL);
-
     }
 
 };

@@ -3,7 +3,6 @@
 //
 
 #include "UIFactory.h"
-#include "Components/RenderFrame.h"
 
 
 entityx::Entity Inanna::UIFactory::CreateCanvas(Vecf pos, Vecf size) {
@@ -20,14 +19,13 @@ entityx::Entity Inanna::UIFactory::CreateCanvas(Vecf pos, Vecf size) {
 }
 
 entityx::Entity Inanna::UIFactory::CreateButton(Vecf pos, Vecf size) {
-    auto entity = entities.create();
+    auto entity = CreateCanvas(pos, size);
     entity.assign<Button>();
-    entity.assign<Widget>();
-    entity.assign<Renderable>();
-    entity.assign<Interaction>();
-    entity.assign<Position>(pos);
-    entity.assign<Sizable>(size);
-    entity.assign<Scalable>();
-
     return entity;
 }
+//
+//entityx::Entity Inanna::UIFactory::CreateStack(Vecf pos, Vecf size) {
+//    auto entity = CreateCanvas(pos, size);
+//    entity.assign<Stack>();
+//    return entity;
+//}

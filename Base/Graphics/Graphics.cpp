@@ -9,11 +9,6 @@
 Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags),
                                                                                              window(width, height),
                                                                                              context(window) {
-
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-    SDL_GL_SetSwapInterval(1);
-
     glEnable(GL_TEXTURE_2D);
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glEnable(GL_BLEND);
@@ -28,6 +23,7 @@ Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFl
     glLoadIdentity();
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+    glClear(GL_COLOR_BUFFER_BIT);
     window.Show();
 }
 
@@ -88,6 +84,7 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
 }
 
 void Inanna::Graphics::Update(float dt) {
+    SDL_GL_MakeCurrent(window, context);
     SDL_GL_SwapWindow(window);
     glClear(GL_COLOR_BUFFER_BIT);
 }
