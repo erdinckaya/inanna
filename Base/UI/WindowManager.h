@@ -5,8 +5,6 @@
 #ifndef INANNA_WINDOWMANAGER_H
 #define INANNA_WINDOWMANAGER_H
 
-#define WINDOW_MANAGER_TEST
-
 #include <entityx/entityx.h>
 #include "../Graphics/Graphics.h"
 #include "UIFactory.h"

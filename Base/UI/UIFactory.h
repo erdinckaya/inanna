@@ -20,6 +20,7 @@
 #include "Components/RenderFrame.h"
 #include "Widgets/Stack.h"
 #include "Widgets/Button.h"
+#include "Widgets/ScrollViewer.h"
 
 
 namespace Inanna {
@@ -31,7 +32,8 @@ namespace Inanna {
 
         entityx::Entity CreateButton(Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
 
-//        entityx::Entity CreateStack(Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
+        entityx::Entity CreateStack(const DirectionType &direction, Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
+        entityx::Entity CreateScrollViewer(const DirectionType &direction, Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
     };
 }
 

@@ -73,7 +73,8 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
     switch (code) {
         case SDLK_y: {
             entityx::Entity parent = uiFactory.CreateCanvas(Vecf(100, 100), Vecf(600, 600));
-            entityx::Entity stack = uiFactory.CreateCanvas();
+            entityx::Entity stack = uiFactory.CreateStack(DirectionType::Vertical);
+            entityx::Entity scrollViewer = uiFactory.CreateScrollViewer(DirectionType::Vertical);
             entityx::Entity child = uiFactory.CreateCanvas();
 
             parent.assign<Root>();
@@ -96,11 +97,11 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
 
 
             std::pair<LayoutType, float> center = {LayoutType::LT_CENTER, 0};
+            scrollViewer.assign<Layout>(center);
             stack.assign<Layout>(center);
-            stack.assign<Stack>(DirectionType::Vertical);
 
-            uiFactory.events.emit<ChildEvent>(parent, stack, true);
-
+            uiFactory.events.emit<ChildEvent>(parent, scrollViewer, true);
+            uiFactory.events.emit<ChildEvent>(scrollViewer, stack, true);
             uiFactory.events.emit<ChildEvent>(stack, child, true);
 
             entityx::Entity child1 = uiFactory.CreateCanvas();

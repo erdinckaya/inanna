@@ -3,6 +3,7 @@
 //
 
 #include "UIFactory.h"
+#include "MouseEventComponents/MouseDrag.h"
 
 
 entityx::Entity Inanna::UIFactory::CreateCanvas(Vecf pos, Vecf size) {
@@ -23,9 +24,18 @@ entityx::Entity Inanna::UIFactory::CreateButton(Vecf pos, Vecf size) {
     entity.assign<Button>();
     return entity;
 }
-//
-//entityx::Entity Inanna::UIFactory::CreateStack(Vecf pos, Vecf size) {
-//    auto entity = CreateCanvas(pos, size);
-//    entity.assign<Stack>();
-//    return entity;
-//}
+
+entityx::Entity Inanna::UIFactory::CreateStack(const DirectionType &direction, Vecf pos, Vecf size) {
+    auto entity = CreateCanvas(pos, size);
+    entity.assign<Stack>(direction);
+    return entity;
+}
+
+entityx::Entity Inanna::UIFactory::CreateScrollViewer(const DirectionType &direction, Vecf pos, Vecf size) {
+    auto entity = CreateCanvas(pos, size);
+    entity.assign<ScrollViewer>(direction);
+    entity.assign<MouseDrag>([](entityx::Entity entity, SDL_MouseMotionEvent event) {
+        printf("Drag drag\n");
+    });
+    return entity;
+}
