@@ -34,8 +34,5 @@ entityx::Entity Inanna::UIFactory::CreateStack(const DirectionType &direction, V
 entityx::Entity Inanna::UIFactory::CreateScrollViewer(const DirectionType &direction, Vecf pos, Vecf size) {
     auto entity = CreateCanvas(pos, size);
     entity.assign<ScrollViewer>(direction);
-    entity.assign<MouseDrag>([](entityx::Entity entity, SDL_MouseMotionEvent event) {
-        printf("Drag drag\n");
-    });
     return entity;
 }

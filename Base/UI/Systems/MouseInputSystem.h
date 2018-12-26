@@ -188,6 +188,7 @@ namespace Inanna {
                         events.emit<MouseDragEndEvent>(dragEntity, mouseMotionEvent);
                         dragEntity.invalidate();
                     }
+                    clickEntity.invalidate();
                 } else {
                     lastMouseDownEntity = clickEntity;
                     lastMouseDownTime = mouseButtonEvent.timestamp;
@@ -205,6 +206,22 @@ namespace Inanna {
             auto diff = Vecf(mouseMotionEvent.xrel, mouseMotionEvent.yrel);
             if (dragEntity.valid() && diff != Vecf(0, 0)) {
                 events.emit<MouseDragEvent>(dragEntity, mouseMotionEvent);
+            }
+
+            if (clickEntity.valid()) {
+                // Search for scrollview.
+                entityx::Entity ent = clickEntity;
+                while (ent.valid()) {
+                    if (dragEntity != ent && ent.has_component<MouseDrag>()) {
+                        events.emit<MouseDragEvent>(ent, mouseMotionEvent);
+                    }
+
+                    if (ent.has_component<Widget>()) {
+                        ent = ent.component<Widget>()->parent;
+                    } else {
+                        ent.invalidate();
+                    }
+                }
             }
         }
 

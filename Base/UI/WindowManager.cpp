@@ -6,6 +6,7 @@
 #include "../World.h"
 #include "Systems/LayoutSystem.h"
 #include "Systems/StackSystem.h"
+#include "Systems/ScrollViewerSystem.h"
 #include "Systems/RenderFrameSystem.h"
 
 
@@ -30,6 +31,7 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
     uiFactory.systems.add<LayoutSystem>();
 
     uiFactory.systems.add<StackSystem>();
+    uiFactory.systems.add<ScrollViewerSystem>();
     uiFactory.systems.add<PositionSystem>();
 
 
@@ -51,6 +53,7 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
     uiFactory.systems.update<ButtonSystem>(dt);
 
     uiFactory.systems.update<StackSystem>(dt);
+    uiFactory.systems.update<ScrollViewerSystem>(dt);
 
 
     uiFactory.systems.update<SizeSystem>(dt);
@@ -74,7 +77,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
         case SDLK_y: {
             entityx::Entity parent = uiFactory.CreateCanvas(Vecf(100, 100), Vecf(600, 600));
             entityx::Entity stack = uiFactory.CreateStack(DirectionType::Vertical);
-            entityx::Entity scrollViewer = uiFactory.CreateScrollViewer(DirectionType::Vertical);
+            entityx::Entity scrollViewer = uiFactory.CreateScrollViewer(DirectionType::Vertical, Vecf(0, 0), Vecf(600, 600));
             entityx::Entity child = uiFactory.CreateCanvas();
 
             parent.assign<Root>();

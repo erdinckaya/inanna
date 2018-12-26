@@ -12,16 +12,25 @@
 #include "../Components/Position.h"
 #include "../Components/Sizable.h"
 #include "../Widgets/ScrollViewer.h"
+#include "../MouseEventComponents/MouseDrag.h"
 
 namespace Inanna {
 
-    class ScrollVieverSystem : public entityx::System<ScrollVieverSystem> {
+    class ScrollViewerSystem : public entityx::System<ScrollViewerSystem> {
     public:
-        explicit ScrollVieverSystem() = default;
+        explicit ScrollViewerSystem() = default;
+
+        void AssignDragEvents(entityx::Entity entity) {
+            if (!entity.has_component<MouseDrag>()) {
+                entity.assign<MouseDrag>([](entityx::Entity entity, SDL_MouseMotionEvent event) {
+                    // TODO Move widgets interms of directions
+                });
+            }
+        }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<ScrollViever>([this](entityx::Entity entity, ScrollViever &scrollViever){
-
+            entities.each<ScrollViewer>([this](entityx::Entity entity, ScrollViewer &scrollViever){
+                AssignDragEvents(entity);
             });
         }
     };
