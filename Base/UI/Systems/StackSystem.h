@@ -39,6 +39,7 @@ namespace Inanna {
                             offset += childSize->size.y;
                             break;
                         }
+                        case HorizontalVertical:break;
                     }
 
                     if (stack.direction == DirectionType::Horizontal) {

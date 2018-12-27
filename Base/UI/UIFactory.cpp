@@ -4,6 +4,7 @@
 
 #include "UIFactory.h"
 #include "MouseEventComponents/MouseDrag.h"
+#include "Widgets/ScrollBar.h"
 
 
 entityx::Entity Inanna::UIFactory::CreateCanvas(Vecf pos, Vecf size) {
@@ -33,6 +34,14 @@ entityx::Entity Inanna::UIFactory::CreateStack(const DirectionType &direction, V
 
 entityx::Entity Inanna::UIFactory::CreateScrollViewer(const DirectionType &direction, Vecf pos, Vecf size) {
     auto entity = CreateCanvas(pos, size);
-    entity.assign<ScrollViewer>(direction);
+    entity.assign<ScrollViewer>();
+    return entity;
+}
+
+entityx::Entity Inanna::UIFactory::CreateScrollViewer(Vecf pos, Vecf size) {
+    auto entity = CreateCanvas(pos, size);
+    entity.assign<ScrollViewer>();
+    entity.assign<ScrollBar>(DirectionType::HorizontalVertical);
+
     return entity;
 }

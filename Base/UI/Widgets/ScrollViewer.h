@@ -9,9 +9,7 @@
 
 namespace Inanna {
     struct ScrollViewer {
-        explicit ScrollViewer(const DirectionType &direction) : direction(direction) {}
-
-        DirectionType direction;
+        explicit ScrollViewer() = default;
     };
 }
 

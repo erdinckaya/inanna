@@ -40,7 +40,8 @@ namespace Inanna {
 
     enum DirectionType {
         Horizontal,
-        Vertical
+        Vertical,
+        HorizontalVertical
     };
 }
 

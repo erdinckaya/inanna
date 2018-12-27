@@ -33,7 +33,9 @@ namespace Inanna {
         entityx::Entity CreateButton(Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
 
         entityx::Entity CreateStack(const DirectionType &direction, Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
+
         entityx::Entity CreateScrollViewer(const DirectionType &direction, Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
+        entityx::Entity CreateScrollViewer(Vecf pos = Vecf(0, 0), Vecf size = Vecf(0, 0));
     };
 }
 
