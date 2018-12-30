@@ -35,9 +35,9 @@ Inanna::World::World() : isExist(true) {
     SDL_GetCurrentDisplayMode(0, &current);
 
 
-    graphics = std::make_unique<Graphics>(WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
+    graphics = std::make_unique<Graphics>(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
     SDL_GL_SetSwapInterval(1);
-    windowManager = std::make_unique<WindowManager>(WIDTH, HEIGHT, graphics.get());
+    windowManager = std::make_unique<WindowManager>(SCREEN_WIDTH, SCREEN_HEIGHT, graphics.get());
 }
 
 Inanna::World::~World() {

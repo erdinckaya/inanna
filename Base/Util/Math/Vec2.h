@@ -140,6 +140,10 @@ namespace Inanna {
         inline static float Cross(Vec2 v1, Vec2 v2) {
             return (v1.x * v2.y) - (v1.y * v2.x);
         }
+
+        std::string ToString() const {
+            return ("{" + std::to_string(x) + ", " + std::to_string(y) + "}");
+        }
     };
 
     typedef Vec2<float> Vecf;

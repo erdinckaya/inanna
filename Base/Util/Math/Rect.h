@@ -36,12 +36,20 @@ namespace Inanna {
             return !(x > second.x + second.w || x + w < second.x || y > second.y + second.h || y + h < second.y);
         }
 
+        inline Vec2<T> Length() const {
+            return Vec2<T>(std::abs(w), std::abs(h));
+        }
 
-        friend inline bool operator==(const Rect& lhs, const Rect& rhs) {
+        std::string ToString() const {
+            return "{" + std::to_string(x) + ", " + std::to_string(y)
+                   + ", " + std::to_string(w) + "," + std::to_string(h) + "}";
+        }
+
+        friend inline bool operator==(const Rect &lhs, const Rect &rhs) {
             return lhs.x == rhs.x && lhs.y == rhs.y && lhs.w == rhs.w && lhs.h == rhs.h;
         }
 
-        friend inline bool operator!=(const Rect& lhs, const Rect& rhs) {
+        friend inline bool operator!=(const Rect &lhs, const Rect &rhs) {
             return !(lhs == rhs);
         }
 

@@ -35,6 +35,7 @@ entityx::Entity Inanna::UIFactory::CreateStack(const DirectionType &direction, V
 entityx::Entity Inanna::UIFactory::CreateScrollViewer(const DirectionType &direction, Vecf pos, Vecf size) {
     auto entity = CreateCanvas(pos, size);
     entity.assign<ScrollViewer>();
+    entity.assign<ScrollBar>(direction);
     return entity;
 }
 

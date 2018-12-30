@@ -64,7 +64,7 @@ public:
 		RED("red", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
 		GUCHAN("guchan", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
 		YELLOW("yellow", 256.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		Sheet("pieces", "/Users/always/CLionProjects/inanna/Resources/pieces.png")
+		Sheet("pieces", "/home/misterdortnal/CLionProjects/Inanna/Resources/pieces.png")
 
     {}
 

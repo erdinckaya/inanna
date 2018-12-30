@@ -80,8 +80,6 @@ namespace Inanna {
                     graphics->DrawTexture(renderable.target, clip, pos, renderable.rotation, renderable.scale);
                 }
                 renderable.renderContext = intersect;
-            } else {
-                NormalRender(renderable);
             }
         }
 

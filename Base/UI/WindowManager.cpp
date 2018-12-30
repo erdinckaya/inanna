@@ -101,7 +101,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
 
             std::pair<LayoutType, float> center = {LayoutType::LT_CENTER, 0};
             scrollViewer.assign<Layout>(center);
-            stack.assign<Layout>(center);
+//            stack.assign<Layout>(center);
 
             uiFactory.events.emit<ChildEvent>(parent, scrollViewer, true);
             uiFactory.events.emit<ChildEvent>(scrollViewer, stack, true);
@@ -114,6 +114,18 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             entityx::Entity child2 = uiFactory.CreateCanvas();
             child2.component<Renderable>()->target = Resources::PIECES.DARK_PURPLE;
             uiFactory.events.emit<ChildEvent>(stack, child2, true);
+
+            entityx::Entity child3 = uiFactory.CreateCanvas();
+            child3.component<Renderable>()->target = Resources::PIECES.DARK_PURPLE;
+            uiFactory.events.emit<ChildEvent>(stack, child3, true);
+
+//            entityx::Entity child4 = uiFactory.CreateCanvas();
+//            child4.component<Renderable>()->target = Resources::PIECES.DARK_PURPLE;
+//            uiFactory.events.emit<ChildEvent>(stack, child4, true);
+
+            entityx::Entity child5 = uiFactory.CreateCanvas();
+            child5.component<Renderable>()->target = Resources::PIECES.CYAN;
+            uiFactory.events.emit<ChildEvent>(stack, child5, true);
 
 
             break;

@@ -24,7 +24,7 @@ namespace Inanna {
         void CalculateValues(entityx::Entity entity, const Veci &mouse) {
             auto content = entity.component<Widget>()->GetChild(0);
             auto contentSize = content.component<Sizable>();
-            auto renderContext = entity.component<Renderable>()->renderContext;
+            auto renderContext = entity.component<Renderable>()->renderContext.Length();
             auto scrollBar = entity.component<ScrollBar>();
             auto direction = scrollBar->direction;
 
@@ -37,7 +37,7 @@ namespace Inanna {
 
             switch (direction) {
 
-                case Horizontal: {
+                case Vertical: {
                     if (canScrollHorizontal) {
                         scrollBar->value = Vecf(0, scrollBar->value.y + mouse.y);
                     }
@@ -47,7 +47,7 @@ namespace Inanna {
 
                     break;
                 }
-                case Vertical: {
+                case Horizontal: {
                     if (canScrollVertical) {
                         scrollBar->value = Vecf(scrollBar->value.x + mouse.x, 0);
                     } else {
@@ -95,7 +95,6 @@ namespace Inanna {
             if (!entity.has_component<MouseDrag>()) {
                 entity.assign<MouseDrag>([this](entityx::Entity entity, SDL_MouseMotionEvent event) {
                     // TODO Move widgets interms of directions
-                    printf("Mouse diff %d\n", event.y);
                     CalculateValues(entity, Veci(event.xrel, event.yrel));
                 });
             }
@@ -105,8 +104,17 @@ namespace Inanna {
             auto content = entity.component<Widget>()->GetChild(0);
             auto scrollBar = entity.component<ScrollBar>();
             auto position = content.component<Position>();
-            float x = scrollBar->ratio;
+            auto contentSize = content.component<Sizable>()->size;
+            auto renderContext = entity.component<Renderable>()->renderContext.Length();
 
+
+            float xRatio = scrollBar->ratio.x;
+            float yRatio = scrollBar->ratio.y;
+
+            float maxX = std::max(contentSize.x - renderContext.x, 0.0f);
+            float maxY = std::max(contentSize.y - renderContext.y, 0.0f);
+
+            position->position = Vecf(-maxX * xRatio, -maxY * yRatio);
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {

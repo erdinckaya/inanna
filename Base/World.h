@@ -13,8 +13,8 @@
 #include "Input/MouseInput.h"
 
 namespace Inanna {
-    const unsigned int WIDTH = 900;
-    const unsigned int HEIGHT = 900;
+    const unsigned int SCREEN_WIDTH = 900;
+    const unsigned int SCREEN_HEIGHT = 900;
     const float FPS = 60;
 
     class World {

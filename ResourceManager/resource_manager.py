@@ -1,10 +1,15 @@
 import os
 import json
+import platform
 
 resource_path = "Resources"
-output_path = os.path.join("/Users/always/CLionProjects/inanna/Assets", "Resources.h")
-output_path_cpp = os.path.join("/Users/always/CLionProjects/inanna/Assets", "Resources.cpp")
-atlas_path = os.path.join("/Users/always/CLionProjects/inanna", "Resources")
+join_path = "/Users/always/CLionProjects/inanna"
+if platform.system() == "Linux":
+    join_path = "/home/misterdortnal/CLionProjects/Inanna"
+
+output_path = os.path.join(join_path + "/Assets", "Resources.h")
+output_path_cpp = os.path.join(join_path + "/Assets", "Resources.cpp")
+atlas_path = os.path.join(join_path, "Resources")
 
 
 class Resource:
