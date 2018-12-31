@@ -12,6 +12,7 @@
 #include "Input/KeyInput.h"
 #include "Input/MouseInput.h"
 
+
 namespace Inanna {
     const unsigned int SCREEN_WIDTH = 900;
     const unsigned int SCREEN_HEIGHT = 900;
