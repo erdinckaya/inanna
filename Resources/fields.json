@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "tennis_field.png",
+	"frame": {"x":0,"y":0,"w":257,"h":427},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":257,"h":427},
+	"sourceSize": {"w":257,"h":427}
+},
+{
+	"filename": "tennis_field1.jpg",
+	"frame": {"x":0,"y":512,"w":600,"h":900},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":600,"h":900},
+	"sourceSize": {"w":600,"h":900}
+},
+{
+	"filename": "tennis_field2.jpg",
+	"frame": {"x":257,"y":0,"w":336,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":336,"h":512},
+	"sourceSize": {"w":336,"h":512}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "fields.png",
+	"format": "RGBA8888",
+	"size": {"w":600,"h":1412},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:2ad4d570e6590d5f39cbe6dceb7f1d59:1182832648dc745d0142e51750f8ea2b:8f837753a9fdc04870cd1ecc2e163d1f$"
+}
+}

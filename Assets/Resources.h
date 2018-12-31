@@ -51,6 +51,22 @@ public:
 
 
 
+struct Balls : public Sheet {
+
+public:
+    Balls() :
+		IMAGE("image", 0.000000f, 0.000000f, 300.000000f, 300.000000f, 300.000000f, 300.000000f, "balls", "RGBA8888"),
+		Sheet("balls", "/home/misterdortnal/CLionProjects/Inanna/Resources/balls.png")
+
+    {}
+
+	ImageAsset IMAGE;
+
+
+};
+
+
+
 struct Pieces : public Sheet {
 
 public:
@@ -81,13 +97,35 @@ public:
 
 };
 
+
+
+struct Fields : public Sheet {
+
+public:
+    Fields() :
+		TENNIS_FIELD("tennis_field", 0.000000f, 0.000000f, 257.000000f, 427.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
+		TENNIS_FIELD1("tennis_field1", 0.000000f, 512.000000f, 600.000000f, 900.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
+		TENNIS_FIELD2("tennis_field2", 257.000000f, 0.000000f, 336.000000f, 512.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
+		Sheet("fields", "/home/misterdortnal/CLionProjects/Inanna/Resources/fields.png")
+
+    {}
+
+	ImageAsset TENNIS_FIELD;
+	ImageAsset TENNIS_FIELD1;
+	ImageAsset TENNIS_FIELD2;
+
+
+};
+
 struct Resources {
 public:
+	static Balls BALLS;
 	static Pieces PIECES;
+	static Fields FIELDS;
 
 
 	static int SheetCount;
-	static const Sheet Sheets[1];
+	static const Sheet Sheets[3];
 };
 
 

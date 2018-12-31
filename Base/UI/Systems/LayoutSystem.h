@@ -43,7 +43,7 @@ namespace Inanna {
                             position.position = Vecf(c_x, c_y);
                             break;
                         }
-                        case LT_HORIZONTAL_lCENTER: {
+                        case LT_HORIZONTAL_CENTER: {
                             auto c_x = (p_size->size.x - sizable.size.x) * 0.5f;
                             position.position = Vecf(c_x, position.position.y);
                             break;

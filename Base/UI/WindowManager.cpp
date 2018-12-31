@@ -75,14 +75,17 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
 #ifdef WINDOW_MANAGER_TEST
     switch (code) {
         case SDLK_y: {
-            entityx::Entity parent = uiFactory.CreateCanvas(Vecf(100, 100), Vecf(600, 600));
+
+            auto nativeSize = Vecf(Resources::FIELDS.TENNIS_FIELD2.w, Resources::FIELDS.TENNIS_FIELD2.h) * 1.5f;
+            auto centerPos = (Vecf(SCREEN_WIDTH, SCREEN_HEIGHT) - nativeSize) * 0.5f;
+            entityx::Entity parent = uiFactory.CreateCanvas(centerPos, nativeSize);
             entityx::Entity stack = uiFactory.CreateStack(DirectionType::Vertical);
-            entityx::Entity scrollViewer = uiFactory.CreateScrollViewer(DirectionType::Vertical, Vecf(0, 0), Vecf(600, 600));
+            entityx::Entity scrollViewer = uiFactory.CreateScrollViewer(DirectionType::Vertical, Vecf(0, 0), Vecf(400, 600));
             entityx::Entity child = uiFactory.CreateCanvas();
 
             parent.assign<Root>();
-            parent.assign<RenderFrame>(Rectf(Vecf(0, 0), Vecf(600, 600)));
-            parent.component<Renderable>()->target = Resources::PIECES.BLUE;
+            parent.assign<RenderFrame>(Rectf(Vecf(0, 0), nativeSize));
+            parent.component<Renderable>()->target = Resources::FIELDS.TENNIS_FIELD2;
             parent.assign<MouseClick>([](entityx::Entity entity, SDL_MouseButtonEvent event) {
                 printf("MouseClick %s\n", entity.component<Renderable>()->target.id);
             });
@@ -101,7 +104,8 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
 
             std::pair<LayoutType, float> center = {LayoutType::LT_CENTER, 0};
             scrollViewer.assign<Layout>(center);
-//            stack.assign<Layout>(center);
+            std::pair<LayoutType, float> hCenter = {LayoutType::LT_HORIZONTAL_CENTER, 0};
+            stack.assign<Layout>(hCenter);
 
             uiFactory.events.emit<ChildEvent>(parent, scrollViewer, true);
             uiFactory.events.emit<ChildEvent>(scrollViewer, stack, true);

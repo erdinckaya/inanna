@@ -32,7 +32,7 @@ namespace Inanna {
         LT_LEFT,
         LT_RIGHT,
         LT_CENTER,
-        LT_HORIZONTAL_lCENTER,
+        LT_HORIZONTAL_CENTER,
         LT_VERTICAL_CENTER,
         LT_TOP,
         LT_BOTTOM,
