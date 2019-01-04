@@ -10,6 +10,8 @@
 #include "../../Util/Math/Rect.h"
 #include "../../../Assets/Resources.h"
 
+#include "../../../ThirdParty/MonitorX/3rdParty/FlexibleReflection/Reflect.h"
+
 namespace Inanna {
     struct Renderable {
         explicit Renderable(const ImageAsset &target = ImageAsset(), const Vecf &pos = Vecf(0, 0),
@@ -34,6 +36,8 @@ namespace Inanna {
         Rectf frame;
         Rectf renderContext;
         bool hasFrame;
+
+        REFLECT()
     };
 }
 

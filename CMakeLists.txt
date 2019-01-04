@@ -5,12 +5,13 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
-add_compile_definitions(WINDOW_MANAGER_TEST)
+add_compile_definitions(WINDOW_MANAGER_TEST MONITORX_DEBUG)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(BOX2D REQUIRED)
+find_package(OpenGL REQUIRED)
 find_package(Glew REQUIRED)
 find_package(Glut REQUIRED)
 find_package(Entityx REQUIRED)
@@ -58,11 +59,12 @@ add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Server/Ga
         Base/UI/Components/Layout.h Base/UI/Systems/LayoutSystem.h Base/UI/Widgets/Stack.h
         Base/UI/Systems/StackSystem.h Base/UI/Components/RenderFrame.h Base/UI/Systems/RenderFrameSystem.h
         Base/UI/Widgets/ScrollViewer.h Base/UI/Systems/ScrollViewerSystem.h Base/UI/Widgets/ScrollBar.h
-        ThirdParty/ImGui/imconfig.h ThirdParty/ImGui/imgui.cpp ThirdParty/ImGui/imgui.h ThirdParty/ImGui/imgui_demo.cpp
-        ThirdParty/ImGui/imgui_draw.cpp ThirdParty/ImGui/imgui_impl_opengl2.cpp ThirdParty/ImGui/imgui_impl_opengl2.h
-        ThirdParty/ImGui/imgui_impl_sdl.cpp ThirdParty/ImGui/imgui_impl_sdl.h ThirdParty/ImGui/imgui_internal.h
-        ThirdParty/ImGui/imgui_widgets.cpp ThirdParty/ImGui/imstb_rectpack.h ThirdParty/ImGui/imstb_textedit.h
-        ThirdParty/ImGui/imstb_truetype.h)
+        ThirdParty/MonitorX/3rdParty/ImGui/imconfig.h ThirdParty/MonitorX/3rdParty/ImGui/imgui.cpp ThirdParty/MonitorX/3rdParty/ImGui/imgui.h ThirdParty/MonitorX/3rdParty/ImGui/imgui_demo.cpp
+        ThirdParty/MonitorX/3rdParty/ImGui/imgui_draw.cpp ThirdParty/MonitorX/3rdParty/ImGui/imgui_impl_opengl2.cpp ThirdParty/MonitorX/3rdParty/ImGui/imgui_impl_opengl2.h
+        ThirdParty/MonitorX/3rdParty/ImGui/imgui_impl_sdl.cpp ThirdParty/MonitorX/3rdParty/ImGui/imgui_impl_sdl.h ThirdParty/MonitorX/3rdParty/ImGui/imgui_internal.h
+        ThirdParty/MonitorX/3rdParty/ImGui/imgui_widgets.cpp ThirdParty/MonitorX/3rdParty/ImGui/imstb_rectpack.h ThirdParty/MonitorX/3rdParty/ImGui/imstb_textedit.h
+        ThirdParty/MonitorX/3rdParty/ImGui/imstb_truetype.h ThirdParty/MonitorX/3rdParty/FlexibleReflection/Reflect.h ThirdParty/MonitorX/3rdParty/FlexibleReflection/Primitives.cpp
+        ThirdParty/MonitorX/MonitorX.h ThirdParty/MonitorX/MonitorX.cpp Base/MonitorX/MonitorComponents.cpp)
 
 
 target_link_libraries(Inanna ${SDL2_LIBRARY}

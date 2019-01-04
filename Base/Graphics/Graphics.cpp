@@ -4,6 +4,7 @@
 
 
 #include "Graphics.h"
+#include "../UI/WindowManager.h"
 
 
 Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags),
@@ -25,8 +26,10 @@ Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFl
 
     glClear(GL_COLOR_BUFFER_BIT);
     window.Show();
-
-    InitImGui();
+#ifdef MONITORX_DEBUG
+    monitorX = std::make_unique<monitorx::MonitorX>(&WindowManager::uiFactory, window, context.Get());
+    monitorX->Init();
+#endif
 }
 
 
@@ -86,35 +89,16 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
 }
 
 void Inanna::Graphics::Update(float dt) {
-    RenderImGui();
+#ifdef MONITORX_DEBUG
+    monitorX->Render<Renderable, Position, end_of_list>();
+#endif
     SDL_GL_MakeCurrent(window, context);
-    ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
     SDL_GL_SwapWindow(window);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Inanna::Graphics::InitImGui() {
-
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
-
-    // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    //ImGui::StyleColorsClassic();
-
-    // Setup Platform/Renderer bindings
-    ImGui_ImplSDL2_InitForOpenGL(window, context);
-    ImGui_ImplOpenGL2_Init();
+void Inanna::Graphics::PassEvent(SDL_Event *event) {
+#ifdef MONITORX_DEBUG
+    monitorX->ProcessEvent(event);
+#endif
 }
-
-void Inanna::Graphics::RenderImGui() {
-    // Start the Dear ImGui frame
-    ImGui_ImplOpenGL2_NewFrame();
-    ImGui_ImplSDL2_NewFrame(window);
-    ImGui::NewFrame();
-    // Rendering
-    ImGui::Render();
-}
-

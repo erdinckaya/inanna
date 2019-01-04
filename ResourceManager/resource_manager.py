@@ -37,6 +37,8 @@ image_class_str = \
 #ifndef RESOURCEMANAGER_RESOURCES_H
 #define RESOURCEMANAGER_RESOURCES_H
 
+#include "../ThirdParty/MonitorX/3rdParty/FlexibleReflection/Reflect.h"
+
 #include<string>
 #include<string.h>
 
@@ -63,6 +65,8 @@ public:
         this->parent_h = parent_h;
         this->parent = parent;
         this->format = format;
+        
+        this->name = std::string(this->id);
     } 
 
     const char* id;
@@ -77,9 +81,13 @@ public:
     const char* parent;
     const char* format;
     
+    std::string name;
+    
     bool valid() const {
         return strcmp(id, "") != 0;
     }
+    
+    REFLECT()
 };
 
 

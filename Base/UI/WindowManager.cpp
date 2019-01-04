@@ -132,10 +132,18 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             uiFactory.events.emit<ChildEvent>(stack, child5, true);
 
 
+            entityx::Entity child6 = uiFactory.CreateCanvas();
+            child6.component<Renderable>()->target = Resources::PIECES.YELLOW;
+            uiFactory.events.emit<ChildEvent>(parent, child6, true);
+
             break;
         }
         case SDLK_p: {
             MouseInput::Instance.PrintKeys();
+            break;
+        }
+        case SDLK_g: {
+            graphics->monitorX->ShowEntityEditor(true);
             break;
         }
         case SDLK_c: {

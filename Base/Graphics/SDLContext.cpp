@@ -15,3 +15,9 @@ Inanna::SDLContext::SDLContext(SDLWindow &sdlWindow)
 Inanna::SDLContext::operator SDL_GLContext() const {
     return context.get();
 }
+
+#ifdef MONITORX_DEBUG
+SDL_GLContext *Inanna::SDLContext::Get() {
+    return static_cast<SDL_GLContext *>(context.get());
+}
+#endif

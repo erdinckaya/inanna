@@ -54,6 +54,7 @@ void Inanna::World::Start() {
         KeyInput::Instance.BeginNewFrame();
         MouseInput::Instance.BeginNewFrame();
         while (SDL_PollEvent(&event)) {
+            graphics->PassEvent(&event);
             OnEvent(&event);
         }
 

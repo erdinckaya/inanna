@@ -43,6 +43,7 @@ namespace Inanna {
             auto child = event.child.component<Widget>();
             auto parent = event.parent.component<Widget>();
 
+            // TODO: Erdinc Add assert for trying to add child when child has already parent!
             if (childEvent.add) {
                 child->SetParent(parent.entity());
                 parent->AddChild(child.entity());

@@ -13,6 +13,8 @@ namespace Inanna {
 
         Vecf position;
         Vecf global;
+
+        REFLECT()
     };
 }
 #endif //INANNA_POSITION_H

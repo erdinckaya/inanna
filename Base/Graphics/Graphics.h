@@ -15,10 +15,7 @@
 #include <SDL_opengl.h>
 #include "../../Assets/Resources.h"
 #include "../Util/Math/Rect.h"
-
-#include "../../ThirdParty/ImGui/imgui.h"
-#include "../../ThirdParty/ImGui/imgui_impl_sdl.h"
-#include "../../ThirdParty/ImGui/imgui_impl_opengl2.h"
+#include "../../ThirdParty/MonitorX/MonitorX.h"
 
 namespace Inanna {
     class Graphics {
@@ -31,6 +28,12 @@ namespace Inanna {
 
         void Update(float dt);
 
+        void PassEvent(SDL_Event *event);
+
+#ifdef MONITORX_DEBUG
+        std::unique_ptr<monitorx::MonitorX> monitorX;
+#endif
+
     private:
         SDL sdl;
         SDLWindow window;
@@ -40,10 +43,6 @@ namespace Inanna {
 
 
         std::unordered_map<const char *, std::unique_ptr<SDLSurface>> spriteSheets;
-
-        void InitImGui();
-
-        void RenderImGui();
     };
 }
 

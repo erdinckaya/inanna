@@ -4,16 +4,18 @@
 
 #include <cmath>
 
+#include "../../../ThirdParty/MonitorX/3rdParty/FlexibleReflection/Reflect.h"
+
 namespace Inanna {
 
-    template<class T>
+    template<class C>
     class Vec2 {
     public:
-        T x, y;
+        C x, y;
 
         Vec2() : x(0), y(0) {}
 
-        Vec2(T x, T y) : x(x), y(y) {}
+        Vec2(C x, C y) : x(x), y(y) {}
 
         Vec2(const Vec2 &v) : x(v.x), y(v.y) {}
 
@@ -93,7 +95,7 @@ namespace Inanna {
             return !(lhs == rhs);
         }
 
-        inline void Set(T x, T y) {
+        inline void Set(C x, C y) {
             this->x = x;
             this->y = y;
         }
@@ -144,11 +146,19 @@ namespace Inanna {
         std::string ToString() const {
             return ("{" + std::to_string(x) + ", " + std::to_string(y) + "}");
         }
+
+        REFLECT_TEMPLATE(Vec2, C)
+                            REFLECT_STRUCT_MEMBER_TEMPLATE(x)
+                            REFLECT_STRUCT_MEMBER_TEMPLATE(y)
+        REFLECT_STRUCT_END()
     };
+
+    REFLECT_STRUCT_INIT_TEMPLATE(Vec2)
 
     typedef Vec2<float> Vecf;
     typedef Vec2<double> Vecd;
     typedef Vec2<int> Veci;
+
 }
 
 #endif

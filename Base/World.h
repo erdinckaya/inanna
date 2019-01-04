@@ -42,6 +42,8 @@ namespace Inanna {
         std::unique_ptr<WindowManager> windowManager;
 
 
+
+
         void BringDoom();
 
         void OnTest(SDL_Keycode code);

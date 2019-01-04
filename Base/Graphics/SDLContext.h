@@ -19,6 +19,10 @@ namespace Inanna {
 
         operator SDL_GLContext() const;
 
+#ifdef MONITORX_DEBUG
+        SDL_GLContext* Get();
+#endif
+
     private:
         std::unique_ptr<void, void (*)(SDL_GLContext)> context;
     };
