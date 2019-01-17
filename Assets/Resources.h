@@ -75,6 +75,32 @@ public:
 
 
 
+struct Death : public Sheet {
+
+public:
+    Death() :
+		DEATH_000("Death_000", 0.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		DEATH_001("Death_001", 262.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		DEATH_002("Death_002", 524.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		DEATH_003("Death_003", 786.000000f, 0.000000f, 263.000000f, 254.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		DEATH_004("Death_004", 1049.000000f, 0.000000f, 266.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		DEATH_005("Death_005", 1315.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		Sheet("death", "/Users/always/CLionProjects/inanna/Resources/death.png")
+
+    {}
+
+	ImageAsset DEATH_000;
+	ImageAsset DEATH_001;
+	ImageAsset DEATH_002;
+	ImageAsset DEATH_003;
+	ImageAsset DEATH_004;
+	ImageAsset DEATH_005;
+
+
+};
+
+
+
 struct Fields : public Sheet {
 
 public:
@@ -128,12 +154,13 @@ public:
 struct Resources {
 public:
 	static Balls BALLS;
+	static Death DEATH;
 	static Fields FIELDS;
 	static Pieces PIECES;
 
 
 	static int SheetCount;
-	static const Sheet Sheets[3];
+	static const Sheet Sheets[4];
 };
 
 

@@ -2,6 +2,8 @@ import os
 import json
 import platform
 
+import animations
+
 resource_path = "Resources"
 join_path = "/Users/always/CLionProjects/inanna"
 if platform.system() == "Linux":
@@ -128,6 +130,7 @@ for resource in resources:
     sheet_format = sheet_data["meta"]["format"]
     sheet_width = sheet_data["meta"]["size"]["w"]
     sheet_height = sheet_data["meta"]["size"]["h"]
+    animations.create_animations(sheet_data["meta"])
     path = resource.path
 
     asset_definition_class_str = ""
