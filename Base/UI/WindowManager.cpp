@@ -8,6 +8,7 @@
 #include "Systems/StackSystem.h"
 #include "Systems/ScrollViewerSystem.h"
 #include "Systems/RenderFrameSystem.h"
+#include "../../Assets/Animations.h"
 
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
@@ -140,6 +141,11 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
         }
         case SDLK_p: {
             MouseInput::Instance.PrintKeys();
+
+//            auto size = Animations::DEATH.frameSize;
+//            for (int i = 0; i < size; ++i) {
+//                printf("image name is %s\n", Animations::DEATH.keyFrames[i].);
+//            }
             break;
         }
         case SDLK_g: {

@@ -203,3 +203,6 @@ with open(output_path, 'w') as the_file:
 
 with open(output_path_cpp, 'w') as the_file:
     the_file.write(cpp_file_str)
+
+
+animations.write_animations(join_path)

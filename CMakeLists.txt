@@ -33,7 +33,8 @@ include_directories(${SDL2_INCLUDE_DIR}
         ${SODIUM_INCLUDE_DIR})
 
 
-add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Server/GameServer.cpp
+add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Assets/Animations.h Assets/Animations.cpp
+        Server/GameServer.cpp
         Server/GameServer.h Server/GameAdapter.cpp Server/GameAdapter.h Server/GameChannel.h
         Server/GameConnectionConfig.h Server/GameMessageFactory.h Server/GameMessageType.h
         Server/MyMessage.h Base/World.cpp Base/World.h Base/UI/WindowManager.cpp Base/UI/WindowManager.h
