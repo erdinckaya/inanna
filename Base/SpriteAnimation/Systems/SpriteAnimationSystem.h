@@ -14,12 +14,42 @@ namespace Inanna {
 
         explicit SpriteAnimationSystem(Graphics *graphics) : graphics(graphics), frameCount(0) {}
 
+        SpriteAnimationState Next(SpriteAnimation* animation) {
+            animation->time = 0;
+            if (animation->reverse) {
+                animation->frameIndex--;
+            } else {
+                animation->frameIndex++;
+            }
+
+            int limit = animation->reverse ? -1 : animation->animData->FrameSize();
+            if (animation->frameIndex == limit) {
+                animation->loopCount--;
+                if (animation->loopCount <= 0) {
+                    if (animation->pingpong)  {
+                        animation->reverse = !animation->reverse;
+                        animation->frameIndex = animation->reverse ? animation->animData->FrameSize() - 1 : 0;
+                        animation->pingpong = false;
+                    } else {
+                        animation->state = SpriteAnimationState::Finished;
+                    }
+                }
+            } else {
+                animation->state = SpriteAnimationState::Animating;
+            }
+
+            animation->frameIndex += animation->animData->FrameSize();
+            animation->frameIndex %= animation->animData->FrameSize();
+
+            return animation->state;
+        }
+
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<SpriteAnimation>([this, dt](entityx::Entity entity, SpriteAnimation &animation) {
                 double speed = 1000.0 / animation.animData->Speed();
                 bool isKilled = false;
                 if (animation.time >= speed) {
-                    auto state = animation.Next();
+                    auto state = Next(&animation);
                     if (state == SpriteAnimationState::Finished && animation.killAtFinish) {
                         isKilled = true;
                         entity.destroy();

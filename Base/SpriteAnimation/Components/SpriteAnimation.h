@@ -15,30 +15,7 @@ namespace Inanna {
         explicit SpriteAnimation(const SpriteAnimData *animData) : animData(animData), frameIndex(0), reverse(false),
                                                                    time(0), loop(false), loopCount(-1),
                                                                    state(SpriteAnimationState::Start),
-                                                                   killAtFinish(false) {}
-
-        SpriteAnimationState Next() {
-            time = 0;
-            if (reverse) {
-                frameIndex--;
-            } else {
-                frameIndex++;
-            }
-
-            if (frameIndex == animData->FrameSize()) {
-                loopCount--;
-                if (loopCount <= 0) {
-                    state = SpriteAnimationState::Finished;
-                }
-            } else {
-                state = SpriteAnimationState::Animating;
-            }
-
-            frameIndex += animData->FrameSize();
-            frameIndex %= animData->FrameSize();
-
-            return state;
-        }
+                                                                   killAtFinish(false), pingpong(false) {}
 
         const ImageAsset KeyFrame() {
             return animData->KeyFrame(frameIndex);
@@ -49,6 +26,7 @@ namespace Inanna {
         bool reverse;
         entityx::TimeDelta time;
         bool loop;
+        bool pingpong;
         int loopCount;
         SpriteAnimationState state;
         bool killAtFinish;

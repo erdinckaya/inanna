@@ -8,6 +8,5 @@
 entityx::Entity Inanna::SpriteAnimationFactory::CreateAnimation(const SpriteAnimData* animation) {
     auto entity = entities.create();
     auto comp = entity.assign<SpriteAnimation>(animation);
-    comp->killAtFinish = true;
     return entity;
 }
