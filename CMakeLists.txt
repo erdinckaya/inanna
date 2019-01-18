@@ -33,7 +33,7 @@ include_directories(${SDL2_INCLUDE_DIR}
         ${SODIUM_INCLUDE_DIR})
 
 
-add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Assets/Animations.h Assets/Animations.cpp
+add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Assets/AnimationData.h Assets/AnimationData.cpp
         Server/GameServer.cpp
         Server/GameServer.h Server/GameAdapter.cpp Server/GameAdapter.h Server/GameChannel.h
         Server/GameConnectionConfig.h Server/GameMessageFactory.h Server/GameMessageType.h
@@ -65,7 +65,7 @@ add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Assets/An
         ThirdParty/MonitorX/3rdParty/ImGui/imgui_impl_sdl.cpp ThirdParty/MonitorX/3rdParty/ImGui/imgui_impl_sdl.h ThirdParty/MonitorX/3rdParty/ImGui/imgui_internal.h
         ThirdParty/MonitorX/3rdParty/ImGui/imgui_widgets.cpp ThirdParty/MonitorX/3rdParty/ImGui/imstb_rectpack.h ThirdParty/MonitorX/3rdParty/ImGui/imstb_textedit.h
         ThirdParty/MonitorX/3rdParty/ImGui/imstb_truetype.h ThirdParty/MonitorX/3rdParty/FlexibleReflection/Reflect.h ThirdParty/MonitorX/3rdParty/FlexibleReflection/Primitives.cpp
-        ThirdParty/MonitorX/MonitorX.h ThirdParty/MonitorX/MonitorX.cpp Base/MonitorX/MonitorComponents.cpp)
+        ThirdParty/MonitorX/MonitorX.h ThirdParty/MonitorX/MonitorX.cpp Base/MonitorX/MonitorComponents.cpp Base/SpriteAnimation/SpriteAnimationFactory.cpp Base/SpriteAnimation/SpriteAnimationFactory.h Base/SpriteAnimation/Components/SpriteAnimation.h Base/SpriteAnimation/Systems/SpriteAnimationSystem.h Base/SpriteAnimation/Components/SpriteAnimationState.h)
 
 
 target_link_libraries(Inanna ${SDL2_LIBRARY}

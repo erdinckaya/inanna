@@ -58,7 +58,7 @@
 	"anims": [{
       "name": "death",
       "images": ["Death_000", "Death_001", "Death_002", "Death_003", "Death_004", "Death_005"],
-      "speed": 5
+      "speed": 10
     }],
 	"smartupdate": "$TexturePacker:SmartUpdate:893baf0e789e2e66d62a73ae7d5ed905:e576f274cbac5860cdf70eb45cc68459:27934bbfecdf9d2f1189d1220a8997c5$"
 }

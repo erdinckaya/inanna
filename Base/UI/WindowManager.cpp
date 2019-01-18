@@ -8,10 +8,12 @@
 #include "Systems/StackSystem.h"
 #include "Systems/ScrollViewerSystem.h"
 #include "Systems/RenderFrameSystem.h"
-#include "../../Assets/Animations.h"
+#include "../../Assets/AnimationData.h"
+#include "../SpriteAnimation/Systems/SpriteAnimationSystem.h"
 
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
+Inanna::SpriteAnimationFactory Inanna::WindowManager::spriteAnimationFactory;
 
 Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphics)
         : width(width), height(height), graphics(graphics) {
@@ -42,6 +44,10 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
 
 
     uiFactory.systems.configure();
+
+
+    spriteAnimationFactory.systems.add<SpriteAnimationSystem>(graphics);
+    spriteAnimationFactory.systems.configure();
 }
 
 void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
@@ -70,6 +76,9 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
 
     uiFactory.systems.update<RenderFrameSystem>(dt);
     uiFactory.systems.update<RenderSystem>(dt);
+
+
+    spriteAnimationFactory.systems.update<SpriteAnimationSystem>(dt);
 }
 
 void Inanna::WindowManager::Test(SDL_Keycode code) {
@@ -141,11 +150,6 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
         }
         case SDLK_p: {
             MouseInput::Instance.PrintKeys();
-
-//            auto size = Animations::DEATH.frameSize;
-//            for (int i = 0; i < size; ++i) {
-//                printf("image name is %s\n", Animations::DEATH.keyFrames[i].);
-//            }
             break;
         }
         case SDLK_g: {
@@ -154,6 +158,10 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
         }
         case SDLK_c: {
             uiFactory.events.emit<ClearAllEvent>();
+            break;
+        }
+        case SDLK_n: {
+            spriteAnimationFactory.CreateAnimation(&AnimationData::DEATH);
             break;
         }
         default:

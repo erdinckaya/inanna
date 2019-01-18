@@ -10,30 +10,54 @@ animations_file_str_h = """
 #include<string>
 #include<string.h>
 
+struct SpriteAnimData {
+    virtual const char* Name() const = 0;
+    virtual const int Speed() const = 0;
+    virtual const int FrameSize() const = 0;
+    virtual const ImageAsset KeyFrame(int index) const = 0;
+};
+
 %s
 
-struct Animations {
+struct AnimationData {
 %s
 };
 
-#endif RESOURCEMANAGER_ANIMATIONS_H
+#endif //RESOURCEMANAGER_ANIMATIONS_H
 """
 
 
 animation_str = """
-struct %sSpriteAnim {
+struct %sAnim : public SpriteAnimData {
     
-    %sSpriteAnim() :
+    %sAnim() :
         name(\"%s\"),
         frameSize(%d),
         speed(%d),
-        keyFrames{%s}
+        keyFrames {%s
+        }
     { }
 
     const char* name;
-    ImageAsset keyFrames[%d];
+    const int speed;
     const int frameSize;
-    int speed;
+    ImageAsset keyFrames[%d];
+    
+    const char* Name() const override {
+        return name;
+    }
+    
+    const int Speed() const override {
+        return speed;
+    }
+    
+    const int FrameSize() const override {
+        return frameSize;
+    }
+    
+    const ImageAsset KeyFrame(int index) const override {
+        return keyFrames[index];
+    }
     
     REFLECT()
 };
@@ -57,14 +81,14 @@ def create_animations(meta):
     for anim in anims:
         result_str = ""
         name = anim["name"]
-        animation_fields_str += "\tstatic %sSpriteAnim %s;\n" % (name.title(), name.upper())
-        animation_defination_cpp_str += "%sSpriteAnim Animations::%s;\n" %(name.title(), name.upper())
+        animation_fields_str += "\tstatic %sAnim %s;\n" % (name.title(), name.upper())
+        animation_defination_cpp_str += "%sAnim AnimationData::%s;\n" %(name.title(), name.upper())
         i = 0
         framSize = len(anim["images"])
-        keyframes = "Resources::%s.%s" % (name.upper(), anim["images"][0].upper())
+        keyframes = "\n\t\t\t Resources::%s.%s" % (name.upper(), anim["images"][0].upper())
         for image in anim["images"]:
             if i != 0:
-                keyframes += """, Resources::%s.%s""" % (name.upper(), image.upper())
+                keyframes += """\n\t\t\t,Resources::%s.%s""" % (name.upper(), image.upper())
             i += 1
 
         result_str = animation_str % (name.title(), name.title(), name, framSize, anim["speed"], keyframes, framSize)
@@ -73,18 +97,18 @@ def create_animations(meta):
 
 def write_animations(path):
     h_file_str = animations_file_str_h % (animation_defination_str, animation_fields_str)
-    animations_path = os.path.join(path + "/Assets", "Animations.h")
+    animations_path = os.path.join(path + "/Assets", "AnimationData.h")
     with open(animations_path, 'w') as h_file:
         h_file.write(h_file_str)
 
     cpp_file_template_str = """
-#include "Animations.h"
+#include "AnimationData.h"
 
 %s
     
 """
 
-    animations_cpp_path = os.path.join(path + "/Assets", "Animations.cpp")
+    animations_cpp_path = os.path.join(path + "/Assets", "AnimationData.cpp")
     cpp_file_str = cpp_file_template_str %  animation_defination_cpp_str;
     with open(animations_cpp_path, 'w') as cpp_file:
         cpp_file.write(cpp_file_str)

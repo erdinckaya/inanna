@@ -60,7 +60,8 @@ void Inanna::World::Start() {
 
 //        OnLoop();
 
-        windowManager->Update(1000/*ms*/ / FPS);
+        windowManager->
+        Update(1000/*ms*/ / FPS);
         OnRender(FPS);
 //        physics->Update(kFps);
         const auto ms_per_frame = static_cast<const Uint32>(1000/*ms*/ / FPS);

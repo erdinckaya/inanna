@@ -24,6 +24,7 @@
 #include "MouseEventComponents/MouseDown.h"
 #include "MouseEventComponents/MouseUp.h"
 #include "Systems/ButtonSystem.h"
+#include "../SpriteAnimation/SpriteAnimationFactory.h"
 
 
 namespace Inanna {
@@ -44,6 +45,7 @@ namespace Inanna {
 
 
         static UIFactory uiFactory;
+        static SpriteAnimationFactory spriteAnimationFactory;
     private:
         float width;
         float height;
