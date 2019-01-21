@@ -15,6 +15,10 @@ namespace Inanna {
         explicit SpriteAnimationSystem(Graphics *graphics) : graphics(graphics), frameCount(0) {}
 
         SpriteAnimationState Next(SpriteAnimation* animation) {
+            if (animation->state == SpriteAnimationState::Finished) {
+                return animation->state;
+            }
+
             animation->time = 0;
             if (animation->reverse) {
                 animation->frameIndex--;

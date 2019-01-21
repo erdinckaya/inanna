@@ -25,11 +25,11 @@ resources = []
 
 for root, dirs, files in os.walk(atlas_path):
     for file in files:
-        if file.endswith(".png"):
+        if file.endswith(".json"):
             name = file.split(".")[0]
             path = os.path.join(root, file)
-            data = os.path.join(root, file.split(".")[0] + ".json")
-            resources.append(Resource(name, path, data))
+            data = os.path.join(root, file.split(".")[0] + ".png")
+            resources.append(Resource(name, data, path))
 
 
 result_str = ""
