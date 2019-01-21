@@ -22,13 +22,14 @@ namespace Inanna {
                 animation->frameIndex++;
             }
 
-            int limit = animation->reverse ? -1 : animation->animData->FrameSize();
+            const int frameSize = static_cast<int>(animation->animData.keyFrames.size());
+            int limit = animation->reverse ? -1 : frameSize;
             if (animation->frameIndex == limit) {
                 animation->loopCount--;
                 if (animation->loopCount <= 0) {
                     if (animation->pingpong)  {
                         animation->reverse = !animation->reverse;
-                        animation->frameIndex = animation->reverse ? animation->animData->FrameSize() - 1 : 0;
+                        animation->frameIndex = animation->reverse ? frameSize - 1 : 0;
                         animation->pingpong = false;
                     } else {
                         animation->state = SpriteAnimationState::Finished;
@@ -38,15 +39,15 @@ namespace Inanna {
                 animation->state = SpriteAnimationState::Animating;
             }
 
-            animation->frameIndex += animation->animData->FrameSize();
-            animation->frameIndex %= animation->animData->FrameSize();
+            animation->frameIndex += frameSize;
+            animation->frameIndex %= frameSize;
 
             return animation->state;
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<SpriteAnimation>([this, dt](entityx::Entity entity, SpriteAnimation &animation) {
-                double speed = 1000.0 / animation.animData->Speed();
+                double speed = 1000.0 / animation.animData.speed;
                 bool isKilled = false;
                 if (animation.time >= speed) {
                     auto state = Next(&animation);

@@ -1,3 +1,5 @@
+#include <utility>
+
 //
 // Created by Erdınc Kaya on 2019-01-18.
 //
@@ -12,16 +14,16 @@
 namespace Inanna {
     struct SpriteAnimation {
 
-        explicit SpriteAnimation(const SpriteAnimData *animData) : animData(animData), frameIndex(0), reverse(false),
+        explicit SpriteAnimation(SpriteAnimData animData) : animData(std::move(animData)), frameIndex(0), reverse(false),
                                                                    time(0), loop(false), loopCount(-1),
                                                                    state(SpriteAnimationState::Start),
                                                                    killAtFinish(false), pingpong(false) {}
 
         const ImageAsset KeyFrame() {
-            return animData->KeyFrame(frameIndex);
+            return animData.keyFrames[frameIndex];
         }
 
-        const SpriteAnimData *animData;
+        const SpriteAnimData animData;
         int frameIndex;
         bool reverse;
         entityx::TimeDelta time;

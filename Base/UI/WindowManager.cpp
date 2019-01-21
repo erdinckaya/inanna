@@ -161,7 +161,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             break;
         }
         case SDLK_n: {
-            spriteAnimationFactory.CreateAnimation(&AnimationData::DEATH);
+            spriteAnimationFactory.CreateAnimation(AnimationData::DEATH);
             break;
         }
         default:

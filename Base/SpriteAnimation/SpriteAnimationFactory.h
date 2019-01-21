@@ -13,7 +13,7 @@ namespace Inanna {
     public:
         explicit SpriteAnimationFactory() = default;
 
-        entityx::Entity CreateAnimation(const SpriteAnimData* animation);
+        entityx::Entity CreateAnimation(const SpriteAnimData &animation);
     };
 }
 

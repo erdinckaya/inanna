@@ -9,59 +9,28 @@ animations_file_str_h = """
 
 #include<string>
 #include<string.h>
+#include<vector>
 
-struct SpriteAnimData {
-    virtual const char* Name() const = 0;
-    virtual const int Speed() const = 0;
-    virtual const int FrameSize() const = 0;
-    virtual const ImageAsset KeyFrame(int index) const = 0;
+template<typename C>
+struct SpriteAnim {
+    
+    template<typename ... T>
+    explicit SpriteAnim(const char* name, const int speed, T ...args) : name(name), speed(speed), keyFrames{C(args)...} {} 
+
+    const char* name;
+    const int speed;
+    std::vector<ImageAsset> keyFrames;
+    
+    REFLECT()
 };
 
-%s
+typedef SpriteAnim<ImageAsset> SpriteAnimData;
 
 struct AnimationData {
 %s
 };
 
 #endif //RESOURCEMANAGER_ANIMATIONS_H
-"""
-
-
-animation_str = """
-struct %sAnim : public SpriteAnimData {
-    
-    %sAnim() :
-        name(\"%s\"),
-        frameSize(%d),
-        speed(%d),
-        keyFrames {%s
-        }
-    { }
-
-    const char* name;
-    const int speed;
-    const int frameSize;
-    ImageAsset keyFrames[%d];
-    
-    const char* Name() const override {
-        return name;
-    }
-    
-    const int Speed() const override {
-        return speed;
-    }
-    
-    const int FrameSize() const override {
-        return frameSize;
-    }
-    
-    const ImageAsset KeyFrame(int index) const override {
-        return keyFrames[index];
-    }
-    
-    REFLECT()
-};
-
 """
 
 animation_fields_str = ""
@@ -81,22 +50,18 @@ def create_animations(meta):
     for anim in anims:
         result_str = ""
         name = anim["name"]
-        animation_fields_str += "\tstatic %sAnim %s;\n" % (name.title(), name.upper())
-        animation_defination_cpp_str += "%sAnim AnimationData::%s;\n" %(name.title(), name.upper())
-        i = 0
-        framSize = len(anim["images"])
-        keyframes = "\n\t\t\t Resources::%s.%s" % (name.upper(), anim["images"][0].upper())
+        animation_fields_str += "\tstatic SpriteAnim<ImageAsset> %s;\n" % (name.upper())
+        constructor_str = "(\"%s\", %d" % (name, anim["speed"])
         for image in anim["images"]:
-            if i != 0:
-                keyframes += """\n\t\t\t,Resources::%s.%s""" % (name.upper(), image.upper())
-            i += 1
+            constructor_str += """, Resources::%s.%s""" % (name.upper(), image.upper())
+        constructor_str += ");\n"
 
-        result_str = animation_str % (name.title(), name.title(), name, framSize, anim["speed"], keyframes, framSize)
-        animation_defination_str += result_str
+        animation_defination_cpp_str += "SpriteAnim<ImageAsset> AnimationData::%s" %(name.upper())
+        animation_defination_cpp_str += constructor_str
 
 
 def write_animations(path):
-    h_file_str = animations_file_str_h % (animation_defination_str, animation_fields_str)
+    h_file_str = animations_file_str_h % (animation_fields_str)
     animations_path = os.path.join(path + "/Assets", "AnimationData.h")
     with open(animations_path, 'w') as h_file:
         h_file.write(h_file_str)
