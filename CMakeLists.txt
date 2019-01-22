@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
-add_compile_definitions(WINDOW_MANAGER_TEST MONITORX_DEBUG)
+add_compile_definitions(WINDOW_MANAGER_TEST START_WORLD MONITORX_DEBUG)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
@@ -65,7 +65,7 @@ add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Assets/An
         ThirdParty/MonitorX/3rdParty/ImGui/imgui_impl_sdl.cpp ThirdParty/MonitorX/3rdParty/ImGui/imgui_impl_sdl.h ThirdParty/MonitorX/3rdParty/ImGui/imgui_internal.h
         ThirdParty/MonitorX/3rdParty/ImGui/imgui_widgets.cpp ThirdParty/MonitorX/3rdParty/ImGui/imstb_rectpack.h ThirdParty/MonitorX/3rdParty/ImGui/imstb_textedit.h
         ThirdParty/MonitorX/3rdParty/ImGui/imstb_truetype.h ThirdParty/MonitorX/3rdParty/FlexibleReflection/Reflect.h ThirdParty/MonitorX/3rdParty/FlexibleReflection/Primitives.cpp
-        ThirdParty/MonitorX/MonitorX.h ThirdParty/MonitorX/MonitorX.cpp Base/MonitorX/MonitorComponents.cpp Base/SpriteAnimation/SpriteAnimationFactory.cpp Base/SpriteAnimation/SpriteAnimationFactory.h Base/SpriteAnimation/Components/SpriteAnimation.h Base/SpriteAnimation/Systems/SpriteAnimationSystem.h Base/SpriteAnimation/Components/SpriteAnimationState.h)
+        ThirdParty/MonitorX/MonitorX.h ThirdParty/MonitorX/MonitorX.cpp Base/MonitorX/MonitorComponents.cpp Base/SpriteAnimation/SpriteAnimationFactory.cpp Base/SpriteAnimation/SpriteAnimationFactory.h Base/SpriteAnimation/Components/SpriteAnimation.h Base/SpriteAnimation/Systems/SpriteAnimationSystem.h Base/SpriteAnimation/Components/SpriteAnimationState.h Base/SpriteAnimation/Systems/SpritePositionSystem.h Base/SpriteAnimation/Systems/SpriteRenderSystem.h)
 
 
 target_link_libraries(Inanna ${SDL2_LIBRARY}

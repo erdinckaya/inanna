@@ -12,7 +12,7 @@
 namespace Inanna {
     struct SpriteAnimationSystem : public entityx::System<SpriteAnimationSystem> {
 
-        explicit SpriteAnimationSystem(Graphics *graphics) : graphics(graphics), frameCount(0) {}
+        explicit SpriteAnimationSystem() : frameCount(0) {}
 
         SpriteAnimationState Next(SpriteAnimation* animation) {
             if (animation->state == SpriteAnimationState::Finished) {
@@ -29,15 +29,14 @@ namespace Inanna {
             const int frameSize = static_cast<int>(animation->animData.keyFrames.size());
             int limit = animation->reverse ? -1 : frameSize;
             if (animation->frameIndex == limit) {
-                animation->loopCount--;
-                if (animation->loopCount <= 0) {
-                    if (animation->pingpong)  {
-                        animation->reverse = !animation->reverse;
-                        animation->frameIndex = animation->reverse ? frameSize - 1 : 0;
-                        animation->pingpong = false;
-                    } else {
-                        animation->state = SpriteAnimationState::Finished;
-                    }
+                if (animation->loop) {
+                    animation->state = SpriteAnimationState::Animating;
+                } else if (animation->pingpong)  {
+                    animation->reverse = !animation->reverse;
+                    animation->frameIndex = animation->reverse ? frameSize - 1 : 0;
+                    animation->pingpong = false;
+                } else {
+                    animation->state = SpriteAnimationState::Finished;
                 }
             } else {
                 animation->state = SpriteAnimationState::Animating;
@@ -60,20 +59,11 @@ namespace Inanna {
                         entity.destroy();
                     }
                 }
-
-                if (!isKilled) {
-                    auto keyFrame = animation.KeyFrame();
-                    Rectf clip = {0, 0, keyFrame.w, keyFrame.h};
-                    Rectf pos = {200, 200, keyFrame.w, keyFrame.h};
-                    graphics->DrawTexture(keyFrame, clip, pos, 0, Vecf(1, 1));
-                    animation.time += dt;
-                }
             });
         }
 
     private:
         int frameCount;
-        Graphics *graphics;
     };
 }
 

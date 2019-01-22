@@ -33,6 +33,18 @@ namespace Inanna {
             return Vec2(x - v.x, y - v.y);
         }
 
+        inline Vec2 operator+(const Vec2 &v) const {
+            return Vec2(x + v.x, y + v.y);
+        }
+
+        inline Vec2 operator-(const Vec2 &v) {
+            return Vec2(x - v.x, y - v.y);
+        }
+
+        inline Vec2 operator-(const Vec2 &v) const {
+            return Vec2(x - v.x, y - v.y);
+        }
+
         inline Vec2 &operator+=(Vec2 &v) {
             x += v.x;
             y += v.y;

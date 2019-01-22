@@ -2,14 +2,13 @@
 #include "Assets/Resources.h"
 #include "Server/GameServer.h"
 #include "Base/World.h"
+#include "ThirdParty/boolinq.h"
 
 #include <entityx/entityx.h>
 #include <yojimbo.h>
 #include <thread>
 #include <shared.h>
 
-//#define START_SERVER
-#define START_WORLD
 
 
 void startServer() {
@@ -48,6 +47,12 @@ int main() {
     Inanna::World word;
     word.Start();
 #endif
+
+    int src[] = {1,2,3,4,5,6,7,8};
+    auto dst = boolinq::from(src).where( [](int a){return a%2 == 1;})    // 1,3,5,7
+            .select([](int a){return a*2;})         // 2,6,10,14
+            .where( [](int a){return a>2 && a<12;}) // 6,10
+            .toVector();
 
     return 0;
 }

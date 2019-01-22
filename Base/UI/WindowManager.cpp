@@ -10,6 +10,8 @@
 #include "Systems/RenderFrameSystem.h"
 #include "../../Assets/AnimationData.h"
 #include "../SpriteAnimation/Systems/SpriteAnimationSystem.h"
+#include "../SpriteAnimation/Systems/SpritePositionSystem.h"
+#include "../SpriteAnimation/Systems/SpriteRenderSystem.h"
 
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
@@ -46,7 +48,9 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
     uiFactory.systems.configure();
 
 
-    spriteAnimationFactory.systems.add<SpriteAnimationSystem>(graphics);
+    spriteAnimationFactory.systems.add<SpriteAnimationSystem>();
+    spriteAnimationFactory.systems.add<SpritePositionSystem>();
+    spriteAnimationFactory.systems.add<SpriteRenderSystem>(graphics);
     spriteAnimationFactory.systems.configure();
 }
 
@@ -79,6 +83,8 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
 
 
     spriteAnimationFactory.systems.update<SpriteAnimationSystem>(dt);
+    spriteAnimationFactory.systems.update<SpritePositionSystem>(dt);
+    spriteAnimationFactory.systems.update<SpriteRenderSystem>(dt);
 }
 
 void Inanna::WindowManager::Test(SDL_Keycode code) {
@@ -161,7 +167,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             break;
         }
         case SDLK_n: {
-            spriteAnimationFactory.CreateAnimation(AnimationData::DEATH);
+            spriteAnimationFactory.CreateAnimation(AnimationData::KYO_LITTLE_KICK);
             break;
         }
         default:
