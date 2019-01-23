@@ -17,20 +17,25 @@ struct SpriteAnim {
     template<typename ... T>
     explicit SpriteAnim(const char* name, const int speed, T ...args) : name(name), speed(speed), keyFrames{C(args)...} {} 
 
-    const char* name;
-    const int speed;
+    std::string name;
+    int speed;
     std::vector<ImageAsset> keyFrames;
     
     friend inline bool operator==(const SpriteAnim& lhs, const SpriteAnim& rhs) {
-		return strcmp(lhs.name == rhs.name) == 0;
+		return lhs.name.compare(rhs.name) == 0;
 	}
 
 	friend inline bool operator!=(const SpriteAnim& lhs, const SpriteAnim& rhs) {
 		return !(lhs == rhs);
 	}
     
-    REFLECT()
+	REFLECT_TEMPLATE(SpriteAnim, C)
+						REFLECT_STRUCT_MEMBER_TEMPLATE(name)
+						REFLECT_STRUCT_MEMBER_TEMPLATE(speed)
+						REFLECT_STRUCT_MEMBER_TEMPLATE(keyFrames)
+	REFLECT_STRUCT_END()
 };
+REFLECT_STRUCT_INIT_TEMPLATE(SpriteAnim)
 
 typedef SpriteAnim<ImageAsset> SpriteAnimData;
 

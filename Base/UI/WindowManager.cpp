@@ -12,6 +12,8 @@
 #include "../SpriteAnimation/Systems/SpriteAnimationSystem.h"
 #include "../SpriteAnimation/Systems/SpritePositionSystem.h"
 #include "../SpriteAnimation/Systems/SpriteRenderSystem.h"
+#include "../Game/Systems/MoveCharacterSystem.h"
+#include "../Game/Systems/KeyInputSystem.h"
 
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
@@ -48,6 +50,8 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
     uiFactory.systems.configure();
 
 
+    spriteAnimationFactory.systems.add<KeyInputSystem>();
+    spriteAnimationFactory.systems.add<MoveCharacterSystem>();
     spriteAnimationFactory.systems.add<SpriteAnimationSystem>();
     spriteAnimationFactory.systems.add<SpritePositionSystem>();
     spriteAnimationFactory.systems.add<SpriteRenderSystem>(graphics);
@@ -82,6 +86,8 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
     uiFactory.systems.update<RenderSystem>(dt);
 
 
+    spriteAnimationFactory.systems.update<KeyInputSystem>(dt);
+    spriteAnimationFactory.systems.update<MoveCharacterSystem>(dt);
     spriteAnimationFactory.systems.update<SpriteAnimationSystem>(dt);
     spriteAnimationFactory.systems.update<SpritePositionSystem>(dt);
     spriteAnimationFactory.systems.update<SpriteRenderSystem>(dt);
@@ -167,13 +173,13 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             break;
         }
         case SDLK_n: {
-            spriteAnimationFactory.CreateAnimation(AnimationData::KYO_MOVE_BACK);
+            character = spriteAnimationFactory.CreateAnimation(AnimationData::KYO_IDLE);
+            character.assign<Character>();
             break;
         }
         default:
             break;
     }
-    printf("Entity count %d\n", static_cast<int>(uiFactory.entities.size()));
 
 #endif
 }

@@ -1,0 +1,29 @@
+{"frames": [
+
+{
+	"filename": "Frame0.png",
+	"frame": {"x":0,"y":0,"w":118,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":206},
+	"sourceSize": {"w":118,"h":206}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "kyo_idle.png",
+	"format": "RGBA8888",
+	"size": {"w":118,"h":206},
+	"scale": "1",
+	"anims": [
+		{
+			"name": "kyo_idle",
+			"images": [
+				"Frame0"
+			],
+			"speed": 13
+		}
+	],
+	"smartupdate": "$TexturePacker:SmartUpdate:b9589e9a1d5d87b5d0c4642e952dc38f:ae39dbe3f6f21cdc3dd51cafa57e2b30:4cd6737ff4eab775d5743b4a33a2e219$"
+}
+}

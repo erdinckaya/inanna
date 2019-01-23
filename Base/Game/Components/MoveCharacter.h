@@ -1,17 +1,22 @@
 //
-// Created by Erdınc Kaya on 2019-01-23.
+// Created by misterdortnal on 23.01.2019.
 //
 
 #ifndef INANNA_MOVECHARACTER_H
 #define INANNA_MOVECHARACTER_H
 
+#include <entityx/config.h>
+#include "../../Util/Math/Vec2.h"
+
 namespace Inanna {
     struct MoveCharacter {
-        explicit MoveCharacter(bool forward = true, float speed = 0.1f) : forward(forward), speed(speed) {}
+        explicit MoveCharacter(const Vecf &direction, int speed) : direction(direction), speed(speed), time(0) {}
 
-        bool forward;
-        float speed;
+        int speed;
+        Vecf direction;
+        float time;
+
+        REFLECT()
     };
 }
-
 #endif //INANNA_MOVECHARACTER_H

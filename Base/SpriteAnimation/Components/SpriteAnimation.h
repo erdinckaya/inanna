@@ -7,7 +7,6 @@
 #ifndef INANNA_SPRITEANIMATION_H
 #define INANNA_SPRITEANIMATION_H
 
-#include <entityx/config.h>
 #include "../../../Assets/AnimationData.h"
 #include "SpriteAnimationState.h"
 #include "../../Util/Math/Vec2.h"
@@ -42,14 +41,16 @@ namespace Inanna {
             return Vecf(w, h);
         }
 
-        const SpriteAnimData animData;
+        SpriteAnimData animData;
         int frameIndex;
         bool reverse;
-        entityx::TimeDelta time;
+        float time;
         bool loop;
         bool pingpong;
         SpriteAnimationState state;
         bool killAtFinish;
+
+        REFLECT()
     };
 }
 

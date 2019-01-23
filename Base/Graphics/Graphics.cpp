@@ -5,6 +5,8 @@
 
 #include "Graphics.h"
 #include "../UI/WindowManager.h"
+#include "../SpriteAnimation/Components/SpriteAnimation.h"
+#include "../Game/Components/MoveCharacter.h"
 
 
 Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags),
@@ -27,7 +29,7 @@ Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFl
     glClear(GL_COLOR_BUFFER_BIT);
     window.Show();
 #ifdef MONITORX_DEBUG
-    monitorX = std::make_unique<monitorx::MonitorX>(&WindowManager::uiFactory, window, context.Get());
+    monitorX = std::make_unique<monitorx::MonitorX>(&WindowManager::spriteAnimationFactory, window, context.Get());
     monitorX->Init();
 #endif
 }
@@ -90,7 +92,7 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
 
 void Inanna::Graphics::Update(float dt) {
 #ifdef MONITORX_DEBUG
-    monitorX->Render<Renderable, Position, end_of_list>();
+    monitorX->Render<Renderable, Position, SpriteAnimation, MoveCharacter, end_of_list>();
 #endif
     SDL_GL_MakeCurrent(window, context);
     SDL_GL_SwapWindow(window);

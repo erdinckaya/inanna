@@ -12,14 +12,14 @@
 namespace Inanna {
     struct SpriteAnimationSystem : public entityx::System<SpriteAnimationSystem> {
 
-        explicit SpriteAnimationSystem() : frameCount(0) {}
+        explicit SpriteAnimationSystem() = default;
 
         SpriteAnimationState Next(SpriteAnimation* animation) {
+            animation->time = 0;
             if (animation->state == SpriteAnimationState::Finished) {
                 return animation->state;
             }
 
-            animation->time = 0;
             if (animation->reverse) {
                 animation->frameIndex--;
             } else {
@@ -62,8 +62,6 @@ namespace Inanna {
             });
         }
 
-    private:
-        int frameCount;
     };
 }
 
