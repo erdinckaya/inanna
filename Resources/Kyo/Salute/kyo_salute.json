@@ -424,6 +424,31 @@
         "x": 0.5,
         "y": 0.5
       }
+    },
+    {
+      "filename": "Idle",
+      "frame": {
+        "x": 870,
+        "y": 0,
+        "w": 118,
+        "h": 206
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 118,
+        "h": 206
+      },
+      "sourceSize": {
+        "w": 118,
+        "h": 206
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
     }
   ],
   "meta": {

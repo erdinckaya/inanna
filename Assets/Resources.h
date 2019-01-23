@@ -121,6 +121,38 @@ public:
 
 
 
+struct Pieces : public Sheet {
+
+public:
+    Pieces() :
+		BLUE("blue", 0.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		CYAN("cyan", 256.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		DARK_PURPLE("dark_purple", 512.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		GHOST("ghost", 0.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		GREEN("green", 256.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		PURPLE("purple", 512.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		RED("red", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		GUCHAN("guchan", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		YELLOW("yellow", 256.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
+		Sheet("pieces", "/Users/always/CLionProjects/inanna/Resources/pieces.png")
+
+    {}
+
+	ImageAsset BLUE;
+	ImageAsset CYAN;
+	ImageAsset DARK_PURPLE;
+	ImageAsset GHOST;
+	ImageAsset GREEN;
+	ImageAsset PURPLE;
+	ImageAsset RED;
+	ImageAsset GUCHAN;
+	ImageAsset YELLOW;
+
+
+};
+
+
+
 struct Kyo_Little_Kick : public Sheet {
 
 public:
@@ -133,7 +165,7 @@ public:
 		FRAME5("Frame5", 788.000000f, 0.000000f, 138.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
 		FRAME6("Frame6", 926.000000f, 0.000000f, 120.000000f, 206.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
 		FRAME7("Frame7", 1046.000000f, 0.000000f, 118.000000f, 206.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
-		Sheet("kyo_little_kick", "/Users/always/CLionProjects/inanna/Resources/kyo_little_kick.png")
+		Sheet("kyo_little_kick", "/Users/always/CLionProjects/inanna/Resources/Kyo/Hit/kyo_little_kick.png")
 
     {}
 
@@ -151,6 +183,22 @@ public:
 
 
 
+struct Kyo_Idle : public Sheet {
+
+public:
+    Kyo_Idle() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 118.000000f, 206.000000f, 118.000000f, 206.000000f, "kyo_idle", "RGBA8888"),
+		Sheet("kyo_idle", "/Users/always/CLionProjects/inanna/Resources/Kyo/Idle/kyo_idle.png")
+
+    {}
+
+	ImageAsset FRAME0;
+
+
+};
+
+
+
 struct Kyo_Move_Back : public Sheet {
 
 public:
@@ -161,7 +209,7 @@ public:
 		FRAME3("Frame3", 316.000000f, 0.000000f, 90.000000f, 230.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
 		FRAME4("Frame4", 406.000000f, 0.000000f, 88.000000f, 228.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
 		FRAME5("Frame5", 494.000000f, 0.000000f, 90.000000f, 220.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
-		Sheet("kyo_move_back", "/Users/always/CLionProjects/inanna/Resources/kyo_move_back.png")
+		Sheet("kyo_move_back", "/Users/always/CLionProjects/inanna/Resources/Kyo/Move/kyo_move_back.png")
 
     {}
 
@@ -186,7 +234,7 @@ public:
 		FRAME2("Frame2", 188.000000f, 0.000000f, 94.000000f, 232.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
 		FRAME3("Frame3", 282.000000f, 0.000000f, 104.000000f, 224.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
 		FRAME4("Frame4", 386.000000f, 0.000000f, 120.000000f, 222.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
-		Sheet("kyo_move_forward", "/Users/always/CLionProjects/inanna/Resources/kyo_move_forward.png")
+		Sheet("kyo_move_forward", "/Users/always/CLionProjects/inanna/Resources/Kyo/Move/kyo_move_forward.png")
 
     {}
 
@@ -222,7 +270,8 @@ public:
 		FRAME14("Frame14", 684.000000f, 284.000000f, 148.000000f, 188.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888"),
 		FRAME15("Frame15", 832.000000f, 284.000000f, 148.000000f, 192.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888"),
 		FRAME16("Frame16", 870.000000f, 0.000000f, 118.000000f, 206.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888"),
-		Sheet("kyo_salute", "/Users/always/CLionProjects/inanna/Resources/kyo_salute.png")
+		IDLE("Idle", 870.000000f, 0.000000f, 118.000000f, 206.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888"),
+		Sheet("kyo_salute", "/Users/always/CLionProjects/inanna/Resources/Kyo/Salute/kyo_salute.png")
 
     {}
 
@@ -243,38 +292,7 @@ public:
 	ImageAsset FRAME14;
 	ImageAsset FRAME15;
 	ImageAsset FRAME16;
-
-
-};
-
-
-
-struct Pieces : public Sheet {
-
-public:
-    Pieces() :
-		BLUE("blue", 0.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		CYAN("cyan", 256.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		DARK_PURPLE("dark_purple", 512.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		GHOST("ghost", 0.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		GREEN("green", 256.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		PURPLE("purple", 512.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		RED("red", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		GUCHAN("guchan", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		YELLOW("yellow", 256.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		Sheet("pieces", "/Users/always/CLionProjects/inanna/Resources/pieces.png")
-
-    {}
-
-	ImageAsset BLUE;
-	ImageAsset CYAN;
-	ImageAsset DARK_PURPLE;
-	ImageAsset GHOST;
-	ImageAsset GREEN;
-	ImageAsset PURPLE;
-	ImageAsset RED;
-	ImageAsset GUCHAN;
-	ImageAsset YELLOW;
+	ImageAsset IDLE;
 
 
 };
@@ -284,15 +302,16 @@ public:
 	static Balls BALLS;
 	static Death DEATH;
 	static Fields FIELDS;
+	static Pieces PIECES;
 	static Kyo_Little_Kick KYO_LITTLE_KICK;
+	static Kyo_Idle KYO_IDLE;
 	static Kyo_Move_Back KYO_MOVE_BACK;
 	static Kyo_Move_Forward KYO_MOVE_FORWARD;
 	static Kyo_Salute KYO_SALUTE;
-	static Pieces PIECES;
 
 
 	static int SheetCount;
-	static const Sheet Sheets[8];
+	static const Sheet Sheets[9];
 };
 
 

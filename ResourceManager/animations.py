@@ -21,6 +21,14 @@ struct SpriteAnim {
     const int speed;
     std::vector<ImageAsset> keyFrames;
     
+    friend inline bool operator==(const SpriteAnim& lhs, const SpriteAnim& rhs) {
+		return strcmp(lhs.name == rhs.name) == 0;
+	}
+
+	friend inline bool operator!=(const SpriteAnim& lhs, const SpriteAnim& rhs) {
+		return !(lhs == rhs);
+	}
+    
     REFLECT()
 };
 
