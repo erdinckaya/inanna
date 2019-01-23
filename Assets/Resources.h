@@ -59,6 +59,148 @@ public:
 
 
 
+struct Balls : public Sheet {
+
+public:
+    Balls() :
+		IMAGE("image", 0.000000f, 0.000000f, 300.000000f, 300.000000f, 300.000000f, 300.000000f, "balls", "RGBA8888"),
+		Sheet("balls", "/Users/always/CLionProjects/inanna/Resources/balls.png")
+
+    {}
+
+	ImageAsset IMAGE;
+
+
+};
+
+
+
+struct Death : public Sheet {
+
+public:
+    Death() :
+		DEATH_000("Death_000", 0.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		DEATH_001("Death_001", 262.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		DEATH_002("Death_002", 524.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		DEATH_003("Death_003", 786.000000f, 0.000000f, 263.000000f, 254.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		DEATH_004("Death_004", 1049.000000f, 0.000000f, 266.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		DEATH_005("Death_005", 1315.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
+		Sheet("death", "/Users/always/CLionProjects/inanna/Resources/death.png")
+
+    {}
+
+	ImageAsset DEATH_000;
+	ImageAsset DEATH_001;
+	ImageAsset DEATH_002;
+	ImageAsset DEATH_003;
+	ImageAsset DEATH_004;
+	ImageAsset DEATH_005;
+
+
+};
+
+
+
+struct Fields : public Sheet {
+
+public:
+    Fields() :
+		TENNIS_FIELD("tennis_field", 0.000000f, 0.000000f, 257.000000f, 427.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
+		TENNIS_FIELD1("tennis_field1", 0.000000f, 512.000000f, 600.000000f, 900.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
+		TENNIS_FIELD2("tennis_field2", 257.000000f, 0.000000f, 336.000000f, 512.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
+		Sheet("fields", "/Users/always/CLionProjects/inanna/Resources/fields.png")
+
+    {}
+
+	ImageAsset TENNIS_FIELD;
+	ImageAsset TENNIS_FIELD1;
+	ImageAsset TENNIS_FIELD2;
+
+
+};
+
+
+
+struct Kyo_Little_Kick : public Sheet {
+
+public:
+    Kyo_Little_Kick() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 176.000000f, 218.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
+		FRAME1("Frame1", 176.000000f, 0.000000f, 138.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
+		FRAME2("Frame2", 314.000000f, 0.000000f, 134.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
+		FRAME3("Frame3", 448.000000f, 0.000000f, 206.000000f, 218.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
+		FRAME4("Frame4", 654.000000f, 0.000000f, 134.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
+		FRAME5("Frame5", 788.000000f, 0.000000f, 138.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
+		FRAME6("Frame6", 926.000000f, 0.000000f, 120.000000f, 206.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
+		FRAME7("Frame7", 1046.000000f, 0.000000f, 118.000000f, 206.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
+		Sheet("kyo_little_kick", "/Users/always/CLionProjects/inanna/Resources/kyo_little_kick.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+
+
+};
+
+
+
+struct Kyo_Move_Back : public Sheet {
+
+public:
+    Kyo_Move_Back() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 112.000000f, 212.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
+		FRAME1("Frame1", 112.000000f, 0.000000f, 110.000000f, 216.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
+		FRAME2("Frame2", 222.000000f, 0.000000f, 94.000000f, 222.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
+		FRAME3("Frame3", 316.000000f, 0.000000f, 90.000000f, 230.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
+		FRAME4("Frame4", 406.000000f, 0.000000f, 88.000000f, 228.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
+		FRAME5("Frame5", 494.000000f, 0.000000f, 90.000000f, 220.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
+		Sheet("kyo_move_back", "/Users/always/CLionProjects/inanna/Resources/kyo_move_back.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+
+
+};
+
+
+
+struct Kyo_Move_Forward : public Sheet {
+
+public:
+    Kyo_Move_Forward() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 94.000000f, 218.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
+		FRAME1("Frame1", 94.000000f, 0.000000f, 94.000000f, 226.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
+		FRAME2("Frame2", 188.000000f, 0.000000f, 94.000000f, 232.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
+		FRAME3("Frame3", 282.000000f, 0.000000f, 104.000000f, 224.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
+		FRAME4("Frame4", 386.000000f, 0.000000f, 120.000000f, 222.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
+		Sheet("kyo_move_forward", "/Users/always/CLionProjects/inanna/Resources/kyo_move_forward.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+
+
+};
+
+
+
 struct Kyo_Salute : public Sheet {
 
 public:
@@ -80,7 +222,7 @@ public:
 		FRAME14("Frame14", 684.000000f, 284.000000f, 148.000000f, 188.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888"),
 		FRAME15("Frame15", 832.000000f, 284.000000f, 148.000000f, 192.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888"),
 		FRAME16("Frame16", 870.000000f, 0.000000f, 118.000000f, 206.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888"),
-		Sheet("kyo_salute", "/home/misterdortnal/CLionProjects/Inanna/Resources/kyo_salute.png")
+		Sheet("kyo_salute", "/Users/always/CLionProjects/inanna/Resources/kyo_salute.png")
 
     {}
 
@@ -120,7 +262,7 @@ public:
 		RED("red", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
 		GUCHAN("guchan", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
 		YELLOW("yellow", 256.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		Sheet("pieces", "/home/misterdortnal/CLionProjects/Inanna/Resources/pieces.png")
+		Sheet("pieces", "/Users/always/CLionProjects/inanna/Resources/pieces.png")
 
     {}
 
@@ -137,110 +279,20 @@ public:
 
 };
 
-
-
-struct Balls : public Sheet {
-
-public:
-    Balls() :
-		IMAGE("image", 0.000000f, 0.000000f, 300.000000f, 300.000000f, 300.000000f, 300.000000f, "balls", "RGBA8888"),
-		Sheet("balls", "/home/misterdortnal/CLionProjects/Inanna/Resources/balls.png")
-
-    {}
-
-	ImageAsset IMAGE;
-
-
-};
-
-
-
-struct Death : public Sheet {
-
-public:
-    Death() :
-		DEATH_000("Death_000", 0.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
-		DEATH_001("Death_001", 262.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
-		DEATH_002("Death_002", 524.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
-		DEATH_003("Death_003", 786.000000f, 0.000000f, 263.000000f, 254.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
-		DEATH_004("Death_004", 1049.000000f, 0.000000f, 266.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
-		DEATH_005("Death_005", 1315.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
-		Sheet("death", "/home/misterdortnal/CLionProjects/Inanna/Resources/death.png")
-
-    {}
-
-	ImageAsset DEATH_000;
-	ImageAsset DEATH_001;
-	ImageAsset DEATH_002;
-	ImageAsset DEATH_003;
-	ImageAsset DEATH_004;
-	ImageAsset DEATH_005;
-
-
-};
-
-
-
-struct Fields : public Sheet {
-
-public:
-    Fields() :
-		TENNIS_FIELD("tennis_field", 0.000000f, 0.000000f, 257.000000f, 427.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
-		TENNIS_FIELD1("tennis_field1", 0.000000f, 512.000000f, 600.000000f, 900.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
-		TENNIS_FIELD2("tennis_field2", 257.000000f, 0.000000f, 336.000000f, 512.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
-		Sheet("fields", "/home/misterdortnal/CLionProjects/Inanna/Resources/fields.png")
-
-    {}
-
-	ImageAsset TENNIS_FIELD;
-	ImageAsset TENNIS_FIELD1;
-	ImageAsset TENNIS_FIELD2;
-
-
-};
-
-
-
-struct Kyo_Little_Kick : public Sheet {
-
-public:
-    Kyo_Little_Kick() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 176.000000f, 218.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
-		FRAME1("Frame1", 176.000000f, 0.000000f, 138.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
-		FRAME2("Frame2", 314.000000f, 0.000000f, 134.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
-		FRAME3("Frame3", 448.000000f, 0.000000f, 206.000000f, 218.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
-		FRAME4("Frame4", 654.000000f, 0.000000f, 134.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
-		FRAME5("Frame5", 788.000000f, 0.000000f, 138.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
-		FRAME6("Frame6", 926.000000f, 0.000000f, 120.000000f, 206.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
-		FRAME7("Frame7", 1046.000000f, 0.000000f, 118.000000f, 206.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
-		Sheet("kyo_little_kick", "/home/misterdortnal/CLionProjects/Inanna/Resources/kyo_little_kick.png")
-
-    {}
-
-	ImageAsset FRAME0;
-	ImageAsset FRAME1;
-	ImageAsset FRAME2;
-	ImageAsset FRAME3;
-	ImageAsset FRAME4;
-	ImageAsset FRAME5;
-	ImageAsset FRAME6;
-	ImageAsset FRAME7;
-
-
-};
-
 struct Resources {
 public:
-	static Kyo_Salute KYO_SALUTE;
-	static Pieces PIECES;
 	static Balls BALLS;
 	static Death DEATH;
 	static Fields FIELDS;
 	static Kyo_Little_Kick KYO_LITTLE_KICK;
+	static Kyo_Move_Back KYO_MOVE_BACK;
+	static Kyo_Move_Forward KYO_MOVE_FORWARD;
+	static Kyo_Salute KYO_SALUTE;
+	static Pieces PIECES;
 
 
 	static int SheetCount;
-	static const Sheet Sheets[6];
+	static const Sheet Sheets[8];
 };
 
 

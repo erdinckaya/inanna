@@ -58,19 +58,13 @@ void Inanna::World::Start() {
             OnEvent(&event);
         }
 
-//        OnLoop();
-
-        windowManager->
-        Update(1000/*ms*/ / FPS);
+        windowManager->Update(1000/*ms*/ / FPS);
         OnRender(FPS);
-//        physics->Update(kFps);
         const auto ms_per_frame = static_cast<const Uint32>(1000/*ms*/ / FPS);
         const Uint32 elapsed_time_ms = SDL_GetTicks() - start_time_ms;
         if (elapsed_time_ms < ms_per_frame) {
             SDL_Delay(ms_per_frame - elapsed_time_ms);
         }
-
-//        CleanMarkedObjects();
     }
 
     BringDoom();

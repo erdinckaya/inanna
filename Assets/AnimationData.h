@@ -24,9 +24,11 @@ struct SpriteAnim {
 typedef SpriteAnim<ImageAsset> SpriteAnimData;
 
 struct AnimationData {
-	static SpriteAnim<ImageAsset> KYO_SALUTE;
 	static SpriteAnim<ImageAsset> DEATH;
 	static SpriteAnim<ImageAsset> KYO_LITTLE_KICK;
+	static SpriteAnim<ImageAsset> KYO_MOVE_BACK;
+	static SpriteAnim<ImageAsset> KYO_MOVE_FORWARD;
+	static SpriteAnim<ImageAsset> KYO_SALUTE;
 
 };
 

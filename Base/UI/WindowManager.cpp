@@ -167,7 +167,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             break;
         }
         case SDLK_n: {
-            spriteAnimationFactory.CreateAnimation(AnimationData::KYO_LITTLE_KICK);
+            spriteAnimationFactory.CreateAnimation(AnimationData::KYO_MOVE_BACK);
             break;
         }
         default:

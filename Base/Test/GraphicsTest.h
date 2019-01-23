@@ -6,6 +6,7 @@
 #define INANNA_GRAPHICSTEST_H
 
 #include "../Graphics/Graphics.h"
+#include "../World.h"
 
 class GraphicsTest {
 
@@ -27,7 +28,7 @@ public:
     }
 
     void TestInit() {
-        Inanna::Graphics graphics(900, 900, SDL_WINDOW_OPENGL);
+        Inanna::Graphics graphics(Inanna::SCREEN_WIDTH, Inanna::SCREEN_WIDTH, SDL_WINDOW_OPENGL);
     }
 
 };
