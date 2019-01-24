@@ -19,13 +19,7 @@ namespace Inanna {
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Character, Position, MoveCharacter, SpriteAnimation>(
                     [this, dt](entityx::Entity entity, Character &character, Position &position, MoveCharacter &move,
-                           SpriteAnimation &anim) {
-//                        if (anim.animData != AnimationData::KYO_MOVE_BACK ||
-//                            anim.animData != AnimationData::KYO_MOVE_FORWARD) {
-//                            entity.remove<SpriteAnimation>();
-//                            entity.assign<SpriteAnimation>(AnimationData::KYO_IDLE);
-//                        }
-
+                               SpriteAnimation &anim) {
                         double speed = 1000.0 / move.speed;
                         bool isKilled = false;
                         if (move.time >= speed) {

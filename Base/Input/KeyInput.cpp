@@ -3,8 +3,12 @@
 //
 
 #include "KeyInput.h"
+#include "../UI/WindowManager.h"
+#include "../Game/Events/KeyHitEvent.h"
 
 Inanna::KeyInput Inanna::KeyInput::Instance;
+
+Inanna::KeyInput::KeyInput() : KEY_DOWN_LIMIT(2) {}
 
 void Inanna::KeyInput::BeginNewFrame() {
     pressedKeys.clear();
@@ -14,11 +18,19 @@ void Inanna::KeyInput::BeginNewFrame() {
 void Inanna::KeyInput::KeyDownEvent(SDL_Event &event) {
     pressedKeys[event.key.keysym.scancode] = true;
     heldKeys[event.key.keysym.scancode] = true;
+
+    firstDownKeys[event.key.keysym.scancode]++;
+    if (firstDownKeys[event.key.keysym.scancode] >= KEY_DOWN_LIMIT) {
+        firstDownKeys[event.key.keysym.scancode] = KEY_DOWN_LIMIT;
+    } else if (firstDownKeys[event.key.keysym.scancode] == 1) {
+        WindowManager::spriteAnimationFactory.events.emit<KeyHitEvent>(event.key.keysym.scancode);
+    }
 }
 
 void Inanna::KeyInput::KeyUpEvent(SDL_Event &event) {
     releasedKeys[event.key.keysym.scancode] = true;
     heldKeys[event.key.keysym.scancode] = false;
+    firstDownKeys[event.key.keysym.scancode] = 0;
 }
 
 bool Inanna::KeyInput::WasKeyPressed(SDL_Scancode key) {
@@ -27,6 +39,10 @@ bool Inanna::KeyInput::WasKeyPressed(SDL_Scancode key) {
 
 bool Inanna::KeyInput::WasKeyReleased(SDL_Scancode key) {
     return releasedKeys[key];
+}
+
+bool Inanna::KeyInput::IsKeyHit(SDL_Scancode key) {
+    return firstDownKeys[key] == 1;
 }
 
 bool Inanna::KeyInput::IsKeyHeld(SDL_Scancode key) {
@@ -45,6 +61,10 @@ void Inanna::KeyInput::PrintKeys() {
 
     for (auto &releasedKey : releasedKeys) {
         printf("Released Key %d state %d\n", (int) releasedKey.first, (int) releasedKey.second);
+    }
+
+    for (auto &hitKey : firstDownKeys) {
+        printf("Hit Key %d state %d\n", (int) hitKey.first, (int) hitKey.second);
     }
     printf("=================END==================\n");
 

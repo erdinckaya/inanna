@@ -8,6 +8,9 @@
 #include <entityx/System.h>
 #include "../Components/SpriteAnimation.h"
 #include "../../Graphics/Graphics.h"
+#include "../Components/Time.h"
+
+#include <queue>
 
 namespace Inanna {
     struct SpriteAnimationSystem : public entityx::System<SpriteAnimationSystem> {
@@ -17,7 +20,7 @@ namespace Inanna {
         SpriteAnimationState Next(SpriteAnimation* animation) {
             animation->time = 0;
             if (animation->state == SpriteAnimationState::Finished) {
-                return animation->state;
+                return static_cast<SpriteAnimationState>(animation->state);
             }
 
             if (animation->reverse) {
@@ -45,7 +48,7 @@ namespace Inanna {
             animation->frameIndex += frameSize;
             animation->frameIndex %= frameSize;
 
-            return animation->state;
+            return static_cast<SpriteAnimationState>(animation->state);
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
@@ -61,7 +64,6 @@ namespace Inanna {
                 }
             });
         }
-
     };
 }
 

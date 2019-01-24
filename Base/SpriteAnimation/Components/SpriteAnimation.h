@@ -11,13 +11,18 @@
 #include "SpriteAnimationState.h"
 #include "../../Util/Math/Vec2.h"
 
+
 namespace Inanna {
     struct SpriteAnimation {
 
-        explicit SpriteAnimation(SpriteAnimData animData) : animData(std::move(animData)), frameIndex(0), reverse(false),
-                                                                   time(0), loop(false),
-                                                                   state(SpriteAnimationState::Start),
-                                                                   killAtFinish(false), pingpong(false) {}
+        explicit SpriteAnimation(SpriteAnimData animData) : animData(std::move(animData)), frameIndex(0),
+                                                            reverse(false),
+                                                            time(0), loop(false),
+                                                            state(SpriteAnimationState::Start),
+                                                            killAtFinish(false), pingpong(false),
+                                                            onFinish(nullptr) {}
+
+        ~SpriteAnimation() { onFinish = nullptr; }
 
         const ImageAsset KeyFrame() {
             return animData.keyFrames[frameIndex];
@@ -30,11 +35,11 @@ namespace Inanna {
             for (int i = 0; i < size; ++i) {
                 auto keyFrame = animData.keyFrames[i];
                 if (w < keyFrame.w) {
-                    w  = keyFrame.w;
+                    w = keyFrame.w;
                 }
 
                 if (h < keyFrame.h) {
-                    h  = keyFrame.h;
+                    h = keyFrame.h;
                 }
             }
 
@@ -47,8 +52,10 @@ namespace Inanna {
         float time;
         bool loop;
         bool pingpong;
-        SpriteAnimationState state;
+        int state;
         bool killAtFinish;
+
+        void *onFinish;
 
         REFLECT()
     };

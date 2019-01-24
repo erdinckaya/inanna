@@ -14,6 +14,7 @@
 #include "../SpriteAnimation/Systems/SpriteRenderSystem.h"
 #include "../Game/Systems/MoveCharacterSystem.h"
 #include "../Game/Systems/KeyInputSystem.h"
+#include "../Game/Command/Systems/InputCommandSystem.h"
 
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
@@ -51,6 +52,9 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
 
 
     spriteAnimationFactory.systems.add<KeyInputSystem>();
+    spriteAnimationFactory.systems.add<InputCommandSystem>();
+
+
     spriteAnimationFactory.systems.add<MoveCharacterSystem>();
     spriteAnimationFactory.systems.add<SpriteAnimationSystem>();
     spriteAnimationFactory.systems.add<SpritePositionSystem>();
@@ -87,6 +91,7 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
 
 
     spriteAnimationFactory.systems.update<KeyInputSystem>(dt);
+    spriteAnimationFactory.systems.update<InputCommandSystem>(dt);
     spriteAnimationFactory.systems.update<MoveCharacterSystem>(dt);
     spriteAnimationFactory.systems.update<SpriteAnimationSystem>(dt);
     spriteAnimationFactory.systems.update<SpritePositionSystem>(dt);
@@ -174,7 +179,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
         }
         case SDLK_n: {
             character = spriteAnimationFactory.CreateAnimation(AnimationData::KYO_IDLE);
-            character.assign<Character>();
+            character.assign<Character>("Kyo");
             break;
         }
         default:

@@ -1,0 +1,60 @@
+{"frames": [
+
+{
+	"filename": "Frame0.png",
+	"frame": {"x":0,"y":0,"w":130,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":206},
+	"sourceSize": {"w":130,"h":206},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame1.png",
+	"frame": {"x":130,"y":0,"w":182,"h":204},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":182,"h":204},
+	"sourceSize": {"w":182,"h":204},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame2.png",
+	"frame": {"x":312,"y":0,"w":130,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":206},
+	"sourceSize": {"w":130,"h":206},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame3.png",
+	"frame": {"x":442,"y":0,"w":118,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":206},
+	"sourceSize": {"w":118,"h":206},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "kyo_little_fist.png",
+	"format": "RGBA8888",
+	"size": {"w":560,"h":206},
+	"scale": "1",
+	"anims": [
+		{
+			"name": "kyo_little_fist",
+			"images": [
+				"Frame0",
+				"Frame1",
+				"Frame2",
+				"Frame3"
+			],
+			"speed": 13
+		}
+	],
+	"smartupdate": "$TexturePacker:SmartUpdate:d6d8481c06b4f099d9e897a74cf6ad2b:8f7d8c840c1b5170f916147c85388d0a:d473bd8b0734ddea9de73ac3473387b2$"
+}
+}

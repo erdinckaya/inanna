@@ -1,3 +1,7 @@
+#include <utility>
+
+#include <utility>
+
 //
 // Created by misterdortnal on 23.01.2019.
 //
@@ -7,7 +11,9 @@
 
 namespace Inanna {
     struct Character {
+        explicit Character(std::string id) : id(std::move(id)) {}
 
+        const std::string id;
     };
 }
 

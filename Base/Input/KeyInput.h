@@ -14,6 +14,8 @@ namespace Inanna {
 
     class KeyInput {
     public:
+        KeyInput();
+
         void BeginNewFrame();
 
         void KeyUpEvent(SDL_Event &event);
@@ -24,6 +26,8 @@ namespace Inanna {
 
         bool WasKeyReleased(SDL_Scancode key);
 
+        bool IsKeyHit(SDL_Scancode key);
+
         bool IsKeyHeld(SDL_Scancode key);
 
         void PrintKeys();
@@ -32,8 +36,11 @@ namespace Inanna {
 
     private:
         std::map<SDL_Scancode, bool> heldKeys;
+        std::map<SDL_Scancode, int> firstDownKeys;
         std::map<SDL_Scancode, bool> pressedKeys;
         std::map<SDL_Scancode, bool> releasedKeys;
+
+        const int KEY_DOWN_LIMIT;
     };
 }
 

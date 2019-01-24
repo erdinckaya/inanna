@@ -34,7 +34,7 @@ REFLECT_STRUCT_BEGIN(Inanna::SpriteAnimation)
                     REFLECT_STRUCT_MEMBER(pingpong)
                     REFLECT_STRUCT_MEMBER(killAtFinish)
                     REFLECT_STRUCT_MEMBER(reverse)
-
+                    REFLECT_STRUCT_MEMBER(state)
 REFLECT_STRUCT_END()
 
 

@@ -12,55 +12,51 @@
 #include "../Components/Character.h"
 #include "../Components/MoveCharacter.h"
 #include "../../Input/KeyInput.h"
+#include "../Events/KeyHitEvent.h"
+#include "../Command/Components/InputCommand.h"
+
 
 namespace Inanna {
-    struct KeyInputSystem : public entityx::System<KeyInputSystem> {
+    struct KeyInputSystem : public entityx::System<KeyInputSystem>, public ex::Receiver<KeyInputSystem> {
+
+        void configure(ex::EventManager &events) override {
+            events.subscribe<KeyHitEvent>(*this);
+        }
+
         explicit KeyInputSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character>([this](entityx::Entity entity, Character &character) {
+
+            entities.each<Character>([&](entityx::Entity entity, Character &character) {
                 if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT)) {
-                    entity.replace<MoveCharacter>(Vecf(-1, 0), 5);
-
-                    if (entity.component<SpriteAnimation>()->animData != AnimationData::KYO_MOVE_BACK) {
-                        entity.remove<SpriteAnimation>();
-                        auto anim = entity.assign<SpriteAnimation>(AnimationData::KYO_MOVE_BACK);
-                        anim->loop = true;
-                    } else {
-                        entity.component<SpriteAnimation>()->loop = true;
-                    }
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_LEFT);
+                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_RIGHT);
                 }
 
-                if (KeyInput::Instance.WasKeyReleased(SDL_SCANCODE_LEFT)) {
-                    if (entity.has_component<MoveCharacter>()) {
-                        entity.remove<MoveCharacter>();
-
-                        entity.remove<SpriteAnimation>();
-                        entity.assign<SpriteAnimation>(AnimationData::KYO_IDLE);
-                    }
+                if (KeyInput::Instance.WasKeyPressed(SDL_SCANCODE_LEFT)) {
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_LEFT, false);
+                } else if (KeyInput::Instance.WasKeyPressed(SDL_SCANCODE_RIGHT)) {
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_RIGHT, false);
                 }
 
-                if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
-                    entity.replace<MoveCharacter>(Vecf(1, 0), 5);
-                    if (entity.component<SpriteAnimation>()->animData != AnimationData::KYO_MOVE_FORWARD) {
-                        entity.remove<SpriteAnimation>();
-                        auto anim = entity.assign<SpriteAnimation>(AnimationData::KYO_MOVE_FORWARD);
-                        anim->loop = true;
-                    } else {
-                        entity.component<SpriteAnimation>()->loop = true;
-                    }
-                }
-
-                if (KeyInput::Instance.WasKeyReleased(SDL_SCANCODE_RIGHT)) {
-                    if (entity.has_component<MoveCharacter>()) {
-                        entity.remove<MoveCharacter>();
-
-                        entity.remove<SpriteAnimation>();
-                        entity.assign<SpriteAnimation>(AnimationData::KYO_IDLE);
-                    }
+                if (hitKeys[SDL_SCANCODE_F]) {
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_F);
+                } else if (hitKeys[SDL_SCANCODE_K]) {
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_K);
                 }
             });
+
+            hitKeys.clear();
         }
+
+
+        void receive(const KeyHitEvent &keyHitEvent) {
+            hitKeys[keyHitEvent.key] = true;
+        }
+
+    private:
+        std::map<SDL_Scancode, bool> hitKeys;
     };
 }
 

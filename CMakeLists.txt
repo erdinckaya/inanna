@@ -40,8 +40,8 @@ add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Assets/An
         Server/MyMessage.h Base/World.cpp Base/World.h Base/UI/WindowManager.cpp Base/UI/WindowManager.h
         Base/Graphics/Graphics.cpp Base/Graphics/Graphics.h Base/Graphics/SDL.cpp Base/Graphics/SDL.h
         Base/Graphics/SDLWindow.cpp Base/Graphics/SDLWindow.h Base/Graphics/SDLContext.cpp Base/Graphics/SDLContext.h
-        Base/Graphics/SDLSurface.cpp Base/Graphics/SDLSurface.h Base/Test/GraphicsTest.h Base/Time/Time.cpp
-        Base/Time/Time.h Base/Util/Math/Vec2.h Base/Util/Math/Rect.h Base/UI/Systems/RenderSystem.h
+        Base/Graphics/SDLSurface.cpp Base/Graphics/SDLSurface.h Base/Test/GraphicsTest.h
+        Base/Util/Math/Vec2.h Base/Util/Math/Rect.h Base/UI/Systems/RenderSystem.h
         Base/UI/Components/Renderable.h Base/UI/Components/Scalable.h Base/UI/Systems/ScaleSystem.h
         Base/UI/Components/Position.h Base/UI/Systems/PositionSystem.h Base/UI/Components/Sizable.h
         Base/UI/Systems/SizeSystem.h Base/UI/Components/Rotation.h Base/UI/Systems/RotationSystem.h
@@ -65,7 +65,7 @@ add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Assets/An
         ThirdParty/MonitorX/3rdParty/ImGui/imgui_impl_sdl.cpp ThirdParty/MonitorX/3rdParty/ImGui/imgui_impl_sdl.h ThirdParty/MonitorX/3rdParty/ImGui/imgui_internal.h
         ThirdParty/MonitorX/3rdParty/ImGui/imgui_widgets.cpp ThirdParty/MonitorX/3rdParty/ImGui/imstb_rectpack.h ThirdParty/MonitorX/3rdParty/ImGui/imstb_textedit.h
         ThirdParty/MonitorX/3rdParty/ImGui/imstb_truetype.h ThirdParty/MonitorX/3rdParty/FlexibleReflection/Reflect.h ThirdParty/MonitorX/3rdParty/FlexibleReflection/Primitives.cpp
-        ThirdParty/MonitorX/MonitorX.h ThirdParty/MonitorX/MonitorX.cpp Base/MonitorX/MonitorComponents.cpp Base/SpriteAnimation/SpriteAnimationFactory.cpp Base/SpriteAnimation/SpriteAnimationFactory.h Base/SpriteAnimation/Components/SpriteAnimation.h Base/SpriteAnimation/Systems/SpriteAnimationSystem.h Base/SpriteAnimation/Components/SpriteAnimationState.h Base/SpriteAnimation/Systems/SpritePositionSystem.h Base/SpriteAnimation/Systems/SpriteRenderSystem.h Base/Game/Components/Character.h Base/Game/Components/MoveCharacter.h Base/Game/Systems/MoveCharacterSystem.h Base/Game/Systems/KeyInputSystem.h)
+        ThirdParty/MonitorX/MonitorX.h ThirdParty/MonitorX/MonitorX.cpp Base/MonitorX/MonitorComponents.cpp Base/SpriteAnimation/SpriteAnimationFactory.cpp Base/SpriteAnimation/SpriteAnimationFactory.h Base/SpriteAnimation/Components/SpriteAnimation.h Base/SpriteAnimation/Systems/SpriteAnimationSystem.h Base/SpriteAnimation/Components/SpriteAnimationState.h Base/SpriteAnimation/Systems/SpritePositionSystem.h Base/SpriteAnimation/Systems/SpriteRenderSystem.h Base/Game/Components/Character.h Base/Game/Components/MoveCharacter.h Base/Game/Systems/MoveCharacterSystem.h Base/Game/Systems/KeyInputSystem.h Base/Game/Events/KeyHitEvent.h Base/Game/Command/Components/InputCommand.h Base/Game/Command/Systems/InputCommandSystem.h Base/Util/SpriteMacro.h Base/SpriteAnimation/Components/Time.h Base/Game/Logic/MoveLogic.h Base/Game/Command/Components/InputCommand.cpp Base/Game/Command/Events/CommandExecutedEvent.h)
 
 
 target_link_libraries(Inanna ${SDL2_LIBRARY}
