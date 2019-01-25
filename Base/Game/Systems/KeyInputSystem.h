@@ -29,21 +29,21 @@ namespace Inanna {
 
             entities.each<Character>([&](entityx::Entity entity, Character &character) {
                 if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT)) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_LEFT);
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_LEFT, dt);
                 } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_RIGHT);
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_RIGHT, dt);
                 }
 
-                if (KeyInput::Instance.WasKeyPressed(SDL_SCANCODE_LEFT)) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_LEFT, false);
-                } else if (KeyInput::Instance.WasKeyPressed(SDL_SCANCODE_RIGHT)) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_RIGHT, false);
+                if (KeyInput::Instance.WasKeyReleased(SDL_SCANCODE_LEFT)) {
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_LEFT, dt, false);
+                } else if (KeyInput::Instance.WasKeyReleased(SDL_SCANCODE_RIGHT)) {
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_RIGHT, dt, false);
                 }
 
                 if (hitKeys[SDL_SCANCODE_F]) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_F);
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_F, dt);
                 } else if (hitKeys[SDL_SCANCODE_K]) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_K);
+                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_K, dt);
                 }
             });
 

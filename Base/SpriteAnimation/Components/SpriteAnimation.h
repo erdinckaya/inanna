@@ -10,6 +10,8 @@
 #include "../../../Assets/AnimationData.h"
 #include "SpriteAnimationState.h"
 #include "../../Util/Math/Vec2.h"
+#include "../../../ThirdParty/Signals/Signal.h"
+#include "../../Game/Command/Components/InputCommand.h"
 
 
 namespace Inanna {
@@ -19,10 +21,7 @@ namespace Inanna {
                                                             reverse(false),
                                                             time(0), loop(false),
                                                             state(SpriteAnimationState::Start),
-                                                            killAtFinish(false), pingpong(false),
-                                                            onFinish(nullptr) {}
-
-        ~SpriteAnimation() { onFinish = nullptr; }
+                                                            killAtFinish(false), pingpong(false) {}
 
         const ImageAsset KeyFrame() {
             return animData.keyFrames[frameIndex];
@@ -55,7 +54,8 @@ namespace Inanna {
         int state;
         bool killAtFinish;
 
-        void *onFinish;
+        Gallant::Delegate2<entityx::Entity, CommandId> onComplete;
+        CommandId commandId;
 
         REFLECT()
     };

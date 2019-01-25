@@ -17,8 +17,6 @@ namespace Inanna {
         Vecf direction;
         float time;
 
-        void* onFinish;
-
         REFLECT()
     };
 }

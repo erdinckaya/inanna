@@ -57,9 +57,12 @@ namespace Inanna {
                 bool isKilled = false;
                 if (animation.time >= speed) {
                     auto state = Next(&animation);
-                    if (state == SpriteAnimationState::Finished && animation.killAtFinish) {
-                        isKilled = true;
-                        entity.destroy();
+                    if (state == SpriteAnimationState::Finished) {
+                        animation.onComplete(entity, animation.commandId);
+                        if (animation.killAtFinish) {
+                            isKilled = true;
+                            entity.destroy();
+                        }
                     }
                 }
             });

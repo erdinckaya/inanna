@@ -13,6 +13,7 @@
 #include "../../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../../../Util/SpriteMacro.h"
 #include "../../Logic/MoveLogic.h"
+#include "../../Logic/HitLogic.h"
 
 #include "../../../../ThirdParty/boolinq.h"
 #include "../Events/CommandExecutedEvent.h"
@@ -29,24 +30,26 @@ namespace Inanna {
         }
 
         void Consume() {
-            auto cmd = queue.front();
-            queue.pop();
-            switch (cmd.key) {
-                case SDL_SCANCODE_RIGHT:
-                case SDL_SCANCODE_LEFT: {
-                    MoveLogic::Move(cmd);
-                    break;
+            if (!queue.empty()) {
+                auto cmd = queue.front();
+                queue.pop();
+                switch (cmd.key) {
+                    case SDL_SCANCODE_RIGHT:
+                    case SDL_SCANCODE_LEFT: {
+                        MoveLogic::Move(cmd);
+                        break;
+                    }
+                    case SDL_SCANCODE_F: {
+                        HitLogic::Hit(cmd);
+                        break;
+                    }
+                    case SDL_SCANCODE_K: {
+                        INANNA_REPLACE_SPRITE_ANIM_IF_NOT(cmd.character, AnimationData::KYO_LITTLE_KICK);
+                        break;
+                    }
+                    default:
+                        break;
                 }
-                case SDL_SCANCODE_F: {
-                    INANNA_REPLACE_SPRITE_ANIM_IF_NOT(cmd.character, AnimationData::KYO_LITTLE_FIST);
-                    break;
-                }
-                case SDL_SCANCODE_K: {
-                    INANNA_REPLACE_SPRITE_ANIM_IF_NOT(cmd.character, AnimationData::KYO_LITTLE_KICK);
-                    break;
-                }
-                default:
-                    break;
             }
         }
 
@@ -54,7 +57,7 @@ namespace Inanna {
             std::vector<InputCommand> list;
             auto hasInterrupt = false;
             entities.each<InputCommand>([this, &list, &hasInterrupt](entityx::Entity entity, InputCommand &cmd) {
-                // TODO ERDINC TEST! DELETE THIS LATER
+                // TODO: ERDINC TEST! DELETE THIS LATER
                 character = cmd.character;
                 if (cmd.interrupt) {
                     list.clear();
@@ -74,15 +77,24 @@ namespace Inanna {
             for (int i = 0; i < size; ++i) {
                 queue.emplace(commands[i]);
             }
-
             if (queueSize == 0 && !queue.empty()) {
                 Consume();
             }
         }
 
         void receive(const CommandExecutedEvent &event) {
+            while (!queue.empty()) {
+                if (queue.front().id != event.id) {
+                    queue.pop();
+                } else {
+                    queue.pop();
+                    break;
+                }
+            }
+
             Consume();
             if (queue.empty()) {
+                printf("Command QUEUE is empty!\n");
                 INANNA_REPLACE_SPRITE_ANIM_IF_NOT(character, AnimationData::KYO_IDLE);
             }
         }

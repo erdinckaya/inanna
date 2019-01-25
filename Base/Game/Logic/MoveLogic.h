@@ -7,10 +7,16 @@
 
 #include "../Command/Components/InputCommand.h"
 #include "../../../Assets/AnimationData.h"
+#include "../Command/Events/CommandExecutedEvent.h"
 
 namespace Inanna {
     struct MoveLogic {
-        static void Move(const InputCommand &cmd) {
+
+        static void MoveComplete(entityx::Entity character, CommandId id) {
+            WindowManager::spriteAnimationFactory.events.emit<CommandExecutedEvent>(character, id);
+        }
+
+        static void Move(InputCommand &cmd) {
             auto entity = cmd.character;
             auto animData = AnimationData::KYO_MOVE_BACK;
             int direction = -1;
@@ -26,11 +32,15 @@ namespace Inanna {
                     INANNA_REPLACE_SPRITE_ANIM(entity, animData);
                     auto anim = entity.component<SpriteAnimation>();
                     anim->loop = true;
+
                 } else {
                     entity.component<SpriteAnimation>()->loop = true;
                 }
             } else {
+
                 INANNA_REMOVE_COMPONENT(entity, MoveCharacter);
+//                cmd.onComplete.Connect(&MoveLogic::MoveComplete);
+                MoveComplete(cmd.character, cmd.id);
             }
         }
     };
