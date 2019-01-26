@@ -54,9 +54,6 @@ namespace Inanna {
         int state;
         bool killAtFinish;
 
-        Gallant::Delegate2<entityx::Entity, CommandId> onComplete;
-        CommandId commandId;
-
         REFLECT()
     };
 }

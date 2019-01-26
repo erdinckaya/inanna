@@ -123,7 +123,7 @@ namespace reflect {
 //--------------------------------------------------------
 
     struct TypeDescriptor_Bool : TypeDescriptor {
-        TypeDescriptor_Bool() : TypeDescriptor{"bool", sizeof(long)} {
+        TypeDescriptor_Bool() : TypeDescriptor{"bool", sizeof(bool)} {
         }
 
         void dump(const void *obj, int /* unused */) const override {

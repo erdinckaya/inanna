@@ -20,7 +20,8 @@ namespace Inanna {
     typedef unsigned long CommandId;
 
     struct InputCommand {
-        InputCommand(const entityx::Entity &character, const SDL_Scancode &key, const float time, const bool &down = true,
+        InputCommand(const entityx::Entity &character, const SDL_Scancode &key, const float time,
+                     const bool &down = true,
                      const bool &interrupt = false) :
                 character(character), key(key), down(down), interrupt(interrupt), time(time), id(Id++) {}
 
@@ -29,9 +30,6 @@ namespace Inanna {
         bool down;
         bool interrupt;
         const float time;
-
-        Gallant::Signal2<entityx::Entity, CommandId> onComplete;
-
         CommandId id;
 
     private:

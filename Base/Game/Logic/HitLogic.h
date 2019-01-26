@@ -20,6 +20,8 @@ namespace Inanna {
 
         static void Hit(InputCommand &cmd) {
             auto entity = cmd.character;
+            entity.replace<CommandLink>(cmd.character, cmd.id);
+            entity.component<CommandLink>()->onExecuted.Connect(&HitLogic::HitComplete);
             switch (cmd.key) {
                 case SDL_SCANCODE_F:{
                     bool isReplaced = false;
@@ -33,9 +35,6 @@ namespace Inanna {
                 }
                 default: break;
             }
-
-            entity.component<SpriteAnimation>()->commandId = cmd.id;
-            entity.component<SpriteAnimation>()->onComplete.Bind(&HitLogic::HitComplete);
         }
     };
 }

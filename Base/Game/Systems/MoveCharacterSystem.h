@@ -11,6 +11,8 @@
 #include "../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Components/Character.h"
 #include "../Components/MoveCharacter.h"
+#include "../../Util/SpriteMacro.h"
+#include "../../Game/Command/Components/CommandLink.h"
 
 namespace Inanna {
     struct MoveCharacterSystem : public entityx::System<MoveCharacterSystem> {
@@ -24,7 +26,8 @@ namespace Inanna {
                         bool isKilled = false;
                         if (move.time >= speed) {
                             move.time = 0;
-                            entity.remove<MoveCharacter>();
+                            INANNA_REMOVE_COMPONENT(entity, MoveCharacter);
+                            INANNA_COMMAND_EXECUTED(entity);
                         } else {
                             move.time += dt;
                         }

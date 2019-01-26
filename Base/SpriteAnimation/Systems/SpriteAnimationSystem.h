@@ -9,6 +9,7 @@
 #include "../Components/SpriteAnimation.h"
 #include "../../Graphics/Graphics.h"
 #include "../Components/Time.h"
+#include "../../Util/SpriteMacro.h"
 
 #include <queue>
 
@@ -58,7 +59,7 @@ namespace Inanna {
                 if (animation.time >= speed) {
                     auto state = Next(&animation);
                     if (state == SpriteAnimationState::Finished) {
-                        animation.onComplete(entity, animation.commandId);
+                        INANNA_COMMAND_EXECUTED(entity);
                         if (animation.killAtFinish) {
                             isKilled = true;
                             entity.destroy();

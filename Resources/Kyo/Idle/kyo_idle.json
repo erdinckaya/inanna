@@ -7,23 +7,95 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":206},
 	"sourceSize": {"w":118,"h":206}
+},
+{
+	"filename": "Frame1.png",
+	"frame": {"x":0,"y":206,"w":122,"h":208},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":208},
+	"sourceSize": {"w":122,"h":208}
+},
+{
+	"filename": "Frame2.png",
+	"frame": {"x":0,"y":414,"w":122,"h":208},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":208},
+	"sourceSize": {"w":122,"h":208}
+},
+{
+	"filename": "Frame3.png",
+	"frame": {"x":0,"y":622,"w":124,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":124,"h":206},
+	"sourceSize": {"w":124,"h":206}
+},
+{
+	"filename": "Frame4.png",
+	"frame": {"x":0,"y":828,"w":124,"h":204},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":124,"h":204},
+	"sourceSize": {"w":124,"h":204}
+},
+{
+	"filename": "Frame5.png",
+	"frame": {"x":0,"y":1032,"w":122,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":206},
+	"sourceSize": {"w":122,"h":206}
+},
+{
+	"filename": "Frame6.png",
+	"frame": {"x":0,"y":1238,"w":122,"h":208},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":208},
+	"sourceSize": {"w":122,"h":208}
+},
+{
+	"filename": "Frame7.png",
+	"frame": {"x":0,"y":1446,"w":122,"h":208},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":208},
+	"sourceSize": {"w":122,"h":208}
+},
+{
+	"filename": "Frame8.png",
+	"frame": {"x":0,"y":1654,"w":120,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":206},
+	"sourceSize": {"w":120,"h":206}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "kyo_idle.png",
 	"format": "RGBA8888",
-	"size": {"w":118,"h":206},
+	"size": {"w":124,"h":1860},
 	"scale": "1",
 	"anims": [
 		{
 			"name": "kyo_idle",
 			"images": [
-				"Frame0"
+				"Frame0",
+				"Frame1",
+				"Frame2",
+				"Frame3",
+				"Frame4",
+				"Frame5",
+				"Frame6",
+				"Frame7",
+				"Frame8"
 			],
-			"speed": 13
+			"speed": 8
 		}
 	],
-	"smartupdate": "$TexturePacker:SmartUpdate:b9589e9a1d5d87b5d0c4642e952dc38f:ae39dbe3f6f21cdc3dd51cafa57e2b30:4cd6737ff4eab775d5743b4a33a2e219$"
+	"smartupdate": "$TexturePacker:SmartUpdate:10b40f52ad8f27ceea45083d0a6fdffd:9bb730a0101db8c91dc0ba59b5e7cbd2:4cd6737ff4eab775d5743b4a33a2e219$"
 }
 }

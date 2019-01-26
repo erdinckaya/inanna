@@ -18,6 +18,8 @@
 #include "../../../../ThirdParty/boolinq.h"
 #include "../Events/CommandExecutedEvent.h"
 
+#include "../Components/CommandLink.h"
+
 using namespace boolinq;
 
 namespace Inanna {
@@ -32,7 +34,6 @@ namespace Inanna {
         void Consume() {
             if (!queue.empty()) {
                 auto cmd = queue.front();
-                queue.pop();
                 switch (cmd.key) {
                     case SDL_SCANCODE_RIGHT:
                     case SDL_SCANCODE_LEFT: {
@@ -57,8 +58,6 @@ namespace Inanna {
             std::vector<InputCommand> list;
             auto hasInterrupt = false;
             entities.each<InputCommand>([this, &list, &hasInterrupt](entityx::Entity entity, InputCommand &cmd) {
-                // TODO: ERDINC TEST! DELETE THIS LATER
-                character = cmd.character;
                 if (cmd.interrupt) {
                     list.clear();
                     hasInterrupt = true;
@@ -71,22 +70,31 @@ namespace Inanna {
                 Clear();
             }
 
-            auto commands = from(list).orderBy([](const InputCommand &cmd) { return cmd.id; }).toVector();
-            auto size = commands.size();
             auto queueSize = queue.size();
-            for (int i = 0; i < size; ++i) {
-                queue.emplace(commands[i]);
+            if (!list.empty()) {
+                auto commands = from(list).orderBy([](const InputCommand &cmd) { return cmd.id; }).toVector();
+                auto size = commands.size();
+                for (int i = 0; i < size; ++i) {
+                    queue.emplace(commands[i]);
+                    if (commands[i].key == SDL_SCANCODE_RIGHT && !commands[i].down ) {
+                        printf("Count is %lu\n", queue.size());
+                    }
+                }
             }
+
             if (queueSize == 0 && !queue.empty()) {
                 Consume();
             }
         }
 
         void receive(const CommandExecutedEvent &event) {
+            entityx::Entity character = event.character;
             while (!queue.empty()) {
                 if (queue.front().id != event.id) {
+                    printf("Removed %lu\n", queue.front().id);
                     queue.pop();
                 } else {
+                    printf("Removed %lu\n", queue.front().id);
                     queue.pop();
                     break;
                 }
@@ -94,8 +102,8 @@ namespace Inanna {
 
             Consume();
             if (queue.empty()) {
-                printf("Command QUEUE is empty!\n");
                 INANNA_REPLACE_SPRITE_ANIM_IF_NOT(character, AnimationData::KYO_IDLE);
+                character.component<SpriteAnimation>()->loop = true;
             }
         }
 
@@ -105,7 +113,6 @@ namespace Inanna {
         }
 
         std::queue<InputCommand> queue;
-        entityx::Entity character;
     };
 }
 
