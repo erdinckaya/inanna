@@ -4,8 +4,8 @@
 // Created by Erdınc Kaya on 2019-01-24.
 //
 
-#ifndef INANNA_MOVECOMMAND_H
-#define INANNA_MOVECOMMAND_H
+#ifndef INANNA_INPUTCOMMAND_H
+#define INANNA_INPUTCOMMAND_H
 
 #include <string>
 #include <SDL_scancode.h>
@@ -20,7 +20,7 @@ namespace Inanna {
     typedef unsigned long CommandId;
 
     struct InputCommand {
-        InputCommand(const entityx::Entity &character, const SDL_Scancode &key, const float time,
+        InputCommand(const entityx::Entity &character, const SDL_Scancode &key, const Uint32 time,
                      const bool &down = true,
                      const bool &interrupt = false) :
                 character(character), key(key), down(down), interrupt(interrupt), time(time), id(Id++) {}
@@ -29,7 +29,7 @@ namespace Inanna {
         const SDL_Scancode key;
         bool down;
         bool interrupt;
-        const float time;
+        const Uint32 time;
         CommandId id;
 
     private:
@@ -40,4 +40,4 @@ namespace Inanna {
     };
 }
 
-#endif //INANNA_MOVECOMMAND_H
+#endif //INANNA_INPUTCOMMAND_H

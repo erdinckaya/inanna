@@ -26,8 +26,6 @@ namespace Inanna {
                         bool isKilled = false;
                         if (move.time >= speed) {
                             move.time = 0;
-                            INANNA_REMOVE_COMPONENT(entity, MoveCharacter);
-                            INANNA_COMMAND_EXECUTED(entity);
                         } else {
                             move.time += dt;
                         }

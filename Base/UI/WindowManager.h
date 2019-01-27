@@ -46,15 +46,12 @@ namespace Inanna {
 
         static UIFactory uiFactory;
         static SpriteAnimationFactory spriteAnimationFactory;
+
     private:
         float width;
         float height;
 
         Graphics *graphics;
-
-#ifdef WINDOW_MANAGER_TEST
-        entityx::Entity character;
-#endif
     };
 }
 

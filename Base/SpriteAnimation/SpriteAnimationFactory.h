@@ -14,6 +14,11 @@ namespace Inanna {
         explicit SpriteAnimationFactory() = default;
 
         entityx::Entity CreateAnimation(const SpriteAnimData &animation);
+
+
+#ifdef WINDOW_MANAGER_TEST
+        entityx::Entity character;
+#endif
     };
 }
 

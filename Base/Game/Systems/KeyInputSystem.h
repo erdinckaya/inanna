@@ -15,6 +15,8 @@
 #include "../Command/Components/InputCommand.h"
 #include "../Components/UserKey.h"
 #include "../../../ThirdParty/boolinq.h"
+#include "../Components/UserKeyContainer.h"
+#include "../Command/Components/MoveCommand.h"
 
 using namespace boolinq;
 
@@ -23,10 +25,54 @@ namespace Inanna {
 
         explicit KeyInputSystem() = default;
 
+        void ClearTimeoutInputs(UserKeyContainer *container) {
+            unsigned long size = container->buffer.size();
+            auto limit = container->buffer[container->buffer.size() - 1].time - 2000;
+            int index = 0;
+            for (int i = 0; i < size; ++i) {
+                if (container->buffer[i].time <= limit) {
+                    index++;
+                }
+            }
+
+            if (index != 0) {
+                container->buffer.erase(container->buffer.begin(), container->buffer.begin() + index);
+            }
+        }
+
+        void FindKeyPatterns(entityx::EntityManager &entities, entityx::Entity entity, UserKeyContainer *container) {
+            if (container == nullptr) {
+                return;
+            }
+            ClearTimeoutInputs(container);
+
+            for (auto &userKey : container->buffer) {
+                switch (userKey.key) {
+                    case SDL_SCANCODE_LEFT:
+                    case SDL_SCANCODE_RIGHT: {
+                        entities.create().assign<MoveCommand>(entity, userKey);
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
+        }
+
+        void CreateCommands(entityx::EntityManager &entities, const std::vector<UserKey> &keys) {
+            if (!keys.empty()) {
+                UserKeyContainer *container = WindowManager::spriteAnimationFactory.character.component<UserKeyContainer>().get();
+                for (auto key : keys) {
+                    container->buffer.push_back(key);
+                }
+                FindKeyPatterns(entities, WindowManager::spriteAnimationFactory.character, container);
+            }
+        }
+
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
 
             std::vector<UserKey> keys;
-            entities.each<Character, UserKey>([&keys](entityx::Entity entity, Character &character, UserKey &userKey) {
+            entities.each<UserKey>([&keys](entityx::Entity entity, UserKey &userKey) {
                 keys.emplace_back(userKey);
                 entity.destroy();
 
@@ -49,8 +95,8 @@ namespace Inanna {
 //                }
             });
 
-            keys = from(keys).orderBy([](const UserKey &key) {return key.time;}).toVector();
-
+            keys = from(keys).orderBy([](const UserKey &key) { return key.time; }).toVector();
+            CreateCommands(entities, keys);
         }
     };
 }

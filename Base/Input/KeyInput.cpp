@@ -20,20 +20,12 @@ void Inanna::KeyInput::KeyDownEvent(SDL_Event &event) {
     heldKeys[event.key.keysym.scancode] = true;
 
     firstDownKeys[event.key.keysym.scancode]++;
-    bool isHit = false;
     if (firstDownKeys[event.key.keysym.scancode] >= KEY_DOWN_LIMIT) {
         firstDownKeys[event.key.keysym.scancode] = KEY_DOWN_LIMIT;
     } else if (firstDownKeys[event.key.keysym.scancode] == 1) {
-        isHit = true;
         WindowManager::spriteAnimationFactory.entities.create().assign<UserKey>(event.key.keysym.scancode,
                                                                                 event.key.timestamp,
-                                                                                event.key.type == 0, isHit);
-    }
-
-    if (!isHit) {
-        WindowManager::spriteAnimationFactory.entities.create().assign<UserKey>(event.key.keysym.scancode,
-                                                                                event.key.timestamp,
-                                                                                event.key.type == 0, isHit);
+                                                                                true);
     }
 }
 
@@ -44,7 +36,7 @@ void Inanna::KeyInput::KeyUpEvent(SDL_Event &event) {
 
     WindowManager::spriteAnimationFactory.entities.create().assign<UserKey>(event.key.keysym.scancode,
                                                                             event.key.timestamp,
-                                                                            event.key.type == 0, true);
+                                                                            false);
 }
 
 bool Inanna::KeyInput::WasKeyPressed(SDL_Scancode key) {

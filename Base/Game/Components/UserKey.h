@@ -9,13 +9,17 @@
 
 namespace Inanna {
     struct UserKey {
-        explicit UserKey(SDL_Scancode key, Uint32 time, bool down, bool hit) : key(key), time(time), down(down),
-                                                                               hit(hit) {}
+        explicit UserKey() : key(SDL_SCANCODE_UNKNOWN), time(0), down(false) {}
+
+        explicit UserKey(SDL_Scancode key, Uint32 time, bool down) : key(key), time(time), down(down) {}
 
         SDL_Scancode key;
         Uint32 time;
         bool down;
-        bool hit;
+
+        std::string ToString() {
+            return std::to_string(key) + ", " + std::to_string(time) + ", " + std::to_string(down);
+        }
     };
 }
 

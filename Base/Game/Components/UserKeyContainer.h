@@ -5,14 +5,14 @@
 #ifndef INANNA_USERKEYCONTAINER_H
 #define INANNA_USERKEYCONTAINER_H
 
-#include "../../Util/CircularBuffer.h"
+#include <vector>
 #include "UserKey.h"
 
 namespace Inanna {
     struct UserKeyContainer {
-        explicit UserKeyContainer() : buffer(30) {}
+        explicit UserKeyContainer() = default;
 
-        CircularBuffer<UserKey> buffer;
+        std::vector<UserKey> buffer;
     };
 }
 

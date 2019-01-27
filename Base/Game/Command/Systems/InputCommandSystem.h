@@ -76,9 +76,6 @@ namespace Inanna {
                 auto size = commands.size();
                 for (int i = 0; i < size; ++i) {
                     queue.emplace(commands[i]);
-                    if (commands[i].key == SDL_SCANCODE_RIGHT && !commands[i].down ) {
-                        printf("Count is %lu\n", queue.size());
-                    }
                 }
             }
 
@@ -91,10 +88,8 @@ namespace Inanna {
             entityx::Entity character = event.character;
             while (!queue.empty()) {
                 if (queue.front().id != event.id) {
-                    printf("Removed %lu\n", queue.front().id);
                     queue.pop();
                 } else {
-                    printf("Removed %lu\n", queue.front().id);
                     queue.pop();
                     break;
                 }

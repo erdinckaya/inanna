@@ -31,6 +31,13 @@ namespace Inanna {
             return _size;
         }
 
+        void clear() const {
+            begin_index = 0;
+            end_index = 0;
+            _size = 0;
+            buffer.clear();
+        }
+
         void push_front(C c) {
             begin_index = decrease(begin_index);
             buffer[begin_index] = c;
