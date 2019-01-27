@@ -73,10 +73,10 @@ add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Assets/An
         Base/SpriteAnimation/Components/SpriteAnimation.h Base/SpriteAnimation/Systems/SpriteAnimationSystem.h
         Base/SpriteAnimation/Components/SpriteAnimationState.h Base/SpriteAnimation/Systems/SpritePositionSystem.h
         Base/SpriteAnimation/Systems/SpriteRenderSystem.h Base/Game/Components/Character.h Base/Game/Components/MoveCharacter.h
-        Base/Game/Systems/MoveCharacterSystem.h Base/Game/Systems/KeyInputSystem.h Base/Game/Events/KeyHitEvent.h
+        Base/Game/Systems/MoveCharacterSystem.h Base/Game/Systems/KeyInputSystem.h
         Base/Game/Command/Components/InputCommand.h Base/Game/Command/Systems/InputCommandSystem.h Base/Util/SpriteMacro.h
         Base/SpriteAnimation/Components/Time.h Base/Game/Logic/MoveLogic.h Base/Game/Command/Components/InputCommand.cpp
-        Base/Game/Command/Events/CommandExecutedEvent.h ThirdParty/Signals/Delegate.h ThirdParty/Signals/Signal.h Base/Game/Logic/HitLogic.h Base/Game/Command/Components/CommandLink.h)
+        Base/Game/Command/Events/CommandExecutedEvent.h ThirdParty/Signals/Delegate.h ThirdParty/Signals/Signal.h Base/Game/Logic/HitLogic.h Base/Game/Command/Components/CommandLink.h Base/Util/CircularBuffer.h Base/Game/Util/GameKey.h Base/Game/Components/UserKey.h Base/Game/Components/UserKeyContainer.h)
 
 
 target_link_libraries(Inanna ${SDL2_LIBRARY}

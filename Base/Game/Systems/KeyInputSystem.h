@@ -12,51 +12,46 @@
 #include "../Components/Character.h"
 #include "../Components/MoveCharacter.h"
 #include "../../Input/KeyInput.h"
-#include "../Events/KeyHitEvent.h"
 #include "../Command/Components/InputCommand.h"
+#include "../Components/UserKey.h"
+#include "../../../ThirdParty/boolinq.h"
 
+using namespace boolinq;
 
 namespace Inanna {
-    struct KeyInputSystem : public entityx::System<KeyInputSystem>, public ex::Receiver<KeyInputSystem> {
-
-        void configure(ex::EventManager &events) override {
-            events.subscribe<KeyHitEvent>(*this);
-        }
+    struct KeyInputSystem : public entityx::System<KeyInputSystem> {
 
         explicit KeyInputSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
 
-            entities.each<Character>([&](entityx::Entity entity, Character &character) {
-                if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT)) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_LEFT, dt);
-                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_RIGHT, dt);
-                }
+            std::vector<UserKey> keys;
+            entities.each<Character, UserKey>([&keys](entityx::Entity entity, Character &character, UserKey &userKey) {
+                keys.emplace_back(userKey);
+                entity.destroy();
 
-                if (KeyInput::Instance.WasKeyReleased(SDL_SCANCODE_LEFT)) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_LEFT, dt, false);
-                } else if (KeyInput::Instance.WasKeyReleased(SDL_SCANCODE_RIGHT)) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_RIGHT, dt, false);
-                }
+//                if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT)) {
+//                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_LEFT, dt);
+//                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
+//                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_RIGHT, dt);
+//                }
+//
+//                if (KeyInput::Instance.WasKeyReleased(SDL_SCANCODE_LEFT)) {
+//                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_LEFT, dt, false);
+//                } else if (KeyInput::Instance.WasKeyReleased(SDL_SCANCODE_RIGHT)) {
+//                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_RIGHT, dt, false);
+//                }
 
-                if (hitKeys[SDL_SCANCODE_F]) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_F, dt);
-                } else if (hitKeys[SDL_SCANCODE_K]) {
-                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_K, dt);
-                }
+//                if (hitKeys[SDL_SCANCODE_F]) {
+//                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_F, dt);
+//                } else if (hitKeys[SDL_SCANCODE_K]) {
+//                    entities.create().assign<InputCommand>(entity, SDL_SCANCODE_K, dt);
+//                }
             });
 
-            hitKeys.clear();
+            keys = from(keys).orderBy([](const UserKey &key) {return key.time;}).toVector();
+
         }
-
-
-        void receive(const KeyHitEvent &keyHitEvent) {
-            hitKeys[keyHitEvent.key] = true;
-        }
-
-    private:
-        std::map<SDL_Scancode, bool> hitKeys;
     };
 }
 
