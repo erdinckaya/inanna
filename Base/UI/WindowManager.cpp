@@ -22,7 +22,6 @@
 
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
-Inanna::SpriteAnimationFactory Inanna::WindowManager::spriteAnimationFactory;
 
 Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphics)
         : width(width), height(height), graphics(graphics) {
@@ -53,20 +52,6 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
 
 
     uiFactory.systems.configure();
-
-
-    spriteAnimationFactory.systems.add<KeyInputSystem>();
-
-    spriteAnimationFactory.systems.add<HitCommandSystem>();
-    spriteAnimationFactory.systems.add<MoveCommandSystem>();
-
-
-    spriteAnimationFactory.systems.add<HitSystem>();
-    spriteAnimationFactory.systems.add<MoveCharacterSystem>();
-    spriteAnimationFactory.systems.add<SpriteAnimationSystem>();
-    spriteAnimationFactory.systems.add<SpritePositionSystem>();
-    spriteAnimationFactory.systems.add<SpriteRenderSystem>(graphics);
-    spriteAnimationFactory.systems.configure();
 }
 
 void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
@@ -95,17 +80,6 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
 
     uiFactory.systems.update<RenderFrameSystem>(dt);
     uiFactory.systems.update<RenderSystem>(dt);
-
-
-    spriteAnimationFactory.systems.update<KeyInputSystem>(dt);
-    spriteAnimationFactory.systems.update<HitCommandSystem>(dt);
-    spriteAnimationFactory.systems.update<MoveCommandSystem>(dt);
-
-    spriteAnimationFactory.systems.update<HitSystem>(dt);
-    spriteAnimationFactory.systems.update<MoveCharacterSystem>(dt);
-    spriteAnimationFactory.systems.update<SpriteAnimationSystem>(dt);
-    spriteAnimationFactory.systems.update<SpritePositionSystem>(dt);
-    spriteAnimationFactory.systems.update<SpriteRenderSystem>(dt);
 }
 
 void Inanna::WindowManager::Test(SDL_Keycode code) {
@@ -188,10 +162,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
             break;
         }
         case SDLK_n: {
-            spriteAnimationFactory.character = spriteAnimationFactory.CreateAnimation(AnimationData::KYO_IDLE);
-            spriteAnimationFactory.character.assign<Character>("Kyo");
-            spriteAnimationFactory.character.assign<UserKeyHistory>();
-            spriteAnimationFactory.character.assign<MoveState>();
+
             break;
         }
         default:

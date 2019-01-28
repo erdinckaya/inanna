@@ -11,6 +11,7 @@
 #include "UI/WindowManager.h"
 #include "Input/KeyInput.h"
 #include "Input/MouseInput.h"
+#include "Game/Game.h"
 
 
 namespace Inanna {
@@ -40,8 +41,7 @@ namespace Inanna {
 
         std::unique_ptr<Graphics> graphics;
         std::unique_ptr<WindowManager> windowManager;
-
-
+        std::unique_ptr<Game> game;
 
 
         void BringDoom();

@@ -17,6 +17,8 @@
 #include "../Components/UserKeyHistory.h"
 #include "../Command/Components/MoveCommand.h"
 #include "../Command/Components/HitCommand.h"
+#include "../Game.h"
+
 
 using namespace boolinq;
 
@@ -64,7 +66,7 @@ namespace Inanna {
 
             keys = from(keys).orderBy([](const UserKey &key) { return key.time; }).toVector();
 
-            auto entity = WindowManager::spriteAnimationFactory.character;
+            auto entity = Game::Instance->Player;
 
             if (entity.valid()) {
 

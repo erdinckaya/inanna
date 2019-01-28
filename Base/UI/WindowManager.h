@@ -45,7 +45,6 @@ namespace Inanna {
 
 
         static UIFactory uiFactory;
-        static SpriteAnimationFactory spriteAnimationFactory;
 
     private:
         float width;

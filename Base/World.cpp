@@ -38,6 +38,9 @@ Inanna::World::World() : isExist(true) {
     graphics = std::make_unique<Graphics>(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
     SDL_GL_SetSwapInterval(1);
     windowManager = std::make_unique<WindowManager>(SCREEN_WIDTH, SCREEN_HEIGHT, graphics.get());
+    game = std::make_unique<Game>(graphics.get());
+    Game::Instance = game.get();
+    graphics->Init();
 }
 
 Inanna::World::~World() {
@@ -59,6 +62,8 @@ void Inanna::World::Start() {
         }
 
         windowManager->Update(1000/*ms*/ / FPS);
+        game->Update(1000/*ms*/ / FPS);
+
         OnRender(FPS);
         const auto ms_per_frame = static_cast<const Uint32>(1000/*ms*/ / FPS);
         const Uint32 elapsed_time_ms = SDL_GetTicks() - start_time_ms;
@@ -122,6 +127,7 @@ void Inanna::World::BringDoom() {
 
 void Inanna::World::OnTest(SDL_Keycode code) {
     windowManager->Test(code);
+    game->Test(code);
 }
 
 void Inanna::World::OnRender(float dt) {

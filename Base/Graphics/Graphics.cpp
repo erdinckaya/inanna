@@ -7,6 +7,7 @@
 #include "../UI/WindowManager.h"
 #include "../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Game/Components/MoveCharacter.h"
+#include "../World.h"
 
 
 Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags),
@@ -28,10 +29,6 @@ Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFl
 
     glClear(GL_COLOR_BUFFER_BIT);
     window.Show();
-#ifdef MONITORX_DEBUG
-    monitorX = std::make_unique<monitorx::MonitorX>(&WindowManager::spriteAnimationFactory, window, context.Get());
-    monitorX->Init();
-#endif
 }
 
 
@@ -118,5 +115,12 @@ void Inanna::Graphics::Update(float dt) {
 void Inanna::Graphics::PassEvent(SDL_Event *event) {
 #ifdef MONITORX_DEBUG
     monitorX->ProcessEvent(event);
+#endif
+}
+
+void Inanna::Graphics::Init() {
+#ifdef MONITORX_DEBUG
+    monitorX = std::make_unique<monitorx::MonitorX>(Game::Instance, window, context.Get());
+    monitorX->Init();
 #endif
 }

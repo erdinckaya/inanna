@@ -8,6 +8,7 @@
 #include <entityx/System.h>
 #include "../../UI/Components/Position.h"
 #include "../Components/SpriteAnimation.h"
+#include "../../World.h"
 
 namespace Inanna {
     // Pivots are bottom left for anims
