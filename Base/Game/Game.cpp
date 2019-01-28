@@ -43,7 +43,6 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
 }
 
 
-
 void Inanna::Game::Test(SDL_Keycode code) {
 #ifdef WINDOW_MANAGER_TEST
     switch (code) {

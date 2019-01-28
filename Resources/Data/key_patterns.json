@@ -1,14 +1,14 @@
 {
-  "key_code": {
-    "Back": 0,
-    "Up": 1,
-    "Front": 2,
-    "Down": 3,
-    "LittleFist": 4,
-    "LittleKick": 5,
-    "BigFist": 6,
-    "BigKick": 7
-  },
+  "key_code": [
+    "Back",
+    "Up",
+    "Front",
+    "Down",
+    "LittleFist",
+    "LittleKick",
+    "BigFist",
+    "BigKick"
+  ],
   "moves": [
     {
       "id": "jump_back",

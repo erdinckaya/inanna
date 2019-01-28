@@ -52,8 +52,6 @@ namespace Inanna {
 
             UserKeyHistory* history = entity.component<UserKeyHistory>().get();
             ClearTimeoutKeys(history);
-
-
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {

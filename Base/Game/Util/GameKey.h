@@ -6,18 +6,17 @@
 #define INANNA_GAMEKEY_H
 
 namespace Inanna {
-    enum Direction {
-        Left,
-        Right,
-        Down,
-        Up
-    };
-
     enum GameKey {
-        Walk,
-        Run,
-        JumpLittle,
-        JumpLonger,
+        Back_GK,
+        Up_GK,
+        Front_GK,
+        Down_GK,
+        LittleFist_GK,
+        LittleKick_GK,
+        BigFist_GK,
+        BigKick_GK,
+
+        NumOfGameKey
     };
 }
 
