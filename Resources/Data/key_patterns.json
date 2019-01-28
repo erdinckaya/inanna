@@ -1,0 +1,100 @@
+{
+  "key_code": {
+    "Back": 0,
+    "Up": 1,
+    "Front": 2,
+    "Down": 3,
+    "LittleFist": 4,
+    "LittleKick": 5,
+    "BigFist": 6,
+    "BigKick": 7
+  },
+  "moves": [
+    {
+      "id": "jump_back",
+      "keys": [
+        "Back",
+        "Back"
+      ],
+      "duration": 500
+    },
+    {
+      "id": "run",
+      "keys": [
+        "Front",
+        "Front"
+      ],
+      "duration": 500
+    },
+    {
+      "id": "oryu",
+      "keys": [
+        "Front",
+        "Down",
+        "Front"
+      ],
+      "duration": 1500
+    },
+    {
+      "id": "adu",
+      "keys": [
+        "Back",
+        "Down"
+      ],
+      "duration": 1000
+    },
+    {
+      "id": "taktak",
+      "keys": [
+        "Front",
+        "Down",
+        "Back"
+      ],
+      "duration": 1000
+    },
+    {
+      "id": "adu-taktak",
+      "keys": [
+        "Back",
+        "Down",
+        "Front",
+        "Down",
+        "Back"
+      ],
+      "duration": 1500
+    },
+    {
+      "id": "taktak-adu",
+      "keys": [
+        "Front",
+        "Down",
+        "Back",
+        "Down",
+        "Front"
+      ],
+      "duration": 1500
+    },
+    {
+      "id": "iki-adu",
+      "keys": [
+        "Back",
+        "Down",
+        "Back",
+        "Down"
+      ],
+      "duration": 1500
+    },
+    {
+      "id": "iki-taktak",
+      "keys": [
+        "Front",
+        "Down",
+        "Back",
+        "Front",
+        "Down",
+        "Back"
+      ],
+      "duration": 1500
+    }
+  ]
+}

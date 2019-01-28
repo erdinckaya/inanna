@@ -11,7 +11,7 @@ if platform.system() == "Linux":
 
 output_path = os.path.join(join_path + "/Assets", "Resources.h")
 output_path_cpp = os.path.join(join_path + "/Assets", "Resources.cpp")
-atlas_path = os.path.join(join_path, "Resources")
+atlas_path = os.path.join(join_path, "Resources/Assets")
 
 
 class Resource:

@@ -24,7 +24,8 @@ namespace Inanna {
 
         ~Graphics();
 
-        void DrawTexture(ImageAsset image, Rectf clip, Rectf destination, float angle, Vecf scale);
+        void DrawTexture(ImageAsset image, Rectf clip, Rectf destination, float angle, Vecf scale, bool flipY = false,
+                         bool flipX = false);
 
         void Update(float dt);
 

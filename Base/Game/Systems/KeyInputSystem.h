@@ -25,6 +25,35 @@ namespace Inanna {
 
         explicit KeyInputSystem() = default;
 
+
+        void ClearTimeoutKeys(UserKeyHistory *history) {
+            const int size = static_cast<const int>(history->buffer.size());
+            const Uint32 TwoSeconds = 2000;
+            const Uint32 now = SDL_GetTicks();
+            const Uint32 limit = now - TwoSeconds;
+            int index = 0;
+            for (int i = 0; i < size; ++i) {
+                if (history->buffer[i].time <= limit) {
+                    index++;
+                }
+            }
+
+            if (index > 0) {
+                history->buffer.erase(history->buffer.begin(), history->buffer.begin() + index);
+            }
+        }
+
+        void FindSpecialMoves(entityx::Entity entity, std::vector<UserKey> keys) {
+            for (auto &userKey : keys) {
+                entity.component<UserKeyHistory>()->buffer.push_back(userKey);
+            }
+
+            UserKeyHistory* history = entity.component<UserKeyHistory>().get();
+            ClearTimeoutKeys(history);
+
+
+        }
+
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
 
             std::vector<UserKey> keys;
@@ -38,6 +67,8 @@ namespace Inanna {
             auto entity = WindowManager::spriteAnimationFactory.character;
 
             if (entity.valid()) {
+
+                FindSpecialMoves(entity, keys);
 
                 for (auto &userKey : keys) {
                     bool validkKey = false;

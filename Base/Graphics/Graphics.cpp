@@ -47,7 +47,8 @@ void Inanna::Graphics::InitResources() {
     }
 }
 
-void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destination, float angle, Vecf scale) {
+void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destination, float angle, Vecf scale,
+                                   bool flipY, bool flipX) {
     glEnable(GL_TEXTURE_2D);
 
     SDLSurface &surface = *spriteSheets[image.parent];
@@ -65,6 +66,19 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
     float part_y = (image.y + clip.y) / surface.Height();
     float part_h = part_y + (clip.h / surface.Height());
 
+    if (flipY) {
+        float tmp = part_x;
+        part_x = part_w;
+        part_w = tmp;
+    }
+
+    if (flipX) {
+        float tmp = part_y;
+        part_y = part_h;
+        part_h = tmp;
+    }
+
+
     float center_x = destination.x + destination.w * 0.5f;
     float center_y = destination.y + destination.h * 0.5f;
 
@@ -72,6 +86,7 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
     glTranslatef(center_x, center_y, 0);
     glRotatef(angle, 0, 0, 1);
     glTranslatef(-center_x, -center_y, 0);
+
 
     glColor3f(1.0f, 1.0f, 1.0f);
     glBegin(GL_QUADS);
@@ -83,6 +98,7 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
     glVertex2f(destination.x + destination.w, destination.y);
     glTexCoord2f(part_x, part_y);
     glVertex2f(destination.x, destination.y);
+
     glEnd();
 // draw model
     glPopMatrix();

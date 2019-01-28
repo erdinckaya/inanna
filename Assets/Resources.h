@@ -64,7 +64,7 @@ struct Balls : public Sheet {
 public:
     Balls() :
 		IMAGE("image", 0.000000f, 0.000000f, 300.000000f, 300.000000f, 300.000000f, 300.000000f, "balls", "RGBA8888"),
-		Sheet("balls", "/Users/always/CLionProjects/inanna/Resources/balls.png")
+		Sheet("balls", "/Users/always/CLionProjects/inanna/Resources/Assets/balls.png")
 
     {}
 
@@ -85,7 +85,7 @@ public:
 		DEATH_003("Death_003", 786.000000f, 0.000000f, 263.000000f, 254.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
 		DEATH_004("Death_004", 1049.000000f, 0.000000f, 266.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
 		DEATH_005("Death_005", 1315.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888"),
-		Sheet("death", "/Users/always/CLionProjects/inanna/Resources/death.png")
+		Sheet("death", "/Users/always/CLionProjects/inanna/Resources/Assets/death.png")
 
     {}
 
@@ -108,7 +108,7 @@ public:
 		TENNIS_FIELD("tennis_field", 0.000000f, 0.000000f, 257.000000f, 427.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
 		TENNIS_FIELD1("tennis_field1", 0.000000f, 512.000000f, 600.000000f, 900.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
 		TENNIS_FIELD2("tennis_field2", 257.000000f, 0.000000f, 336.000000f, 512.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888"),
-		Sheet("fields", "/Users/always/CLionProjects/inanna/Resources/fields.png")
+		Sheet("fields", "/Users/always/CLionProjects/inanna/Resources/Assets/fields.png")
 
     {}
 
@@ -134,7 +134,7 @@ public:
 		RED("red", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
 		GUCHAN("guchan", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
 		YELLOW("yellow", 256.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888"),
-		Sheet("pieces", "/Users/always/CLionProjects/inanna/Resources/pieces.png")
+		Sheet("pieces", "/Users/always/CLionProjects/inanna/Resources/Assets/pieces.png")
 
     {}
 
@@ -161,7 +161,7 @@ public:
 		FRAME1("Frame1", 130.000000f, 0.000000f, 182.000000f, 204.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888"),
 		FRAME2("Frame2", 312.000000f, 0.000000f, 130.000000f, 206.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888"),
 		FRAME3("Frame3", 442.000000f, 0.000000f, 118.000000f, 206.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888"),
-		Sheet("kyo_little_fist", "/Users/always/CLionProjects/inanna/Resources/Kyo/Hit/kyo_little_fist.png")
+		Sheet("kyo_little_fist", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_little_fist.png")
 
     {}
 
@@ -187,7 +187,7 @@ public:
 		FRAME5("Frame5", 788.000000f, 0.000000f, 138.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
 		FRAME6("Frame6", 926.000000f, 0.000000f, 120.000000f, 206.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
 		FRAME7("Frame7", 1046.000000f, 0.000000f, 118.000000f, 206.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888"),
-		Sheet("kyo_little_kick", "/Users/always/CLionProjects/inanna/Resources/Kyo/Hit/kyo_little_kick.png")
+		Sheet("kyo_little_kick", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_little_kick.png")
 
     {}
 
@@ -218,7 +218,7 @@ public:
 		FRAME6("Frame6", 0.000000f, 1238.000000f, 122.000000f, 208.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888"),
 		FRAME7("Frame7", 0.000000f, 1446.000000f, 122.000000f, 208.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888"),
 		FRAME8("Frame8", 0.000000f, 1654.000000f, 120.000000f, 206.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888"),
-		Sheet("kyo_idle", "/Users/always/CLionProjects/inanna/Resources/Kyo/Idle/kyo_idle.png")
+		Sheet("kyo_idle", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Idle/kyo_idle.png")
 
     {}
 
@@ -247,7 +247,7 @@ public:
 		FRAME3("Frame3", 316.000000f, 0.000000f, 90.000000f, 230.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
 		FRAME4("Frame4", 406.000000f, 0.000000f, 88.000000f, 228.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
 		FRAME5("Frame5", 494.000000f, 0.000000f, 90.000000f, 220.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888"),
-		Sheet("kyo_move_back", "/Users/always/CLionProjects/inanna/Resources/Kyo/Move/kyo_move_back.png")
+		Sheet("kyo_move_back", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Move/kyo_move_back.png")
 
     {}
 
@@ -272,7 +272,7 @@ public:
 		FRAME2("Frame2", 188.000000f, 0.000000f, 94.000000f, 232.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
 		FRAME3("Frame3", 282.000000f, 0.000000f, 104.000000f, 224.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
 		FRAME4("Frame4", 386.000000f, 0.000000f, 120.000000f, 222.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888"),
-		Sheet("kyo_move_forward", "/Users/always/CLionProjects/inanna/Resources/Kyo/Move/kyo_move_forward.png")
+		Sheet("kyo_move_forward", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Move/kyo_move_forward.png")
 
     {}
 
@@ -309,7 +309,7 @@ public:
 		FRAME15("Frame15", 832.000000f, 284.000000f, 148.000000f, 192.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888"),
 		FRAME16("Frame16", 870.000000f, 0.000000f, 118.000000f, 206.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888"),
 		IDLE("Idle", 870.000000f, 0.000000f, 118.000000f, 206.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888"),
-		Sheet("kyo_salute", "/Users/always/CLionProjects/inanna/Resources/Kyo/Salute/kyo_salute.png")
+		Sheet("kyo_salute", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Salute/kyo_salute.png")
 
     {}
 
