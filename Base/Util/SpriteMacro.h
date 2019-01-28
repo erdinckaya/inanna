@@ -11,6 +11,11 @@
     entity.remove<SpriteAnimation>(); \
     entity.assign<SpriteAnimation>(anim); \
 
+#define INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(entity, anim) \
+    entity.remove<SpriteAnimation>(); \
+    auto comp = entity.assign<SpriteAnimation>(anim); \
+    comp->loop = true; \
+
 #define INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, anim) \
     if (entity.has_component<SpriteAnimation>()) { \
         if (entity.component<SpriteAnimation>()->animData != anim) { \
@@ -24,13 +29,11 @@
         entity.remove<comp>(); \
     } \
 
-
 #define INANNA_COMMAND_EXECUTED(entity) \
     if (entity.has_component<CommandLink>()) { \
         auto link = entity.component<CommandLink>(); \
         auto ent = link->entity; \
-        auto id = link->commandId; \
-        link->onExecuted(ent, id); \
+        link->onExecuted(ent); \
     } \
 
 #endif //INANNA_SPRITEMACRO_H

@@ -9,7 +9,6 @@
 #include "../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Game/Components/MoveCharacter.h"
 #include "../Game/Components/Character.h"
-#include "../Game/Command/Components/InputCommand.h"
 
 REFLECT_STRUCT_BEGIN(Inanna::Renderable)
                     REFLECT_STRUCT_MEMBER(rotation)
@@ -46,8 +45,3 @@ REFLECT_STRUCT_BEGIN(Inanna::MoveCharacter)
 
 REFLECT_STRUCT_END()
 
-
-REFLECT_STRUCT_BEGIN(Inanna::InputCommand)
-                    REFLECT_STRUCT_MEMBER(down)
-                    REFLECT_STRUCT_MEMBER(interrupt)
-REFLECT_STRUCT_END()

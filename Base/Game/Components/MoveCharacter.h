@@ -10,12 +10,16 @@
 
 namespace Inanna {
     struct MoveCharacter {
-        explicit MoveCharacter(const Vecf &direction, int speed) : direction(direction), speed(speed), time(0) {}
+        explicit MoveCharacter(const Vecf &direction, int speed, const SpriteAnimData &animData) : direction(direction),
+                                                                                                   speed(speed),
+                                                                                                   animData(animData),
+                                                                                                   time(0) {}
 
 
         int speed;
         Vecf direction;
         float time;
+        SpriteAnimData animData;
 
         REFLECT()
     };

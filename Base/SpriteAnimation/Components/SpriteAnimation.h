@@ -11,7 +11,6 @@
 #include "SpriteAnimationState.h"
 #include "../../Util/Math/Vec2.h"
 #include "../../../ThirdParty/Signals/Signal.h"
-#include "../../Game/Command/Components/InputCommand.h"
 
 
 namespace Inanna {

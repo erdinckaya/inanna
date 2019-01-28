@@ -7,16 +7,14 @@
 
 
 #include <entityx/quick.h>
-#include "InputCommand.h"
 
 namespace Inanna {
     struct CommandLink {
-        explicit CommandLink(const entityx::Entity &entity, const CommandId &commandId) : entity(entity), commandId(commandId) {}
+        explicit CommandLink(const entityx::Entity &entity) : entity(entity) {}
 
         entityx::Entity entity;
-        CommandId commandId;
 
-        Gallant::Signal2<entityx::Entity, CommandId> onExecuted;
+        Gallant::Signal1<entityx::Entity> onExecuted;
     };
 }
 

@@ -14,10 +14,11 @@
 #include "../SpriteAnimation/Systems/SpriteRenderSystem.h"
 #include "../Game/Systems/MoveCharacterSystem.h"
 #include "../Game/Systems/KeyInputSystem.h"
-#include "../Game/Command/Systems/InputCommandSystem.h"
 #include "../Game/Command/Systems/MoveCommandSystem.h"
 #include "../Game/Components/MoveState.h"
 #include "../Game/Util/MoveStates.h"
+#include "../Game/Command/Systems/HitCommandSystem.h"
+#include "../Game/Systems/HitSystem.h"
 
 
 Inanna::UIFactory Inanna::WindowManager::uiFactory;
@@ -55,9 +56,12 @@ Inanna::WindowManager::WindowManager(float width, float height, Graphics *graphi
 
 
     spriteAnimationFactory.systems.add<KeyInputSystem>();
+
+    spriteAnimationFactory.systems.add<HitCommandSystem>();
     spriteAnimationFactory.systems.add<MoveCommandSystem>();
 
 
+    spriteAnimationFactory.systems.add<HitSystem>();
     spriteAnimationFactory.systems.add<MoveCharacterSystem>();
     spriteAnimationFactory.systems.add<SpriteAnimationSystem>();
     spriteAnimationFactory.systems.add<SpritePositionSystem>();
@@ -94,7 +98,10 @@ void Inanna::WindowManager::Update(entityx::TimeDelta dt) {
 
 
     spriteAnimationFactory.systems.update<KeyInputSystem>(dt);
+    spriteAnimationFactory.systems.update<HitCommandSystem>(dt);
     spriteAnimationFactory.systems.update<MoveCommandSystem>(dt);
+
+    spriteAnimationFactory.systems.update<HitSystem>(dt);
     spriteAnimationFactory.systems.update<MoveCharacterSystem>(dt);
     spriteAnimationFactory.systems.update<SpriteAnimationSystem>(dt);
     spriteAnimationFactory.systems.update<SpritePositionSystem>(dt);
@@ -183,7 +190,7 @@ void Inanna::WindowManager::Test(SDL_Keycode code) {
         case SDLK_n: {
             spriteAnimationFactory.character = spriteAnimationFactory.CreateAnimation(AnimationData::KYO_IDLE);
             spriteAnimationFactory.character.assign<Character>("Kyo");
-            spriteAnimationFactory.character.assign<UserKeyContainer>();
+            spriteAnimationFactory.character.assign<UserKeyHistory>();
             spriteAnimationFactory.character.assign<MoveState>();
             break;
         }

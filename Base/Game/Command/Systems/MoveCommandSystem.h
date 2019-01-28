@@ -11,14 +11,28 @@
 #include "../../Components/MoveCharacter.h"
 #include "../../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../../../Util/SpriteMacro.h"
+#include "../../Components/MoveState.h"
 
 using namespace boolinq;
 
 namespace Inanna {
-    struct MoveCommandSystem : public entityx::System<MoveCommandSystem>{
+    struct MoveCommandSystem : public entityx::System<MoveCommandSystem> {
+
+        void Move(entityx::Entity &character, SpriteAnimData &animData, int direction) const {
+            character.replace<MoveCharacter>(Vecf(0.75f, 0) * direction, 5, animData);
+        }
+
+        void RemoveMove(entityx::Entity &character) const {
+            INANNA_REMOVE_COMPONENT(character, MoveCharacter);
+            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(character, AnimationData::KYO_IDLE);
+        }
 
         void Move(MoveCommand &cmd) {
             auto character = cmd.character;
+            if (character.component<MoveState>()->lock) {
+                RemoveMove(character);
+            }
+
             auto animData = AnimationData::KYO_MOVE_BACK;
             int direction = -1;
             if (cmd.userKey.key == SDL_SCANCODE_RIGHT) {
@@ -27,18 +41,9 @@ namespace Inanna {
             }
 
             if (cmd.userKey.down) {
-                character.replace<MoveCharacter>(Vecf(0.75f, 0) * direction, 5);
-
-                if (character.component<SpriteAnimation>()->animData != animData) {
-                    INANNA_REPLACE_SPRITE_ANIM(character, animData);
-                    auto anim = character.component<SpriteAnimation>();
-                    anim->loop = true;
-                }
+                Move(character, animData, direction);
             } else {
-                INANNA_REMOVE_COMPONENT(character, MoveCharacter);
-                INANNA_REPLACE_SPRITE_ANIM(character, AnimationData::KYO_IDLE);
-                auto anim = character.component<SpriteAnimation>();
-                anim->loop = true;
+                RemoveMove(character);
             }
         }
 
@@ -49,14 +54,11 @@ namespace Inanna {
                 entity.destroy();
             });
 
-            commands = from(commands).orderBy([](const MoveCommand &cmd) {return cmd.userKey.time;}).toVector();
+            commands = from(commands).orderBy([](const MoveCommand &cmd) { return cmd.userKey.time; }).toVector();
             for (auto &cmd : commands) {
                 Move(cmd);
             }
         }
-
-    private:
-        std::set<entityx::Entity, Uint32> lastMoveUpTime;
     };
 }
 

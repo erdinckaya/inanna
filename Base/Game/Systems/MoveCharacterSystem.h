@@ -13,23 +13,31 @@
 #include "../Components/MoveCharacter.h"
 #include "../../Util/SpriteMacro.h"
 #include "../../Game/Command/Components/CommandLink.h"
+#include "../Components/MoveState.h"
 
 namespace Inanna {
     struct MoveCharacterSystem : public entityx::System<MoveCharacterSystem> {
         explicit MoveCharacterSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, Position, MoveCharacter, SpriteAnimation>(
+            entities.each<Character, Position, MoveCharacter, MoveState>(
                     [this, dt](entityx::Entity entity, Character &character, Position &position, MoveCharacter &move,
-                               SpriteAnimation &anim) {
-                        double speed = 1000.0 / move.speed;
-                        bool isKilled = false;
-                        if (move.time >= speed) {
-                            move.time = 0;
-                        } else {
-                            move.time += dt;
+                            MoveState &moveState) {
+                        if (!moveState.lock) {
+
+                            if (entity.component<SpriteAnimation>()->animData != move.animData) {
+                                INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(entity, move.animData);
+                            }
+
+                            double speed = 1000.0 / move.speed;
+                            bool isKilled = false;
+                            if (move.time >= speed) {
+                                move.time = 0;
+                            } else {
+                                move.time += dt;
+                            }
+                            position.position += move.direction * move.speed;
                         }
-                        position.position += move.direction * move.speed;
                     });
         }
     };

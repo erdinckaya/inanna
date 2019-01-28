@@ -9,8 +9,8 @@
 #include "UserKey.h"
 
 namespace Inanna {
-    struct UserKeyContainer {
-        explicit UserKeyContainer() = default;
+    struct UserKeyHistory {
+        explicit UserKeyHistory() = default;
 
         std::vector<UserKey> buffer;
     };

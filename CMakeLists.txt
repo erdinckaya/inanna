@@ -74,9 +74,8 @@ add_executable(Inanna main.cpp Assets/Resources.h Assets/Resources.cpp Assets/An
         Base/SpriteAnimation/Components/SpriteAnimationState.h Base/SpriteAnimation/Systems/SpritePositionSystem.h
         Base/SpriteAnimation/Systems/SpriteRenderSystem.h Base/Game/Components/Character.h Base/Game/Components/MoveCharacter.h
         Base/Game/Systems/MoveCharacterSystem.h Base/Game/Systems/KeyInputSystem.h
-        Base/Game/Command/Components/InputCommand.h Base/Game/Command/Systems/InputCommandSystem.h Base/Util/SpriteMacro.h
-        Base/SpriteAnimation/Components/Time.h Base/Game/Logic/MoveLogic.h Base/Game/Command/Components/InputCommand.cpp
-        Base/Game/Command/Events/CommandExecutedEvent.h ThirdParty/Signals/Delegate.h ThirdParty/Signals/Signal.h Base/Game/Logic/HitLogic.h Base/Game/Command/Components/CommandLink.h Base/Util/CircularBuffer.h Base/Game/Util/GameKey.h Base/Game/Components/UserKey.h Base/Game/Components/UserKeyContainer.h Base/Game/Command/Components/MoveCommand.h Base/Game/Command/Systems/MoveCommandSystem.h Base/Game/Util/MoveStates.h Base/Game/Components/MoveState.h)
+        Base/Util/SpriteMacro.h Base/SpriteAnimation/Components/Time.h Base/Game/Command/Events/CommandExecutedEvent.h
+        ThirdParty/Signals/Delegate.h ThirdParty/Signals/Signal.h Base/Game/Command/Components/CommandLink.h Base/Util/CircularBuffer.h Base/Game/Util/GameKey.h Base/Game/Components/UserKey.h Base/Game/Components/UserKeyHistory.h Base/Game/Command/Components/MoveCommand.h Base/Game/Command/Systems/MoveCommandSystem.h Base/Game/Util/MoveStates.h Base/Game/Components/MoveState.h Base/Game/Command/Components/HitCommand.h Base/Game/Command/Systems/HitCommandSystem.h Base/Game/Components/Hit.h Base/Game/Systems/HitSystem.h)
 
 
 target_link_libraries(Inanna ${SDL2_LIBRARY}
