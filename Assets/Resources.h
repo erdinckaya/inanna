@@ -153,6 +153,26 @@ public:
 
 
 
+struct Kyo_Crouch : public Sheet {
+
+public:
+    Kyo_Crouch() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 118.000000f, 204.000000f, 118.000000f, 532.000000f, "kyo_crouch", "RGBA8888"),
+		FRAME1("Frame1", 0.000000f, 204.000000f, 104.000000f, 186.000000f, 118.000000f, 532.000000f, "kyo_crouch", "RGBA8888"),
+		FRAME2("Frame2", 0.000000f, 390.000000f, 118.000000f, 142.000000f, 118.000000f, 532.000000f, "kyo_crouch", "RGBA8888"),
+		Sheet("kyo_crouch", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Crouch/kyo_crouch.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+
+
+};
+
+
+
 struct Kyo_Little_Fist : public Sheet {
 
 public:
@@ -341,6 +361,7 @@ public:
 	static Death DEATH;
 	static Fields FIELDS;
 	static Pieces PIECES;
+	static Kyo_Crouch KYO_CROUCH;
 	static Kyo_Little_Fist KYO_LITTLE_FIST;
 	static Kyo_Little_Kick KYO_LITTLE_KICK;
 	static Kyo_Idle KYO_IDLE;
@@ -350,7 +371,7 @@ public:
 
 
 	static int SheetCount;
-	static const Sheet Sheets[10];
+	static const Sheet Sheets[11];
 };
 
 

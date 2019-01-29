@@ -21,7 +21,7 @@ namespace Inanna {
         void Test(SDL_Keycode code);
 
 
-        KeyPatterns keyPatterns;
+        KeyPatterns KeyPatterns;
         entityx::Entity Player;
         entityx::Entity Rival;
 

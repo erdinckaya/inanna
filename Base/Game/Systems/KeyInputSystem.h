@@ -17,6 +17,7 @@
 #include "../Components/UserKeyHistory.h"
 #include "../Command/Components/MoveCommand.h"
 #include "../Command/Components/HitCommand.h"
+#include "../Command/Components/CrouchCommand.h"
 #include "../Game.h"
 
 
@@ -45,6 +46,30 @@ namespace Inanna {
             }
         }
 
+        GameKey ConvertToGameKey(UserKey &key) {
+            if (Game::Instance->Rival.valid()) {
+                // TODO: Check relative facing!
+            } else {
+                switch (key.key) {
+                    case SDL_SCANCODE_LEFT:
+                        return GameKey::Back_GK;
+                    case SDL_SCANCODE_RIGHT:
+                        return GameKey::Forward_GK;
+                    case SDL_SCANCODE_UP:
+                        return GameKey::Jump_GK;
+                    case SDL_SCANCODE_DOWN:
+                        return GameKey::Crouch_GK;
+                    case SDL_SCANCODE_F:
+                        return GameKey::LittleFist_GK;
+                    case SDL_SCANCODE_K:
+                        return GameKey::LittleKick_GK;
+                    default:
+                        break;
+                }
+            }
+            return InValid;
+        }
+
         void FindSpecialMoves(entityx::Entity entity, std::vector<UserKey> keys) {
             for (auto &userKey : keys) {
                 entity.component<UserKeyHistory>()->buffer.push_back(userKey);
@@ -52,6 +77,26 @@ namespace Inanna {
 
             UserKeyHistory* history = entity.component<UserKeyHistory>().get();
             ClearTimeoutKeys(history);
+            auto specialKeyDefinations = Game::Instance->KeyPatterns.SpecialMoveKeys;
+            std::unordered_map<SpecialMoveKey, int> foundedKeys;
+            for (auto &def : specialKeyDefinations) {
+                const int size = static_cast<const int>(history->buffer.size());
+                for (int i = 0; i < size; ++i) {
+                    auto key = ConvertToGameKey(history->buffer[i]);
+                    if (key == def.Keys[0]) {
+                        int k = 0;
+                        for (int j = 0; j < def.Keys.size() && k < size; ++j, ++k) {
+                            auto fetchedKey = ConvertToGameKey(history->buffer[j]);
+                            if (fetchedKey != def.Keys[k]) {
+                                break;
+                            }
+                        }
+                        if (k == def.Keys.size()) {
+                            foundedKeys[def.Id] = i;
+                        }
+                    }
+                }
+            }
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
@@ -82,6 +127,11 @@ namespace Inanna {
                         case SDL_SCANCODE_K:
                         case SDL_SCANCODE_F: {
                             entities.create().assign<HitCommand>(entity, userKey);
+                            validkKey = true;
+                            break;
+                        }
+                        case SDL_SCANCODE_DOWN: {
+                            entities.create().assign<CrouchCommand>(entity, userKey);
                             validkKey = true;
                             break;
                         }

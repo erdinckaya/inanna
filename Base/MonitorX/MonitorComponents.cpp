@@ -9,6 +9,7 @@
 #include "../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Game/Components/MoveCharacter.h"
 #include "../Game/Components/Character.h"
+#include "../Game/Components/Crouch.h"
 
 REFLECT_STRUCT_BEGIN(Inanna::Renderable)
                     REFLECT_STRUCT_MEMBER(rotation)
@@ -35,6 +36,7 @@ REFLECT_STRUCT_BEGIN(Inanna::SpriteAnimation)
                     REFLECT_STRUCT_MEMBER(killAtFinish)
                     REFLECT_STRUCT_MEMBER(reverse)
                     REFLECT_STRUCT_MEMBER(state)
+                    REFLECT_STRUCT_MEMBER(stayAtLastFrame)
 REFLECT_STRUCT_END()
 
 
@@ -43,5 +45,9 @@ REFLECT_STRUCT_BEGIN(Inanna::MoveCharacter)
                     REFLECT_STRUCT_MEMBER(direction)
                     REFLECT_STRUCT_MEMBER(speed)
 
+REFLECT_STRUCT_END()
+
+REFLECT_STRUCT_BEGIN(Inanna::Crouch)
+                    REFLECT_STRUCT_MEMBER(down)
 REFLECT_STRUCT_END()
 

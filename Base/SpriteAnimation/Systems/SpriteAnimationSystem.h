@@ -48,6 +48,9 @@ namespace Inanna {
 
             animation->frameIndex += frameSize;
             animation->frameIndex %= frameSize;
+            if (animation->stayAtLastFrame) {
+                animation->frameIndex = animation->LastFrame();
+            }
 
             return static_cast<SpriteAnimationState>(animation->state);
         }

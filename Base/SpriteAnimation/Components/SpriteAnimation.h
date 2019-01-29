@@ -20,10 +20,15 @@ namespace Inanna {
                                                             reverse(false),
                                                             time(0), loop(false),
                                                             state(SpriteAnimationState::Start),
-                                                            killAtFinish(false), pingpong(false) {}
+                                                            killAtFinish(false), pingpong(false),
+                                                            stayAtLastFrame(false) {}
 
         const ImageAsset KeyFrame() {
             return animData.keyFrames[frameIndex];
+        }
+
+        const int LastFrame() {
+            return animData.keyFrames.size() - 1;
         }
 
         const Vecf Size() {
@@ -52,6 +57,7 @@ namespace Inanna {
         bool pingpong;
         int state;
         bool killAtFinish;
+        bool stayAtLastFrame;
 
         REFLECT()
     };

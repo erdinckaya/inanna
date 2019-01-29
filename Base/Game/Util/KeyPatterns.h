@@ -54,7 +54,6 @@ namespace Inanna {
                 }
                 SpecialMoveKeys.push_back(data);
             }
-            printf("12313\n");
         }
 
         std::string StringKeys[GameKey::NumOfGameKey];

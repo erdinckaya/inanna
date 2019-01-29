@@ -9,9 +9,9 @@ namespace Inanna {
     enum GameKey {
         InValid = -1,
         Back_GK = 0,
-        Up_GK = 1,
-        Front_GK = 2,
-        Down_GK = 3,
+        Jump_GK = 1,
+        Forward_GK = 2,
+        Crouch_GK = 3,
         LittleFist_GK = 4,
         LittleKick_GK = 5,
         BigFist_GK = 5,

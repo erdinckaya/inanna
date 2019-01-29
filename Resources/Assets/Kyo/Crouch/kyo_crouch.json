@@ -1,0 +1,50 @@
+{"frames": [
+
+{
+	"filename": "Frame0.png",
+	"frame": {"x":0,"y":0,"w":118,"h":204},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":204},
+	"sourceSize": {"w":118,"h":204},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame1.png",
+	"frame": {"x":0,"y":204,"w":104,"h":186},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":104,"h":186},
+	"sourceSize": {"w":104,"h":186},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame2.png",
+	"frame": {"x":0,"y":390,"w":118,"h":142},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":142},
+	"sourceSize": {"w":118,"h":142},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "kyo_crouch.png",
+	"format": "RGBA8888",
+	"size": {"w":118,"h":532},
+	"scale": "1",
+	"anims": [
+		{
+			"name": "kyo_crouch",
+			"images": [
+				"Frame0",
+				"Frame1",
+				"Frame2"
+			],
+			"speed": 15
+		}
+	],
+	"smartupdate": "$TexturePacker:SmartUpdate:000ad32a44a68da3177416364e4eb1a7:59aadcc81145b260a7895a4ae485bcbb:708a08e9e106e3f27a51e1c911039e43$"
+}
+}
