@@ -29,6 +29,8 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<SpritePositionSystem>();
     systems.add<SpriteRenderSystem>(graphics);
     systems.configure();
+
+    keyPatterns.Init("../Resources/Data/key_patterns.json");
 }
 
 void Inanna::Game::Update(entityx::TimeDelta dt) {

@@ -8,6 +8,7 @@
 
 #include <entityx/quick.h>
 #include "../Graphics/Graphics.h"
+#include "Util/KeyPatterns.h"
 
 
 namespace Inanna {
@@ -19,6 +20,8 @@ namespace Inanna {
 
         void Test(SDL_Keycode code);
 
+
+        KeyPatterns keyPatterns;
         entityx::Entity Player;
         entityx::Entity Rival;
 

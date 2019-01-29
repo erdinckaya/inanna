@@ -9,12 +9,13 @@
 #include <vector>
 #include <SDL_quit.h>
 #include "GameKey.h"
+#include "SpecialMoveKey.h"
 
 namespace Inanna {
     struct SpecialMoveKeyData {
-        std::string Id;
+        SpecialMoveKey Id;
         std::vector<GameKey> Keys;
-        Uint32 duration;
+        Uint32 Duration;
     };
 }
 
