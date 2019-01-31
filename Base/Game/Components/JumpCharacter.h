@@ -12,19 +12,26 @@
 #include "../../Util/Math/Vec2.h"
 #include "../../../Assets/AnimationData.h"
 
+#include <SDL_types.h>
+
 namespace Inanna {
     struct JumpCharacter {
-        explicit JumpCharacter(const Vecf &direction, int speed, SpriteAnimData animData) : direction(direction),
-                                                                                            speed(speed),
-                                                                                            animData(std::move(
-                                                                                                    animData)),
-                                                                                            time(0) {}
+        explicit JumpCharacter(const Vecf &direction, int speed,
+                               SpriteAnimData animData, Uint32 startTime) : direction(direction),
+                                                                            speed(speed),
+                                                                            animData(std::move(
+                                                                                    animData)),
+                                                                            time(0),
+                                                                            startTime(startTime),
+                                                                            longJump(false) {}
 
 
         int speed;
         Vecf direction;
         float time;
         SpriteAnimData animData;
+        Uint32 startTime;
+        bool longJump;
 
 
         REFLECT()

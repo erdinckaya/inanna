@@ -18,7 +18,7 @@ struct SpriteAnim {
     explicit SpriteAnim(const char* name, const int speed, T ...args) : name(name), speed(speed), keyFrames{C(args)...} {} 
 
     std::string name;
-    int speed;
+    float speed;
     std::vector<ImageAsset> keyFrames;
     
     friend inline bool operator==(const SpriteAnim& lhs, const SpriteAnim& rhs) {

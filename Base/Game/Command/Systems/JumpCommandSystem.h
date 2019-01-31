@@ -13,6 +13,7 @@
 #include "../../Components/JumpCharacter.h"
 #include "../../Components/JumpState.h"
 #include "../../Events/JumpEnd.h"
+#include "../../Util/Chrono.h"
 
 using namespace boolinq;
 
@@ -28,7 +29,8 @@ namespace Inanna {
                 return;
             }
             cmd.character.replace<SpriteIndex>(cmd.character, 4);
-            cmd.character.replace<JumpCharacter>(Vecf(0, 2), 5, AnimationData::KYO_JUMP);
+            cmd.character.replace<JumpCharacter>(Vecf(0, 2), 5, AnimationData::KYO_JUMP, Chrono::Now());
+            cmd.character.component<JumpState>()->state = JumpStates::RISE_JS;
         }
 
 

@@ -18,7 +18,7 @@
 namespace Inanna {
     struct JumpCharacterSystem : public entityx::System<JumpCharacterSystem>, entityx::Receiver<JumpCharacterSystem> {
 
-        explicit JumpCharacterSystem() : FLOOR(100), manager(nullptr) {}
+        explicit JumpCharacterSystem() : FLOOR(100), manager(nullptr), LongJumpTimeLimit(100) {}
 
         void configure(entityx::EventManager &events) override {
             manager = &events;
@@ -27,9 +27,16 @@ namespace Inanna {
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, Position, JumpCharacter>(
-                    [this, dt](entityx::Entity entity, Character &character, Position &position, JumpCharacter &jump) {
+            entities.each<Character, Position, JumpCharacter, SpriteAnimation>(
+                    [this, dt](entityx::Entity entity, Character &character, Position &position, JumpCharacter &jump, SpriteAnimation &anim) {
                         INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, jump.animData);
+                        if (!jump.longJump && Chrono::Now() > jump.startTime + LongJumpTimeLimit &&
+                            KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_UP)) {
+                            jump.longJump = true;
+                            anim.animData.speed *= 0.6f;
+                            jump.direction *= 1.25f;
+                            printf("LONG LONG LONG\n");
+                        }
 
                         double speed = 1000.0 / jump.speed;
                         bool isKilled = false;
@@ -53,10 +60,12 @@ namespace Inanna {
         void receive(const SpriteIndex &spriteIndex) {
             SpriteIndex event = spriteIndex;
             event.entity.component<JumpCharacter>()->direction *= -1;
+            event.entity.component<JumpState>()->state = JumpStates::FALL_JS;
         }
 
     private:
         const int FLOOR;
+        const Uint32 LongJumpTimeLimit;
         entityx::EventManager *manager;
     };
 }
