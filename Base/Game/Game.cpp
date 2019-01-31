@@ -17,6 +17,9 @@
 #include "Components/MoveState.h"
 #include "Command/Systems/CrouchCommandSystem.h"
 #include "Systems/CrouchSystem.h"
+#include "Command/Systems/JumpCommandSystem.h"
+#include "Systems/JumpCharacterSystem.h"
+#include "Components/JumpState.h"
 
 
 Inanna::Game* Inanna::Game::Instance = nullptr;
@@ -26,11 +29,13 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<HitCommandSystem>();
     systems.add<MoveCommandSystem>();
     systems.add<CrouchCommandSystem>();
+    systems.add<JumpCommandSystem>();
 
 
     systems.add<HitSystem>();
     systems.add<CrouchSystem>();
     systems.add<MoveCharacterSystem>();
+    systems.add<JumpCharacterSystem>();
 
 
     systems.add<SpriteAnimationSystem>();
@@ -38,7 +43,7 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<SpriteRenderSystem>(graphics);
     systems.configure();
 
-    KeyPatterns.Init("../Resources/Data/key_patterns.json");
+    Patterns.Init("../Resources/Data/key_patterns.json");
 }
 
 void Inanna::Game::Update(entityx::TimeDelta dt) {
@@ -46,11 +51,13 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<HitCommandSystem>(dt);
     systems.update<MoveCommandSystem>(dt);
     systems.update<CrouchCommandSystem>(dt);
+    systems.update<JumpCommandSystem>(dt);
 
 
     systems.update<HitSystem>(dt);
     systems.update<CrouchSystem>(dt);
     systems.update<MoveCharacterSystem>(dt);
+    systems.update<JumpCharacterSystem>(dt);
 
 
     systems.update<SpriteAnimationSystem>(dt);
@@ -71,6 +78,7 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Player.assign<Character>("Kyo");
             Player.assign<UserKeyHistory>();
             Player.assign<MoveState>();
+            Player.assign<JumpState>();
 
             break;
         }

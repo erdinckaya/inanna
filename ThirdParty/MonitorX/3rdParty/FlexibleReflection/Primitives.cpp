@@ -1,3 +1,4 @@
+#include <SDL_types.h>
 #include "Reflect.h"
 
 namespace reflect {
@@ -140,5 +141,31 @@ namespace reflect {
         static TypeDescriptor_Bool typeDesc;
         return &typeDesc;
     }
+
+
+
+//--------------------------------------------------------
+// A type descriptor for Uint8
+//--------------------------------------------------------
+
+    struct TypeDescriptor_Uint8 : TypeDescriptor {
+        TypeDescriptor_Uint8() : TypeDescriptor{"int", sizeof(Uint8)} {
+        }
+
+        void dump(const void *obj, int /* unused */) const override {
+            std::cout << "int{" << *(const Uint8 *) obj << "}";
+        }
+
+        std::string type(const void *obj) const override {
+            return "int";
+        }
+    };
+
+    template<>
+    TypeDescriptor *getPrimitiveDescriptor<Uint8>() {
+        static TypeDescriptor_Uint8 typeDesc;
+        return &typeDesc;
+    }
+
 
 } // namespace reflect

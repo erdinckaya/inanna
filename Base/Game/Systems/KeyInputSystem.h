@@ -18,6 +18,7 @@
 #include "../Command/Components/MoveCommand.h"
 #include "../Command/Components/HitCommand.h"
 #include "../Command/Components/CrouchCommand.h"
+#include "../Command/Components/JumpCommand.h"
 #include "../Game.h"
 
 
@@ -77,7 +78,7 @@ namespace Inanna {
 
             UserKeyHistory* history = entity.component<UserKeyHistory>().get();
             ClearTimeoutKeys(history);
-            auto specialKeyDefinations = Game::Instance->KeyPatterns.SpecialMoveKeys;
+            auto specialKeyDefinations = Game::Instance->Patterns.SpecialMoveKeys;
             std::unordered_map<SpecialMoveKey, int> foundedKeys;
             for (auto &def : specialKeyDefinations) {
                 const int size = static_cast<const int>(history->buffer.size());
@@ -96,10 +97,6 @@ namespace Inanna {
                         }
                     }
                 }
-            }
-
-            for (auto& it: foundedKeys) {
-                printf("Keys are %d\n", it.first);
             }
         }
 
@@ -136,6 +133,11 @@ namespace Inanna {
                         }
                         case SDL_SCANCODE_DOWN: {
                             entities.create().assign<CrouchCommand>(entity, userKey);
+                            validkKey = true;
+                            break;
+                        }
+                        case SDL_SCANCODE_UP: {
+                            entities.create().assign<JumpCommand>(entity, userKey);
                             validkKey = true;
                             break;
                         }

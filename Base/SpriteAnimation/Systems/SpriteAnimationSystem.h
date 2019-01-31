@@ -10,6 +10,8 @@
 #include "../../Graphics/Graphics.h"
 #include "../Components/Time.h"
 #include "../../Util/SpriteMacro.h"
+#include "../Event/SpriteIndex.h"
+#include "../Event/SpriteAnimEnd.h"
 
 #include <queue>
 
@@ -55,14 +57,25 @@ namespace Inanna {
             return static_cast<SpriteAnimationState>(animation->state);
         }
 
+        void FireSpriteEvent(entityx::Entity entity, entityx::EventManager &manager, int index) {
+            if (entity.has_component<SpriteIndex>()) {
+                if (entity.component<SpriteIndex>()->index == index) {
+                    INANNA_REMOVE_COMPONENT(entity, SpriteIndex);
+                    manager.emit<SpriteIndex>(entity, index);
+                }
+            }
+        }
+
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<SpriteAnimation>([this, dt](entityx::Entity entity, SpriteAnimation &animation) {
+            entities.each<SpriteAnimation>([this, dt, &events](entityx::Entity entity, SpriteAnimation &animation) {
                 double speed = 1000.0 / animation.animData.speed;
                 bool isKilled = false;
                 if (animation.time >= speed) {
                     auto state = Next(&animation);
+                    FireSpriteEvent(entity, events, animation.frameIndex);
                     if (state == SpriteAnimationState::Finished) {
                         INANNA_COMMAND_EXECUTED(entity);
+                        events.emit<SpriteAnimEnd>(entity);
                         if (animation.killAtFinish) {
                             isKilled = true;
                             entity.destroy();
