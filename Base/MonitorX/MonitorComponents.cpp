@@ -10,6 +10,7 @@
 #include "../Game/Components/MoveCharacter.h"
 #include "../Game/Components/Character.h"
 #include "../Game/Components/Crouch.h"
+#include "../Game/Components/UserKeyHistory.h"
 
 REFLECT_STRUCT_BEGIN(Inanna::Renderable)
                     REFLECT_STRUCT_MEMBER(rotation)

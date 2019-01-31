@@ -20,6 +20,7 @@ namespace Inanna {
         std::string ToString() {
             return std::to_string(key) + ", " + std::to_string(time) + ", " + std::to_string(down);
         }
+
     };
 }
 

@@ -97,6 +97,10 @@ namespace Inanna {
                     }
                 }
             }
+
+            for (auto& it: foundedKeys) {
+                printf("Keys are %d\n", it.first);
+            }
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {

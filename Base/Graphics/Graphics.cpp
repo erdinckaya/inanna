@@ -9,6 +9,7 @@
 #include "../Game/Components/MoveCharacter.h"
 #include "../World.h"
 #include "../Game/Components/Crouch.h"
+#include "../Game/Components/UserKeyHistory.h"
 
 
 Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags),
