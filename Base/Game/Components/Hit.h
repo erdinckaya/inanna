@@ -9,8 +9,8 @@
 
 namespace Inanna {
     struct Hit {
-        explicit Hit(const SDL_Scancode &key) : key(key) {}
-        SDL_Scancode key;
+        explicit Hit(const Uint32 &key) : key(key) {}
+        Uint32 key;
     };
 }
 

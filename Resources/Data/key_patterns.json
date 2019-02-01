@@ -38,8 +38,8 @@
     {
       "id": "adu",
       "keys": [
-        "Back",
-        "Down"
+        "Down",
+        "Front"
       ],
       "duration": 1000
     },
@@ -55,7 +55,6 @@
     {
       "id": "adu-taktak",
       "keys": [
-        "Back",
         "Down",
         "Front",
         "Down",
@@ -77,10 +76,10 @@
     {
       "id": "iki-adu",
       "keys": [
-        "Back",
         "Down",
-        "Back",
-        "Down"
+        "Front",
+        "Down",
+        "Front"
       ],
       "duration": 1500
     },

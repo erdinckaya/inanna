@@ -71,3 +71,14 @@ REFLECT_STRUCT_BEGIN(Inanna::MoveState)
                     REFLECT_STRUCT_MEMBER(lock)
                     REFLECT_STRUCT_MEMBER(state)
 REFLECT_STRUCT_END()
+
+REFLECT_STRUCT_BEGIN(Inanna::UserKey)
+                    REFLECT_STRUCT_MEMBER(key)
+                    REFLECT_STRUCT_MEMBER(time)
+                    REFLECT_STRUCT_MEMBER(down)
+REFLECT_STRUCT_END()
+
+
+REFLECT_STRUCT_BEGIN(Inanna::UserKeyHistory)
+                    REFLECT_STRUCT_MEMBER(buffer)
+REFLECT_STRUCT_END()

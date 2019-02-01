@@ -13,6 +13,8 @@ namespace Inanna {
         explicit UserKeyHistory() = default;
 
         std::vector<UserKey> buffer;
+
+        REFLECT()
     };
 }
 

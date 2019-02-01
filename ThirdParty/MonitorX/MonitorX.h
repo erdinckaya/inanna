@@ -18,7 +18,6 @@
 #include "3rdParty/FlexibleReflection/Reflect.h"
 
 
-
 #ifndef __APPLE__
 #include <climits>
 #endif
@@ -150,11 +149,29 @@ namespace monitorx {
                         isStruct = true;
                         const void *next_obj = ((char *) obj + member.offset);
                         std::string nextID = elemID.append(member.name);
-                        RenderStruct(dynamic_cast<reflect::TypeDescriptor_Struct *>(member.type), next_obj, nextID, member.name);
+                        RenderStruct(dynamic_cast<reflect::TypeDescriptor_Struct *>(member.type), next_obj, nextID,
+                                     member.name);
+                    } else if (strcmp(member.type->type(obj).c_str(), "vector") == 0) {
+                        auto tD = dynamic_cast<reflect::TypeDescriptor_StdVector *>(member.type);
+                        std::string nextID = std::string(member.name).append("##").append(elemID);
+                        if (ImGui::TreeNode(nextID.c_str())) {
+                            for (int i = 0; i < tD->getSize(obj); ++i) {
+                                const void* next_obj = tD->getItem(obj, static_cast<size_t>(i));
+                                nextID = nextID.append(std::to_string(i));
+                                auto nextType = (reflect::TypeDescriptor_Struct *) tD->itemType;
+                                RenderStruct(nextType, next_obj, nextID, std::to_string(i).c_str());
+
+                                ImGui::SameLine(0);
+                                const char *text = nextType->name;
+                                ImGui::Text("%s", text);
+                            }
+                            ImGui::TreePop();
+                            ImGui::Separator();
+                        }
                     }
 
                     ImGui::SameLine(0);
-                    const char* text = member.type->type(obj).c_str();
+                    const char *text = member.type->type(obj).c_str();
                     if (isStruct) {
                         auto nextType = dynamic_cast<reflect::TypeDescriptor_Struct *>(member.type);
                         text = nextType->name;

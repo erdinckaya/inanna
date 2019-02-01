@@ -168,4 +168,30 @@ namespace reflect {
     }
 
 
+//--------------------------------------------------------
+// A type descriptor for Uint32
+//--------------------------------------------------------
+
+    struct TypeDescriptor_Uint32 : TypeDescriptor {
+        TypeDescriptor_Uint32() : TypeDescriptor{"int", sizeof(Uint32)} {
+        }
+
+        void dump(const void *obj, int /* unused */) const override {
+            std::cout << "int{" << *(const Uint32 *) obj << "}";
+        }
+
+        std::string type(const void *obj) const override {
+            return "int";
+        }
+    };
+
+    template<>
+    TypeDescriptor *getPrimitiveDescriptor<Uint32>() {
+        static TypeDescriptor_Uint32 typeDesc;
+        return &typeDesc;
+    }
+
+
 } // namespace reflect
+
+

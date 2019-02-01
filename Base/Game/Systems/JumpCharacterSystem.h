@@ -37,7 +37,6 @@ namespace Inanna {
                             jump.longJump = true;
                             anim.animData.speed *= 0.5f;
                             jump.direction *= 1.8f;
-                            printf("LONG LONG LONG\n");
                         }
 
                         double speed = 1000.0 / jump.speed;
