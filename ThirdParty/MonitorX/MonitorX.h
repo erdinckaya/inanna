@@ -113,6 +113,55 @@ namespace monitorx {
             RenderComponent<C1, Components...>();
         }
 
+        void RenderFloat(const void *obj, const reflect::TypeDescriptor_Struct::Member &member,
+                         const std::basic_string<char, std::char_traits<char>, std::allocator<char>> &strID) const {
+            ImGui::PushItemWidth(100);
+            ImGui::DragFloat(strID.c_str(), (float *) ((char *) obj + member.offset),
+                             0.02f, FLT_MIN, FLT_MAX, "%.2f", 2.0f);
+        }
+
+        void RenderInt(const void *obj, const reflect::TypeDescriptor_Struct::Member &member,
+                       const std::basic_string<char, std::char_traits<char>, std::allocator<char>> &strID) const {
+            ImGui::PushItemWidth(100);
+            ImGui::DragInt(strID.c_str(), (int *) ((char *) obj + member.offset),
+                           0.02f, INT_MIN, INT_MAX, "%.2f");
+        }
+
+        void RenderDouble(const void *obj, const reflect::TypeDescriptor_Struct::Member &member,
+                          const std::basic_string<char, std::char_traits<char>, std::allocator<char>> &strID) const {
+            ImGui::PushItemWidth(100);
+            ImGui::DragFloat(strID.c_str(), (float *) ((char *) obj + member.offset),
+                             0.02f, FLT_MIN, FLT_MAX, "%.2f", 2.0f);
+        }
+
+        void RenderString(const void *obj, const reflect::TypeDescriptor_Struct::Member &member,
+                          const std::basic_string<char, std::char_traits<char>, std::allocator<char>> &strID) const {
+            ImGui::PushItemWidth(100);
+            auto *str = (std::__1::string *) ((char *) obj + member.offset);
+            ImGui::InputText(strID.c_str(), (char *) str->c_str(), str->capacity() + 1,
+                             ImGuiInputTextFlags_CallbackResize, InputTextCallback, (void *) str);
+        }
+
+        void RenderBool(const void *obj, const reflect::TypeDescriptor_Struct::Member &member,
+                        const std::basic_string<char, std::char_traits<char>, std::allocator<char>> &strID) const {
+            ImGui::Checkbox(strID.c_str(), (bool *) ((char *) obj + member.offset));
+        }
+
+        void RenderPrimitives(const void *obj, const reflect::TypeDescriptor_Struct::Member &member,
+                        const std::basic_string<char, std::char_traits<char>, std::allocator<char>> &strID) const {
+            if (strcmp(member.type->type(obj).c_str(), "float") == 0) {
+                RenderFloat(obj, member, strID);
+            } else if (strcmp(member.type->type(obj).c_str(), "int") == 0) {
+                RenderInt(obj, member, strID);
+            } else if (strcmp(member.type->type(obj).c_str(), "double") == 0) {
+                RenderDouble(obj, member, strID);
+            } else if (strcmp(member.type->type(obj).c_str(), "string") == 0) {
+                RenderString(obj, member, strID);
+            } else if (strcmp(member.type->type(obj).c_str(), "bool") == 0) {
+                RenderBool(obj, member, strID);
+            }
+        }
+
         void RenderStruct(reflect::TypeDescriptor_Struct *typeDesc, const void *obj, const std::string &idBase,
                           const char *recursiveName) {
             auto elemID = std::string(typeDesc->name) + "##" + idBase;
@@ -125,27 +174,8 @@ namespace monitorx {
                 for (auto member : typeDesc->members) {
                     bool isStruct = false;
                     auto strID = std::string(member.name).append("##").append(elemID);
-                    if (strcmp(member.type->type(obj).c_str(), "float") == 0) {
-                        ImGui::PushItemWidth(100);
-                        ImGui::DragFloat(strID.c_str(), (float *) ((char *) obj + member.offset),
-                                         0.02f, FLT_MIN, FLT_MAX, "%.2f", 2.0f);
-                    } else if (strcmp(member.type->type(obj).c_str(), "int") == 0) {
-                        ImGui::PushItemWidth(100);
-                        ImGui::DragInt(strID.c_str(), (int *) ((char *) obj + member.offset),
-                                       0.02f, INT_MIN, INT_MAX, "%.2f");
-                    } else if (strcmp(member.type->type(obj).c_str(), "double") == 0) {
-                        ImGui::PushItemWidth(100);
-                        ImGui::DragFloat(strID.c_str(), (float *) ((char *) obj + member.offset),
-                                         0.02f, FLT_MIN, FLT_MAX, "%.2f", 2.0f);
-                    } else if (strcmp(member.type->type(obj).c_str(), "string") == 0) {
-                        ImGui::PushItemWidth(100);
-                        auto *str = (std::string *) ((char *) obj + member.offset);
-                        ImGui::InputText(strID.c_str(), (char *) str->c_str(), str->capacity() + 1,
-                                         ImGuiInputTextFlags_CallbackResize, InputTextCallback, (void *) str);
 
-                    } else if (strcmp(member.type->type(obj).c_str(), "bool") == 0) {
-                        ImGui::Checkbox(strID.c_str(), (bool *) ((char *) obj + member.offset));
-                    } else if (strcmp(member.type->type(obj).c_str(), "struct") == 0) {
+                    if (strcmp(member.type->type(obj).c_str(), "struct") == 0) {
                         isStruct = true;
                         const void *next_obj = ((char *) obj + member.offset);
                         std::string nextID = elemID.append(member.name);
@@ -156,18 +186,31 @@ namespace monitorx {
                         std::string nextID = std::string(member.name).append("##").append(elemID);
                         if (ImGui::TreeNode(nextID.c_str())) {
                             for (int i = 0; i < tD->getSize(obj); ++i) {
-                                const void* next_obj = tD->getItem(obj, static_cast<size_t>(i));
+                                const void *next_obj = tD->getItem(obj, static_cast<size_t>(i) + member.offset);
                                 nextID = nextID.append(std::to_string(i));
-                                auto nextType = (reflect::TypeDescriptor_Struct *) tD->itemType;
-                                RenderStruct(nextType, next_obj, nextID, std::to_string(i).c_str());
+                                auto nextType = dynamic_cast<reflect::TypeDescriptor_Struct *>(tD->itemType);
+                                const char *text = nullptr;
+                                if (nextType != nullptr) {
+                                    text = nextType->name;
+                                    RenderStruct(nextType, next_obj, nextID, std::to_string(i).c_str());
+                                } else {
+                                    reflect::TypeDescriptor_Struct::Member m{};
+                                    m.name = std::to_string(i).c_str();
+                                    m.offset = 0;
+                                    m.type = tD->itemType;
+                                    RenderPrimitives(next_obj, m, std::to_string(i));
+                                }
 
-                                ImGui::SameLine(0);
-                                const char *text = nextType->name;
-                                ImGui::Text("%s", text);
+                                if (text != nullptr) {
+                                    ImGui::SameLine(0);
+                                    ImGui::Text("%s", text);
+                                }
                             }
                             ImGui::TreePop();
                             ImGui::Separator();
                         }
+                    } else {
+                        RenderPrimitives(obj, member, strID);
                     }
 
                     ImGui::SameLine(0);
