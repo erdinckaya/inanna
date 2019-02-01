@@ -10,11 +10,13 @@
 
 namespace Inanna {
     struct MoveState {
-        explicit MoveState(const MoveStates &state = MoveStates::IDLE_MS, const bool &lock = false) : state(state),
+        explicit MoveState(const Uint8 &state = MoveStates::IDLE_MS, const bool &lock = false) : state(state),
                                                                                                       lock(lock) {}
 
-        MoveStates state;
+        Uint8 state;
         bool lock;
+
+        REFLECT()
     };
 }
 

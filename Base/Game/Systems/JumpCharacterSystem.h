@@ -27,14 +27,16 @@ namespace Inanna {
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, Position, JumpCharacter, SpriteAnimation>(
-                    [this, dt](entityx::Entity entity, Character &character, Position &position, JumpCharacter &jump, SpriteAnimation &anim) {
+            entities.each<Character, Position, JumpCharacter, SpriteAnimation, MoveState>(
+                    [this, dt](entityx::Entity entity, Character &character, Position &position, JumpCharacter &jump,
+                               SpriteAnimation &anim, MoveState &moveState) {
+                        moveState.lock = true;
                         INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, jump.animData);
                         if (!jump.longJump && Chrono::Now() > jump.startTime + LongJumpTimeLimit &&
                             KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_UP)) {
                             jump.longJump = true;
-                            anim.animData.speed *= 0.6f;
-                            jump.direction *= 1.25f;
+                            anim.animData.speed *= 0.5f;
+                            jump.direction *= 1.8f;
                             printf("LONG LONG LONG\n");
                         }
 
@@ -54,13 +56,19 @@ namespace Inanna {
         }
 
         void receive(const SpriteAnimEnd &spriteAnimEnd) {
-            manager->emit<JumpEnd>(spriteAnimEnd.entity);
+            SpriteAnimEnd event = spriteAnimEnd;
+            if (event.entity.has_component<JumpCharacter>()) {
+                manager->emit<JumpEnd>(event.entity);
+                event.entity.component<MoveState>()->lock = false;
+            }
         }
 
         void receive(const SpriteIndex &spriteIndex) {
             SpriteIndex event = spriteIndex;
-            event.entity.component<JumpCharacter>()->direction *= -1;
-            event.entity.component<JumpState>()->state = JumpStates::FALL_JS;
+            if (event.entity.has_component<JumpCharacter>()) {
+                event.entity.component<JumpCharacter>()->direction *= -1;
+                event.entity.component<JumpState>()->state = JumpStates::FALL_JS;
+            }
         }
 
     private:

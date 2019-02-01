@@ -12,6 +12,7 @@
 #include "../Game/Components/UserKeyHistory.h"
 #include "../Game/Components/JumpCharacter.h"
 #include "../Game/Components/JumpState.h"
+#include "../Game/Components/MoveState.h"
 
 
 Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags),
@@ -109,7 +110,8 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
 
 void Inanna::Graphics::Update(float dt) {
 #ifdef MONITORX_DEBUG
-    monitorX->Render<Renderable, Position, SpriteAnimation, JumpState, MoveCharacter, JumpCharacter, Crouch, end_of_list>();
+    monitorX->Render<Renderable, Position, SpriteAnimation, JumpState, MoveState, MoveCharacter,
+            JumpCharacter, Crouch, end_of_list>();
 #endif
     SDL_GL_MakeCurrent(window, context);
     SDL_GL_SwapWindow(window);

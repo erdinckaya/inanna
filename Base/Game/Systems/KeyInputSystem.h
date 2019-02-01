@@ -19,6 +19,7 @@
 #include "../Command/Components/HitCommand.h"
 #include "../Command/Components/CrouchCommand.h"
 #include "../Command/Components/JumpCommand.h"
+#include "../Util/Chrono.h"
 #include "../Game.h"
 
 
@@ -144,6 +145,20 @@ namespace Inanna {
                         default:
                             break;
                     }
+                }
+
+                if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_UP)) {
+                    UserKey key(SDL_SCANCODE_UP, Chrono::Now(), true);
+                    entities.create().assign<JumpCommand>(entity, key);
+                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_DOWN)) {
+                    UserKey key(SDL_SCANCODE_DOWN, Chrono::Now(), true);
+                    entities.create().assign<CrouchCommand>(entity, key);
+                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT)) {
+                    UserKey key(SDL_SCANCODE_LEFT, Chrono::Now(), true);
+                    entities.create().assign<MoveCommand>(entity, key);
+                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
+                    UserKey key(SDL_SCANCODE_RIGHT, Chrono::Now(), true);
+                    entities.create().assign<MoveCommand>(entity, key);
                 }
             }
         }

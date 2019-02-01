@@ -17,6 +17,10 @@ namespace Inanna {
     struct CrouchCommandSystem : public entityx::System<CrouchCommandSystem> {
 
         void CrouchCharacter(CrouchCommand &cmd) {
+            if (cmd.character.has_component<Crouch>() && cmd.userKey.down) {
+                return;
+            }
+            cmd.character.component<MoveState>()->lock = cmd.userKey.down;
             cmd.character.replace<Crouch>(cmd.userKey.down);
         }
 

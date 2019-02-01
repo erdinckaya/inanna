@@ -10,6 +10,7 @@
 #include "../Game/Components/MoveCharacter.h"
 #include "../Game/Components/JumpCharacter.h"
 #include "../Game/Components/JumpState.h"
+#include "../Game/Components/MoveState.h"
 #include "../Game/Components/Character.h"
 #include "../Game/Components/Crouch.h"
 #include "../Game/Components/UserKeyHistory.h"
@@ -62,6 +63,11 @@ REFLECT_STRUCT_BEGIN(Inanna::Crouch)
 REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::JumpState)
+                    REFLECT_STRUCT_MEMBER(lock)
+                    REFLECT_STRUCT_MEMBER(state)
+REFLECT_STRUCT_END()
+
+REFLECT_STRUCT_BEGIN(Inanna::MoveState)
                     REFLECT_STRUCT_MEMBER(lock)
                     REFLECT_STRUCT_MEMBER(state)
 REFLECT_STRUCT_END()

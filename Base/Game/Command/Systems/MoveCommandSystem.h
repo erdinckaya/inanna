@@ -12,6 +12,8 @@
 #include "../../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../../../Util/SpriteMacro.h"
 #include "../../Components/MoveState.h"
+#include "../../Components/JumpState.h"
+#include "../../Util/JumpStates.h"
 
 using namespace boolinq;
 
@@ -29,8 +31,8 @@ namespace Inanna {
 
         void Move(MoveCommand &cmd) {
             auto character = cmd.character;
-            if (character.component<MoveState>()->lock) {
-                RemoveMove(character);
+            if (character.has_component<MoveCharacter>() && cmd.userKey.down) {
+                return;
             }
 
             auto animData = AnimationData::KYO_MOVE_BACK;
@@ -56,7 +58,11 @@ namespace Inanna {
 
             commands = from(commands).orderBy([](const MoveCommand &cmd) { return cmd.userKey.time; }).toVector();
             for (auto &cmd : commands) {
-                Move(cmd);
+                auto jumpState = cmd.character.component<JumpState>()->state;
+                auto moveLock = cmd.character.component<MoveState>()->lock;
+                if (jumpState == JumpStates::IDLE_JS && !moveLock) {
+                    Move(cmd);
+                }
             }
         }
     };

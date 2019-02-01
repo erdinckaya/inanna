@@ -7,9 +7,9 @@
 
 namespace Inanna {
     enum MoveStates {
-        IDLE_MS,
-        WALK_MS,
-        RUN_MS
+        IDLE_MS = 0,
+        WALK_MS = 1,
+        RUN_MS = 2
     };
 }
 
