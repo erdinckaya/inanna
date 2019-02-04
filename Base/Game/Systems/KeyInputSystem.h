@@ -54,22 +54,22 @@ namespace Inanna {
             } else {
                 switch (key.key) {
                     case SDL_SCANCODE_LEFT:
-                        return GameKey::Back_GK;
+                        return GameKey::Back;
                     case SDL_SCANCODE_RIGHT:
-                        return GameKey::Forward_GK;
+                        return GameKey::Forward;
                     case SDL_SCANCODE_UP:
-                        return GameKey::Jump_GK;
+                        return GameKey::Jump;
                     case SDL_SCANCODE_DOWN:
-                        return GameKey::Crouch_GK;
+                        return GameKey::Crouch;
                     case SDL_SCANCODE_F:
-                        return GameKey::LittleFist_GK;
+                        return GameKey::LittleFist;
                     case SDL_SCANCODE_K:
-                        return GameKey::LittleKick_GK;
+                        return GameKey::LittleKick;
                     default:
                         break;
                 }
             }
-            return InValid;
+            return GameKey::InValid;
         }
 
         void FindSpecialMoves(entityx::Entity entity, std::vector<UserKey> keys) {

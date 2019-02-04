@@ -21,9 +21,9 @@ namespace Inanna {
 
         GameKey GetKey(const std::string &keyStr) {
             GameKey key = GameKey::InValid;
-            for (int i = 0; i < GameKey::NumOfGameKey; ++i) {
+            for (int i = 0; i < GameKey::_size(); ++i) {
                 if (StringKeys[i] == keyStr) {
-                    key = (GameKey) i;
+                    key = GameKey::_from_integral(i);
                     break;
                 }
             }
@@ -36,7 +36,7 @@ namespace Inanna {
             file >> j;
 
             json jKeycode = j["key_code"];
-            for (int i = 0; i < GameKey::NumOfGameKey; ++i) {
+            for (int i = 0; i < GameKey::_size(); ++i) {
                 StringKeys[i] = jKeycode[i].get<std::string>();
             }
 
@@ -56,7 +56,7 @@ namespace Inanna {
             }
         }
 
-        std::string StringKeys[GameKey::NumOfGameKey];
+        std::string StringKeys[GameKey::_size()];
         std::vector<SpecialMoveKeyData> SpecialMoveKeys;
     };
 }
