@@ -48,6 +48,18 @@ namespace Inanna {
             }
         }
 
+        GameKey GetHit(GameKey key) {
+            switch (key) {
+                case GameKey::LittleFist:
+                case GameKey::LittleKick:
+                case GameKey::BigFist:
+                case GameKey::BigKick:
+                    return GameKey::Hit;
+                default:
+                    return key;
+            }
+        }
+
         GameKey ConvertToGameKey(UserKey &key) {
             if (Game::Instance->Rival.valid()) {
                 // TODO: Check relative facing!
@@ -75,21 +87,43 @@ namespace Inanna {
         void FindSpecialMoves(entityx::Entity entity, std::vector<UserKey> keys) {
             for (auto &userKey : keys) {
                 entity.component<UserKeyHistory>()->buffer.push_back(userKey);
+                if (userKey.key == SDL_SCANCODE_F) {
+                    printf("1231231\n");
+                }
             }
 
             UserKeyHistory* history = entity.component<UserKeyHistory>().get();
             ClearTimeoutKeys(history);
             auto specialKeyDefinations = Game::Instance->Patterns.SpecialMoveKeys;
-            std::unordered_map<SpecialMoveKey, int> foundedKeys;
+            std::map<SpecialMoveKey, int> foundedKeys;
+
+            auto downBuffer = from(history->buffer).where([](const UserKey &u) {return u.down;}).
+                    select([](const UserKey &u) {return u;}).toVector();
+//            printf("Down buffer \n");
+//            for (auto d : downBuffer) {
+//                if (d.down) {
+//                    auto key = ConvertToGameKey(d);
+//                    printf(" %s", key._to_string());
+//                }
+//            }
+//            printf("\n");
+
+            auto upBuffer = from(history->buffer).where([](const UserKey &u) {return !u.down;}).toVector();
             for (auto &def : specialKeyDefinations) {
-                const int size = static_cast<const int>(history->buffer.size());
+                const int size = static_cast<const int>(downBuffer.size());
                 for (int i = 0; i < size; ++i) {
-                    auto key = ConvertToGameKey(history->buffer[i]);
+                    auto key = ConvertToGameKey(downBuffer[i]);
                     if (key == def.Keys[0]) {
                         int k = 0;
-                        for (int j = 0; j < def.Keys.size() && k < size; ++j, ++k) {
-                            auto fetchedKey = ConvertToGameKey(history->buffer[j]);
-                            if (fetchedKey != def.Keys[k]) {
+                        for (int j = i; k < def.Keys.size() && j < size; ++j, ++k) {
+                            auto fetchedKey = ConvertToGameKey(downBuffer[j]);
+
+                            if (def.Keys[k] == +GameKey::Hit) {
+                                if (GetHit(fetchedKey) != def.Keys[k]) {
+                                    break;
+                                }
+
+                            } else if (fetchedKey != def.Keys[k]) {
                                 break;
                             }
                         }
@@ -100,9 +134,9 @@ namespace Inanna {
                 }
             }
 
-//            for (auto item : foundedKeys) {
-//                printf("Key is %d\n", item.first);
-//            }
+            for (auto item : foundedKeys) {
+                printf("Key is %s\n", item.first._to_string());
+            }
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {

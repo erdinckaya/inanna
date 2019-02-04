@@ -7,7 +7,8 @@
     "LittleFist",
     "LittleKick",
     "BigFist",
-    "BigKick"
+    "BigKick",
+    "Hit"
   ],
   "moves": [
     {
@@ -31,7 +32,8 @@
       "keys": [
         "Front",
         "Down",
-        "Front"
+        "Front",
+        "Hit"
       ],
       "duration": 1500
     },
@@ -39,7 +41,8 @@
       "id": "adu",
       "keys": [
         "Down",
-        "Front"
+        "Front",
+        "Hit"
       ],
       "duration": 1000
     },
@@ -48,7 +51,8 @@
       "keys": [
         "Front",
         "Down",
-        "Back"
+        "Back",
+        "Hit"
       ],
       "duration": 1000
     },
@@ -58,7 +62,8 @@
         "Down",
         "Front",
         "Down",
-        "Back"
+        "Back",
+        "Hit"
       ],
       "duration": 1500
     },
@@ -69,7 +74,8 @@
         "Down",
         "Back",
         "Down",
-        "Front"
+        "Front",
+        "Hit"
       ],
       "duration": 1500
     },
@@ -79,7 +85,8 @@
         "Down",
         "Front",
         "Down",
-        "Front"
+        "Front",
+        "Hit"
       ],
       "duration": 1500
     },
@@ -91,7 +98,8 @@
         "Back",
         "Front",
         "Down",
-        "Back"
+        "Back",
+        "Hit"
       ],
       "duration": 1500
     }

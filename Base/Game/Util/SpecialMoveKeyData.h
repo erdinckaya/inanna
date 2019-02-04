@@ -13,6 +13,8 @@
 
 namespace Inanna {
     struct SpecialMoveKeyData {
+        explicit SpecialMoveKeyData(): Id(SpecialMoveKey::Invalid), Duration(0) {}
+
         SpecialMoveKey Id;
         std::vector<GameKey> Keys;
         Uint32 Duration;

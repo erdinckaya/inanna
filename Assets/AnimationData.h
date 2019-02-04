@@ -39,12 +39,12 @@ typedef SpriteAnim<ImageAsset> SpriteAnimData;
 struct AnimationData {
 	static SpriteAnim<ImageAsset> DEATH;
 	static SpriteAnim<ImageAsset> KYO_CROUCH;
+	static SpriteAnim<ImageAsset> KYO_JUMP;
 	static SpriteAnim<ImageAsset> KYO_LITTLE_FIST;
 	static SpriteAnim<ImageAsset> KYO_LITTLE_KICK;
-	static SpriteAnim<ImageAsset> KYO_IDLE;
-	static SpriteAnim<ImageAsset> KYO_JUMP;
-	static SpriteAnim<ImageAsset> KYO_MOVE_BACK;
 	static SpriteAnim<ImageAsset> KYO_MOVE_FORWARD;
+	static SpriteAnim<ImageAsset> KYO_MOVE_BACK;
+	static SpriteAnim<ImageAsset> KYO_IDLE;
 	static SpriteAnim<ImageAsset> KYO_SALUTE;
 
 };

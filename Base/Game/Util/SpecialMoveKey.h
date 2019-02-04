@@ -6,17 +6,8 @@
 #define INANNA_SPECIALMOVEKEY_H
 
 namespace Inanna {
-    enum SpecialMoveKey {
-        JumpBack_SM = 0,
-        Run_SM = 1,
-        Oryu_SM = 2,
-        Adu_SM = 3,
-        Taktak_SM = 4,
-        AduTaktak_SM = 5,
-        TaktakAdu_SM = 6,
-        IkiAdu_SM = 7,
-        IkiTaktak_SM = 8,
-    };
+    BETTER_ENUM(SpecialMoveKey, int, Invalid = -1, JumpBack = 0, Run = 1, Oryu = 2, Adu = 3, Taktak = 4, AduTaktak = 5,
+                TaktakAdu = 6, IkiAdu = 7, IkiTaktak = 8)
 }
 
 #endif //INANNA_SPECIALMOVEKEY_H

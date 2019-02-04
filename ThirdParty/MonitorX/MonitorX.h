@@ -137,7 +137,7 @@ namespace monitorx {
         void RenderString(const void *obj, const reflect::TypeDescriptor_Struct::Member &member,
                           const std::basic_string<char, std::char_traits<char>, std::allocator<char>> &strID) const {
             ImGui::PushItemWidth(100);
-            auto *str = (std::__1::string *) ((char *) obj + member.offset);
+            auto *str = (std::string *) ((char *) obj + member.offset);
             ImGui::InputText(strID.c_str(), (char *) str->c_str(), str->capacity() + 1,
                              ImGuiInputTextFlags_CallbackResize, InputTextCallback, (void *) str);
         }
