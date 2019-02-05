@@ -17,6 +17,7 @@
 #include "../SpriteAnimation/Components/SpriteLoop.h"
 #include "../Game/Components/CrouchState.h"
 #include "../Game/Components/Roll.h"
+#include "../Game/Components/Oryu.h"
 
 
 Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags),
@@ -115,7 +116,7 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
 void Inanna::Graphics::Update(float dt) {
 #ifdef MONITORX_DEBUG
     monitorX->Render<Renderable, Position, SpriteAnimation, SpriteLoop, JumpState, MoveState, CrouchState, MoveCharacter,
-            Run, Roll, JumpCharacter, Crouch, UserKey, UserKeyHistory, end_of_list>();
+            Run, Roll, Oryu, JumpCharacter, Crouch, UserKey, UserKeyHistory, end_of_list>();
 #endif
     SDL_GL_MakeCurrent(window, context);
     SDL_GL_SwapWindow(window);

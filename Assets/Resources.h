@@ -363,6 +363,42 @@ public:
 
 
 
+struct Kyo_Oryu : public Sheet {
+
+public:
+    Kyo_Oryu() :
+		FRAME0("Frame0", 206.000000f, 0.000000f, 96.000000f, 212.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		FRAME1("Frame1", 258.000000f, 474.000000f, 176.000000f, 252.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		FRAME2("Frame2", 324.000000f, 212.000000f, 92.000000f, 262.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		FRAME3("Frame3", 120.000000f, 474.000000f, 138.000000f, 248.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		FRAME4("Frame4", 0.000000f, 474.000000f, 120.000000f, 250.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		FRAME5("Frame5", 218.000000f, 212.000000f, 106.000000f, 248.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		FRAME6("Frame6", 106.000000f, 212.000000f, 112.000000f, 238.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		FRAME7("Frame7", 0.000000f, 212.000000f, 106.000000f, 234.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		FRAME8("Frame8", 0.000000f, 0.000000f, 102.000000f, 160.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		FRAME9("Frame9", 102.000000f, 0.000000f, 104.000000f, 186.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		FRAME10("Frame10", 302.000000f, 0.000000f, 118.000000f, 206.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888"),
+		Sheet("kyo_oryu", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Oryu/kyo_oryu.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+	ImageAsset FRAME9;
+	ImageAsset FRAME10;
+
+
+};
+
+
+
 struct Kyo_Roll_Backward : public Sheet {
 
 public:
@@ -521,6 +557,7 @@ public:
 	static Kyo_Jump_Back KYO_JUMP_BACK;
 	static Kyo_Move_Back KYO_MOVE_BACK;
 	static Kyo_Move_Forward KYO_MOVE_FORWARD;
+	static Kyo_Oryu KYO_ORYU;
 	static Kyo_Roll_Backward KYO_ROLL_BACKWARD;
 	static Kyo_Roll_Forward KYO_ROLL_FORWARD;
 	static Kyo_Run KYO_RUN;
@@ -528,7 +565,7 @@ public:
 
 
 	static int SheetCount;
-	static const Sheet Sheets[16];
+	static const Sheet Sheets[17];
 };
 
 

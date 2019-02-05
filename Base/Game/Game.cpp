@@ -27,6 +27,8 @@
 #include "Components/CrouchState.h"
 #include "Command/Systems/RollCommandSystem.h"
 #include "Systems/RollSystem.h"
+#include "Command/Systems/OryuCommandSystem.h"
+#include "Systems/OryuSystem.h"
 
 
 Inanna::Game* Inanna::Game::Instance = nullptr;
@@ -40,6 +42,7 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<JumpBackCommandSystem>();
     systems.add<RunCommandSystem>();
     systems.add<RollCommandSystem>();
+    systems.add<OryuCommandSystem>();
 
 
     systems.add<HitSystem>();
@@ -49,6 +52,7 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<JumpBackSystem>();
     systems.add<RunSystem>();
     systems.add<RollSystem>();
+    systems.add<OryuSystem>();
 
 
     systems.add<SpriteAnimationSystem>();
@@ -68,6 +72,7 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<JumpBackCommandSystem>(dt);
     systems.update<RunCommandSystem>(dt);
     systems.update<RollCommandSystem>(dt);
+    systems.update<OryuCommandSystem>(dt);
 
 
     systems.update<HitSystem>(dt);
@@ -77,6 +82,7 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<JumpBackSystem>(dt);
     systems.update<RunSystem>(dt);
     systems.update<RollSystem>(dt);
+    systems.update<OryuSystem>(dt);
 
 
     systems.update<SpriteAnimationSystem>(dt);

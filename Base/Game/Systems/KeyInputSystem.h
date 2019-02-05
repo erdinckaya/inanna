@@ -24,6 +24,7 @@
 #include "../Command/Components/JumpBackCommand.h"
 #include "../Command/Components/RunCommand.h"
 #include "../Command/Components/RollCommand.h"
+#include "../Command/Components/OryuCommand.h"
 #include "../Util/Chrono.h"
 #include "../Game.h"
 #include "../Events/LockInput.h"
@@ -94,7 +95,7 @@ namespace Inanna {
             return GameKey::InValid;
         }
 
-        SpecialMoveKey FindSpecialMoves(entityx::Entity entity, std::vector<UserKey> keys) {
+        std::tuple<SpecialMoveKey, GameKey> FindSpecialMoves(entityx::Entity entity, std::vector<UserKey> keys) {
             for (auto &userKey : keys) {
                 entity.component<UserKeyHistory>()->buffer.push_back(userKey);
             }
@@ -103,6 +104,7 @@ namespace Inanna {
             ClearTimeoutKeys(history);
             auto specialKeyDefinations = Game::Instance->Patterns.SpecialMoveKeys;
             std::vector<SpecialMoveKey> foundedKeys;
+            GameKey lastKey = GameKey::InValid;
             std::vector<UserKey> userKeys;
 
             auto downBuffer = from(history->buffer).where([](const UserKey &u) { return u.down; }).
@@ -117,6 +119,7 @@ namespace Inanna {
                         int k = 0;
                         for (int j = i; k < def.Keys.size() && j < size; ++j, ++k) {
                             auto fetchedKey = ConvertToGameKey(downBuffer[j]);
+                            lastKey = fetchedKey;
 
                             if (def.Keys[k] == +GameKey::Hit) {
                                 if (GetHit(fetchedKey) != def.Keys[k]) {
@@ -144,7 +147,7 @@ namespace Inanna {
                 }
             }
 
-            return foundedKeys.empty() ? +SpecialMoveKey::Invalid : foundedKeys[0];
+            return std::make_tuple(foundedKeys.empty() ? +SpecialMoveKey::Invalid : foundedKeys[0], lastKey);
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
@@ -157,12 +160,17 @@ namespace Inanna {
                 entity.destroy();
             });
 
+
             keys = from(keys).orderBy([](const UserKey &key) { return key.time; }).toVector();
 
             auto entity = Game::Instance->Player;
+            if (lockedCharacters[entity]) {
+                return;
+            }
 
             if (entity.valid()) {
-                auto specialKey = FindSpecialMoves(entity, keys);
+                auto result = FindSpecialMoves(entity, keys);
+                auto specialKey = std::get<0>(result);
                 if (specialKey != +SpecialMoveKey::Invalid) {
                     printf("SpecialKey is %s\n", specialKey._to_string());
                     switch (specialKey) {
@@ -171,6 +179,9 @@ namespace Inanna {
                             break;
                         case SpecialMoveKey::Run:
                             entities.create().assign<RunCommand>(entity);
+                            break;
+                        case SpecialMoveKey::Oryu:
+                            entities.create().assign<OryuCommand>(entity, std::get<1>(result));
                             break;
                         default:
                             break;
