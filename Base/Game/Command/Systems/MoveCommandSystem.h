@@ -40,10 +40,6 @@ namespace Inanna {
 
         void Move(MoveCommand &cmd) {
             auto character = cmd.character;
-            if (character.component<MoveState>()->state == MoveStates::RUN_MS && !cmd.userKey.down) {
-                manager->emit<RunEnd>(cmd.character);
-                return;
-            }
 
             if (character.has_component<MoveCharacter>() && cmd.userKey.down) {
                 return;
@@ -74,6 +70,11 @@ namespace Inanna {
             for (auto &cmd : commands) {
                 auto jumpState = cmd.character.component<JumpState>()->state;
                 auto moveLock = cmd.character.component<MoveState>()->lock;
+                if (cmd.character.component<MoveState>()->state == MoveStates::RUN_MS && !cmd.userKey.down) {
+                    manager->emit<RunEnd>(cmd.character);
+                    return;
+                }
+
                 if (jumpState == JumpStates::IDLE_JS) {
                     if (!cmd.userKey.down || !moveLock) {
                         Move(cmd);

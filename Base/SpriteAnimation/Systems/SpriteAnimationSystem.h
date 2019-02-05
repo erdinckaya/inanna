@@ -12,6 +12,7 @@
 #include "../../Util/SpriteMacro.h"
 #include "../Event/SpriteIndex.h"
 #include "../Event/SpriteAnimEnd.h"
+#include "../Components/SpriteLoop.h"
 
 #include <queue>
 
@@ -20,7 +21,7 @@ namespace Inanna {
 
         explicit SpriteAnimationSystem() = default;
 
-        SpriteAnimationState Next(SpriteAnimation* animation) {
+        SpriteAnimationState Next(entityx::Entity entity, SpriteAnimation *animation) {
             animation->time = 0;
             if (animation->state == SpriteAnimationState::Finished) {
                 return static_cast<SpriteAnimationState>(animation->state);
@@ -32,12 +33,17 @@ namespace Inanna {
                 animation->frameIndex++;
             }
 
+            if (entity.has_component<SpriteLoop>()) { ;
+                animation->frameIndex = std::max(entity.component<SpriteLoop>()->start,
+                                                 std::min(animation->frameIndex, entity.component<SpriteLoop>()->end));
+            }
+
             const int frameSize = static_cast<int>(animation->animData.keyFrames.size());
             int limit = animation->reverse ? -1 : frameSize;
             if (animation->frameIndex == limit) {
                 if (animation->loop) {
                     animation->state = SpriteAnimationState::Animating;
-                } else if (animation->pingpong)  {
+                } else if (animation->pingpong) {
                     animation->reverse = !animation->reverse;
                     animation->frameIndex = animation->reverse ? frameSize - 1 : 0;
                     animation->pingpong = false;
@@ -48,11 +54,22 @@ namespace Inanna {
                 animation->state = SpriteAnimationState::Animating;
             }
 
-            animation->frameIndex += frameSize;
-            animation->frameIndex %= frameSize;
-            if (animation->stayAtLastFrame) {
-                animation->frameIndex = animation->LastFrame();
+            if (entity.has_component<SpriteLoop>()) {
+                auto start = entity.component<SpriteLoop>()->start;
+                auto end = entity.component<SpriteLoop>()->end;
+                auto size = end - start + 1;
+
+                animation->frameIndex += size;
+                animation->frameIndex %= size;
+                animation->frameIndex += start;
+            } else {
+                animation->frameIndex += frameSize;
+                animation->frameIndex %= frameSize;
+                if (animation->stayAtLastFrame) {
+                    animation->frameIndex = animation->LastFrame();
+                }
             }
+
 
             return static_cast<SpriteAnimationState>(animation->state);
         }
@@ -71,7 +88,7 @@ namespace Inanna {
                 double speed = 1000.0 / animation.animData.speed;
                 bool isKilled = false;
                 if (animation.time >= speed) {
-                    auto state = Next(&animation);
+                    auto state = Next(entity, &animation);
                     FireSpriteEvent(entity, events, animation.frameIndex);
                     if (state == SpriteAnimationState::Finished) {
                         INANNA_COMMAND_EXECUTED(entity);

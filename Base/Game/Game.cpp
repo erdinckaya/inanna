@@ -24,6 +24,7 @@
 #include "Systems/JumpBackSystem.h"
 #include "Command/Systems/RunCommandSystem.h"
 #include "Systems/RunSystem.h"
+#include "Components/CrouchState.h"
 
 
 Inanna::Game* Inanna::Game::Instance = nullptr;
@@ -91,6 +92,7 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Player.assign<UserKeyHistory>();
             Player.assign<MoveState>();
             Player.assign<JumpState>();
+            Player.assign<CrouchState>();
 
             break;
         }

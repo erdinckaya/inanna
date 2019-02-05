@@ -24,6 +24,14 @@
         } \
     } \
 
+#define INANNA_REPLACE_SPRITE_ANIM_IF_NOT_LOOP(entity, anim) \
+    if (entity.has_component<SpriteAnimation>()) { \
+        if (entity.component<SpriteAnimation>()->animData != anim) { \
+            entity.remove<SpriteAnimation>(); \
+            entity.assign<SpriteAnimation>(anim)->loop = true; \
+        } \
+    } \
+
 #define INANNA_REMOVE_COMPONENT(entity, comp) \
     if (entity.has_component<comp>()) { \
         entity.remove<comp>(); \

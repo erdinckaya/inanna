@@ -13,10 +13,12 @@
 #include "../../Components/Run.h"
 #include "../../Components/JumpState.h"
 #include "../../Components/MoveState.h"
+#include "../../Components/CrouchState.h"
 #include "../../../../Assets/AnimationData.h"
 #include "../../../Util/SpriteMacro.h"
 #include "../../../SpriteAnimation/Event/SpriteIndex.h"
 #include "../../Events/RunEnd.h"
+#include "../../../SpriteAnimation/Components/SpriteLoop.h"
 
 using namespace boolinq;
 
@@ -32,12 +34,14 @@ namespace Inanna {
                 return;
             }
 
-            cmd.character.replace<SpriteIndex>(cmd.character, 7);
-            cmd.character.replace<Run>(Vecf(1, 0), 5, AnimationData::KYO_RUN);
+            cmd.character.replace<SpriteLoop>(1, 6);
+            cmd.character.replace<Run>(Vecf(1.5f, 0), 5, AnimationData::KYO_RUN);
             cmd.character.component<JumpState>()->lock = true;
             cmd.character.component<JumpState>()->state = JumpStates::RISE_JS;
             cmd.character.component<MoveState>()->lock = true;
             cmd.character.component<MoveState>()->state = MoveStates::RUN_MS;
+            cmd.character.component<CrouchState>()->lock = true;
+            cmd.character.component<CrouchState>()->state = CrouchStates::Idle;
         }
 
 
@@ -57,10 +61,13 @@ namespace Inanna {
         void receive(const RunEnd &runEnd) {
             RunEnd event = runEnd;
             INANNA_REMOVE_COMPONENT(event.entity, Run);
-            event.entity.component<JumpState>()->state = JumpStates::IDLE_JS;
+            INANNA_REMOVE_COMPONENT(event.entity, SpriteLoop);
             event.entity.component<JumpState>()->lock = false;
+            event.entity.component<JumpState>()->state = JumpStates::IDLE_JS;
             event.entity.component<MoveState>()->lock = false;
             event.entity.component<MoveState>()->state = MoveStates::IDLE_MS;
+            event.entity.component<CrouchState>()->lock = false;
+            event.entity.component<CrouchState>()->state = CrouchStates::Idle;
             INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
         }
     };

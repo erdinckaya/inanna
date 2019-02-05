@@ -7,11 +7,13 @@
 #include "../UI/Components/Renderable.h"
 #include "../UI/Components/Position.h"
 #include "../SpriteAnimation/Components/SpriteAnimation.h"
+#include "../SpriteAnimation/Components/SpriteLoop.h"
 #include "../Game/Components/MoveCharacter.h"
 #include "../Game/Components/Run.h"
 #include "../Game/Components/JumpCharacter.h"
 #include "../Game/Components/JumpState.h"
 #include "../Game/Components/MoveState.h"
+#include "../Game/Components/CrouchState.h"
 #include "../Game/Components/Character.h"
 #include "../Game/Components/Crouch.h"
 #include "../Game/Components/UserKeyHistory.h"
@@ -44,6 +46,11 @@ REFLECT_STRUCT_BEGIN(Inanna::SpriteAnimation)
                     REFLECT_STRUCT_MEMBER(stayAtLastFrame)
 REFLECT_STRUCT_END()
 
+REFLECT_STRUCT_BEGIN(Inanna::SpriteLoop)
+                    REFLECT_STRUCT_MEMBER(start)
+                    REFLECT_STRUCT_MEMBER(end)
+REFLECT_STRUCT_END()
+
 
 REFLECT_STRUCT_BEGIN(Inanna::MoveCharacter)
                     REFLECT_STRUCT_MEMBER(time)
@@ -74,6 +81,11 @@ REFLECT_STRUCT_BEGIN(Inanna::JumpState)
 REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::MoveState)
+                    REFLECT_STRUCT_MEMBER(lock)
+                    REFLECT_STRUCT_MEMBER(state)
+REFLECT_STRUCT_END()
+
+REFLECT_STRUCT_BEGIN(Inanna::CrouchState)
                     REFLECT_STRUCT_MEMBER(lock)
                     REFLECT_STRUCT_MEMBER(state)
 REFLECT_STRUCT_END()

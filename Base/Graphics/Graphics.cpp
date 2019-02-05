@@ -7,12 +7,15 @@
 #include "../UI/WindowManager.h"
 #include "../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Game/Components/MoveCharacter.h"
+#include "../Game/Components/Run.h"
 #include "../World.h"
 #include "../Game/Components/Crouch.h"
 #include "../Game/Components/UserKeyHistory.h"
 #include "../Game/Components/JumpCharacter.h"
 #include "../Game/Components/JumpState.h"
 #include "../Game/Components/MoveState.h"
+#include "../SpriteAnimation/Components/SpriteLoop.h"
+#include "../Game/Components/CrouchState.h"
 
 
 Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags),
@@ -110,8 +113,8 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
 
 void Inanna::Graphics::Update(float dt) {
 #ifdef MONITORX_DEBUG
-    monitorX->Render<Renderable, Position, SpriteAnimation, JumpState, MoveState, MoveCharacter,
-            JumpCharacter, Crouch, UserKey, UserKeyHistory, end_of_list>();
+    monitorX->Render<Renderable, Position, SpriteAnimation, SpriteLoop, JumpState, MoveState, CrouchState, MoveCharacter,
+            Run, JumpCharacter, Crouch, UserKey, UserKeyHistory, end_of_list>();
 #endif
     SDL_GL_MakeCurrent(window, context);
     SDL_GL_SwapWindow(window);
