@@ -13,6 +13,8 @@
 #include "../../../../ThirdParty/boolinq.h"
 #include "../Components/HitCommand.h"
 #include "../../Components/Hit.h"
+#include "../../Components/JumpBack.h"
+#include "../../Components/Roll.h"
 
 using namespace boolinq;
 
@@ -20,6 +22,10 @@ namespace Inanna {
     struct HitCommandSystem : public entityx::System<HitCommandSystem> {
 
         void CharacterHit(HitCommand &cmd) {
+            if (cmd.character.has_component<Roll>() || cmd.character.has_component<JumpBack>()) {
+                return;
+            }
+
             auto character = cmd.character;
             switch (cmd.userKey.key) {
                 case SDL_SCANCODE_K:

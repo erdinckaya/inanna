@@ -7,6 +7,8 @@
 
 
 #include <entityx/System.h>
+#include <map>
+
 #include "../../UI/Components/Position.h"
 #include "../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Components/Character.h"
@@ -24,14 +26,19 @@
 #include "../Command/Components/RollCommand.h"
 #include "../Util/Chrono.h"
 #include "../Game.h"
+#include "../Events/LockInput.h"
 
 
 using namespace boolinq;
 
 namespace Inanna {
-    struct KeyInputSystem : public entityx::System<KeyInputSystem> {
+    struct KeyInputSystem : public entityx::System<KeyInputSystem>, entityx::Receiver<KeyInputSystem> {
 
         explicit KeyInputSystem() = default;
+
+        void configure(entityx::EventManager &events) override {
+            events.subscribe<LockInput>(*this);
+        }
 
 
         void ClearTimeoutKeys(UserKeyHistory *history) {
@@ -143,8 +150,10 @@ namespace Inanna {
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
 
             std::vector<UserKey> keys;
-            entities.each<UserKey>([&keys](entityx::Entity entity, UserKey &userKey) {
-                keys.emplace_back(userKey);
+            entities.each<UserKey>([&](entityx::Entity entity, UserKey &userKey) {
+                if (!lockedCharacters[entity]) {
+                    keys.emplace_back(userKey);
+                }
                 entity.destroy();
             });
 
@@ -170,10 +179,13 @@ namespace Inanna {
                     return;
                 }
 
-                if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_B)) {
+                if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT) && KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_F) &&
+                    KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_K)) {
                     entities.create().assign<RollCommand>(entity, false);
                     return;
-                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_R)) {
+                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_F) &&
+                           KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_K)) {
+                    printf("123123\n");
                     entities.create().assign<RollCommand>(entity, true);
                     return;
                 }
@@ -189,6 +201,7 @@ namespace Inanna {
                         }
                         case SDL_SCANCODE_K:
                         case SDL_SCANCODE_F: {
+                            printf("HIT HIT %d\n", userKey.down);
                             entities.create().assign<HitCommand>(entity, userKey);
                             validkKey = true;
                             break;
@@ -223,6 +236,13 @@ namespace Inanna {
                 }
             }
         }
+
+        void receive(const LockInput &lockInput) {
+            lockedCharacters[lockInput.entity] = lockInput.value;
+        }
+
+    private:
+        std::unordered_map<entityx::Entity, bool> lockedCharacters;
     };
 }
 

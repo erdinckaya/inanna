@@ -46,6 +46,7 @@ namespace Inanna {
             }
 
             RemoveOthers(cmd.character);
+            manager->emit<LockInput>(cmd.character, true);
             auto direction = cmd.forward ? 1 : -1;
             auto animData = cmd.forward ? AnimationData::KYO_ROLL_FORWARD : AnimationData::KYO_ROLL_BACKWARD;
             cmd.character.replace<Roll>(animData, Vecf(1, 0) * direction, 5);
@@ -76,6 +77,7 @@ namespace Inanna {
             event.entity.component<MoveState>()->lock = false;
             event.entity.component<CrouchState>()->lock = false;
             INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+            manager->emit<LockInput>(event.entity, false);
         }
 
     private:
