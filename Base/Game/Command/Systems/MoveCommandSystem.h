@@ -15,16 +15,18 @@
 #include "../../Components/JumpState.h"
 #include "../../Util/JumpStates.h"
 #include "../../Events/RunEnd.h"
+#include "../../Events/MoveEnd.h"
 
 using namespace boolinq;
 
 namespace Inanna {
-    struct MoveCommandSystem : public entityx::System<MoveCommandSystem> {
+    struct MoveCommandSystem : public entityx::System<MoveCommandSystem>, entityx::Receiver<MoveCommandSystem> {
 
         explicit MoveCommandSystem(): manager(nullptr) {}
 
         void configure(entityx::EventManager &events) override {
             manager = &events;
+            events.subscribe<MoveEnd>(*this);
         }
 
         void Move(entityx::Entity &character, SpriteAnimData &animData, int direction) const {
@@ -80,6 +82,13 @@ namespace Inanna {
                         Move(cmd);
                     }
                 }
+            }
+        }
+
+        void receive(const MoveEnd &moveEnd) {
+            MoveEnd event = moveEnd;
+            if (event.entity.has_component<MoveCharacter>()) {
+                RemoveMove(event.entity);
             }
         }
     private:

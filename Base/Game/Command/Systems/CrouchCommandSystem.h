@@ -8,13 +8,18 @@
 
 #include <entityx/System.h>
 #include "../../Components/Crouch.h"
+#include "../../Events/CrouchEnd.h"
 #include "../Components/CrouchCommand.h"
 #include "../../../../ThirdParty/boolinq.h"
 
 using namespace boolinq;
 
 namespace Inanna {
-    struct CrouchCommandSystem : public entityx::System<CrouchCommandSystem> {
+    struct CrouchCommandSystem : public entityx::System<CrouchCommandSystem>, entityx::Receiver<CrouchCommandSystem> {
+
+        void configure(entityx::EventManager &events) override {
+            events.subscribe<CrouchEnd>(*this);
+        }
 
         void CrouchCharacter(CrouchCommand &cmd) {
             if (cmd.character.has_component<Crouch>() && cmd.userKey.down) {
@@ -34,6 +39,14 @@ namespace Inanna {
             commands = from(commands).orderBy([](const CrouchCommand &cmd) { return cmd.userKey.time; }).toVector();
             for (auto &cmd : commands) {
                 CrouchCharacter(cmd);
+            }
+        }
+
+        void receive(const CrouchEnd &crouchEnd) {
+            CrouchEnd event = crouchEnd;
+            if (event.entity.has_component<Crouch>()) {
+                INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+                INANNA_REMOVE_COMPONENT(event.entity, Crouch);
             }
         }
     };

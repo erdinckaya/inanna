@@ -13,6 +13,7 @@
 #include "../../Components/JumpState.h"
 #include "../../Components/MoveState.h"
 #include "../../Events/RollEnd.h"
+#include "../../Events/CrouchEnd.h"
 #include "../../../../Assets/AnimationData.h"
 #include "../../../Util/SpriteMacro.h"
 #include "../Components/RollCommand.h"
@@ -23,15 +24,28 @@ using namespace boolinq;
 
 namespace Inanna {
     struct RollCommandSystem : public entityx::System<RollCommandSystem>, public entityx::Receiver<RollCommandSystem> {
+        explicit RollCommandSystem() : manager(nullptr) {}
 
         void configure(entityx::EventManager &events) override {
+            manager = &events;
             events.subscribe<RollEnd>(*this);
         }
 
+        void RemoveOthers(entityx::Entity entity) {
+            manager->emit<MoveEnd>(entity);
+            manager->emit<JumpEnd>(entity);
+            manager->emit<RunEnd>(entity);
+            manager->emit<CrouchEnd>(entity);
+        }
+
         void HandleJumpBack(RollCommand &cmd) {
-            if (cmd.character.has_component<Roll>()) {
+            if (cmd.character.has_component<Roll>()
+                || cmd.character.has_component<Hit>()
+                || cmd.character.has_component<JumpCharacter>()) {
                 return;
             }
+
+            RemoveOthers(cmd.character);
             auto direction = cmd.forward ? 1 : -1;
             auto animData = cmd.forward ? AnimationData::KYO_ROLL_FORWARD : AnimationData::KYO_ROLL_BACKWARD;
             cmd.character.replace<Roll>(animData, Vecf(1, 0) * direction, 5);
@@ -63,6 +77,9 @@ namespace Inanna {
             event.entity.component<CrouchState>()->lock = false;
             INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
         }
+
+    private:
+        entityx::EventManager *manager;
     };
 }
 #endif //INANNA_ROLLCOMMANDSYSTEM_H

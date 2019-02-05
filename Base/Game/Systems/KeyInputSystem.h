@@ -153,7 +153,6 @@ namespace Inanna {
             auto entity = Game::Instance->Player;
 
             if (entity.valid()) {
-
                 auto specialKey = FindSpecialMoves(entity, keys);
                 if (specialKey != +SpecialMoveKey::Invalid) {
                     printf("SpecialKey is %s\n", specialKey._to_string());
