@@ -21,6 +21,7 @@
 #include "../Command/Components/JumpCommand.h"
 #include "../Command/Components/JumpBackCommand.h"
 #include "../Command/Components/RunCommand.h"
+#include "../Command/Components/RollCommand.h"
 #include "../Util/Chrono.h"
 #include "../Game.h"
 
@@ -167,6 +168,14 @@ namespace Inanna {
                             break;
                     }
 
+                    return;
+                }
+
+                if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_B)) {
+                    entities.create().assign<RollCommand>(entity, false);
+                    return;
+                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_R)) {
+                    entities.create().assign<RollCommand>(entity, true);
                     return;
                 }
 

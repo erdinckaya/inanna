@@ -363,6 +363,70 @@ public:
 
 
 
+struct Kyo_Roll_Backward : public Sheet {
+
+public:
+    Kyo_Roll_Backward() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 140.000000f, 198.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888"),
+		FRAME1("Frame1", 0.000000f, 198.000000f, 188.000000f, 206.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888"),
+		FRAME2("Frame2", 0.000000f, 404.000000f, 204.000000f, 184.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888"),
+		FRAME3("Frame3", 0.000000f, 588.000000f, 212.000000f, 154.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888"),
+		FRAME4("Frame4", 0.000000f, 742.000000f, 142.000000f, 132.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888"),
+		FRAME5("Frame5", 0.000000f, 874.000000f, 188.000000f, 118.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888"),
+		FRAME6("Frame6", 0.000000f, 992.000000f, 160.000000f, 140.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888"),
+		FRAME7("Frame7", 0.000000f, 1132.000000f, 102.000000f, 160.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888"),
+		FRAME8("Frame8", 102.000000f, 1132.000000f, 118.000000f, 206.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888"),
+		Sheet("kyo_roll_backward", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Roll/kyo_roll_backward.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+
+
+};
+
+
+
+struct Kyo_Roll_Forward : public Sheet {
+
+public:
+    Kyo_Roll_Forward() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 102.000000f, 160.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888"),
+		FRAME1("Frame1", 0.000000f, 160.000000f, 160.000000f, 140.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888"),
+		FRAME2("Frame2", 0.000000f, 300.000000f, 188.000000f, 118.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888"),
+		FRAME3("Frame3", 0.000000f, 418.000000f, 142.000000f, 132.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888"),
+		FRAME4("Frame4", 0.000000f, 550.000000f, 212.000000f, 154.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888"),
+		FRAME5("Frame5", 0.000000f, 704.000000f, 204.000000f, 184.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888"),
+		FRAME6("Frame6", 0.000000f, 888.000000f, 188.000000f, 206.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888"),
+		FRAME7("Frame7", 0.000000f, 1094.000000f, 90.000000f, 220.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888"),
+		FRAME8("Frame8", 90.000000f, 1094.000000f, 118.000000f, 206.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888"),
+		Sheet("kyo_roll_forward", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Roll/kyo_roll_forward.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+
+
+};
+
+
+
 struct Kyo_Run : public Sheet {
 
 public:
@@ -457,12 +521,14 @@ public:
 	static Kyo_Jump_Back KYO_JUMP_BACK;
 	static Kyo_Move_Back KYO_MOVE_BACK;
 	static Kyo_Move_Forward KYO_MOVE_FORWARD;
+	static Kyo_Roll_Backward KYO_ROLL_BACKWARD;
+	static Kyo_Roll_Forward KYO_ROLL_FORWARD;
 	static Kyo_Run KYO_RUN;
 	static Kyo_Salute KYO_SALUTE;
 
 
 	static int SheetCount;
-	static const Sheet Sheets[14];
+	static const Sheet Sheets[16];
 };
 
 

@@ -1,0 +1,110 @@
+{"frames": [
+
+{
+	"filename": "Frame0.png",
+	"frame": {"x":0,"y":0,"w":102,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":102,"h":160},
+	"sourceSize": {"w":102,"h":160},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame1.png",
+	"frame": {"x":0,"y":160,"w":160,"h":140},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":140},
+	"sourceSize": {"w":160,"h":140},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame2.png",
+	"frame": {"x":0,"y":300,"w":188,"h":118},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":118},
+	"sourceSize": {"w":188,"h":118},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame3.png",
+	"frame": {"x":0,"y":418,"w":142,"h":132},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":142,"h":132},
+	"sourceSize": {"w":142,"h":132},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame4.png",
+	"frame": {"x":0,"y":550,"w":212,"h":154},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":212,"h":154},
+	"sourceSize": {"w":212,"h":154},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame5.png",
+	"frame": {"x":0,"y":704,"w":204,"h":184},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":204,"h":184},
+	"sourceSize": {"w":204,"h":184},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame6.png",
+	"frame": {"x":0,"y":888,"w":188,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":206},
+	"sourceSize": {"w":188,"h":206},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame7.png",
+	"frame": {"x":0,"y":1094,"w":90,"h":220},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":220},
+	"sourceSize": {"w":90,"h":220},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame8.png",
+	"frame": {"x":90,"y":1094,"w":118,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":206},
+	"sourceSize": {"w":118,"h":206},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "kyo_roll_forward.png",
+	"format": "RGBA8888",
+	"size": {"w":212,"h":1314},
+	"scale": "1",
+	"anims": [
+		{
+			"name": "kyo_roll_forward",
+			"images": [
+				"Frame0",
+				"Frame1",
+				"Frame2",
+				"Frame3",
+				"Frame4",
+				"Frame5",
+				"Frame6",
+				"Frame7",
+				"Frame8"
+			],
+			"speed": 20
+		}
+	],
+	"smartupdate": "$TexturePacker:SmartUpdate:057fcf13c9466a2247fe6d83d6a8005e:595b01db78d7cd9d4a3f78178567e3ba:ec7da5025e94749c4da79c417b030b3d$"
+}
+}

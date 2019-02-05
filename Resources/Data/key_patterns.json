@@ -17,7 +17,7 @@
         "Back",
         "Back"
       ],
-      "duration": 500
+      "duration": 200
     },
     {
       "id": "run",
@@ -25,7 +25,7 @@
         "Front",
         "Front"
       ],
-      "duration": 500
+      "duration": 200
     },
     {
       "id": "oryu",
