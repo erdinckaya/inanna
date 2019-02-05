@@ -25,8 +25,10 @@ namespace Inanna {
         }
 
         void RemoveMove(entityx::Entity &character) const {
-            INANNA_REMOVE_COMPONENT(character, MoveCharacter);
-            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(character, AnimationData::KYO_IDLE);
+            if (character.has_component<MoveCharacter>()) {
+                INANNA_REMOVE_COMPONENT(character, MoveCharacter);
+                INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(character, AnimationData::KYO_IDLE);
+            }
         }
 
         void Move(MoveCommand &cmd) {
@@ -60,8 +62,10 @@ namespace Inanna {
             for (auto &cmd : commands) {
                 auto jumpState = cmd.character.component<JumpState>()->state;
                 auto moveLock = cmd.character.component<MoveState>()->lock;
-                if (jumpState == JumpStates::IDLE_JS && !moveLock) {
-                    Move(cmd);
+                if (jumpState == JumpStates::IDLE_JS) {
+                    if (!cmd.userKey.down || !moveLock) {
+                        Move(cmd);
+                    }
                 }
             }
         }

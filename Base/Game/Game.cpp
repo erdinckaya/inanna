@@ -20,6 +20,8 @@
 #include "Command/Systems/JumpCommandSystem.h"
 #include "Systems/JumpCharacterSystem.h"
 #include "Components/JumpState.h"
+#include "Command/Systems/JumpBackCommandSystem.h"
+#include "Systems/JumpBackSystem.h"
 
 
 Inanna::Game* Inanna::Game::Instance = nullptr;
@@ -30,12 +32,14 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<MoveCommandSystem>();
     systems.add<CrouchCommandSystem>();
     systems.add<JumpCommandSystem>();
+    systems.add<JumpBackCommandSystem>();
 
 
     systems.add<HitSystem>();
     systems.add<CrouchSystem>();
     systems.add<MoveCharacterSystem>();
     systems.add<JumpCharacterSystem>();
+    systems.add<JumpBackSystem>();
 
 
     systems.add<SpriteAnimationSystem>();
@@ -52,12 +56,14 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<MoveCommandSystem>(dt);
     systems.update<CrouchCommandSystem>(dt);
     systems.update<JumpCommandSystem>(dt);
+    systems.update<JumpBackCommandSystem>(dt);
 
 
     systems.update<HitSystem>(dt);
     systems.update<CrouchSystem>(dt);
     systems.update<MoveCharacterSystem>(dt);
     systems.update<JumpCharacterSystem>(dt);
+    systems.update<JumpBackSystem>(dt);
 
 
     systems.update<SpriteAnimationSystem>(dt);

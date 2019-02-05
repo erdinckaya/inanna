@@ -21,6 +21,14 @@ namespace Inanna {
             return std::to_string(key) + ", " + std::to_string(time) + ", " + std::to_string(down);
         }
 
+        friend inline bool operator==(const UserKey& lhs, const UserKey& rhs) {
+            return lhs.key == rhs.key && lhs.down == rhs.down && lhs.time == rhs.time;
+        }
+
+        friend inline bool operator!=(const UserKey& lhs, const UserKey& rhs) {
+            return !(lhs == rhs);
+        }
+
         REFLECT()
     };
 }

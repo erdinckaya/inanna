@@ -19,6 +19,7 @@
 #include "../Command/Components/HitCommand.h"
 #include "../Command/Components/CrouchCommand.h"
 #include "../Command/Components/JumpCommand.h"
+#include "../Command/Components/JumpBackCommand.h"
 #include "../Util/Chrono.h"
 #include "../Game.h"
 
@@ -33,9 +34,9 @@ namespace Inanna {
 
         void ClearTimeoutKeys(UserKeyHistory *history) {
             const int size = static_cast<const int>(history->buffer.size());
-            const Uint32 TwoSeconds = 2000;
-            const Uint32 now = SDL_GetTicks();
-            const Uint32 limit = now - TwoSeconds;
+            const Uint32 OneSeconds = 1000;
+            const Uint32 now = Chrono::Now();
+            const Uint32 limit = now - OneSeconds;
             int index = 0;
             for (int i = 0; i < size; ++i) {
                 if (history->buffer[i].time <= limit) {
@@ -84,31 +85,21 @@ namespace Inanna {
             return GameKey::InValid;
         }
 
-        void FindSpecialMoves(entityx::Entity entity, std::vector<UserKey> keys) {
+        SpecialMoveKey FindSpecialMoves(entityx::Entity entity, std::vector<UserKey> keys) {
             for (auto &userKey : keys) {
                 entity.component<UserKeyHistory>()->buffer.push_back(userKey);
-                if (userKey.key == SDL_SCANCODE_F) {
-                    printf("1231231\n");
-                }
             }
 
-            UserKeyHistory* history = entity.component<UserKeyHistory>().get();
+            UserKeyHistory *history = entity.component<UserKeyHistory>().get();
             ClearTimeoutKeys(history);
             auto specialKeyDefinations = Game::Instance->Patterns.SpecialMoveKeys;
-            std::map<SpecialMoveKey, int> foundedKeys;
+            std::vector<SpecialMoveKey> foundedKeys;
+            std::vector<UserKey> userKeys;
 
-            auto downBuffer = from(history->buffer).where([](const UserKey &u) {return u.down;}).
-                    select([](const UserKey &u) {return u;}).toVector();
-//            printf("Down buffer \n");
-//            for (auto d : downBuffer) {
-//                if (d.down) {
-//                    auto key = ConvertToGameKey(d);
-//                    printf(" %s", key._to_string());
-//                }
-//            }
-//            printf("\n");
+            auto downBuffer = from(history->buffer).where([](const UserKey &u) { return u.down; }).
+                    select([](const UserKey &u) { return u; }).toVector();
 
-            auto upBuffer = from(history->buffer).where([](const UserKey &u) {return !u.down;}).toVector();
+            auto upBuffer = from(history->buffer).where([](const UserKey &u) { return !u.down; }).toVector();
             for (auto &def : specialKeyDefinations) {
                 const int size = static_cast<const int>(downBuffer.size());
                 for (int i = 0; i < size; ++i) {
@@ -126,17 +117,25 @@ namespace Inanna {
                             } else if (fetchedKey != def.Keys[k]) {
                                 break;
                             }
+
+                            userKeys.push_back(downBuffer[j]);
                         }
                         if (k == def.Keys.size()) {
-                            foundedKeys[def.Id] = i;
+                            foundedKeys.push_back(def.Id);
+                            for (auto userKey : userKeys) {
+                                for (int l = 0; l < history->buffer.size(); ++l) {
+                                    if (userKey == history->buffer[l]) {
+                                        history->buffer.erase(history->buffer.begin() + l);
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
 
-            for (auto item : foundedKeys) {
-                printf("Key is %s\n", item.first._to_string());
-            }
+            return foundedKeys.empty() ? +SpecialMoveKey::Invalid : foundedKeys[0];
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
@@ -153,7 +152,19 @@ namespace Inanna {
 
             if (entity.valid()) {
 
-                FindSpecialMoves(entity, keys);
+                auto specialKey = FindSpecialMoves(entity, keys);
+                if (specialKey != +SpecialMoveKey::Invalid) {
+                    printf("SpecialKey is %s\n", specialKey._to_string());
+                    switch (specialKey) {
+                        case SpecialMoveKey::JumpBack:
+                            entities.create().assign<JumpBackCommand>(entity);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    return;
+                }
 
                 for (auto &userKey : keys) {
                     bool validkKey = false;

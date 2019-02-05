@@ -43,7 +43,9 @@ namespace Inanna {
 
             commands = from(commands).orderBy([](const JumpCommand &cmd) { return cmd.userKey.time; }).toVector();
             for (auto &cmd : commands) {
-                HandleJump(cmd);
+                if (!cmd.character.component<JumpState>()->lock) {
+                    HandleJump(cmd);
+                }
             }
         }
 
