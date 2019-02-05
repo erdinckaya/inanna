@@ -1,0 +1,100 @@
+{"frames": [
+
+{
+	"filename": "Frame0.png",
+	"frame": {"x":0,"y":0,"w":176,"h":218},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":176,"h":218},
+	"sourceSize": {"w":176,"h":218},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame1.png",
+	"frame": {"x":176,"y":0,"w":138,"h":212},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":138,"h":212},
+	"sourceSize": {"w":138,"h":212},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame2.png",
+	"frame": {"x":314,"y":0,"w":134,"h":212},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":212},
+	"sourceSize": {"w":134,"h":212},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame3.png",
+	"frame": {"x":448,"y":0,"w":206,"h":218},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":206,"h":218},
+	"sourceSize": {"w":206,"h":218},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame4.png",
+	"frame": {"x":654,"y":0,"w":134,"h":212},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":212},
+	"sourceSize": {"w":134,"h":212},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame5.png",
+	"frame": {"x":788,"y":0,"w":138,"h":212},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":138,"h":212},
+	"sourceSize": {"w":138,"h":212},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame6.png",
+	"frame": {"x":926,"y":0,"w":120,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":206},
+	"sourceSize": {"w":120,"h":206},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame7.png",
+	"frame": {"x":1046,"y":0,"w":118,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":206},
+	"sourceSize": {"w":118,"h":206},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "kyo_big_kick.png",
+	"format": "RGBA8888",
+	"size": {"w":1164,"h":218},
+	"scale": "1",
+	"anims": [
+		{
+			"name": "kyo_big_kick",
+			"images": [
+				"Frame0",
+				"Frame1",
+				"Frame2",
+				"Frame3",
+				"Frame4",
+				"Frame5",
+				"Frame6",
+				"Frame7"
+			],
+			"speed": 15
+		}
+	],
+	"smartupdate": "$TexturePacker:SmartUpdate:477d10b591b273019fea79402416a030:9ca9a61812dc327e721dba0abc1a26ee:4e95a2ea329a262066340fc7b37cc7b6$"
+}
+}

@@ -211,8 +211,8 @@ namespace Inanna {
                             break;
                         }
                         case SDL_SCANCODE_K:
+                        case SDL_SCANCODE_L:
                         case SDL_SCANCODE_F: {
-                            printf("HIT HIT %d\n", userKey.down);
                             entities.create().assign<HitCommand>(entity, userKey);
                             validkKey = true;
                             break;

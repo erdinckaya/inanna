@@ -29,6 +29,7 @@ namespace Inanna {
             auto character = cmd.character;
             switch (cmd.userKey.key) {
                 case SDL_SCANCODE_K:
+                case SDL_SCANCODE_L:
                 case SDL_SCANCODE_F: {
                     if (!character.has_component<Hit>()) {
                         character.assign<Hit>(cmd.userKey.key);

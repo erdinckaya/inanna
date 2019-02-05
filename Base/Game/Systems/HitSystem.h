@@ -42,6 +42,11 @@ namespace Inanna {
                                 entity.replace<CommandLink>(entity)->onExecuted.Connect(&HitSystem::OnHitFinish);
                                 break;
                             }
+                            case SDL_SCANCODE_L: {
+                                INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_BIG_KICK);
+                                entity.replace<CommandLink>(entity)->onExecuted.Connect(&HitSystem::OnHitFinish);
+                                break;
+                            }
                             default:
                                 break;
                         }

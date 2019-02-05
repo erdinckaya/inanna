@@ -115,8 +115,8 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
 
 void Inanna::Graphics::Update(float dt) {
 #ifdef MONITORX_DEBUG
-    monitorX->Render<Renderable, Position, SpriteAnimation, SpriteLoop, JumpState, MoveState, CrouchState, MoveCharacter,
-            Run, Roll, Oryu, JumpCharacter, Crouch, UserKey, UserKeyHistory, end_of_list>();
+    monitorX->Render<Renderable, Position, SpriteAnimation, SpriteLoop, JumpState, MoveState, CrouchState, UserKeyHistory,
+            MoveCharacter, Run, Roll, Oryu, JumpCharacter, Crouch, UserKey, end_of_list>();
 #endif
     SDL_GL_MakeCurrent(window, context);
     SDL_GL_SwapWindow(window);
