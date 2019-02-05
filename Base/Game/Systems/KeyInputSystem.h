@@ -20,6 +20,7 @@
 #include "../Command/Components/CrouchCommand.h"
 #include "../Command/Components/JumpCommand.h"
 #include "../Command/Components/JumpBackCommand.h"
+#include "../Command/Components/RunCommand.h"
 #include "../Util/Chrono.h"
 #include "../Game.h"
 
@@ -158,6 +159,9 @@ namespace Inanna {
                     switch (specialKey) {
                         case SpecialMoveKey::JumpBack:
                             entities.create().assign<JumpBackCommand>(entity);
+                            break;
+                        case SpecialMoveKey::Run:
+                            entities.create().assign<RunCommand>(entity);
                             break;
                         default:
                             break;

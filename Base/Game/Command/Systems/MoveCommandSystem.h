@@ -14,11 +14,18 @@
 #include "../../Components/MoveState.h"
 #include "../../Components/JumpState.h"
 #include "../../Util/JumpStates.h"
+#include "../../Events/RunEnd.h"
 
 using namespace boolinq;
 
 namespace Inanna {
     struct MoveCommandSystem : public entityx::System<MoveCommandSystem> {
+
+        explicit MoveCommandSystem(): manager(nullptr) {}
+
+        void configure(entityx::EventManager &events) override {
+            manager = &events;
+        }
 
         void Move(entityx::Entity &character, SpriteAnimData &animData, int direction) const {
             character.replace<MoveCharacter>(Vecf(0.75f, 0) * direction, 5, animData);
@@ -33,6 +40,11 @@ namespace Inanna {
 
         void Move(MoveCommand &cmd) {
             auto character = cmd.character;
+            if (character.component<MoveState>()->state == MoveStates::RUN_MS && !cmd.userKey.down) {
+                manager->emit<RunEnd>(cmd.character);
+                return;
+            }
+
             if (character.has_component<MoveCharacter>() && cmd.userKey.down) {
                 return;
             }
@@ -69,6 +81,8 @@ namespace Inanna {
                 }
             }
         }
+    private:
+        entityx::EventManager *manager;
     };
 }
 

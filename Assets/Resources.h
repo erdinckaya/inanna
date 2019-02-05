@@ -363,6 +363,38 @@ public:
 
 
 
+struct Kyo_Run : public Sheet {
+
+public:
+    Kyo_Run() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 102.000000f, 160.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888"),
+		FRAME1("Frame1", 0.000000f, 172.000000f, 126.000000f, 178.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888"),
+		FRAME2("Frame2", 0.000000f, 356.000000f, 210.000000f, 184.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888"),
+		FRAME3("Frame3", 102.000000f, 0.000000f, 202.000000f, 170.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888"),
+		FRAME4("Frame4", 126.000000f, 172.000000f, 126.000000f, 180.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888"),
+		FRAME5("Frame5", 252.000000f, 172.000000f, 218.000000f, 184.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888"),
+		FRAME6("Frame6", 304.000000f, 0.000000f, 206.000000f, 172.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888"),
+		FRAME7("Frame7", 328.000000f, 356.000000f, 112.000000f, 212.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888"),
+		FRAME8("Frame8", 210.000000f, 356.000000f, 118.000000f, 206.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888"),
+		Sheet("kyo_run", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Run/kyo_run.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+
+
+};
+
+
+
 struct Kyo_Salute : public Sheet {
 
 public:
@@ -425,11 +457,12 @@ public:
 	static Kyo_Jump_Back KYO_JUMP_BACK;
 	static Kyo_Move_Back KYO_MOVE_BACK;
 	static Kyo_Move_Forward KYO_MOVE_FORWARD;
+	static Kyo_Run KYO_RUN;
 	static Kyo_Salute KYO_SALUTE;
 
 
 	static int SheetCount;
-	static const Sheet Sheets[13];
+	static const Sheet Sheets[14];
 };
 
 

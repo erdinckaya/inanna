@@ -8,6 +8,7 @@
 #include "../UI/Components/Position.h"
 #include "../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Game/Components/MoveCharacter.h"
+#include "../Game/Components/Run.h"
 #include "../Game/Components/JumpCharacter.h"
 #include "../Game/Components/JumpState.h"
 #include "../Game/Components/MoveState.h"
@@ -48,7 +49,12 @@ REFLECT_STRUCT_BEGIN(Inanna::MoveCharacter)
                     REFLECT_STRUCT_MEMBER(time)
                     REFLECT_STRUCT_MEMBER(direction)
                     REFLECT_STRUCT_MEMBER(speed)
+REFLECT_STRUCT_END()
 
+REFLECT_STRUCT_BEGIN(Inanna::Run)
+                    REFLECT_STRUCT_MEMBER(time)
+                    REFLECT_STRUCT_MEMBER(direction)
+                    REFLECT_STRUCT_MEMBER(speed)
 REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::JumpCharacter)

@@ -1,0 +1,110 @@
+{"frames": [
+
+{
+	"filename": "Frame0.png",
+	"frame": {"x":0,"y":0,"w":102,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":102,"h":160},
+	"sourceSize": {"w":102,"h":160},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame1.png",
+	"frame": {"x":0,"y":172,"w":126,"h":178},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":178},
+	"sourceSize": {"w":126,"h":178},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame2.png",
+	"frame": {"x":0,"y":356,"w":210,"h":184},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":210,"h":184},
+	"sourceSize": {"w":210,"h":184},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame3.png",
+	"frame": {"x":102,"y":0,"w":202,"h":170},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":202,"h":170},
+	"sourceSize": {"w":202,"h":170},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame4.png",
+	"frame": {"x":126,"y":172,"w":126,"h":180},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":180},
+	"sourceSize": {"w":126,"h":180},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame5.png",
+	"frame": {"x":252,"y":172,"w":218,"h":184},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":218,"h":184},
+	"sourceSize": {"w":218,"h":184},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame6.png",
+	"frame": {"x":304,"y":0,"w":206,"h":172},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":206,"h":172},
+	"sourceSize": {"w":206,"h":172},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame7.png",
+	"frame": {"x":328,"y":356,"w":112,"h":212},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":112,"h":212},
+	"sourceSize": {"w":112,"h":212},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Frame8.png",
+	"frame": {"x":210,"y":356,"w":118,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":206},
+	"sourceSize": {"w":118,"h":206},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "kyo_run.png",
+	"format": "RGBA8888",
+	"size": {"w":510,"h":568},
+	"scale": "1",
+	"anims": [
+		{
+			"name": "kyo_run",
+			"images": [
+				"Frame0",
+				"Frame1",
+				"Frame2",
+				"Frame3",
+				"Frame4",
+				"Frame5",
+				"Frame6",
+				"Frame7",
+				"Frame8"
+			],
+			"speed": 10
+		}
+	],
+	"smartupdate": "$TexturePacker:SmartUpdate:05d9533526be001e7ee57e84253ffd43:a7a9d50525b646fd7142f0c4d72663ac:3f8acfb6e75046eef27be22ee5ebcd43$"
+}
+}
