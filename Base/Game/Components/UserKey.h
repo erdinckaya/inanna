@@ -5,11 +5,11 @@
 #ifndef INANNA_USERKEY_H
 #define INANNA_USERKEY_H
 
-#include <SDL_scancode.h>
+#include "../Util/GameKey.h"
 
 namespace Inanna {
     struct UserKey {
-        explicit UserKey() : key(SDL_SCANCODE_UNKNOWN), time(0), down(false) {}
+        explicit UserKey() : key(GameKey::InValid), time(0), down(false) {}
 
         explicit UserKey(int key, Uint32 time, bool down) : key(key), time(time), down(down) {}
 

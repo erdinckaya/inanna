@@ -1,15 +1,4 @@
 {
-  "key_code": [
-    "Back",
-    "Up",
-    "Front",
-    "Down",
-    "LittleFist",
-    "LittleKick",
-    "BigFist",
-    "BigKick",
-    "Hit"
-  ],
   "moves": [
     {
       "id": "jump_back",
@@ -22,17 +11,17 @@
     {
       "id": "run",
       "keys": [
-        "Front",
-        "Front"
+        "Forward",
+        "Forward"
       ],
       "duration": 200
     },
     {
       "id": "oryu",
       "keys": [
-        "Front",
+        "Forward",
         "Down",
-        "Front",
+        "Forward",
         "Hit"
       ],
       "duration": 1500
@@ -41,7 +30,7 @@
       "id": "adu",
       "keys": [
         "Down",
-        "Front",
+        "Forward",
         "Hit"
       ],
       "duration": 1000
@@ -49,7 +38,7 @@
     {
       "id": "taktak",
       "keys": [
-        "Front",
+        "Forward",
         "Down",
         "Back",
         "Hit"
@@ -60,7 +49,7 @@
       "id": "adu-taktak",
       "keys": [
         "Down",
-        "Front",
+        "Forward",
         "Down",
         "Back",
         "Hit"
@@ -70,11 +59,11 @@
     {
       "id": "taktak-adu",
       "keys": [
-        "Front",
+        "Forward",
         "Down",
         "Back",
         "Down",
-        "Front",
+        "Forward",
         "Hit"
       ],
       "duration": 1500
@@ -83,9 +72,9 @@
       "id": "iki-adu",
       "keys": [
         "Down",
-        "Front",
+        "Forward",
         "Down",
-        "Front",
+        "Forward",
         "Hit"
       ],
       "duration": 1500
@@ -93,10 +82,10 @@
     {
       "id": "iki-taktak",
       "keys": [
-        "Front",
+        "Forward",
         "Down",
         "Back",
-        "Front",
+        "Forward",
         "Down",
         "Back",
         "Hit"

@@ -27,13 +27,15 @@ namespace Inanna {
             }
 
             auto character = cmd.character;
+            if (!character.has_component<Hit>() && IS_HIT(GameKey::_from_integral(cmd.userKey.key))) {
+                character.assign<Hit>(cmd.userKey.key);
+            }
+
             switch (cmd.userKey.key) {
                 case SDL_SCANCODE_K:
                 case SDL_SCANCODE_L:
                 case SDL_SCANCODE_F: {
-                    if (!character.has_component<Hit>()) {
-                        character.assign<Hit>(cmd.userKey.key);
-                    }
+
                     break;
                 }
                 default:

@@ -31,7 +31,6 @@ for root, dirs, files in os.walk(atlas_path):
             data = os.path.join(root, file.split(".")[0] + ".png")
             resources.append(Resource(name, data, path))
 
-
 result_str = ""
 
 image_class_str = \
@@ -40,6 +39,7 @@ image_class_str = \
 #define RESOURCEMANAGER_RESOURCES_H
 
 #include "../ThirdParty/MonitorX/3rdParty/FlexibleReflection/Reflect.h"
+#include "../Base/Util/Math/Rect.h"
 
 #include<string>
 #include<string.h>
@@ -56,7 +56,8 @@ public:
 struct ImageAsset {
 public:
     explicit ImageAsset() : id("") {}
-    ImageAsset(const char* id, float x, float y, float w, float h, float parent_w, float parent_h, const char* parent, const char* format)
+    ImageAsset(const char* id, float x, float y, float w, float h, float parent_w, float parent_h, const char* parent
+        , const char* format, int hitX, int hitY, int hitW, int hitH)
     {
         this->id = id;
         this->x = x;
@@ -67,6 +68,8 @@ public:
         this->parent_h = parent_h;
         this->parent = parent;
         this->format = format;
+        this->hitRect = Inanna::Rectf(hitX, hitY, hitW, hitH);
+        
         
         this->name = std::string(this->id);
     } 
@@ -79,6 +82,7 @@ public:
     
     float parent_w;
     float parent_h;
+    Inanna::Rectf hitRect;
     
     const char* parent;
     const char* format;
@@ -113,8 +117,6 @@ public:
 
 """
 
-
-
 cpp_file_value_str = ""
 sheet_arr_count = ""
 sheet_arr_str = ""
@@ -144,11 +146,15 @@ for resource in resources:
         y = frame["frame"]["y"]
         w = frame["frame"]["w"]
         h = frame["frame"]["h"]
+        hx, hy, hw, hh = 0, 0, 0, 0
+        if "hitRectangle" in frame:
+            hx, hy, hw, hh = frame["hitRectangle"]["x"], frame["hitRectangle"]["y"], frame["hitRectangle"]["w"], frame["hitRectangle"]["h"]
+
         asset_definition_class_str += "\tImageAsset %s;\n" % (id.upper())
 
-        comma = "," #if len(frames) != frame_count else ""
-        assets_values_class_str += "\t\t%s(\"%s\", %ff, %ff, %ff, %ff, %ff, %ff, \"%s\", \"%s\")%s\n" % (id.upper(), id, x, y, w, h, sheet_width, sheet_height, name, sheet_format, comma)
-
+        comma = ","  # if len(frames) != frame_count else ""
+        assets_values_class_str += "\t\t%s(\"%s\", %ff, %ff, %ff, %ff, %ff, %ff, \"%s\", \"%s\", %ff, %ff, %ff, %ff)%s\n" % (
+        id.upper(), id, x, y, w, h, sheet_width, sheet_height, name, sheet_format, hx, hy, hw, hh, comma)
 
     # assets_values_class_str += "\t\tpath(\"%s\"),\n" % path
     assets_values_class_str += "\t\tSheet(\"%s\", \"%s\")\n" % (name, path)
@@ -157,15 +163,14 @@ for resource in resources:
     # assets_values_class_str += "\t\tname(\"%s\")\n" % name
     # asset_definition_class_str += "\tconst char* name;\n"
 
-    result_str += assets_assets_class_str % (name.title(), name.title(), assets_values_class_str, asset_definition_class_str)
+    result_str += assets_assets_class_str % (
+    name.title(), name.title(), assets_values_class_str, asset_definition_class_str)
     atlas_class_str += "\tstatic %s %s;\n" % (name.title(), name.upper())
 
     cpp_file_value_str += "%s Resources::%s;\n" % (name.title(), name.upper())
 
     s_comma = ", " if len(resources) != resource_count else ""
     sheet_arr_str += "Sheet(Resources::%s.name, Resources::%s.path)%s" % (name.upper(), name.upper(), s_comma)
-
-
 
 resources_class_str = \
     """struct Resources {
@@ -184,7 +189,6 @@ result_str += resources_class_str
 
 print(result_str)
 
-
 cpp_file_str = """
 
 #include \"Resources.h\"
@@ -196,13 +200,10 @@ int Resources::SheetCount = %d;
 const Sheet Resources::Sheets[%d] = {%s};
 """ % (cpp_file_value_str, len(resources), len(resources), sheet_arr_str)
 
-
 with open(output_path, 'w') as the_file:
     the_file.write(result_str)
 
-
 with open(output_path_cpp, 'w') as the_file:
     the_file.write(cpp_file_str)
-
 
 animations.write_animations(join_path)

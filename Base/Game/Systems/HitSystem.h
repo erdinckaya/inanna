@@ -31,18 +31,19 @@ namespace Inanna {
                                SpriteAnimation &anim,
                                Hit &hit) {
                         entity.component<MoveState>()->lock = true;
-                        switch (hit.key) {
-                            case SDL_SCANCODE_F: {
+                        auto key = GameKey::_from_integral(hit.key);
+                        switch (key) {
+                            case GameKey::LittleFist:  {
                                 INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_LITTLE_FIST);
                                 entity.replace<CommandLink>(entity)->onExecuted.Connect(&HitSystem::OnHitFinish);
                                 break;
                             }
-                            case SDL_SCANCODE_K: {
+                            case GameKey::LittleKick: {
                                 INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_LITTLE_KICK);
                                 entity.replace<CommandLink>(entity)->onExecuted.Connect(&HitSystem::OnHitFinish);
                                 break;
                             }
-                            case SDL_SCANCODE_L: {
+                            case GameKey::BigKick: {
                                 INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_BIG_KICK);
                                 entity.replace<CommandLink>(entity)->onExecuted.Connect(&HitSystem::OnHitFinish);
                                 break;

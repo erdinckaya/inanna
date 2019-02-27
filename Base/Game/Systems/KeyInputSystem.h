@@ -59,35 +59,27 @@ namespace Inanna {
             }
         }
 
-        GameKey GetHit(GameKey key) {
-            switch (key) {
-                case GameKey::LittleFist:
-                case GameKey::LittleKick:
-                case GameKey::BigFist:
-                case GameKey::BigKick:
-                    return GameKey::Hit;
-                default:
-                    return key;
-            }
-        }
-
-        GameKey ConvertToGameKey(UserKey &key) {
+        static GameKey ConvertToGameKey(SDL_Scancode key) {
             if (Game::Instance->Rival.valid()) {
                 // TODO: Check relative facing!
             } else {
-                switch (key.key) {
+                switch (key) {
                     case SDL_SCANCODE_LEFT:
                         return GameKey::Back;
                     case SDL_SCANCODE_RIGHT:
                         return GameKey::Forward;
                     case SDL_SCANCODE_UP:
-                        return GameKey::Jump;
+                        return GameKey::Up;
                     case SDL_SCANCODE_DOWN:
-                        return GameKey::Crouch;
+                        return GameKey::Down;
                     case SDL_SCANCODE_F:
                         return GameKey::LittleFist;
                     case SDL_SCANCODE_K:
                         return GameKey::LittleKick;
+                    case SDL_SCANCODE_D:
+                        return GameKey::BigFist;
+                    case SDL_SCANCODE_L:
+                        return GameKey::BigKick;
                     default:
                         break;
                 }
@@ -114,15 +106,15 @@ namespace Inanna {
             for (auto &def : specialKeyDefinations) {
                 const int size = static_cast<const int>(downBuffer.size());
                 for (int i = 0; i < size; ++i) {
-                    auto key = ConvertToGameKey(downBuffer[i]);
+                    auto key = ConvertToGameKey(static_cast<SDL_Scancode>(downBuffer[i].key));
                     if (key == def.Keys[0]) {
                         int k = 0;
                         for (int j = i; k < def.Keys.size() && j < size; ++j, ++k) {
-                            auto fetchedKey = ConvertToGameKey(downBuffer[j]);
+                            auto fetchedKey = ConvertToGameKey(static_cast<SDL_Scancode>(downBuffer[i].key));
                             lastKey = fetchedKey;
 
                             if (def.Keys[k] == +GameKey::Hit) {
-                                if (GetHit(fetchedKey) != def.Keys[k]) {
+                                if (!IS_HIT(fetchedKey)) {
                                     break;
                                 }
 
@@ -203,26 +195,28 @@ namespace Inanna {
 
                 for (auto &userKey : keys) {
                     bool validkKey = false;
-                    switch (userKey.key) {
-                        case SDL_SCANCODE_LEFT:
-                        case SDL_SCANCODE_RIGHT: {
+                    auto k = GameKey::_from_integral(userKey.key);
+                    switch (k) {
+                        case GameKey::Back:
+                        case GameKey::Forward: {
                             entities.create().assign<MoveCommand>(entity, userKey);
                             validkKey = true;
                             break;
                         }
-                        case SDL_SCANCODE_K:
-                        case SDL_SCANCODE_L:
-                        case SDL_SCANCODE_F: {
+                        case GameKey::LittleFist:
+                        case GameKey::LittleKick:
+                        case GameKey::BigFist:
+                        case GameKey::BigKick: {
                             entities.create().assign<HitCommand>(entity, userKey);
                             validkKey = true;
                             break;
                         }
-                        case SDL_SCANCODE_DOWN: {
+                        case GameKey::Down: {
                             entities.create().assign<CrouchCommand>(entity, userKey);
                             validkKey = true;
                             break;
                         }
-                        case SDL_SCANCODE_UP: {
+                        case GameKey::Up: {
                             entities.create().assign<JumpCommand>(entity, userKey);
                             validkKey = true;
                             break;

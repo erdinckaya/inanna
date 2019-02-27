@@ -49,7 +49,7 @@ namespace Inanna {
 
             auto animData = AnimationData::KYO_MOVE_BACK;
             int direction = -1;
-            if (cmd.userKey.key == SDL_SCANCODE_RIGHT) {
+            if (cmd.userKey.key == GameKey::Forward) {
                 animData = AnimationData::KYO_MOVE_FORWARD;
                 direction = 1;
             }

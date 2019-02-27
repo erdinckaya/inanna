@@ -29,6 +29,7 @@
 #include "Systems/RollSystem.h"
 #include "Command/Systems/OryuCommandSystem.h"
 #include "Systems/OryuSystem.h"
+#include "../SpriteAnimation/Systems/SpriteGizmoSystem.h"
 
 
 Inanna::Game* Inanna::Game::Instance = nullptr;
@@ -58,6 +59,7 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<SpriteAnimationSystem>();
     systems.add<SpritePositionSystem>();
     systems.add<SpriteRenderSystem>(graphics);
+    systems.add<SpriteGizmoSystem>(graphics);
     systems.configure();
 
     Patterns.Init("../Resources/Data/key_patterns.json");
@@ -88,6 +90,7 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<SpriteAnimationSystem>(dt);
     systems.update<SpritePositionSystem>(dt);
     systems.update<SpriteRenderSystem>(dt);
+    systems.update<SpriteGizmoSystem>(dt);
 }
 
 

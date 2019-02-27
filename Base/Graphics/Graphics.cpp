@@ -135,3 +135,22 @@ void Inanna::Graphics::Init() {
     monitorX->Init();
 #endif
 }
+
+void Inanna::Graphics::DrawRect(Inanna::Rectf rect, SDL_Color color, int width) {
+    glColor3f(color.r, color.g, color.b);
+    glLineWidth(width);
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    glBegin(GL_POLYGON);
+
+    glVertex2f(rect.x, rect.y);
+    glVertex2f(rect.x + rect.w, rect.y);
+    glVertex2f(rect.x + rect.w, rect.y + rect.h);
+    glVertex2f(rect.x, rect.y + rect.h);
+    glEnd();
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    glFlush();
+}

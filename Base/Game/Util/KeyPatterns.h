@@ -18,27 +18,10 @@ namespace Inanna {
 
     struct KeyPatterns {
 
-
-        GameKey GetKey(const std::string &keyStr) {
-            GameKey key = GameKey::InValid;
-            for (int i = 0; i < GameKey::_size(); ++i) {
-                if (StringKeys[i] == keyStr) {
-                    key = GameKey::_from_integral(i);
-                    break;
-                }
-            }
-            return key;
-        }
-
         void Init(const std::string &dataFile) {
             std::ifstream file(dataFile);
             json j;
             file >> j;
-
-            json jKeycode = j["key_code"];
-            for (int i = 0; i < GameKey::_size() - 1; ++i) {
-                StringKeys[i] = jKeycode[i].get<std::string>();
-            }
 
             json moves = j["moves"];
             const int size = static_cast<const int>(moves.size());
@@ -50,13 +33,12 @@ namespace Inanna {
                 const int keySize = static_cast<const int>(move["keys"].size());
                 for (int k = 0; k < keySize; ++k) {
                     auto keyStr = move["keys"][k].get<std::string>();
-                    data.Keys.push_back(GetKey(keyStr));
+                    data.Keys.push_back(GameKey::_from_string(keyStr.c_str()));
                 }
                 SpecialMoveKeys.push_back(data);
             }
         }
 
-        std::string StringKeys[GameKey::_size() - 1];
         std::vector<SpecialMoveKeyData> SpecialMoveKeys;
     };
 }

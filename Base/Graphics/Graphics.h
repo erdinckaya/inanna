@@ -29,6 +29,8 @@ namespace Inanna {
         void DrawTexture(ImageAsset image, Rectf clip, Rectf destination, float angle, Vecf scale, bool flipY = false,
                          bool flipX = false);
 
+        void DrawRect(Rectf rect, SDL_Color color, int width);
+
         void Update(float dt);
 
         void PassEvent(SDL_Event *event);
