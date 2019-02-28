@@ -102,15 +102,14 @@ namespace Inanna {
             auto downBuffer = from(history->buffer).where([](const UserKey &u) { return u.down; }).
                     select([](const UserKey &u) { return u; }).toVector();
 
-            auto upBuffer = from(history->buffer).where([](const UserKey &u) { return !u.down; }).toVector();
             for (auto &def : specialKeyDefinations) {
                 const int size = static_cast<const int>(downBuffer.size());
                 for (int i = 0; i < size; ++i) {
-                    auto key = ConvertToGameKey(static_cast<SDL_Scancode>(downBuffer[i].key));
+                    auto key = GameKey::_from_integral(downBuffer[i].key);
                     if (key == def.Keys[0]) {
                         int k = 0;
                         for (int j = i; k < def.Keys.size() && j < size; ++j, ++k) {
-                            auto fetchedKey = ConvertToGameKey(static_cast<SDL_Scancode>(downBuffer[i].key));
+                            auto fetchedKey = GameKey::_from_integral(downBuffer[j].key);
                             lastKey = fetchedKey;
 
                             if (def.Keys[k] == +GameKey::Hit) {
@@ -188,7 +187,6 @@ namespace Inanna {
                     return;
                 } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_F) &&
                            KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_K)) {
-                    printf("123123\n");
                     entities.create().assign<RollCommand>(entity, true);
                     return;
                 }
