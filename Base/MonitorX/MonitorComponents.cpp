@@ -6,6 +6,7 @@
 
 #include "../UI/Components/Renderable.h"
 #include "../UI/Components/Position.h"
+#include "../Game/Components/Facing.h"
 #include "../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../SpriteAnimation/Components/SpriteLoop.h"
 #include "../Game/Components/MoveCharacter.h"
@@ -53,6 +54,10 @@ REFLECT_STRUCT_BEGIN(Inanna::SpriteLoop)
                     REFLECT_STRUCT_MEMBER(end)
 REFLECT_STRUCT_END()
 
+
+REFLECT_STRUCT_BEGIN(Inanna::Facing)
+                    REFLECT_STRUCT_MEMBER(left)
+REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::MoveCharacter)
                     REFLECT_STRUCT_MEMBER(time)

@@ -9,18 +9,20 @@
 #include "../../Graphics/Graphics.h"
 #include "../Components/SpriteAnimation.h"
 #include "../../UI/Components/Position.h"
+#include "../../Game/Components/Facing.h"
 
 namespace Inanna {
     struct SpriteRenderSystem : entityx::System<SpriteRenderSystem> {
         explicit SpriteRenderSystem(Graphics *graphics) : graphics(graphics) {}
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Position, SpriteAnimation>(
-                    [this, dt](entityx::Entity entity, Position &position, SpriteAnimation &animation) {
+            entities.each<Position, Facing, SpriteAnimation>(
+                    [this, dt](entityx::Entity entity, Position &position, Facing &facing, SpriteAnimation &animation) {
                         auto keyFrame = animation.KeyFrame();
                         Rectf clip = {0, 0, keyFrame.w, keyFrame.h};
                         Rectf pos = {position.global.x, position.global.y, keyFrame.w, keyFrame.h};
-                        graphics->DrawTexture(keyFrame, clip, pos, 0, Vecf(1, 1));
+
+                        graphics->DrawTexture(keyFrame, clip, pos, 0, Vecf(1, 1), !facing.left, false);
                         animation.time += dt;
                     });
         }

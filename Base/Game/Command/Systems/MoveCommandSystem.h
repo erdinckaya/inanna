@@ -52,6 +52,13 @@ namespace Inanna {
             if (cmd.userKey.key == GameKey::Forward) {
                 animData = AnimationData::KYO_MOVE_FORWARD;
                 direction = 1;
+                if (!cmd.character.component<Facing>()->left) {
+                    direction = -1;
+                }
+            } else if (cmd.userKey.key == GameKey::Back) {
+                if (!cmd.character.component<Facing>()->left) {
+                    direction = 1;
+                }
             }
 
             if (cmd.userKey.down) {

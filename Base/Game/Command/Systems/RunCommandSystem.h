@@ -35,7 +35,12 @@ namespace Inanna {
             }
 
             cmd.character.replace<SpriteLoop>(1, 6);
-            cmd.character.replace<Run>(Vecf(1.5f, 0), 5, AnimationData::KYO_RUN);
+            float direction = 1.5f;
+            if (!cmd.character.component<Facing>()->left) {
+                direction = -1.5f;
+            }
+
+            cmd.character.replace<Run>(Vecf(direction, 0), 5, AnimationData::KYO_RUN);
             cmd.character.component<JumpState>()->lock = true;
             cmd.character.component<JumpState>()->state = JumpStates::RISE_JS;
             cmd.character.component<MoveState>()->lock = true;

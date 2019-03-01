@@ -30,6 +30,8 @@
 #include "Command/Systems/OryuCommandSystem.h"
 #include "Systems/OryuSystem.h"
 #include "../SpriteAnimation/Systems/SpriteGizmoSystem.h"
+#include "Components/Facing.h"
+#include "../SpriteAnimation/Systems/SpriteFacingSystem.h"
 
 
 Inanna::Game* Inanna::Game::Instance = nullptr;
@@ -58,6 +60,7 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
 
     systems.add<SpriteAnimationSystem>();
     systems.add<SpritePositionSystem>();
+    systems.add<SpriteFacingSystem>();
     systems.add<SpriteRenderSystem>(graphics);
     systems.add<SpriteGizmoSystem>(graphics);
     systems.configure();
@@ -89,6 +92,7 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
 
     systems.update<SpriteAnimationSystem>(dt);
     systems.update<SpritePositionSystem>(dt);
+    systems.update<SpriteFacingSystem>(dt);
     systems.update<SpriteRenderSystem>(dt);
     systems.update<SpriteGizmoSystem>(dt);
 }
@@ -97,17 +101,33 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
 void Inanna::Game::Test(SDL_Keycode code) {
 #ifdef WINDOW_MANAGER_TEST
     switch (code) {
-        case SDLK_n: {
+        case SDLK_1: {
             Player = entities.create();
             auto comp = Player.assign<SpriteAnimation>(AnimationData::KYO_IDLE);
             Player.assign<Time>(0);
             comp->loop = true;
             Player.assign<Position>(Vecf(100, 100));
+            Player.assign<Facing>();
             Player.assign<Character>("Kyo");
             Player.assign<UserKeyHistory>();
             Player.assign<MoveState>();
             Player.assign<JumpState>();
             Player.assign<CrouchState>();
+
+            break;
+        }
+        case SDLK_2: {
+            Rival = entities.create();
+            auto comp = Rival.assign<SpriteAnimation>(AnimationData::KYO_IDLE);
+            Rival.assign<Time>(0);
+            comp->loop = true;
+            Rival.assign<Position>(Vecf(100, 100));
+            Rival.assign<Facing>(false);
+            Rival.assign<Character>("Kyo");
+            Rival.assign<UserKeyHistory>();
+            Rival.assign<MoveState>();
+            Rival.assign<JumpState>();
+            Rival.assign<CrouchState>();
 
             break;
         }

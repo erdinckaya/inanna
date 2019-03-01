@@ -31,7 +31,11 @@ namespace Inanna {
                 return;
             }
             cmd.character.replace<SpriteIndex>(cmd.character, 2);
-            cmd.character.replace<JumpBack>(AnimationData::KYO_JUMP_BACK, Vecf(-1, 0.5f), 8);
+            int direction = -1;
+            if (!cmd.character.component<Facing>()->left) {
+                direction = 1;
+            }
+            cmd.character.replace<JumpBack>(AnimationData::KYO_JUMP_BACK, Vecf(direction, 0.5f), 8);
             cmd.character.component<JumpState>()->lock = true;
             cmd.character.component<JumpState>()->state = JumpStates::RISE_JS;
             cmd.character.component<MoveState>()->lock = true;

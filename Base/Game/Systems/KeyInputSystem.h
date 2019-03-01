@@ -10,6 +10,7 @@
 #include <map>
 
 #include "../../UI/Components/Position.h"
+#include "../Components/Facing.h"
 #include "../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Components/Character.h"
 #include "../Components/MoveCharacter.h"
@@ -60,29 +61,25 @@ namespace Inanna {
         }
 
         static GameKey ConvertToGameKey(SDL_Scancode key) {
-            if (Game::Instance->Rival.valid()) {
-                // TODO: Check relative facing!
-            } else {
-                switch (key) {
-                    case SDL_SCANCODE_LEFT:
-                        return GameKey::Back;
-                    case SDL_SCANCODE_RIGHT:
-                        return GameKey::Forward;
-                    case SDL_SCANCODE_UP:
-                        return GameKey::Up;
-                    case SDL_SCANCODE_DOWN:
-                        return GameKey::Down;
-                    case SDL_SCANCODE_F:
-                        return GameKey::LittleFist;
-                    case SDL_SCANCODE_K:
-                        return GameKey::LittleKick;
-                    case SDL_SCANCODE_D:
-                        return GameKey::BigFist;
-                    case SDL_SCANCODE_L:
-                        return GameKey::BigKick;
-                    default:
-                        break;
-                }
+            switch (key) {
+                case SDL_SCANCODE_LEFT:
+                    return Game::Instance->Player.component<Facing>()->left ? GameKey::Back : GameKey::Forward;
+                case SDL_SCANCODE_RIGHT:
+                    return Game::Instance->Player.component<Facing>()->left ? GameKey::Forward : GameKey::Back;
+                case SDL_SCANCODE_UP:
+                    return GameKey::Up;
+                case SDL_SCANCODE_DOWN:
+                    return GameKey::Down;
+                case SDL_SCANCODE_F:
+                    return GameKey::LittleFist;
+                case SDL_SCANCODE_K:
+                    return GameKey::LittleKick;
+                case SDL_SCANCODE_D:
+                    return GameKey::BigFist;
+                case SDL_SCANCODE_L:
+                    return GameKey::BigKick;
+                default:
+                    break;
             }
             return GameKey::InValid;
         }
