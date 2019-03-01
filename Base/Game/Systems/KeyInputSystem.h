@@ -89,6 +89,8 @@ namespace Inanna {
                 entity.component<UserKeyHistory>()->buffer.push_back(userKey);
             }
 
+
+
             UserKeyHistory *history = entity.component<UserKeyHistory>().get();
             ClearTimeoutKeys(history);
             auto specialKeyDefinations = Game::Instance->Patterns.SpecialMoveKeys;
