@@ -214,7 +214,16 @@ namespace Inanna {
                             break;
                         }
                         case GameKey::Up: {
-                            entities.create().assign<JumpCommand>(entity, userKey);
+                            if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT)) {
+                                auto genKey = ConvertToGameKey(SDL_SCANCODE_LEFT);
+                                entities.create().assign<JumpCommand>(entity, UserKey(genKey._to_integral(), userKey.time, userKey.down));
+                            } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
+                                auto genKey = ConvertToGameKey(SDL_SCANCODE_RIGHT);
+                                entities.create().assign<JumpCommand>(entity, UserKey(genKey._to_integral(), userKey.time, userKey.down));
+                            } else {
+                                entities.create().assign<JumpCommand>(entity, userKey);
+                            }
+
                             validkKey = true;
                             break;
                         }
@@ -224,16 +233,16 @@ namespace Inanna {
                 }
 
                 if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_UP)) {
-                    UserKey key(SDL_SCANCODE_UP, Chrono::Now(), true);
+                    UserKey key(ConvertToGameKey(SDL_SCANCODE_UP), Chrono::Now(), true);
                     entities.create().assign<JumpCommand>(entity, key);
                 } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_DOWN)) {
-                    UserKey key(SDL_SCANCODE_DOWN, Chrono::Now(), true);
+                    UserKey key(ConvertToGameKey(SDL_SCANCODE_UP), Chrono::Now(), true);
                     entities.create().assign<CrouchCommand>(entity, key);
                 } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT)) {
-                    UserKey key(SDL_SCANCODE_LEFT, Chrono::Now(), true);
+                    UserKey key(ConvertToGameKey(SDL_SCANCODE_UP), Chrono::Now(), true);
                     entities.create().assign<MoveCommand>(entity, key);
                 } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
-                    UserKey key(SDL_SCANCODE_RIGHT, Chrono::Now(), true);
+                    UserKey key(ConvertToGameKey(SDL_SCANCODE_UP), Chrono::Now(), true);
                     entities.create().assign<MoveCommand>(entity, key);
                 }
             }

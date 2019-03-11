@@ -1,0 +1,110 @@
+{"frames": [
+
+{
+	"filename": "Frame0.png",
+	"frame": {"x":0,"y":290,"w":102,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":102,"h":160},
+	"sourceSize": {"w":102,"h":160}
+},
+{
+	"filename": "Frame1.png",
+	"frame": {"x":88,"y":686,"w":68,"h":282},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":68,"h":282},
+	"sourceSize": {"w":68,"h":282}
+},
+{
+	"filename": "Frame2.png",
+	"frame": {"x":0,"y":480,"w":118,"h":196},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":196},
+	"sourceSize": {"w":118,"h":196}
+},
+{
+	"filename": "Frame3.png",
+	"frame": {"x":0,"y":0,"w":128,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":90},
+	"sourceSize": {"w":128,"h":90}
+},
+{
+	"filename": "Frame4.png",
+	"frame": {"x":128,"y":0,"w":90,"h":130},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":130},
+	"sourceSize": {"w":90,"h":130}
+},
+{
+	"filename": "Frame5.png",
+	"frame": {"x":0,"y":130,"w":140,"h":110},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":140,"h":110},
+	"sourceSize": {"w":140,"h":110}
+},
+{
+	"filename": "Frame6.png",
+	"frame": {"x":102,"y":290,"w":120,"h":190},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":190},
+	"sourceSize": {"w":120,"h":190}
+},
+{
+	"filename": "Frame7.png",
+	"frame": {"x":0,"y":686,"w":88,"h":246},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":246},
+	"sourceSize": {"w":88,"h":246}
+},
+{
+	"filename": "Frame8.png",
+	"frame": {"x":140,"y":130,"w":102,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":102,"h":160},
+	"sourceSize": {"w":102,"h":160}
+},
+{
+	"filename": "Frame9.png",
+	"frame": {"x":118,"y":480,"w":118,"h":206},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":206},
+	"sourceSize": {"w":118,"h":206}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "kyo_jump_forward.png",
+	"format": "RGBA8888",
+	"size": {"w":242,"h":968},
+	"scale": "1",
+	"anims": [
+		{
+			"name": "kyo_jump_forward",
+			"images": [
+				"Frame0",
+				"Frame1",
+				"Frame2",
+				"Frame3",
+				"Frame4",
+				"Frame5",
+				"Frame6",
+				"Frame7",
+				"Frame8",
+				"Frame9"
+			],
+			"speed": 25
+		}
+	],
+	"smartupdate": "$TexturePacker:SmartUpdate:191a94c8649f3f17f2442bcd0cca7a39:dd4b0202d181283f9380c0e0e5491b27:5dfd430d1aed5643c2c06c16898081cc$"
+}
+}

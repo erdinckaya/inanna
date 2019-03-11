@@ -28,9 +28,29 @@ namespace Inanna {
             if (cmd.character.has_component<JumpCharacter>()) {
                 return;
             }
+            auto animData = AnimationData::KYO_JUMP;
+            int direction = 0;
+            auto key = GameKey::_from_integral(cmd.userKey.key);
+            if (key == +GameKey::Forward) {
+                animData = AnimationData::KYO_JUMP_FORWARD;
+                if (cmd.character.component<Facing>()->left) {
+                    direction = 1;
+                } else {
+                    direction = -1;
+                }
+            } else if (key == +GameKey::Back) {
+                animData = AnimationData::KYO_JUMP_BACKWARD;
+                if (cmd.character.component<Facing>()->left) {
+                    direction = -1;
+                } else {
+                    direction = 1;
+                }
+            }
+
             cmd.character.replace<SpriteIndex>(cmd.character, 4);
-            cmd.character.replace<JumpCharacter>(Vecf(0, 3), 5, AnimationData::KYO_JUMP, Chrono::Now());
+            cmd.character.replace<JumpCharacter>(Vecf(direction, 3), 5, animData, Chrono::Now());
             cmd.character.component<JumpState>()->state = JumpStates::RISE_JS;
+            INANNA_REMOVE_COMPONENT(cmd.character, MoveCharacter);
         }
 
 

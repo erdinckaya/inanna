@@ -350,6 +350,74 @@ public:
 
 
 
+struct Kyo_Jump_Backward : public Sheet {
+
+public:
+    Kyo_Jump_Backward() :
+		FRAME0("Frame0", 102.000000f, 220.000000f, 102.000000f, 160.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 98.000000f, 576.000000f, 88.000000f, 246.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 380.000000f, 120.000000f, 190.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 0.000000f, 90.000000f, 140.000000f, 110.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 140.000000f, 90.000000f, 90.000000f, 130.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 0.000000f, 0.000000f, 128.000000f, 90.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 120.000000f, 380.000000f, 118.000000f, 196.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME7("Frame7", 0.000000f, 576.000000f, 98.000000f, 216.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME8("Frame8", 186.000000f, 576.000000f, 68.000000f, 282.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME9("Frame9", 0.000000f, 220.000000f, 102.000000f, 160.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_jump_backward", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Jump/kyo_jump_backward.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+	ImageAsset FRAME9;
+
+
+};
+
+
+
+struct Kyo_Jump_Forward : public Sheet {
+
+public:
+    Kyo_Jump_Forward() :
+		FRAME0("Frame0", 0.000000f, 290.000000f, 102.000000f, 160.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 88.000000f, 686.000000f, 68.000000f, 282.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 480.000000f, 118.000000f, 196.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 0.000000f, 0.000000f, 128.000000f, 90.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 128.000000f, 0.000000f, 90.000000f, 130.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 0.000000f, 130.000000f, 140.000000f, 110.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 102.000000f, 290.000000f, 120.000000f, 190.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME7("Frame7", 0.000000f, 686.000000f, 88.000000f, 246.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME8("Frame8", 140.000000f, 130.000000f, 102.000000f, 160.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME9("Frame9", 118.000000f, 480.000000f, 118.000000f, 206.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_jump_forward", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Jump/kyo_jump_forward.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+	ImageAsset FRAME9;
+
+
+};
+
+
+
 struct Kyo_Move_Back : public Sheet {
 
 public:
@@ -593,6 +661,8 @@ public:
 	static Kyo_Idle KYO_IDLE;
 	static Kyo_Jump KYO_JUMP;
 	static Kyo_Jump_Back KYO_JUMP_BACK;
+	static Kyo_Jump_Backward KYO_JUMP_BACKWARD;
+	static Kyo_Jump_Forward KYO_JUMP_FORWARD;
 	static Kyo_Move_Back KYO_MOVE_BACK;
 	static Kyo_Move_Forward KYO_MOVE_FORWARD;
 	static Kyo_Oryu KYO_ORYU;
@@ -603,7 +673,7 @@ public:
 
 
 	static int SheetCount;
-	static const Sheet Sheets[18];
+	static const Sheet Sheets[20];
 };
 
 

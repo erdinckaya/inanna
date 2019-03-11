@@ -65,7 +65,8 @@ namespace Inanna {
         void receive(const SpriteIndex &spriteIndex) {
             SpriteIndex event = spriteIndex;
             if (event.entity.has_component<JumpCharacter>()) {
-                event.entity.component<JumpCharacter>()->direction *= -1;
+                auto direction = event.entity.component<JumpCharacter>()->direction;
+                event.entity.component<JumpCharacter>()->direction = Vecf(direction.x, -direction.y);
                 event.entity.component<JumpState>()->state = JumpStates::FALL_JS;
             }
         }

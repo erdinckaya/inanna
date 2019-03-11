@@ -45,6 +45,8 @@ struct AnimationData {
 	static SpriteAnim<ImageAsset> KYO_IDLE;
 	static SpriteAnim<ImageAsset> KYO_JUMP;
 	static SpriteAnim<ImageAsset> KYO_JUMP_BACK;
+	static SpriteAnim<ImageAsset> KYO_JUMP_BACKWARD;
+	static SpriteAnim<ImageAsset> KYO_JUMP_FORWARD;
 	static SpriteAnim<ImageAsset> KYO_MOVE_BACK;
 	static SpriteAnim<ImageAsset> KYO_MOVE_FORWARD;
 	static SpriteAnim<ImageAsset> KYO_ORYU;
