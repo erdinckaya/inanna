@@ -11,7 +11,6 @@
 #include "../Components/Character.h"
 #include "../../Util/SpriteMacro.h"
 #include "../Components/JumpBack.h"
-#include "../Components/MoveState.h"
 #include "../../SpriteAnimation/Event/SpriteAnimEnd.h"
 #include "../Events/JumpBackEnd.h"
 #include "../../UI/Components/Position.h"
@@ -27,10 +26,8 @@ namespace Inanna {
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, MoveState, Position, JumpBack>(
-                    [this, dt](entityx::Entity entity, Character &character, MoveState &moveState,
-                               Position &position,
-                               JumpBack &jumpBack) {
+            entities.each<Character, Position, JumpBack>(
+                    [this, dt](entityx::Entity entity, Character &character, Position &position, JumpBack &jumpBack) {
 
                         INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, jumpBack.animData);
                         double speed = 1000.0 / jumpBack.speed;

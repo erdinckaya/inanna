@@ -163,14 +163,51 @@ namespace Inanna {
 
 
             if (entity.valid()) {
+
                 auto characterState = entity.component<CharacterState>();
+                auto oldState = characterState->state;
+                auto state = CharacterBehaviourUtil::GetCharacterBehaviour(entity);
+                if (oldState != state && state == +CharacterBehaviour::Idle) {
+                    events.emit<AbortEvent>(entity);
+                }
+
+
+                auto result = FindSpecialMoves(entity, keys);
+                auto specialKey = std::get<0>(result);
+                if (specialKey != +SpecialMoveKey::Invalid) {
+                    printf("SpecialKey is %s\n", specialKey._to_string());
+                    events.emit<AbortEvent>(entity);
+                    switch (specialKey) {
+                        case SpecialMoveKey::JumpBack:
+                            entity.component<CharacterState>()->state = CharacterBehaviour::JumpBack;
+                            entities.create().assign<JumpBackCommand>(entity);
+                            break;
+                        case SpecialMoveKey::Run:
+                            entity.component<CharacterState>()->state = CharacterBehaviour::Run;
+                            entities.create().assign<RunCommand>(entity);
+                            break;
+                        case SpecialMoveKey::Oryu:
+                            entity.component<CharacterState>()->state = CharacterBehaviour::Oryu;
+                            entities.create().assign<OryuCommand>(entity, std::get<1>(result));
+                            break;
+                        default:
+                            break;
+                    }
+
+                    return;
+                }
+
+
                 if (characterState->lock) {
                     return;
                 }
 
-                auto state = CharacterBehaviourUtil::GetCharacterBehaviour(entity);
+                if (oldState != state) {
+                    events.emit<AbortEvent>(entity);
+                }
 
-                auto oldState = entity.component<CharacterState>()->state;
+
+
                 switch (state) {
                     case CharacterBehaviour::MoveLeft: {
                         auto genKey = ConvertToGameKey(SDL_SCANCODE_LEFT);

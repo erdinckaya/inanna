@@ -8,12 +8,8 @@
 
 #include <entityx/System.h>
 #include "../../../../ThirdParty/boolinq.h"
-#include "../../Util/Chrono.h"
 #include "../Components/RunCommand.h"
 #include "../../Components/Run.h"
-#include "../../Components/JumpState.h"
-#include "../../Components/MoveState.h"
-#include "../../Components/CrouchState.h"
 #include "../../../../Assets/AnimationData.h"
 #include "../../../Util/SpriteMacro.h"
 #include "../../../SpriteAnimation/Event/SpriteIndex.h"
@@ -27,6 +23,7 @@ namespace Inanna {
 
         void configure(entityx::EventManager &events) override {
             events.subscribe<RunEnd>(*this);
+            events.subscribe<AbortEvent>(*this);
         }
 
         void HandleRun(RunCommand &cmd) {
@@ -41,12 +38,7 @@ namespace Inanna {
             }
 
             cmd.character.replace<Run>(Vecf(direction, 0), 5, AnimationData::KYO_RUN);
-            cmd.character.component<JumpState>()->lock = true;
-            cmd.character.component<JumpState>()->state = JumpStates::RISE_JS;
-            cmd.character.component<MoveState>()->lock = true;
-            cmd.character.component<MoveState>()->state = MoveStates::RUN_MS;
-            cmd.character.component<CrouchState>()->lock = true;
-            cmd.character.component<CrouchState>()->state = CrouchStates::Idle;
+            cmd.character.component<CharacterState>()->lock = true;
         }
 
 
@@ -67,13 +59,16 @@ namespace Inanna {
             RunEnd event = runEnd;
             INANNA_REMOVE_COMPONENT(event.entity, Run);
             INANNA_REMOVE_COMPONENT(event.entity, SpriteLoop);
-            event.entity.component<JumpState>()->lock = false;
-            event.entity.component<JumpState>()->state = JumpStates::IDLE_JS;
-            event.entity.component<MoveState>()->lock = false;
-            event.entity.component<MoveState>()->state = MoveStates::IDLE_MS;
-            event.entity.component<CrouchState>()->lock = false;
-            event.entity.component<CrouchState>()->state = CrouchStates::Idle;
             INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+            event.entity.component<CharacterState>()->lock = false;
+        }
+
+        void receive(const AbortEvent &abortEvent) {
+            AbortEvent event = abortEvent;
+            INANNA_REMOVE_COMPONENT(event.entity, Run);
+            INANNA_REMOVE_COMPONENT(event.entity, SpriteLoop);
+            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+            event.entity.component<CharacterState>()->lock = false;
         }
     };
 }

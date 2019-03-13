@@ -8,11 +8,7 @@
 
 #include <entityx/System.h>
 #include "../../../../ThirdParty/boolinq.h"
-#include "../../Util/Chrono.h"
 #include "../Components/JumpBackCommand.h"
-#include "../../Components/JumpBack.h"
-#include "../../Components/JumpState.h"
-#include "../../Components/MoveState.h"
 #include "../../Events/JumpBackEnd.h"
 #include "../../../../Assets/AnimationData.h"
 #include "../../../Util/SpriteMacro.h"
@@ -24,6 +20,7 @@ namespace Inanna {
 
         void configure(entityx::EventManager &events) override {
             events.subscribe<JumpBackEnd>(*this);
+            manager = &events;
         }
 
         void HandleJumpBack(JumpBackCommand &cmd) {
@@ -36,9 +33,8 @@ namespace Inanna {
                 direction = 1;
             }
             cmd.character.replace<JumpBack>(AnimationData::KYO_JUMP_BACK, Vecf(direction, 0.5f), 8);
-            cmd.character.component<JumpState>()->lock = true;
-            cmd.character.component<JumpState>()->state = JumpStates::RISE_JS;
-            cmd.character.component<MoveState>()->lock = true;
+            cmd.character.component<CharacterState>()->lock = true;
+            manager->emit<LockInput>(cmd.character, true);
         }
 
 
@@ -58,11 +54,13 @@ namespace Inanna {
         void receive(const JumpBackEnd &jumpBackEnd) {
             JumpBackEnd event = jumpBackEnd;
             INANNA_REMOVE_COMPONENT(event.entity, JumpBack);
-            event.entity.component<JumpState>()->state = JumpStates::IDLE_JS;
-            event.entity.component<JumpState>()->lock = false;
-            event.entity.component<MoveState>()->lock = false;
             INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+            event.entity.component<CharacterState>()->lock = false;
+            manager->emit<LockInput>(event.entity, false);
         }
+
+    private:
+        entityx::EventManager *manager;
     };
 }
 
