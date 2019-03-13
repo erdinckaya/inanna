@@ -12,7 +12,6 @@
 #include "../Components/Character.h"
 #include "../Components/JumpCharacter.h"
 #include "../../Util/SpriteMacro.h"
-#include "../Components/MoveState.h"
 #include "../Events/JumpEnd.h"
 
 namespace Inanna {
@@ -27,10 +26,9 @@ namespace Inanna {
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, Position, JumpCharacter, SpriteAnimation, MoveState>(
+            entities.each<Character, Position, JumpCharacter, SpriteAnimation>(
                     [this, dt](entityx::Entity entity, Character &character, Position &position, JumpCharacter &jump,
-                               SpriteAnimation &anim, MoveState &moveState) {
-                        moveState.lock = true;
+                               SpriteAnimation &anim) {
                         INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, jump.animData);
                         if (!jump.longJump && Chrono::Now() > jump.startTime + LongJumpTimeLimit &&
                             KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_UP)) {
@@ -58,7 +56,6 @@ namespace Inanna {
             SpriteAnimEnd event = spriteAnimEnd;
             if (event.entity.has_component<JumpCharacter>()) {
                 manager->emit<JumpEnd>(event.entity);
-                event.entity.component<MoveState>()->lock = false;
             }
         }
 

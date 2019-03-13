@@ -25,6 +25,7 @@
 #include "Command/Systems/RunCommandSystem.h"
 #include "Systems/RunSystem.h"
 #include "Components/CrouchState.h"
+#include "Components/CharacterState.h"
 #include "Command/Systems/RollCommandSystem.h"
 #include "Systems/RollSystem.h"
 #include "Command/Systems/OryuCommandSystem.h"
@@ -113,6 +114,7 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Player.assign<MoveState>();
             Player.assign<JumpState>();
             Player.assign<CrouchState>();
+            Player.assign<CharacterState>();
 
             break;
         }
@@ -128,6 +130,7 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Rival.assign<MoveState>();
             Rival.assign<JumpState>();
             Rival.assign<CrouchState>();
+            Player.assign<CharacterState>();
 
             break;
         }

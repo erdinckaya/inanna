@@ -14,10 +14,13 @@
 #include "../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Components/Character.h"
 #include "../Components/MoveCharacter.h"
+#include "../Components/JumpCharacter.h"
+#include "../Components/Crouch.h"
 #include "../../Input/KeyInput.h"
 #include "../Components/UserKey.h"
 #include "../../../ThirdParty/boolinq.h"
 #include "../Components/UserKeyHistory.h"
+#include "../Events/AbortEvent.h"
 #include "../Command/Components/MoveCommand.h"
 #include "../Command/Components/HitCommand.h"
 #include "../Command/Components/CrouchCommand.h"
@@ -27,6 +30,7 @@
 #include "../Command/Components/RollCommand.h"
 #include "../Command/Components/OryuCommand.h"
 #include "../Util/Chrono.h"
+#include "../Util/CharacterBehaivour.h"
 #include "../Game.h"
 #include "../Events/LockInput.h"
 
@@ -88,7 +92,6 @@ namespace Inanna {
             for (auto &userKey : keys) {
                 entity.component<UserKeyHistory>()->buffer.push_back(userKey);
             }
-
 
 
             UserKeyHistory *history = entity.component<UserKeyHistory>().get();
@@ -158,93 +161,63 @@ namespace Inanna {
                 return;
             }
 
+
             if (entity.valid()) {
-                auto result = FindSpecialMoves(entity, keys);
-                auto specialKey = std::get<0>(result);
-                if (specialKey != +SpecialMoveKey::Invalid) {
-                    printf("SpecialKey is %s\n", specialKey._to_string());
-                    switch (specialKey) {
-                        case SpecialMoveKey::JumpBack:
-                            entities.create().assign<JumpBackCommand>(entity);
-                            break;
-                        case SpecialMoveKey::Run:
-                            entities.create().assign<RunCommand>(entity);
-                            break;
-                        case SpecialMoveKey::Oryu:
-                            entities.create().assign<OryuCommand>(entity, std::get<1>(result));
-                            break;
-                        default:
-                            break;
+                auto characterState = entity.component<CharacterState>();
+                if (characterState->lock) {
+                    return;
+                }
+
+                auto state = CharacterBehaviourUtil::GetCharacterBehaviour(entity);
+
+                auto oldState = entity.component<CharacterState>()->state;
+                switch (state) {
+                    case CharacterBehaviour::MoveLeft: {
+                        auto genKey = ConvertToGameKey(SDL_SCANCODE_LEFT);
+                        entities.create().assign<MoveCommand>(entity,
+                                                              UserKey(genKey._to_integral(), Chrono::Now(), true));
+                        break;
                     }
-
-                    return;
-                }
-
-                if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT) && KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_F) &&
-                    KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_K)) {
-                    entities.create().assign<RollCommand>(entity, false);
-                    return;
-                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_F) &&
-                           KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_K)) {
-                    entities.create().assign<RollCommand>(entity, true);
-                    return;
-                }
-
-                for (auto &userKey : keys) {
-                    bool validkKey = false;
-                    auto k = GameKey::_from_integral(userKey.key);
-                    switch (k) {
-                        case GameKey::Back:
-                        case GameKey::Forward: {
-                            entities.create().assign<MoveCommand>(entity, userKey);
-                            validkKey = true;
-                            break;
-                        }
-                        case GameKey::LittleFist:
-                        case GameKey::LittleKick:
-                        case GameKey::BigFist:
-                        case GameKey::BigKick: {
-                            entities.create().assign<HitCommand>(entity, userKey);
-                            validkKey = true;
-                            break;
-                        }
-                        case GameKey::Down: {
-                            entities.create().assign<CrouchCommand>(entity, userKey);
-                            validkKey = true;
-                            break;
-                        }
-                        case GameKey::Up: {
-                            if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT)) {
-                                auto genKey = ConvertToGameKey(SDL_SCANCODE_LEFT);
-                                entities.create().assign<JumpCommand>(entity, UserKey(genKey._to_integral(), userKey.time, userKey.down));
-                            } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
-                                auto genKey = ConvertToGameKey(SDL_SCANCODE_RIGHT);
-                                entities.create().assign<JumpCommand>(entity, UserKey(genKey._to_integral(), userKey.time, userKey.down));
-                            } else {
-                                entities.create().assign<JumpCommand>(entity, userKey);
-                            }
-
-                            validkKey = true;
-                            break;
-                        }
-                        default:
-                            break;
+                    case CharacterBehaviour::MoveRight: {
+                        auto genKey = ConvertToGameKey(SDL_SCANCODE_RIGHT);
+                        entities.create().assign<MoveCommand>(entity,
+                                                              UserKey(genKey._to_integral(), Chrono::Now(), true));
+                        break;
                     }
+                    case CharacterBehaviour::Crouch: {
+                        auto genKey = ConvertToGameKey(SDL_SCANCODE_DOWN);
+                        entities.create().assign<CrouchCommand>(entity,
+                                                                UserKey(genKey._to_integral(), Chrono::Now(), true));
+                        break;
+                    }
+                    case CharacterBehaviour::Jump: {
+                        auto genKey = ConvertToGameKey(SDL_SCANCODE_UP);
+                        entities.create().assign<JumpCommand>(entity,
+                                                                UserKey(genKey._to_integral(), Chrono::Now(), true));
+                        break;
+                    }
+                    case CharacterBehaviour::JumpLeft: {
+                        auto genKey = ConvertToGameKey(SDL_SCANCODE_LEFT);
+                        entities.create().assign<JumpCommand>(entity,
+                                                              UserKey(genKey._to_integral(), Chrono::Now(), true));
+                        break;
+                    }
+                    case CharacterBehaviour::JumpRight: {
+                        auto genKey = ConvertToGameKey(SDL_SCANCODE_RIGHT);
+                        entities.create().assign<JumpCommand>(entity,
+                                                              UserKey(genKey._to_integral(), Chrono::Now(), true));
+                        break;
+                    }
+                    case CharacterBehaviour::Idle: {
+                        if (oldState != state) {
+                            events.emit<AbortEvent>(entity);
+                        }
+                        break;
+                    }
+                    default:
+                        break;
                 }
-
-                if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_UP)) {
-                    UserKey key(ConvertToGameKey(SDL_SCANCODE_UP), Chrono::Now(), true);
-                    entities.create().assign<JumpCommand>(entity, key);
-                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_DOWN)) {
-                    UserKey key(ConvertToGameKey(SDL_SCANCODE_UP), Chrono::Now(), true);
-                    entities.create().assign<CrouchCommand>(entity, key);
-                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT)) {
-                    UserKey key(ConvertToGameKey(SDL_SCANCODE_UP), Chrono::Now(), true);
-                    entities.create().assign<MoveCommand>(entity, key);
-                } else if (KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
-                    UserKey key(ConvertToGameKey(SDL_SCANCODE_UP), Chrono::Now(), true);
-                    entities.create().assign<MoveCommand>(entity, key);
-                }
+                entity.component<CharacterState>()->state = state;
             }
         }
 

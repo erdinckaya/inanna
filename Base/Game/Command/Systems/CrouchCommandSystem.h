@@ -19,10 +19,11 @@ namespace Inanna {
 
         void configure(entityx::EventManager &events) override {
             events.subscribe<CrouchEnd>(*this);
+            events.subscribe<AbortEvent>(*this);
         }
 
         void CrouchCharacter(CrouchCommand &cmd) {
-            if (cmd.character.has_component<Crouch>() && cmd.userKey.down) {
+            if (cmd.character.has_component<Crouch>()) {
                 return;
             }
             cmd.character.component<MoveState>()->lock = cmd.userKey.down;
@@ -44,6 +45,14 @@ namespace Inanna {
 
         void receive(const CrouchEnd &crouchEnd) {
             CrouchEnd event = crouchEnd;
+            if (event.entity.has_component<Crouch>()) {
+                INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+                INANNA_REMOVE_COMPONENT(event.entity, Crouch);
+            }
+        }
+
+        void receive(const AbortEvent &abortEvent) {
+            AbortEvent event = abortEvent;
             if (event.entity.has_component<Crouch>()) {
                 INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
                 INANNA_REMOVE_COMPONENT(event.entity, Crouch);

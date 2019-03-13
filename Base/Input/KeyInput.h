@@ -34,7 +34,6 @@ namespace Inanna {
 
         static KeyInput Instance;
 
-    private:
         std::map<SDL_Scancode, bool> heldKeys;
         std::map<SDL_Scancode, int> firstDownKeys;
         std::map<SDL_Scancode, bool> pressedKeys;

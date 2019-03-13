@@ -51,6 +51,7 @@ namespace Inanna {
             cmd.character.replace<JumpCharacter>(Vecf(direction, 3), 5, animData, Chrono::Now());
             cmd.character.component<JumpState>()->state = JumpStates::RISE_JS;
             INANNA_REMOVE_COMPONENT(cmd.character, MoveCharacter);
+            cmd.character.component<CharacterState>()->lock = true;
         }
 
 
@@ -74,6 +75,7 @@ namespace Inanna {
             INANNA_REMOVE_COMPONENT(event.entity, JumpCharacter);
             event.entity.component<JumpState>()->state = JumpStates::IDLE_JS;
             INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+            event.entity.component<CharacterState>()->lock = false;
         }
     };
 }

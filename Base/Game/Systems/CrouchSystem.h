@@ -19,20 +19,13 @@ namespace Inanna {
         explicit CrouchSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, MoveState, Crouch>(
-                    [this, dt](entityx::Entity entity, Character &character, MoveState &moveState, Crouch &crouch) {
-                        if (entity.component<CrouchState>()->lock) {
-                            return;
-                        }
-                        entity.component<MoveState>()->lock = crouch.down;
-                        if (crouch.down) {
-                            INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_CROUCH);
-                            entity.component<SpriteAnimation>()->stayAtLastFrame = true;
-                        } else {
-                            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(entity, AnimationData::KYO_IDLE);
-                            INANNA_REMOVE_COMPONENT(entity, Crouch);
-                        }
-                    });
+            entities.each<Character, Crouch>([this, dt](entityx::Entity entity, Character &character, Crouch &crouch) {
+                if (entity.component<CrouchState>()->lock) {
+                    return;
+                }
+                INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_CROUCH);
+                entity.component<SpriteAnimation>()->stayAtLastFrame = true;
+            });
         }
     };
 }

@@ -11,11 +11,9 @@
 #include "../../Components/MoveCharacter.h"
 #include "../../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../../../Util/SpriteMacro.h"
-#include "../../Components/MoveState.h"
-#include "../../Components/JumpState.h"
-#include "../../Util/JumpStates.h"
 #include "../../Events/RunEnd.h"
 #include "../../Events/MoveEnd.h"
+#include "../../Events/AbortEvent.h"
 
 using namespace boolinq;
 
@@ -27,6 +25,7 @@ namespace Inanna {
         void configure(entityx::EventManager &events) override {
             manager = &events;
             events.subscribe<MoveEnd>(*this);
+            events.subscribe<AbortEvent>(*this);
         }
 
         void Move(entityx::Entity &character, SpriteAnimData &animData, int direction) const {
@@ -43,7 +42,7 @@ namespace Inanna {
         void Move(MoveCommand &cmd) {
             auto character = cmd.character;
 
-            if (character.has_component<MoveCharacter>() && cmd.userKey.down) {
+            if (character.has_component<MoveCharacter>()) {
                 return;
             }
 
@@ -61,11 +60,7 @@ namespace Inanna {
                 }
             }
 
-            if (cmd.userKey.down) {
-                Move(character, animData, direction);
-            } else {
-                RemoveMove(character);
-            }
+            Move(character, animData, direction);
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
@@ -77,23 +72,19 @@ namespace Inanna {
 
             commands = from(commands).orderBy([](const MoveCommand &cmd) { return cmd.userKey.time; }).toVector();
             for (auto &cmd : commands) {
-                auto jumpState = cmd.character.component<JumpState>()->state;
-                auto moveLock = cmd.character.component<MoveState>()->lock;
-                if (cmd.character.component<MoveState>()->state == MoveStates::RUN_MS && !cmd.userKey.down) {
-                    manager->emit<RunEnd>(cmd.character);
-                    return;
-                }
-
-                if (jumpState == JumpStates::IDLE_JS) {
-                    if (!cmd.userKey.down || !moveLock) {
-                        Move(cmd);
-                    }
-                }
+                Move(cmd);
             }
         }
 
         void receive(const MoveEnd &moveEnd) {
             MoveEnd event = moveEnd;
+            if (event.entity.has_component<MoveCharacter>()) {
+                RemoveMove(event.entity);
+            }
+        }
+
+        void receive(const AbortEvent &abortEnd) {
+            AbortEvent event = abortEnd;
             if (event.entity.has_component<MoveCharacter>()) {
                 RemoveMove(event.entity);
             }
