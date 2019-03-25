@@ -6,8 +6,8 @@
 
 
 bool Inanna::KeyInputSystem::HandleSpecialMoves(entityx::EntityManager &entities, entityx::EventManager &events,
-                        std::vector<UserKey> &keys,
-                        entityx::Entity &entity) {
+                                                std::vector<UserKey> &keys,
+                                                entityx::Entity &entity) {
     auto result = FindSpecialMoves(entity, keys);
     auto specialKey = std::get<0>(result);
     if (specialKey != +SpecialMoveKey::Invalid) {
@@ -36,8 +36,8 @@ bool Inanna::KeyInputSystem::HandleSpecialMoves(entityx::EntityManager &entities
 }
 
 void Inanna::KeyInputSystem::HandleSimpleMoves(entityx::EntityManager &entities, entityx::EventManager &events,
-                                              std::vector<UserKey> &keys,
-                                              entityx::Entity &entity) {
+                                               std::vector<UserKey> &keys,
+                                               entityx::Entity &entity) {
     auto characterState = entity.component<CharacterState>();
     auto oldState = characterState->state;
     auto state = CharacterBehaviourUtil::GetCharacterBehaviour(entity);
@@ -103,8 +103,145 @@ void Inanna::KeyInputSystem::HandleSimpleMoves(entityx::EntityManager &entities,
     entity.component<CharacterState>()->state = state;
 }
 
+bool Inanna::KeyInputSystem::HandleSimpleHits(entityx::EntityManager &entities, entityx::EventManager &events,
+                                              std::vector<UserKey> &keys,
+                                              entityx::Entity &entity) {
+    auto downBuffer = from(keys).where([](const UserKey &u) {
+        auto key = GameKey::_from_integral(u.key);
+        return u.down && key != +GameKey::InValid && IS_HIT(key);
+    }).select([](const UserKey &u) { return u; }).toVector();
 
-std::tuple<Inanna::SpecialMoveKey, Inanna::GameKey> Inanna::KeyInputSystem::FindSpecialMoves(entityx::Entity entity, std::vector<UserKey> keys) {
+    if (downBuffer.empty()) {
+        return false;
+    }
+
+    auto characterState = entity.component<CharacterState>();
+    auto oldState = characterState->state;
+    auto state = CharacterBehaviourUtil::GetCharacterBehaviour(entity);
+    if (oldState != state && state == +CharacterBehaviour::Idle) {
+        events.emit<AbortEvent>(entity);
+    }
+
+    if (characterState->lock) {
+        return false;
+    }
+
+    if (oldState != state) {
+        events.emit<AbortEvent>(entity);
+    }
+
+    // For just one hit
+    auto key = GameKey::_from_integral(downBuffer[0].key);
+
+
+    bool canHit = true;
+
+    switch (state) {
+        case CharacterBehaviour::MoveLeft:
+        case CharacterBehaviour::MoveRight: {
+            switch (key) {
+                case GameKey::LittleFist: {
+                    state = CharacterBehaviour::LittleFist;
+                    break;
+                }
+                case GameKey::LittleKick: {
+                    state = CharacterBehaviour::LittleKick;
+                    break;
+                }
+                case GameKey::BigFist: {
+                    state = CharacterBehaviour::BigFist;
+                    break;
+                }
+                case GameKey::BigKick: {
+                    state = CharacterBehaviour::BigKick;
+                    break;
+                }
+                default: {
+                    canHit = false;
+                    break;
+                }
+
+            }
+            break;
+        }
+
+        case CharacterBehaviour::Crouch: {
+            switch (key) {
+                case GameKey::LittleFist: {
+                    state = CharacterBehaviour::CrouchLittleFist;
+                    break;
+                }
+                case GameKey::LittleKick: {
+                    state = CharacterBehaviour::CrouchLittleKick;
+                    break;
+                }
+                case GameKey::BigFist: {
+                    state = CharacterBehaviour::CrouchBigFist;
+                    break;
+                }
+                case GameKey::BigKick: {
+                    state = CharacterBehaviour::CrouchBigKick;
+                    break;
+                }
+                default: {
+                    canHit = false;
+                    break;
+                }
+
+            }
+            break;
+        }
+        case CharacterBehaviour::Jump:
+        case CharacterBehaviour::JumpLeft:
+        case CharacterBehaviour::JumpRight: {
+            switch (key) {
+                case GameKey::LittleFist: {
+                    state = CharacterBehaviour::JumpLittleFist;
+                    break;
+                }
+                case GameKey::LittleKick: {
+                    state = CharacterBehaviour::JumpLittleKick;
+                    break;
+                }
+                case GameKey::BigFist: {
+                    state = CharacterBehaviour::JumpBigFist;
+                    break;
+                }
+                case GameKey::BigKick: {
+                    state = CharacterBehaviour::JumpBigKick;
+                    break;
+                }
+                default: {
+                    canHit = false;
+                    break;
+                }
+
+            }
+            break;
+        }
+
+        case CharacterBehaviour::Idle: {
+            if (oldState != state) {
+                events.emit<AbortEvent>(entity);
+            }
+            break;
+        }
+        default:
+            break;
+    }
+
+    if (canHit) {
+        entities.create().assign<HitCommand>(entity,UserKey(key._to_integral(), Chrono::Now(), true));
+        entity.component<CharacterState>()->state = state;
+        return true;
+    }
+
+    return false;
+}
+
+
+std::tuple<Inanna::SpecialMoveKey, Inanna::GameKey>
+Inanna::KeyInputSystem::FindSpecialMoves(entityx::Entity entity, std::vector<UserKey> keys) {
     for (auto &userKey : keys) {
         entity.component<UserKeyHistory>()->buffer.push_back(userKey);
     }
@@ -170,13 +307,13 @@ Inanna::GameKey Inanna::KeyInputSystem::ConvertToGameKey(SDL_Scancode key) {
             return GameKey::Up;
         case SDL_SCANCODE_DOWN:
             return GameKey::Down;
-        case SDL_SCANCODE_F:
+        case SDL_SCANCODE_A:
             return GameKey::LittleFist;
-        case SDL_SCANCODE_K:
+        case SDL_SCANCODE_S:
             return GameKey::LittleKick;
-        case SDL_SCANCODE_D:
+        case SDL_SCANCODE_Z:
             return GameKey::BigFist;
-        case SDL_SCANCODE_L:
+        case SDL_SCANCODE_X:
             return GameKey::BigKick;
         default:
             break;

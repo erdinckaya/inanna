@@ -71,6 +71,10 @@ namespace Inanna {
                 if (HandleSpecialMoves(entities, events, keys, entity)) {
                     return;
                 }
+                if (HandleSimpleHits(entities, events, keys, entity)) {
+                    return;
+                }
+
                 HandleSimpleMoves(entities, events, keys, entity);
             }
         }
@@ -90,6 +94,10 @@ namespace Inanna {
                                 entityx::Entity &entity);
 
         void HandleSimpleMoves(entityx::EntityManager &entities, entityx::EventManager &events,
+                               std::vector<UserKey> &keys,
+                               entityx::Entity &entity);
+
+        bool HandleSimpleHits(entityx::EntityManager &entities, entityx::EventManager &events,
                                std::vector<UserKey> &keys,
                                entityx::Entity &entity);
 

@@ -9,38 +9,27 @@
 #include "../../../../Assets/AnimationData.h"
 #include "../../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../../../Util/SpriteMacro.h"
-#include "../../Components/MoveState.h"
 #include "../../../../ThirdParty/boolinq.h"
 #include "../Components/HitCommand.h"
 #include "../../Components/Hit.h"
-#include "../../Components/JumpBack.h"
-#include "../../Components/Roll.h"
+#include "../../Events/HitEnd.h"
 
 using namespace boolinq;
 
 namespace Inanna {
-    struct HitCommandSystem : public entityx::System<HitCommandSystem> {
+    struct HitCommandSystem : public entityx::System<HitCommandSystem>, entityx::Receiver<HitCommandSystem> {
+
+        void configure(entityx::EventManager &events) override {
+            manager = &events;
+            events.subscribe<HitEnd>(*this);
+        }
 
         void CharacterHit(HitCommand &cmd) {
-            if (cmd.character.has_component<Roll>() || cmd.character.has_component<JumpBack>()) {
+            if (cmd.character.has_component<Hit>()) {
                 return;
             }
 
-            auto character = cmd.character;
-            if (!character.has_component<Hit>() && IS_HIT(GameKey::_from_integral(cmd.userKey.key))) {
-                character.assign<Hit>(cmd.userKey.key);
-            }
-
-            switch (cmd.userKey.key) {
-                case SDL_SCANCODE_K:
-                case SDL_SCANCODE_L:
-                case SDL_SCANCODE_F: {
-
-                    break;
-                }
-                default:
-                    break;
-            }
+            cmd.character.assign<Hit>(cmd.userKey.key);
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
@@ -55,6 +44,17 @@ namespace Inanna {
                 CharacterHit(cmd);
             }
         }
+
+        void receive(const HitEnd &hitEvent) {
+            HitEnd event = hitEvent;
+            if (event.entity.has_component<Hit>()) {
+                INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+                INANNA_REMOVE_COMPONENT(event.entity, Hit);
+            }
+        }
+
+    private:
+        entityx::EventManager *manager;
     };
 }
 #endif //INANNA_HITCOMMANDSYSTEM_H

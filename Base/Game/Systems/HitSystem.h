@@ -10,42 +10,37 @@
 #include "../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Components/Character.h"
 #include "../../Util/SpriteMacro.h"
-#include "../../Game/Command/Components/CommandLink.h"
 #include "../Components/Hit.h"
-#include "../Components/MoveState.h"
 
 namespace Inanna {
-    struct HitSystem : public entityx::System<HitSystem> {
-        explicit HitSystem() = default;
+    struct HitSystem : public entityx::System<HitSystem>, entityx::Receiver<HitSystem> {
+        explicit HitSystem() : manager(nullptr) {}
 
-        static void OnHitFinish(entityx::Entity ent) {
-            ent.component<MoveState>()->lock = false;
-            ent.remove<CommandLink>();
-            ent.remove<Hit>();
-            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(ent, AnimationData::KYO_IDLE);
+        void configure(entityx::EventManager &events) override {
+            manager = &events;
+            events.subscribe<SpriteAnimEnd>(*this);
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, MoveState, SpriteAnimation, Hit>(
-                    [this, dt](entityx::Entity entity, Character &character, MoveState &moveState,
-                               SpriteAnimation &anim,
-                               Hit &hit) {
-                        entity.component<MoveState>()->lock = true;
+            entities.each<Character, SpriteAnimation, Hit>(
+                    [this, dt](entityx::Entity entity, Character &character, SpriteAnimation &anim, Hit &hit) {
                         auto key = GameKey::_from_integral(hit.key);
+                        INANNA_REMOVE_COMPONENT(entity, MoveCharacter)
                         switch (key) {
-                            case GameKey::LittleFist:  {
+                            case GameKey::LittleFist: {
                                 INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_LITTLE_FIST);
-                                entity.replace<CommandLink>(entity)->onExecuted.Connect(&HitSystem::OnHitFinish);
+                                break;
+                            }
+                            case GameKey::BigFist: {
+                                INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_BIG_FIST);
                                 break;
                             }
                             case GameKey::LittleKick: {
                                 INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_LITTLE_KICK);
-                                entity.replace<CommandLink>(entity)->onExecuted.Connect(&HitSystem::OnHitFinish);
                                 break;
                             }
                             case GameKey::BigKick: {
                                 INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_BIG_KICK);
-                                entity.replace<CommandLink>(entity)->onExecuted.Connect(&HitSystem::OnHitFinish);
                                 break;
                             }
                             default:
@@ -53,6 +48,16 @@ namespace Inanna {
                         }
                     });
         }
+
+        void receive(const SpriteAnimEnd &spriteAnimEnd) {
+            SpriteAnimEnd event = spriteAnimEnd;
+            if (event.entity.has_component<Hit>()) {
+                manager->emit<HitEnd>(event.entity);
+            }
+        }
+
+    private:
+        entityx::EventManager *manager;
     };
 }
 

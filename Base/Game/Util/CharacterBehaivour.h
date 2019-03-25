@@ -17,7 +17,9 @@ using namespace boolinq;
 
 namespace Inanna {
     BETTER_ENUM(CharacterBehaviour, Uint8, Idle = 0, MoveLeft = 1, MoveRight = 2, Jump = 3, Crouch = 4, JumpLeft = 5,
-                JumpRight = 6, Run = 7, JumpBack = 8, Oryu = 9)
+                JumpRight = 6, Run = 7, JumpBack = 8, Oryu = 9, LittleFist = 10, LittleKick = 11, BigFist = 12, BigKick = 13,
+                CrouchLittleFist = 14, CrouchLittleKick = 15, CrouchBigFist = 16, CrouchBigKick = 17,
+                JumpLittleFist = 18, JumpLittleKick = 19, JumpBigFist = 20, JumpBigKick = 21)
 
 
     struct CharacterBehaviourUtil {

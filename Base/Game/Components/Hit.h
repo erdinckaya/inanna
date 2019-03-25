@@ -11,6 +11,8 @@ namespace Inanna {
     struct Hit {
         explicit Hit(const Uint32 &key) : key(key) {}
         Uint32 key;
+
+        REFLECT()
     };
 }
 

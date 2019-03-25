@@ -178,6 +178,34 @@ public:
 
 
 
+struct Kyo_Big_Fist : public Sheet {
+
+public:
+    Kyo_Big_Fist() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 122.000000f, 208.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 122.000000f, 0.000000f, 118.000000f, 200.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 240.000000f, 0.000000f, 120.000000f, 202.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 360.000000f, 0.000000f, 212.000000f, 196.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 572.000000f, 0.000000f, 184.000000f, 206.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 756.000000f, 0.000000f, 122.000000f, 208.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 878.000000f, 0.000000f, 118.000000f, 206.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_big_fist", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_big_fist.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+
+
+};
+
+
+
 struct Kyo_Big_Kick : public Sheet {
 
 public:
@@ -655,6 +683,7 @@ public:
 	static Fields FIELDS;
 	static Pieces PIECES;
 	static Kyo_Crouch KYO_CROUCH;
+	static Kyo_Big_Fist KYO_BIG_FIST;
 	static Kyo_Big_Kick KYO_BIG_KICK;
 	static Kyo_Little_Fist KYO_LITTLE_FIST;
 	static Kyo_Little_Kick KYO_LITTLE_KICK;
@@ -673,7 +702,7 @@ public:
 
 
 	static int SheetCount;
-	static const Sheet Sheets[20];
+	static const Sheet Sheets[21];
 };
 
 

@@ -11,6 +11,7 @@
 #include "../SpriteAnimation/Components/SpriteLoop.h"
 #include "../Game/Components/MoveCharacter.h"
 #include "../Game/Components/Roll.h"
+#include "../Game/Components/Hit.h"
 #include "../Game/Components/Oryu.h"
 #include "../Game/Components/Run.h"
 #include "../Game/Components/JumpCharacter.h"
@@ -82,6 +83,10 @@ REFLECT_STRUCT_BEGIN(Inanna::Run)
                     REFLECT_STRUCT_MEMBER(time)
                     REFLECT_STRUCT_MEMBER(direction)
                     REFLECT_STRUCT_MEMBER(speed)
+REFLECT_STRUCT_END()
+
+REFLECT_STRUCT_BEGIN(Inanna::Hit)
+                    REFLECT_STRUCT_MEMBER(key)
 REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::JumpCharacter)

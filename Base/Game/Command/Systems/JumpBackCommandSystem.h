@@ -10,6 +10,7 @@
 #include "../../../../ThirdParty/boolinq.h"
 #include "../Components/JumpBackCommand.h"
 #include "../../Events/JumpBackEnd.h"
+#include "../../Components/JumpBack.h"
 #include "../../../../Assets/AnimationData.h"
 #include "../../../Util/SpriteMacro.h"
 
