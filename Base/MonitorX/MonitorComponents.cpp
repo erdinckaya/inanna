@@ -85,10 +85,9 @@ REFLECT_STRUCT_BEGIN(Inanna::Run)
 REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::JumpCharacter)
-                    REFLECT_STRUCT_MEMBER(time)
-                    REFLECT_STRUCT_MEMBER(direction)
-                    REFLECT_STRUCT_MEMBER(speed)
-
+                    REFLECT_STRUCT_MEMBER(distance)
+                    REFLECT_STRUCT_MEMBER(risingTime)
+                    REFLECT_STRUCT_MEMBER(vX)
 REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::Crouch)

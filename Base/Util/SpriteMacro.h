@@ -19,8 +19,7 @@
 #define INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, anim) \
     if (entity.has_component<SpriteAnimation>()) { \
         if (entity.component<SpriteAnimation>()->animData != anim) { \
-            entity.remove<SpriteAnimation>(); \
-            entity.assign<SpriteAnimation>(anim); \
+            entity.replace<SpriteAnimation>(anim); \
         } \
     } \
 

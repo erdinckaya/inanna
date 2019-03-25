@@ -13,6 +13,7 @@
 #include "../Components/JumpCharacter.h"
 #include "../../Util/SpriteMacro.h"
 #include "../Events/JumpEnd.h"
+#include "../../Util/Math/Physics.h"
 
 namespace Inanna {
     struct JumpCharacterSystem : public entityx::System<JumpCharacterSystem>, entityx::Receiver<JumpCharacterSystem> {
@@ -27,27 +28,17 @@ namespace Inanna {
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Character, Position, JumpCharacter, SpriteAnimation>(
-                    [this, dt](entityx::Entity entity, Character &character, Position &position, JumpCharacter &jump,
+                    [this, &entities, dt](entityx::Entity entity, Character &character, Position &position, JumpCharacter &jump,
                                SpriteAnimation &anim) {
                         INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, jump.animData);
-                        if (!jump.longJump && Chrono::Now() > jump.startTime + LongJumpTimeLimit &&
-                            KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_UP)) {
-                            jump.longJump = true;
-                            anim.animData.speed *= 0.5f;
-                            jump.direction *= 1.8f;
-                        }
+                        anim.animData.speed = anim.animData.keyFrames.size() / (jump.risingTime * 2);
+                        float y = Physics::JumpWithDistanceAndTime(jump.distance, jump.risingTime, jump.totalTime);
+                        jump.totalTime += dt * 0.001f;
+                        auto x = static_cast<float>(dt * 0.1f * jump.vX);
+                        position.position = Vecf(position.position.x + x, y + FLOOR);
 
-                        double speed = 1000.0 / jump.speed;
-                        bool isKilled = false;
-                        if (jump.time >= speed) {
-                            jump.time = 0;
-                        } else {
-                            jump.time += dt;
-                        }
-
-                        position.position += jump.direction * jump.speed;
                         if (position.position.y < FLOOR) {
-                            position.position = Vecf(position.position.x, FLOOR);
+                            position.position = Vecf(position.position.x - x, FLOOR);
                         }
                     });
         }
@@ -60,12 +51,12 @@ namespace Inanna {
         }
 
         void receive(const SpriteIndex &spriteIndex) {
-            SpriteIndex event = spriteIndex;
-            if (event.entity.has_component<JumpCharacter>()) {
-                auto direction = event.entity.component<JumpCharacter>()->direction;
-                event.entity.component<JumpCharacter>()->direction = Vecf(direction.x, -direction.y);
-                event.entity.component<JumpState>()->state = JumpStates::FALL_JS;
-            }
+//            SpriteIndex event = spriteIndex;
+//            if (event.entity.has_component<JumpCharacter>()) {
+//                auto direction = event.entity.component<JumpCharacter>()->direction;
+//                event.entity.component<JumpCharacter>()->direction = Vecf(direction.x, -direction.y);
+//                event.entity.component<JumpState>()->state = JumpStates::FALL_JS;
+//            }
         }
 
     private:
