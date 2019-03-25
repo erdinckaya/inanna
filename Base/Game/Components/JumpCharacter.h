@@ -18,8 +18,10 @@
 
 namespace Inanna {
     struct JumpCharacter {
-        explicit JumpCharacter(SpriteAnimData animData, float distance, float risingTime, float vX, Uint32 startTime = Chrono::Now()) :
-            animData(std::move(animData)), startTime(startTime), distance(distance), risingTime(risingTime), vX(vX), totalTime(0) {}
+        explicit JumpCharacter(SpriteAnimData animData, float distance, float risingTime, float vX,
+                               Uint32 startTime = Chrono::Now()) :
+                animData(std::move(animData)), startTime(startTime), distance(distance), risingTime(risingTime), vX(vX),
+                totalTime(0), longJump(true) {}
 
         SpriteAnimData animData;
         Uint32 startTime;
@@ -27,6 +29,7 @@ namespace Inanna {
         float risingTime; // seconds
         float totalTime;  // seconds
         float vX;
+        bool longJump;
 
         REFLECT()
     };

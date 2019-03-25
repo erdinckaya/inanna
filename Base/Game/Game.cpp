@@ -130,7 +130,7 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Rival.assign<MoveState>();
             Rival.assign<JumpState>();
             Rival.assign<CrouchState>();
-            Player.assign<CharacterState>();
+            Rival.assign<CharacterState>();
 
             break;
         }

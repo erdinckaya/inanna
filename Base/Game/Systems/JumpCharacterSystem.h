@@ -28,9 +28,23 @@ namespace Inanna {
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Character, Position, JumpCharacter, SpriteAnimation>(
-                    [this, &entities, dt](entityx::Entity entity, Character &character, Position &position, JumpCharacter &jump,
-                               SpriteAnimation &anim) {
-                        INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, jump.animData);
+                    [this, &entities, dt](entityx::Entity entity, Character &character, Position &position,
+                                          JumpCharacter &jump,
+                                          SpriteAnimation &anim) {
+
+                        if (jump.longJump) {
+                            INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, jump.animData)
+                        }
+
+                        if (jump.longJump && Chrono::Now() < jump.startTime + LongJumpTimeLimit &&
+                            KeyInput::Instance.WasKeyReleased(SDL_SCANCODE_UP)) {
+                            jump.longJump = false;
+                            jump.distance *= 0.5f;
+                            jump.risingTime *= 0.9f;
+                            jump.vX *= 0.5f;
+                            INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_JUMP);
+                        }
+
                         anim.animData.speed = anim.animData.keyFrames.size() / (jump.risingTime * 2);
                         float y = Physics::JumpWithDistanceAndTime(jump.distance, jump.risingTime, jump.totalTime);
                         jump.totalTime += dt * 0.001f;
