@@ -71,6 +71,9 @@ namespace Inanna {
                 if (HandleSpecialMoves(entities, events, keys, entity)) {
                     return;
                 }
+                if (HandleCompositeMoves(entities, events, keys, entity)) {
+                    return;
+                }
                 if (HandleSimpleHits(entities, events, keys, entity)) {
                     return;
                 }
@@ -100,6 +103,10 @@ namespace Inanna {
         bool HandleSimpleHits(entityx::EntityManager &entities, entityx::EventManager &events,
                                std::vector<UserKey> &keys,
                                entityx::Entity &entity);
+
+        bool HandleCompositeMoves(entityx::EntityManager &entities, entityx::EventManager &events,
+                              std::vector<UserKey> &keys,
+                              entityx::Entity &entity);
 
         void ClearTimeoutKeys(UserKeyHistory *history);
 

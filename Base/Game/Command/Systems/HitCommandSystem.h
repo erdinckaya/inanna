@@ -29,7 +29,6 @@ namespace Inanna {
                 return;
             }
 
-            printf("State is %s\n", cmd.state._to_string());
             SpriteAnimData animData = AnimationData::KYO_LITTLE_FIST;
             bool canHit = true;
             switch (cmd.state) {
@@ -78,6 +77,7 @@ namespace Inanna {
             }
 
             if (canHit) {
+                cmd.character.component<CharacterState>()->lock = true;
                 cmd.character.assign<Hit>(cmd.userKey.key, animData);
             }
         }
@@ -98,6 +98,7 @@ namespace Inanna {
         void receive(const HitEnd &hitEvent) {
             HitEnd event = hitEvent;
             if (event.entity.has_component<Hit>()) {
+                event.entity.component<CharacterState>()->lock = false;
                 INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
                 INANNA_REMOVE_COMPONENT(event.entity, Hit);
             }

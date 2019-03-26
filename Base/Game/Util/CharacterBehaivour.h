@@ -16,16 +16,19 @@
 using namespace boolinq;
 
 namespace Inanna {
-    BETTER_ENUM(CharacterBehaviour, Uint8, Idle = 0, MoveLeft = 1, MoveRight = 2, Jump = 3, Crouch = 4, JumpLeft = 5,
-                JumpRight = 6, Run = 7, JumpBack = 8, Oryu = 9, LittleFist = 10, LittleKick = 11, BigFist = 12, BigKick = 13,
+    BETTER_ENUM(CharacterBehaviour, int, Idle = 0, MoveLeft = 1, MoveRight = 2, Jump = 3, Crouch = 4, JumpLeft = 5,
+                JumpRight = 6, Run = 7, JumpBack = 8, Oryu = 9, LittleFist = 10, LittleKick = 11, BigFist = 12,
+                BigKick = 13,
                 CrouchLittleFist = 14, CrouchLittleKick = 15, CrouchBigFist = 16, CrouchBigKick = 17,
-                JumpLittleFist = 18, JumpLittleKick = 19, JumpBigFist = 20, JumpBigKick = 21)
+                JumpLittleFist = 18, JumpLittleKick = 19, JumpBigFist = 20, JumpBigKick = 21,
+                Roll = 22)
 
     struct CharacterBehaviourUtil {
         static CharacterBehaviour GetCharacterBehaviour(entityx::Entity entity) {
             auto keys = from(KeyInput::Instance.heldKeys).where(
-                    [](const std::pair<SDL_Scancode, bool> &p) { return p.second; }).
-                    select([](const std::pair<SDL_Scancode, bool> p) { return p.first; }).toVector();
+                            [](const std::pair<SDL_Scancode, bool> &p) { return p.second; })
+                    .orderBy([](const std::pair<SDL_Scancode, bool> &p) { return p.first; })
+                    .select([](const std::pair<SDL_Scancode, bool> p) { return p.first; }).toVector();
             const int size = static_cast<const int>(keys.size());
             if (size == 1) {
                 auto key = keys[0];

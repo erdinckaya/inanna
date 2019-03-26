@@ -13,7 +13,7 @@ namespace Inanna {
 
         explicit UserKey(int key, Uint32 time, bool down) : key(key), time(time), down(down) {}
 
-        int key;
+        int key; // Equals to GameKey!
         Uint32 time;
         bool down;
 

@@ -8,6 +8,7 @@
 bool Inanna::KeyInputSystem::HandleSpecialMoves(entityx::EntityManager &entities, entityx::EventManager &events,
                                                 std::vector<UserKey> &keys,
                                                 entityx::Entity &entity) {
+
     auto result = FindSpecialMoves(entity, keys);
     auto specialKey = std::get<0>(result);
     if (specialKey != +SpecialMoveKey::Invalid) {
@@ -213,6 +214,7 @@ bool Inanna::KeyInputSystem::HandleSimpleHits(entityx::EntityManager &entities, 
     }
 
     if (canHit) {
+        events.emit<AbortEvent>(entity);
         entities.create().assign<HitCommand>(entity, UserKey(key._to_integral(), Chrono::Now(), true), state);
 //        entity.component<CharacterState>()->state = state;
         return true;
@@ -319,4 +321,50 @@ void Inanna::KeyInputSystem::ClearTimeoutKeys(Inanna::UserKeyHistory *history) {
     if (index > 0) {
         history->buffer.erase(history->buffer.begin(), history->buffer.begin() + index);
     }
+}
+
+bool Inanna::KeyInputSystem::HandleCompositeMoves(entityx::EntityManager &entities, entityx::EventManager &events,
+                                                  std::vector<Inanna::UserKey> &keys, entityx::Entity &entity) {
+    auto buffer = from(keys).where([](const UserKey &u) { return u.down; }).
+            select([](const UserKey &u) { return u; }).
+            orderBy([](const UserKey &u) { return u.key; }).toVector();
+
+    bool success = true;
+    const int size = static_cast<const int>(buffer.size());
+    if (size == 0 || entity.component<CharacterState>()->lock) {
+        return false;
+    }
+    auto oldState = CharacterBehaviour::_from_integral(entity.component<CharacterState>()->state);
+    auto state = CharacterBehaviour::Idle;
+    bool forward = true;
+    if (size == 2) {
+        auto first = GameKey::_from_integral(buffer[0].key);
+        auto second = GameKey::_from_integral(buffer[1].key);
+
+        if (first == +GameKey::LittleFist && second == +GameKey::LittleKick && KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_LEFT)) {
+            state = CharacterBehaviour::Roll;
+            forward = ConvertToGameKey(SDL_SCANCODE_LEFT) == +GameKey::Forward;
+        } else if (first == +GameKey::LittleFist && second == +GameKey::LittleKick && KeyInput::Instance.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
+            state = CharacterBehaviour::Roll;
+            forward = ConvertToGameKey(SDL_SCANCODE_RIGHT) == +GameKey::Forward;
+        } else if (first == +GameKey::LittleFist && second == +GameKey::LittleKick) {
+            state = CharacterBehaviour::Roll;
+            forward = true;
+        }
+    }
+
+    switch (state) {
+        case CharacterBehaviour::Roll: {
+            events.emit<AbortEvent>(entity);
+            entities.create().assign<RollCommand>(entity, forward);
+            break;
+        }
+        default: {
+            success = false;
+            break;
+        }
+
+    }
+
+    return success;
 }

@@ -8,17 +8,12 @@
 #include <entityx/System.h>
 #include "../../../../ThirdParty/boolinq.h"
 #include "../../Util/Chrono.h"
-#include "../Components/JumpBackCommand.h"
 #include "../../Components/Roll.h"
-#include "../../Components/JumpState.h"
-#include "../../Components/MoveState.h"
 #include "../../Events/RollEnd.h"
-#include "../../Events/CrouchEnd.h"
 #include "../../../../Assets/AnimationData.h"
 #include "../../../Util/SpriteMacro.h"
 #include "../Components/RollCommand.h"
 #include "../../../Util/Math/Vec2.h"
-#include "../../Components/CrouchState.h"
 
 using namespace boolinq;
 
@@ -31,21 +26,12 @@ namespace Inanna {
             events.subscribe<RollEnd>(*this);
         }
 
-        void RemoveOthers(entityx::Entity entity) {
-            manager->emit<MoveEnd>(entity);
-            manager->emit<JumpEnd>(entity);
-            manager->emit<RunEnd>(entity);
-            manager->emit<CrouchEnd>(entity);
-        }
-
         void HandleJumpBack(RollCommand &cmd) {
-            if (cmd.character.has_component<Roll>()
-                || cmd.character.has_component<Hit>()
-                || cmd.character.has_component<JumpCharacter>()) {
+            if (cmd.character.has_component<Roll>()) {
                 return;
             }
 
-            RemoveOthers(cmd.character);
+            cmd.character.replace<CharacterState>(CharacterBehaviour::Roll, true);
             manager->emit<LockInput>(cmd.character, true);
             auto direction = cmd.forward ? 1 : -1;
             if (!cmd.character.component<Facing>()->left) {
@@ -54,9 +40,6 @@ namespace Inanna {
 
             auto animData = cmd.forward ? AnimationData::KYO_ROLL_FORWARD : AnimationData::KYO_ROLL_BACKWARD;
             cmd.character.replace<Roll>(animData, Vecf(1, 0) * direction, 5);
-            cmd.character.component<JumpState>()->lock = true;
-            cmd.character.component<MoveState>()->lock = true;
-            cmd.character.component<CrouchState>()->lock = true;
         }
 
 
@@ -76,12 +59,9 @@ namespace Inanna {
         void receive(const RollEnd &rollEnd) {
             RollEnd event = rollEnd;
             INANNA_REMOVE_COMPONENT(event.entity, Roll);
-            event.entity.component<JumpState>()->state = JumpStates::IDLE_JS;
-            event.entity.component<JumpState>()->lock = false;
-            event.entity.component<MoveState>()->lock = false;
-            event.entity.component<CrouchState>()->lock = false;
             INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
             manager->emit<LockInput>(event.entity, false);
+            event.entity.replace<CharacterState>(CharacterBehaviour::Idle);
         }
 
     private:
