@@ -29,7 +29,57 @@ namespace Inanna {
                 return;
             }
 
-            cmd.character.assign<Hit>(cmd.userKey.key);
+            printf("State is %s\n", cmd.state._to_string());
+            SpriteAnimData animData = AnimationData::KYO_LITTLE_FIST;
+            bool canHit = true;
+            switch (cmd.state) {
+                case CharacterBehaviour::LittleFist:
+                    animData = AnimationData::KYO_LITTLE_FIST;
+                    break;
+                case CharacterBehaviour::BigFist:
+                    animData = AnimationData::KYO_BIG_FIST;
+                    break;
+                case CharacterBehaviour::LittleKick:
+                    animData = AnimationData::KYO_LITTLE_KICK;
+                    break;
+                case CharacterBehaviour::BigKick:
+                    animData = AnimationData::KYO_BIG_KICK;
+                    break;
+
+//                case CharacterBehaviour::CrouchLittleFist:
+//                    animData = AnimationData::KYO_CROUCH_LITTLE_FIST;
+//                    break;
+//                case CharacterBehaviour::CrouchBigFist:
+//                    animData = AnimationData::KYO_CROUCH_BIG_FIST;
+//                    break;
+//                case CharacterBehaviour::CrouchLittleKick:
+//                    animData = AnimationData::KYO_CROUCH_LITTLE_KICK;
+//                    break;
+//                case CharacterBehaviour::CrouchBigKick:
+//                    animData = AnimationData::KYO_CROUCH_BIG_KICK;
+//                    break;
+//
+//
+//                case CharacterBehaviour::JumpLittleFist:
+//                    animData = AnimationData::KYO_JUMP_LITTLE_FIST;
+//                    break;
+//                case CharacterBehaviour::JumpBigFist:
+//                    animData = AnimationData::KYO_JUMP_BIG_FIST;
+//                    break;
+//                case CharacterBehaviour::JumpLittleKick:
+//                    animData = AnimationData::KYO_JUMP_LITTLE_KICK;
+//                    break;
+//                case CharacterBehaviour::JumpBigKick:
+//                    animData = AnimationData::KYO_JUMP_BIG_KICK;
+//                    break;
+                default:
+                    canHit = false;
+                    break;
+            }
+
+            if (canHit) {
+                cmd.character.assign<Hit>(cmd.userKey.key, animData);
+            }
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {

@@ -24,28 +24,8 @@ namespace Inanna {
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Character, SpriteAnimation, Hit>(
                     [this, dt](entityx::Entity entity, Character &character, SpriteAnimation &anim, Hit &hit) {
-                        auto key = GameKey::_from_integral(hit.key);
                         INANNA_REMOVE_COMPONENT(entity, MoveCharacter)
-                        switch (key) {
-                            case GameKey::LittleFist: {
-                                INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_LITTLE_FIST);
-                                break;
-                            }
-                            case GameKey::BigFist: {
-                                INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_BIG_FIST);
-                                break;
-                            }
-                            case GameKey::LittleKick: {
-                                INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_LITTLE_KICK);
-                                break;
-                            }
-                            case GameKey::BigKick: {
-                                INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_BIG_KICK);
-                                break;
-                            }
-                            default:
-                                break;
-                        }
+                        INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, hit.animData);
                     });
         }
 

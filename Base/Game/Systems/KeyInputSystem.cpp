@@ -116,19 +116,7 @@ bool Inanna::KeyInputSystem::HandleSimpleHits(entityx::EntityManager &entities, 
     }
 
     auto characterState = entity.component<CharacterState>();
-    auto oldState = characterState->state;
-    auto state = CharacterBehaviourUtil::GetCharacterBehaviour(entity);
-    if (oldState != state && state == +CharacterBehaviour::Idle) {
-        events.emit<AbortEvent>(entity);
-    }
-
-    if (characterState->lock) {
-        return false;
-    }
-
-    if (oldState != state) {
-        events.emit<AbortEvent>(entity);
-    }
+    auto state = CharacterBehaviour::_from_integral(characterState->state);
 
     // For just one hit
     auto key = GameKey::_from_integral(downBuffer[0].key);
@@ -137,6 +125,7 @@ bool Inanna::KeyInputSystem::HandleSimpleHits(entityx::EntityManager &entities, 
     bool canHit = true;
 
     switch (state) {
+        case CharacterBehaviour::Idle:
         case CharacterBehaviour::MoveLeft:
         case CharacterBehaviour::MoveRight: {
             switch (key) {
@@ -219,20 +208,13 @@ bool Inanna::KeyInputSystem::HandleSimpleHits(entityx::EntityManager &entities, 
             }
             break;
         }
-
-        case CharacterBehaviour::Idle: {
-            if (oldState != state) {
-                events.emit<AbortEvent>(entity);
-            }
-            break;
-        }
         default:
             break;
     }
 
     if (canHit) {
-        entities.create().assign<HitCommand>(entity,UserKey(key._to_integral(), Chrono::Now(), true));
-        entity.component<CharacterState>()->state = state;
+        entities.create().assign<HitCommand>(entity, UserKey(key._to_integral(), Chrono::Now(), true), state);
+//        entity.component<CharacterState>()->state = state;
         return true;
     }
 

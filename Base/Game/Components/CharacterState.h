@@ -9,9 +9,9 @@
 
 namespace Inanna {
     struct CharacterState {
-        explicit CharacterState(const Uint8 &state = 0, const bool &lock = false) : state(state), lock(lock) {}
+        explicit CharacterState(const int &state = 0, const bool &lock = false) : state(state), lock(lock) {}
 
-        Uint8 state;
+        int state;
         bool lock;
 
         REFLECT()

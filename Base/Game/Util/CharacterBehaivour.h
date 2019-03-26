@@ -21,7 +21,6 @@ namespace Inanna {
                 CrouchLittleFist = 14, CrouchLittleKick = 15, CrouchBigFist = 16, CrouchBigKick = 17,
                 JumpLittleFist = 18, JumpLittleKick = 19, JumpBigFist = 20, JumpBigKick = 21)
 
-
     struct CharacterBehaviourUtil {
         static CharacterBehaviour GetCharacterBehaviour(entityx::Entity entity) {
             auto keys = from(KeyInput::Instance.heldKeys).where(

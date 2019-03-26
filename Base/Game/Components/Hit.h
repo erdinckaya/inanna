@@ -9,8 +9,9 @@
 
 namespace Inanna {
     struct Hit {
-        explicit Hit(const Uint32 &key) : key(key) {}
+        explicit Hit(const Uint32 &key, SpriteAnimData animData) : key(key), animData(animData) {}
         Uint32 key;
+        SpriteAnimData animData;
 
         REFLECT()
     };
