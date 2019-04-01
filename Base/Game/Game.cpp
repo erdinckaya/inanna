@@ -15,6 +15,7 @@
 #include "Command/Systems/HitCommandSystem.h"
 #include "Systems/HitSystem.h"
 #include "Command/Systems/CrouchCommandSystem.h"
+#include "Command/Systems/DamageReceiveCommandSystem.h"
 #include "Systems/CrouchSystem.h"
 #include "Command/Systems/JumpCommandSystem.h"
 #include "Systems/JumpCharacterSystem.h"
@@ -44,6 +45,7 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<RunCommandSystem>();
     systems.add<RollCommandSystem>();
     systems.add<OryuCommandSystem>();
+    systems.add<DamageReceiveCommandSystem>();
 
 
     systems.add<HitSystem>();
@@ -76,6 +78,7 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<RunCommandSystem>(dt);
     systems.update<RollCommandSystem>(dt);
     systems.update<OryuCommandSystem>(dt);
+    systems.update<DamageReceiveCommandSystem>(dt);
 
 
     systems.update<HitSystem>(dt);
@@ -109,6 +112,8 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Player.assign<Character>("Kyo");
             Player.assign<UserKeyHistory>();
             Player.assign<CharacterState>();
+            Player.assign<SpriteZ>(0);
+            Player.assign<Health>(100);
 
             break;
         }
@@ -122,6 +127,8 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Rival.assign<Character>("Kyo");
             Rival.assign<UserKeyHistory>();
             Rival.assign<CharacterState>();
+            Rival.assign<SpriteZ>(1);
+            Rival.assign<Health>(100);
 
             break;
         }

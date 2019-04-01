@@ -21,7 +21,7 @@ namespace Inanna {
                                                             time(0), loop(false),
                                                             state(SpriteAnimationState::Start),
                                                             killAtFinish(false), pingpong(false),
-                                                            stayAtLastFrame(false) {}
+                                                            stayAtLastFrame(false), hitbox(0, 0, 0, 0) {}
 
         const ImageAsset KeyFrame() {
             return animData.keyFrames[frameIndex];
@@ -58,6 +58,8 @@ namespace Inanna {
         int state;
         bool killAtFinish;
         bool stayAtLastFrame;
+
+        Rectf hitbox;
 
         REFLECT()
     };

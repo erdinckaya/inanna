@@ -10,9 +10,10 @@
 
 namespace Inanna {
     struct AbortEvent {
-        explicit AbortEvent(entityx::Entity entity) : entity(entity) {}
+        explicit AbortEvent(entityx::Entity entity, int level = 0) : entity(entity), level(level) {}
 
         entityx::Entity entity;
+        int level;
     };
 }
 

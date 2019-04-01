@@ -30,13 +30,15 @@ namespace Inanna {
                             }
 
                             Rectf pos = Rectf(position.global + Vecf(x, y), Vecf(image.hitRect.w, image.hitRect.h));
+                            sprite.hitbox = pos;
 
                             graphics->DrawRect(pos, {1, 0, 0, 1}, 1);
 
                             Rectf bound = Rectf(position.global, sprite.Size());
                             graphics->DrawRect(bound, {0, 0, 1, 1}, 2);
+                        } else {
+                            sprite.hitbox = Rectf(0, 0, 0, 0);
                         }
-
                     });
         }
 

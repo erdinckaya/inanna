@@ -22,6 +22,7 @@ namespace Inanna {
         void configure(entityx::EventManager &events) override {
             manager = &events;
             events.subscribe<HitEnd>(*this);
+            events.subscribe<AbortEvent>(*this);
         }
 
         void CharacterHit(HitCommand &cmd) {
@@ -112,6 +113,13 @@ namespace Inanna {
                     manager->emit<SpriteForceKeyFrame>(event.entity, AnimationData::KYO_CROUCH.keyFrames.size() - 1);
                 }
                 INANNA_REMOVE_COMPONENT(event.entity, Hit);
+            }
+        }
+
+        void receive(const AbortEvent &abortEvent) {
+            AbortEvent event = abortEvent;
+            if (event.entity.has_component<Hit>() && event.level > 0) {
+
             }
         }
 

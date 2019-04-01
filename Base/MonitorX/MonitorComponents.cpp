@@ -9,6 +9,7 @@
 #include "../Game/Components/Facing.h"
 #include "../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../SpriteAnimation/Components/SpriteLoop.h"
+#include "../SpriteAnimation/Components/SpriteZ.h"
 #include "../Game/Components/MoveCharacter.h"
 #include "../Game/Components/Roll.h"
 #include "../Game/Components/Hit.h"
@@ -51,6 +52,10 @@ REFLECT_STRUCT_END()
 REFLECT_STRUCT_BEGIN(Inanna::SpriteLoop)
                     REFLECT_STRUCT_MEMBER(start)
                     REFLECT_STRUCT_MEMBER(end)
+REFLECT_STRUCT_END()
+
+REFLECT_STRUCT_BEGIN(Inanna::SpriteZ)
+                    REFLECT_STRUCT_MEMBER(z)
 REFLECT_STRUCT_END()
 
 
