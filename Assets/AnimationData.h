@@ -41,6 +41,10 @@ struct AnimationData {
 	static SpriteAnim<ImageAsset> KYO_CROUCH;
 	static SpriteAnim<ImageAsset> KYO_BIG_FIST;
 	static SpriteAnim<ImageAsset> KYO_BIG_KICK;
+	static SpriteAnim<ImageAsset> KYO_CROUCH_BIG_FIST;
+	static SpriteAnim<ImageAsset> KYO_CROUCH_BIG_KICK;
+	static SpriteAnim<ImageAsset> KYO_CROUCH_LITTLE_KICK;
+	static SpriteAnim<ImageAsset> KYO_CROUCH_LITTLE_FIST;
 	static SpriteAnim<ImageAsset> KYO_LITTLE_FIST;
 	static SpriteAnim<ImageAsset> KYO_LITTLE_KICK;
 	static SpriteAnim<ImageAsset> KYO_IDLE;

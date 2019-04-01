@@ -26,7 +26,6 @@ namespace Inanna {
             if (cmd.character.has_component<Crouch>()) {
                 return;
             }
-            cmd.character.component<MoveState>()->lock = cmd.userKey.down;
             cmd.character.replace<Crouch>(cmd.userKey.down);
         }
 

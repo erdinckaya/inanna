@@ -9,6 +9,7 @@
 #include <SDL_scancode.h>
 #include <SDL_events.h>
 #include <map>
+#include "../Game/Util/GameKey.h"
 
 namespace Inanna {
 
@@ -29,6 +30,8 @@ namespace Inanna {
         bool IsKeyHit(SDL_Scancode key);
 
         bool IsKeyHeld(SDL_Scancode key);
+
+        bool IsKeyHeld(GameKey key);
 
         void PrintKeys();
 

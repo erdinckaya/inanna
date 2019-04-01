@@ -14,6 +14,10 @@ namespace Inanna {
         int state;
         bool lock;
 
+        void SetState(int state) {
+            this->state = state;
+        }
+
         REFLECT()
     };
 }

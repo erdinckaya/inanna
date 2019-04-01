@@ -14,17 +14,14 @@
 #include "Command/Systems/MoveCommandSystem.h"
 #include "Command/Systems/HitCommandSystem.h"
 #include "Systems/HitSystem.h"
-#include "Components/MoveState.h"
 #include "Command/Systems/CrouchCommandSystem.h"
 #include "Systems/CrouchSystem.h"
 #include "Command/Systems/JumpCommandSystem.h"
 #include "Systems/JumpCharacterSystem.h"
-#include "Components/JumpState.h"
 #include "Command/Systems/JumpBackCommandSystem.h"
 #include "Systems/JumpBackSystem.h"
 #include "Command/Systems/RunCommandSystem.h"
 #include "Systems/RunSystem.h"
-#include "Components/CrouchState.h"
 #include "Components/CharacterState.h"
 #include "Command/Systems/RollCommandSystem.h"
 #include "Systems/RollSystem.h"
@@ -111,9 +108,6 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Player.assign<Facing>();
             Player.assign<Character>("Kyo");
             Player.assign<UserKeyHistory>();
-            Player.assign<MoveState>();
-            Player.assign<JumpState>();
-            Player.assign<CrouchState>();
             Player.assign<CharacterState>();
 
             break;
@@ -127,9 +121,6 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Rival.assign<Facing>(false);
             Rival.assign<Character>("Kyo");
             Rival.assign<UserKeyHistory>();
-            Rival.assign<MoveState>();
-            Rival.assign<JumpState>();
-            Rival.assign<CrouchState>();
             Rival.assign<CharacterState>();
 
             break;

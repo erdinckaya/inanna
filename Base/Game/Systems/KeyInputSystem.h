@@ -43,6 +43,7 @@ namespace Inanna {
         explicit KeyInputSystem() = default;
 
         static GameKey ConvertToGameKey(SDL_Scancode key);
+        static SDL_Scancode RevertToSDL(GameKey key);
 
         void configure(entityx::EventManager &events) override {
             events.subscribe<LockInput>(*this);

@@ -11,7 +11,6 @@
 #include "../../../../ThirdParty/boolinq.h"
 #include "../Components/JumpCommand.h"
 #include "../../Components/JumpCharacter.h"
-#include "../../Components/JumpState.h"
 #include "../../Events/JumpEnd.h"
 #include "../../Util/Chrono.h"
 
@@ -49,7 +48,6 @@ namespace Inanna {
 
             cmd.character.replace<SpriteIndex>(cmd.character, 4);
             cmd.character.replace<JumpCharacter>(animData, 300, 0.4f, 5.0f * direction);
-            cmd.character.component<JumpState>()->state = JumpStates::RISE_JS;
             INANNA_REMOVE_COMPONENT(cmd.character, MoveCharacter);
             cmd.character.component<CharacterState>()->lock = true;
         }
@@ -71,7 +69,6 @@ namespace Inanna {
         void receive(const JumpEnd &jumpEnd) {
             JumpEnd event = jumpEnd;
             INANNA_REMOVE_COMPONENT(event.entity, JumpCharacter);
-            event.entity.component<JumpState>()->state = JumpStates::IDLE_JS;
             INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
             event.entity.component<CharacterState>()->lock = false;
         }

@@ -9,7 +9,6 @@
 #include "../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Components/Character.h"
 #include "../../Util/SpriteMacro.h"
-#include "../Components/MoveState.h"
 #include "../../SpriteAnimation/Event/SpriteAnimEnd.h"
 #include "../../UI/Components/Position.h"
 #include "../../SpriteAnimation/Event/SpriteIndex.h"
@@ -21,10 +20,8 @@ namespace Inanna {
         explicit RunSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, MoveState, Position, Run>(
-                    [this, dt](entityx::Entity entity, Character &character, MoveState &moveState,
-                               Position &position,
-                               Run &run) {
+            entities.each<Character, Position, Run>(
+                    [this, dt](entityx::Entity entity, Character &character, Position &position, Run &run) {
                         INANNA_REPLACE_SPRITE_ANIM_IF_NOT_LOOP(entity, run.animData);
 
                         double speed = 1000.0 / run.speed;

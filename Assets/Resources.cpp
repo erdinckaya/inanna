@@ -9,6 +9,10 @@ Pieces Resources::PIECES;
 Kyo_Crouch Resources::KYO_CROUCH;
 Kyo_Big_Fist Resources::KYO_BIG_FIST;
 Kyo_Big_Kick Resources::KYO_BIG_KICK;
+Kyo_Crouch_Big_Fist Resources::KYO_CROUCH_BIG_FIST;
+Kyo_Crouch_Big_Kick Resources::KYO_CROUCH_BIG_KICK;
+Kyo_Crouch_Little_Kick Resources::KYO_CROUCH_LITTLE_KICK;
+Kyo_Crouch_Little_Fist Resources::KYO_CROUCH_LITTLE_FIST;
 Kyo_Little_Fist Resources::KYO_LITTLE_FIST;
 Kyo_Little_Kick Resources::KYO_LITTLE_KICK;
 Kyo_Idle Resources::KYO_IDLE;
@@ -25,6 +29,6 @@ Kyo_Run Resources::KYO_RUN;
 Kyo_Salute Resources::KYO_SALUTE;
 
 
-int Resources::SheetCount = 21;
+int Resources::SheetCount = 25;
 
-const Sheet Resources::Sheets[21] = {Sheet(Resources::BALLS.name, Resources::BALLS.path), Sheet(Resources::DEATH.name, Resources::DEATH.path), Sheet(Resources::FIELDS.name, Resources::FIELDS.path), Sheet(Resources::PIECES.name, Resources::PIECES.path), Sheet(Resources::KYO_CROUCH.name, Resources::KYO_CROUCH.path), Sheet(Resources::KYO_BIG_FIST.name, Resources::KYO_BIG_FIST.path), Sheet(Resources::KYO_BIG_KICK.name, Resources::KYO_BIG_KICK.path), Sheet(Resources::KYO_LITTLE_FIST.name, Resources::KYO_LITTLE_FIST.path), Sheet(Resources::KYO_LITTLE_KICK.name, Resources::KYO_LITTLE_KICK.path), Sheet(Resources::KYO_IDLE.name, Resources::KYO_IDLE.path), Sheet(Resources::KYO_JUMP.name, Resources::KYO_JUMP.path), Sheet(Resources::KYO_JUMP_BACK.name, Resources::KYO_JUMP_BACK.path), Sheet(Resources::KYO_JUMP_BACKWARD.name, Resources::KYO_JUMP_BACKWARD.path), Sheet(Resources::KYO_JUMP_FORWARD.name, Resources::KYO_JUMP_FORWARD.path), Sheet(Resources::KYO_MOVE_BACK.name, Resources::KYO_MOVE_BACK.path), Sheet(Resources::KYO_MOVE_FORWARD.name, Resources::KYO_MOVE_FORWARD.path), Sheet(Resources::KYO_ORYU.name, Resources::KYO_ORYU.path), Sheet(Resources::KYO_ROLL_BACKWARD.name, Resources::KYO_ROLL_BACKWARD.path), Sheet(Resources::KYO_ROLL_FORWARD.name, Resources::KYO_ROLL_FORWARD.path), Sheet(Resources::KYO_RUN.name, Resources::KYO_RUN.path), Sheet(Resources::KYO_SALUTE.name, Resources::KYO_SALUTE.path)};
+const Sheet Resources::Sheets[25] = {Sheet(Resources::BALLS.name, Resources::BALLS.path), Sheet(Resources::DEATH.name, Resources::DEATH.path), Sheet(Resources::FIELDS.name, Resources::FIELDS.path), Sheet(Resources::PIECES.name, Resources::PIECES.path), Sheet(Resources::KYO_CROUCH.name, Resources::KYO_CROUCH.path), Sheet(Resources::KYO_BIG_FIST.name, Resources::KYO_BIG_FIST.path), Sheet(Resources::KYO_BIG_KICK.name, Resources::KYO_BIG_KICK.path), Sheet(Resources::KYO_CROUCH_BIG_FIST.name, Resources::KYO_CROUCH_BIG_FIST.path), Sheet(Resources::KYO_CROUCH_BIG_KICK.name, Resources::KYO_CROUCH_BIG_KICK.path), Sheet(Resources::KYO_CROUCH_LITTLE_KICK.name, Resources::KYO_CROUCH_LITTLE_KICK.path), Sheet(Resources::KYO_CROUCH_LITTLE_FIST.name, Resources::KYO_CROUCH_LITTLE_FIST.path), Sheet(Resources::KYO_LITTLE_FIST.name, Resources::KYO_LITTLE_FIST.path), Sheet(Resources::KYO_LITTLE_KICK.name, Resources::KYO_LITTLE_KICK.path), Sheet(Resources::KYO_IDLE.name, Resources::KYO_IDLE.path), Sheet(Resources::KYO_JUMP.name, Resources::KYO_JUMP.path), Sheet(Resources::KYO_JUMP_BACK.name, Resources::KYO_JUMP_BACK.path), Sheet(Resources::KYO_JUMP_BACKWARD.name, Resources::KYO_JUMP_BACKWARD.path), Sheet(Resources::KYO_JUMP_FORWARD.name, Resources::KYO_JUMP_FORWARD.path), Sheet(Resources::KYO_MOVE_BACK.name, Resources::KYO_MOVE_BACK.path), Sheet(Resources::KYO_MOVE_FORWARD.name, Resources::KYO_MOVE_FORWARD.path), Sheet(Resources::KYO_ORYU.name, Resources::KYO_ORYU.path), Sheet(Resources::KYO_ROLL_BACKWARD.name, Resources::KYO_ROLL_BACKWARD.path), Sheet(Resources::KYO_ROLL_FORWARD.name, Resources::KYO_ROLL_FORWARD.path), Sheet(Resources::KYO_RUN.name, Resources::KYO_RUN.path), Sheet(Resources::KYO_SALUTE.name, Resources::KYO_SALUTE.path)};

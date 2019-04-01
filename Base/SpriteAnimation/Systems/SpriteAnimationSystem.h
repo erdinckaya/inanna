@@ -13,13 +13,18 @@
 #include "../Event/SpriteIndex.h"
 #include "../Event/SpriteAnimEnd.h"
 #include "../Components/SpriteLoop.h"
+#include "../Event/SpriteForceKeyFrame.h"
 
 #include <queue>
 
 namespace Inanna {
-    struct SpriteAnimationSystem : public entityx::System<SpriteAnimationSystem> {
+    struct SpriteAnimationSystem : public entityx::System<SpriteAnimationSystem>, entityx::Receiver<SpriteAnimationSystem> {
 
         explicit SpriteAnimationSystem() = default;
+
+        void configure(entityx::EventManager &events) override {
+            events.subscribe<SpriteForceKeyFrame>(*this);
+        }
 
         SpriteAnimationState Next(entityx::Entity entity, SpriteAnimation *animation) {
             animation->time = 0;
@@ -100,6 +105,11 @@ namespace Inanna {
                     }
                 }
             });
+        }
+
+        void receive(const SpriteForceKeyFrame &spriteForceKeyFrame) {
+            SpriteForceKeyFrame event = spriteForceKeyFrame;
+            event.entity.component<SpriteAnimation>()->frameIndex = event.index;
         }
     };
 }

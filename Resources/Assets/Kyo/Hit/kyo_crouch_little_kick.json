@@ -1,0 +1,57 @@
+{"frames": [
+
+{
+	"filename": "Frame0.png",
+	"frame": {"x":0,"y":0,"w":124,"h":138},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":124,"h":138},
+	"sourceSize": {"w":124,"h":138}
+},
+{
+	"filename": "Frame1.png",
+	"frame": {"x":0,"y":138,"w":192,"h":132},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":132},
+	"sourceSize": {"w":192,"h":132}
+},
+{
+	"filename": "Frame2.png",
+	"frame": {"x":0,"y":270,"w":124,"h":138},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":124,"h":138},
+	"sourceSize": {"w":124,"h":138}
+},
+{
+	"filename": "Frame3.png",
+	"frame": {"x":124,"y":270,"w":118,"h":142},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":142},
+	"sourceSize": {"w":118,"h":142}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "kyo_crouch_little_kick.png",
+	"format": "RGBA8888",
+	"size": {"w":242,"h":412},
+	"scale": "1",
+	"anims": [
+		{
+			"name": "kyo_crouch_little_kick",
+			"images": [
+				"Frame0",
+				"Frame1",
+				"Frame1",
+				"Frame2",
+				"Frame3"
+			],
+			"speed": 11
+		}
+	],
+	"smartupdate": "$TexturePacker:SmartUpdate:6553665328ce270f1694f468ff0de5aa:978067d7e5092fd35ebc6db50c4427c1:eee20dc68c7d377fb6bced4d1688bacd$"
+}
+}

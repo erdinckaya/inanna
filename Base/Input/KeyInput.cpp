@@ -55,6 +55,10 @@ bool Inanna::KeyInput::IsKeyHeld(SDL_Scancode key) {
     return heldKeys[key];
 }
 
+bool Inanna::KeyInput::IsKeyHeld(Inanna::GameKey key) {
+    return heldKeys[KeyInputSystem::RevertToSDL(key)];
+}
+
 void Inanna::KeyInput::PrintKeys() {
     printf("=================START================\n");
     for (auto &pressedKey : pressedKeys) {
@@ -75,3 +79,4 @@ void Inanna::KeyInput::PrintKeys() {
     printf("=================END==================\n");
 
 }
+

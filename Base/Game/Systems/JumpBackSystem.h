@@ -57,7 +57,6 @@ namespace Inanna {
             if (event.entity.has_component<JumpBack>()) {
                 auto d = event.entity.component<JumpBack>()->direction;
                 event.entity.component<JumpBack>()->direction = Vecf(d.x, -d.y);
-                event.entity.component<JumpState>()->state = JumpStates::FALL_JS;
             }
         }
 

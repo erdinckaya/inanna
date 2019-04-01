@@ -15,9 +15,6 @@
 #include "../Game/Components/Oryu.h"
 #include "../Game/Components/Run.h"
 #include "../Game/Components/JumpCharacter.h"
-#include "../Game/Components/JumpState.h"
-#include "../Game/Components/MoveState.h"
-#include "../Game/Components/CrouchState.h"
 #include "../Game/Components/CharacterState.h"
 #include "../Game/Components/Character.h"
 #include "../Game/Components/Crouch.h"
@@ -100,25 +97,11 @@ REFLECT_STRUCT_BEGIN(Inanna::Crouch)
                     REFLECT_STRUCT_MEMBER(down)
 REFLECT_STRUCT_END()
 
-REFLECT_STRUCT_BEGIN(Inanna::JumpState)
-                    REFLECT_STRUCT_MEMBER(lock)
-                    REFLECT_STRUCT_MEMBER(state)
-REFLECT_STRUCT_END()
-
 REFLECT_STRUCT_BEGIN(Inanna::CharacterState)
                     REFLECT_STRUCT_MEMBER(state)
                     REFLECT_STRUCT_MEMBER(lock)
 REFLECT_STRUCT_END()
 
-REFLECT_STRUCT_BEGIN(Inanna::MoveState)
-                    REFLECT_STRUCT_MEMBER(lock)
-                    REFLECT_STRUCT_MEMBER(state)
-REFLECT_STRUCT_END()
-
-REFLECT_STRUCT_BEGIN(Inanna::CrouchState)
-                    REFLECT_STRUCT_MEMBER(lock)
-                    REFLECT_STRUCT_MEMBER(state)
-REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::UserKey)
                     REFLECT_STRUCT_MEMBER(key)

@@ -11,7 +11,6 @@
 #include "../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Components/Character.h"
 #include "../../Util/SpriteMacro.h"
-#include "../Components/MoveState.h"
 #include "../../SpriteAnimation/Event/SpriteIndex.h"
 #include "../../SpriteAnimation/Event/SpriteAnimEnd.h"
 #include "../Util/Chrono.h"
@@ -30,9 +29,9 @@ namespace Inanna {
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, Position, Oryu, SpriteAnimation, MoveState>(
+            entities.each<Character, Position, Oryu, SpriteAnimation>(
                     [this, dt](entityx::Entity entity, Character &character, Position &position, Oryu &oryu,
-                               SpriteAnimation &anim, MoveState &moveState) {
+                               SpriteAnimation &anim) {
 
                         INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, oryu.animData);
                         double speed = 1000.0 / oryu.speed;

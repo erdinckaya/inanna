@@ -16,15 +16,15 @@ bool Inanna::KeyInputSystem::HandleSpecialMoves(entityx::EntityManager &entities
         events.emit<AbortEvent>(entity);
         switch (specialKey) {
             case SpecialMoveKey::JumpBack:
-                entity.component<CharacterState>()->state = CharacterBehaviour::JumpBack;
+                entity.component<CharacterState>()->SetState(CharacterBehaviour::JumpBack);
                 entities.create().assign<JumpBackCommand>(entity);
                 break;
             case SpecialMoveKey::Run:
-                entity.component<CharacterState>()->state = CharacterBehaviour::Run;
+                entity.component<CharacterState>()->SetState(CharacterBehaviour::Run);
                 entities.create().assign<RunCommand>(entity);
                 break;
             case SpecialMoveKey::Oryu:
-                entity.component<CharacterState>()->state = CharacterBehaviour::Oryu;
+                entity.component<CharacterState>()->SetState(CharacterBehaviour::Oryu);
                 entities.create().assign<OryuCommand>(entity, std::get<1>(result));
                 break;
             default:
@@ -101,7 +101,7 @@ void Inanna::KeyInputSystem::HandleSimpleMoves(entityx::EntityManager &entities,
         default:
             break;
     }
-    entity.component<CharacterState>()->state = state;
+    entity.component<CharacterState>()->SetState(state);
 }
 
 bool Inanna::KeyInputSystem::HandleSimpleHits(entityx::EntityManager &entities, entityx::EventManager &events,
@@ -303,6 +303,30 @@ Inanna::GameKey Inanna::KeyInputSystem::ConvertToGameKey(SDL_Scancode key) {
             break;
     }
     return GameKey::InValid;
+}
+
+SDL_Scancode Inanna::KeyInputSystem::RevertToSDL(GameKey key) {
+    switch (key) {
+        case GameKey::Back:
+            return Game::Instance->Player.component<Facing>()->left ? SDL_SCANCODE_LEFT : SDL_SCANCODE_RIGHT;
+        case GameKey::Forward:
+            return Game::Instance->Player.component<Facing>()->left ? SDL_SCANCODE_RIGHT : SDL_SCANCODE_LEFT;
+        case GameKey::Up:
+            return SDL_SCANCODE_UP;
+        case GameKey::Down:
+            return SDL_SCANCODE_DOWN;
+        case GameKey::LittleFist:
+            return SDL_SCANCODE_A;
+        case GameKey::LittleKick:
+            return SDL_SCANCODE_S;
+        case GameKey::BigFist:
+            return SDL_SCANCODE_Z;
+        case GameKey::BigKick:
+            return SDL_SCANCODE_X;
+        default:
+            break;
+    }
+    return SDL_SCANCODE_UNKNOWN;
 }
 
 

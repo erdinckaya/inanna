@@ -26,6 +26,7 @@ namespace Inanna {
                     [this, dt](entityx::Entity entity, Character &character, SpriteAnimation &anim, Hit &hit) {
                         INANNA_REMOVE_COMPONENT(entity, MoveCharacter)
                         INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, hit.animData);
+                        entity.component<SpriteAnimation>()->stayAtLastFrame = hit.stayAtLastFrame;
                     });
         }
 

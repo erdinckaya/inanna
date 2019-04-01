@@ -1,0 +1,101 @@
+{"frames": [
+
+{
+	"filename": "Frame0.png",
+	"frame": {"x":0,"y":0,"w":126,"h":134},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":134},
+	"sourceSize": {"w":126,"h":134}
+},
+{
+	"filename": "Frame1.png",
+	"frame": {"x":126,"y":0,"w":126,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":144},
+	"sourceSize": {"w":126,"h":144}
+},
+{
+	"filename": "Frame2.png",
+	"frame": {"x":0,"y":144,"w":126,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":144},
+	"sourceSize": {"w":126,"h":144}
+},
+{
+	"filename": "Frame3.png",
+	"frame": {"x":126,"y":144,"w":130,"h":208},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":208},
+	"sourceSize": {"w":130,"h":208}
+},
+{
+	"filename": "Frame4.png",
+	"frame": {"x":0,"y":352,"w":118,"h":280},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":280},
+	"sourceSize": {"w":118,"h":280}
+},
+{
+	"filename": "Frame5.png",
+	"frame": {"x":118,"y":352,"w":122,"h":270},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":270},
+	"sourceSize": {"w":122,"h":270}
+},
+{
+	"filename": "Frame6.png",
+	"frame": {"x":0,"y":632,"w":130,"h":208},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":208},
+	"sourceSize": {"w":130,"h":208}
+},
+{
+	"filename": "Frame7.png",
+	"frame": {"x":130,"y":632,"w":102,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":102,"h":160},
+	"sourceSize": {"w":102,"h":160}
+},
+{
+	"filename": "Frame8.png",
+	"frame": {"x":0,"y":840,"w":118,"h":142},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":142},
+	"sourceSize": {"w":118,"h":142}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "kyo_crouch_big_fist.png",
+	"format": "RGBA8888",
+	"size": {"w":256,"h":982},
+	"scale": "1",
+	"anims": [
+		{
+			"name": "kyo_crouch_big_fist",
+			"images": [
+				"Frame0",
+				"Frame1",
+				"Frame2",
+				"Frame3",
+				"Frame4",
+				"Frame5",
+				"Frame6",
+				"Frame7",
+				"Frame8"
+			],
+			"speed": 13
+		}
+	],
+	"smartupdate": "$TexturePacker:SmartUpdate:8ec325fa42a58215ead24a4085566d59:e9d8656ddbcab68e01ed70d71c1a4e76:1398b1ee4c2231c9eda9e26b183571ab$"
+}
+}

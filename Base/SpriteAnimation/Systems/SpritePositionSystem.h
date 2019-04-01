@@ -9,6 +9,7 @@
 #include "../../UI/Components/Position.h"
 #include "../Components/SpriteAnimation.h"
 #include "../../World.h"
+#include "../../Game/Components/Facing.h"
 
 namespace Inanna {
     // Pivots are bottom left for anims
@@ -17,10 +18,10 @@ namespace Inanna {
         explicit SpritePositionSystem() : GROUND(0, SCREEN_HEIGHT) {}
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Position, SpriteAnimation>(
-                    [this](entityx::Entity entity, Position &position, SpriteAnimation &sprite) {
+            entities.each<Position, SpriteAnimation, Facing>(
+                    [this](entityx::Entity entity, Position &position, SpriteAnimation &sprite, Facing &facing) {
                         auto image = sprite.KeyFrame();
-                        Vecf size = Vecf(0, image.h);
+                        Vecf size = Vecf(facing.left ? 0 : image.w, image.h);
                         auto pos = Vecf(position.position.x, -position.position.y);
                         position.global = GROUND + pos - size;
                     });

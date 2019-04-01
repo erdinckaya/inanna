@@ -31,6 +31,7 @@ namespace Inanna {
 
             SpriteAnimData animData = AnimationData::KYO_LITTLE_FIST;
             bool canHit = true;
+            bool stayAtLastFrame = false;
             switch (cmd.state) {
                 case CharacterBehaviour::LittleFist:
                     animData = AnimationData::KYO_LITTLE_FIST;
@@ -45,20 +46,24 @@ namespace Inanna {
                     animData = AnimationData::KYO_BIG_KICK;
                     break;
 
-//                case CharacterBehaviour::CrouchLittleFist:
-//                    animData = AnimationData::KYO_CROUCH_LITTLE_FIST;
-//                    break;
-//                case CharacterBehaviour::CrouchBigFist:
-//                    animData = AnimationData::KYO_CROUCH_BIG_FIST;
-//                    break;
-//                case CharacterBehaviour::CrouchLittleKick:
-//                    animData = AnimationData::KYO_CROUCH_LITTLE_KICK;
-//                    break;
-//                case CharacterBehaviour::CrouchBigKick:
-//                    animData = AnimationData::KYO_CROUCH_BIG_KICK;
-//                    break;
-//
-//
+                case CharacterBehaviour::CrouchLittleFist:
+                    stayAtLastFrame = true;
+                    animData = AnimationData::KYO_CROUCH_LITTLE_FIST;
+                    break;
+                case CharacterBehaviour::CrouchBigFist:
+                    stayAtLastFrame = true;
+                    animData = AnimationData::KYO_CROUCH_BIG_FIST;
+                    break;
+                case CharacterBehaviour::CrouchLittleKick:
+                    stayAtLastFrame = true;
+                    animData = AnimationData::KYO_CROUCH_LITTLE_KICK;
+                    break;
+                case CharacterBehaviour::CrouchBigKick:
+                    stayAtLastFrame = true;
+                    animData = AnimationData::KYO_CROUCH_BIG_KICK;
+                    break;
+
+
 //                case CharacterBehaviour::JumpLittleFist:
 //                    animData = AnimationData::KYO_JUMP_LITTLE_FIST;
 //                    break;
@@ -98,8 +103,14 @@ namespace Inanna {
         void receive(const HitEnd &hitEvent) {
             HitEnd event = hitEvent;
             if (event.entity.has_component<Hit>()) {
-                event.entity.component<CharacterState>()->lock = false;
-                INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+                auto characterState = event.entity.component<CharacterState>();
+                characterState->lock = false;
+                if (!KeyInput::Instance.IsKeyHeld(GameKey::Down)) {
+                    INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+                } else {
+                    INANNA_REPLACE_SPRITE_ANIM_IF_NOT(event.entity, AnimationData::KYO_CROUCH);
+                    manager->emit<SpriteForceKeyFrame>(event.entity, AnimationData::KYO_CROUCH.keyFrames.size() - 1);
+                }
                 INANNA_REMOVE_COMPONENT(event.entity, Hit);
             }
         }

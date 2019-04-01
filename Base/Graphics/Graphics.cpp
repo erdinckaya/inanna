@@ -12,11 +12,8 @@
 #include "../Game/Components/Crouch.h"
 #include "../Game/Components/UserKeyHistory.h"
 #include "../Game/Components/JumpCharacter.h"
-#include "../Game/Components/JumpState.h"
-#include "../Game/Components/MoveState.h"
 #include "../Game/Components/CharacterState.h"
 #include "../SpriteAnimation/Components/SpriteLoop.h"
-#include "../Game/Components/CrouchState.h"
 #include "../Game/Components/Roll.h"
 #include "../Game/Components/Oryu.h"
 #include "../Game/Components/Facing.h"
@@ -118,7 +115,7 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
 
 void Inanna::Graphics::Update(float dt) {
 #ifdef MONITORX_DEBUG
-    monitorX->Render<Renderable, Position, Facing, SpriteAnimation, SpriteLoop, JumpState, MoveState, CrouchState, CharacterState, UserKeyHistory,
+    monitorX->Render<Renderable, Position, Facing, SpriteAnimation, SpriteLoop, CharacterState, UserKeyHistory,
             MoveCharacter, Run, Roll, Oryu, JumpCharacter, Crouch, UserKey, Hit, end_of_list>();
 #endif
     SDL_GL_MakeCurrent(window, context);

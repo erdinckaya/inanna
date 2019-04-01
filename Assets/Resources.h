@@ -238,6 +238,120 @@ public:
 
 
 
+struct Kyo_Crouch_Big_Fist : public Sheet {
+
+public:
+    Kyo_Crouch_Big_Fist() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 126.000000f, 134.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 126.000000f, 0.000000f, 126.000000f, 144.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 144.000000f, 126.000000f, 144.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 126.000000f, 144.000000f, 130.000000f, 208.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 0.000000f, 352.000000f, 118.000000f, 280.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 118.000000f, 352.000000f, 122.000000f, 270.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 0.000000f, 632.000000f, 130.000000f, 208.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME7("Frame7", 130.000000f, 632.000000f, 102.000000f, 160.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME8("Frame8", 0.000000f, 840.000000f, 118.000000f, 142.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_crouch_big_fist", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_crouch_big_fist.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+
+
+};
+
+
+
+struct Kyo_Crouch_Big_Kick : public Sheet {
+
+public:
+    Kyo_Crouch_Big_Kick() :
+		FRAME0("Frame0", 736.000000f, 0.000000f, 124.000000f, 138.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 152.000000f, 0.000000f, 152.000000f, 126.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 604.000000f, 0.000000f, 132.000000f, 134.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 472.000000f, 0.000000f, 132.000000f, 132.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 118.000000f, 138.000000f, 268.000000f, 144.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 752.000000f, 138.000000f, 224.000000f, 170.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 560.000000f, 138.000000f, 192.000000f, 168.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME7("Frame7", 386.000000f, 138.000000f, 174.000000f, 150.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME8("Frame8", 304.000000f, 0.000000f, 168.000000f, 128.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME9("Frame9", 0.000000f, 0.000000f, 152.000000f, 126.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME10("Frame10", 860.000000f, 0.000000f, 124.000000f, 138.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME11("Frame11", 0.000000f, 138.000000f, 118.000000f, 142.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_crouch_big_kick", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_crouch_big_kick.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+	ImageAsset FRAME9;
+	ImageAsset FRAME10;
+	ImageAsset FRAME11;
+
+
+};
+
+
+
+struct Kyo_Crouch_Little_Kick : public Sheet {
+
+public:
+    Kyo_Crouch_Little_Kick() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 124.000000f, 138.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 0.000000f, 138.000000f, 192.000000f, 132.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 270.000000f, 124.000000f, 138.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 124.000000f, 270.000000f, 118.000000f, 142.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_crouch_little_kick", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_crouch_little_kick.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+
+
+};
+
+
+
+struct Kyo_Crouch_Little_Fist : public Sheet {
+
+public:
+    Kyo_Crouch_Little_Fist() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 126.000000f, 134.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 0.000000f, 134.000000f, 170.000000f, 132.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 266.000000f, 126.000000f, 134.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 126.000000f, 266.000000f, 118.000000f, 142.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_crouch_little_fist", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_crouch_litttle_fist.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+
+
+};
+
+
+
 struct Kyo_Little_Fist : public Sheet {
 
 public:
@@ -685,6 +799,10 @@ public:
 	static Kyo_Crouch KYO_CROUCH;
 	static Kyo_Big_Fist KYO_BIG_FIST;
 	static Kyo_Big_Kick KYO_BIG_KICK;
+	static Kyo_Crouch_Big_Fist KYO_CROUCH_BIG_FIST;
+	static Kyo_Crouch_Big_Kick KYO_CROUCH_BIG_KICK;
+	static Kyo_Crouch_Little_Kick KYO_CROUCH_LITTLE_KICK;
+	static Kyo_Crouch_Little_Fist KYO_CROUCH_LITTLE_FIST;
 	static Kyo_Little_Fist KYO_LITTLE_FIST;
 	static Kyo_Little_Kick KYO_LITTLE_KICK;
 	static Kyo_Idle KYO_IDLE;
@@ -702,7 +820,7 @@ public:
 
 
 	static int SheetCount;
-	static const Sheet Sheets[21];
+	static const Sheet Sheets[25];
 };
 
 

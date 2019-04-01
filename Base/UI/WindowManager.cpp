@@ -15,8 +15,6 @@
 #include "../Game/Systems/MoveCharacterSystem.h"
 #include "../Game/Systems/KeyInputSystem.h"
 #include "../Game/Command/Systems/MoveCommandSystem.h"
-#include "../Game/Components/MoveState.h"
-#include "../Game/Util/MoveStates.h"
 #include "../Game/Command/Systems/HitCommandSystem.h"
 #include "../Game/Systems/HitSystem.h"
 

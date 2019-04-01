@@ -10,9 +10,7 @@
 #include "../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Components/Character.h"
 #include "../../Util/SpriteMacro.h"
-#include "../Components/MoveState.h"
 #include "../Components/Crouch.h"
-#include "../Components/CrouchState.h"
 
 namespace Inanna {
     struct CrouchSystem : public entityx::System<CrouchSystem> {
@@ -20,10 +18,10 @@ namespace Inanna {
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Character, Crouch>([this, dt](entityx::Entity entity, Character &character, Crouch &crouch) {
-                if (entity.component<CrouchState>()->lock) {
-                    return;
-                }
                 INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_CROUCH);
+//                if (entity.component<CharacterState>()->oldState == CharacterBehaviour::Crouch) {
+//                    entity.component<SpriteAnimation>()->frameIndex = entity.component<SpriteAnimation>()->LastFrame();
+//                }
                 entity.component<SpriteAnimation>()->stayAtLastFrame = true;
             });
         }
