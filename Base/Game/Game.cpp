@@ -15,7 +15,7 @@
 #include "Command/Systems/HitCommandSystem.h"
 #include "Systems/HitSystem.h"
 #include "Command/Systems/CrouchCommandSystem.h"
-#include "Command/Systems/DamageReceiveCommandSystem.h"
+#include "Command/Systems/DamageCommandSystem.h"
 #include "Systems/CrouchSystem.h"
 #include "Command/Systems/JumpCommandSystem.h"
 #include "Systems/JumpCharacterSystem.h"
@@ -31,6 +31,7 @@
 #include "../SpriteAnimation/Systems/SpriteGizmoSystem.h"
 #include "Components/Facing.h"
 #include "../SpriteAnimation/Systems/SpriteFacingSystem.h"
+#include "Systems/DamageSystem.h"
 
 
 Inanna::Game* Inanna::Game::Instance = nullptr;
@@ -45,7 +46,7 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<RunCommandSystem>();
     systems.add<RollCommandSystem>();
     systems.add<OryuCommandSystem>();
-    systems.add<DamageReceiveCommandSystem>();
+    systems.add<DamageCommandSystem>();
 
 
     systems.add<HitSystem>();
@@ -56,6 +57,7 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<RunSystem>();
     systems.add<RollSystem>();
     systems.add<OryuSystem>();
+    systems.add<DamageSystem>();
 
 
     systems.add<SpriteAnimationSystem>();
@@ -78,7 +80,7 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<RunCommandSystem>(dt);
     systems.update<RollCommandSystem>(dt);
     systems.update<OryuCommandSystem>(dt);
-    systems.update<DamageReceiveCommandSystem>(dt);
+    systems.update<DamageCommandSystem>(dt);
 
 
     systems.update<HitSystem>(dt);
@@ -89,6 +91,7 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<RunSystem>(dt);
     systems.update<RollSystem>(dt);
     systems.update<OryuSystem>(dt);
+    systems.update<DamageSystem>(dt);
 
 
     systems.update<SpriteAnimationSystem>(dt);

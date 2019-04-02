@@ -64,12 +64,44 @@ public:
 
 
 
+struct Pieces : public Sheet {
+
+public:
+    Pieces() :
+		BLUE("blue", 0.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		CYAN("cyan", 256.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		DARK_PURPLE("dark_purple", 512.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		GHOST("ghost", 0.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		GREEN("green", 256.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		PURPLE("purple", 512.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		RED("red", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		GUCHAN("guchan", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		YELLOW("yellow", 256.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("pieces", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/pieces.png")
+
+    {}
+
+	ImageAsset BLUE;
+	ImageAsset CYAN;
+	ImageAsset DARK_PURPLE;
+	ImageAsset GHOST;
+	ImageAsset GREEN;
+	ImageAsset PURPLE;
+	ImageAsset RED;
+	ImageAsset GUCHAN;
+	ImageAsset YELLOW;
+
+
+};
+
+
+
 struct Balls : public Sheet {
 
 public:
     Balls() :
 		IMAGE("image", 0.000000f, 0.000000f, 300.000000f, 300.000000f, 300.000000f, 300.000000f, "balls", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("balls", "/Users/always/CLionProjects/inanna/Resources/Assets/balls.png")
+		Sheet("balls", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/balls.png")
 
     {}
 
@@ -90,7 +122,7 @@ public:
 		DEATH_003("Death_003", 786.000000f, 0.000000f, 263.000000f, 254.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		DEATH_004("Death_004", 1049.000000f, 0.000000f, 266.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		DEATH_005("Death_005", 1315.000000f, 0.000000f, 262.000000f, 255.000000f, 1577.000000f, 255.000000f, "death", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("death", "/Users/always/CLionProjects/inanna/Resources/Assets/death.png")
+		Sheet("death", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/death.png")
 
     {}
 
@@ -113,45 +145,13 @@ public:
 		TENNIS_FIELD("tennis_field", 0.000000f, 0.000000f, 257.000000f, 427.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		TENNIS_FIELD1("tennis_field1", 0.000000f, 512.000000f, 600.000000f, 900.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		TENNIS_FIELD2("tennis_field2", 257.000000f, 0.000000f, 336.000000f, 512.000000f, 600.000000f, 1412.000000f, "fields", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("fields", "/Users/always/CLionProjects/inanna/Resources/Assets/fields.png")
+		Sheet("fields", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/fields.png")
 
     {}
 
 	ImageAsset TENNIS_FIELD;
 	ImageAsset TENNIS_FIELD1;
 	ImageAsset TENNIS_FIELD2;
-
-
-};
-
-
-
-struct Pieces : public Sheet {
-
-public:
-    Pieces() :
-		BLUE("blue", 0.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		CYAN("cyan", 256.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		DARK_PURPLE("dark_purple", 512.000000f, 0.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		GHOST("ghost", 0.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		GREEN("green", 256.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		PURPLE("purple", 512.000000f, 256.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		RED("red", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		GUCHAN("guchan", 0.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		YELLOW("yellow", 256.000000f, 512.000000f, 256.000000f, 256.000000f, 768.000000f, 768.000000f, "pieces", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("pieces", "/Users/always/CLionProjects/inanna/Resources/Assets/pieces.png")
-
-    {}
-
-	ImageAsset BLUE;
-	ImageAsset CYAN;
-	ImageAsset DARK_PURPLE;
-	ImageAsset GHOST;
-	ImageAsset GREEN;
-	ImageAsset PURPLE;
-	ImageAsset RED;
-	ImageAsset GUCHAN;
-	ImageAsset YELLOW;
 
 
 };
@@ -165,7 +165,7 @@ public:
 		FRAME0("Frame0", 0.000000f, 0.000000f, 118.000000f, 204.000000f, 118.000000f, 532.000000f, "kyo_crouch", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME1("Frame1", 0.000000f, 204.000000f, 104.000000f, 186.000000f, 118.000000f, 532.000000f, "kyo_crouch", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME2("Frame2", 0.000000f, 390.000000f, 118.000000f, 142.000000f, 118.000000f, 532.000000f, "kyo_crouch", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_crouch", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Crouch/kyo_crouch.png")
+		Sheet("kyo_crouch", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Crouch/kyo_crouch.png")
 
     {}
 
@@ -178,18 +178,21 @@ public:
 
 
 
-struct Kyo_Big_Fist : public Sheet {
+struct Kyo_Jump : public Sheet {
 
 public:
-    Kyo_Big_Fist() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 122.000000f, 208.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 122.000000f, 0.000000f, 118.000000f, 200.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 240.000000f, 0.000000f, 120.000000f, 202.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 360.000000f, 0.000000f, 212.000000f, 196.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME4("Frame4", 572.000000f, 0.000000f, 184.000000f, 206.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME5("Frame5", 756.000000f, 0.000000f, 122.000000f, 208.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME6("Frame6", 878.000000f, 0.000000f, 118.000000f, 206.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_big_fist", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_big_fist.png")
+    Kyo_Jump() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 102.000000f, 160.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 110.000000f, 958.000000f, 68.000000f, 282.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 118.000000f, 736.000000f, 110.000000f, 222.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 0.000000f, 534.000000f, 148.000000f, 202.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 0.000000f, 160.000000f, 154.000000f, 172.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 0.000000f, 332.000000f, 148.000000f, 202.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 0.000000f, 958.000000f, 110.000000f, 222.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME7("Frame7", 178.000000f, 958.000000f, 68.000000f, 282.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME8("Frame8", 102.000000f, 0.000000f, 102.000000f, 160.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME9("Frame9", 0.000000f, 736.000000f, 118.000000f, 206.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_jump", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Jump/kyo_jump.png")
 
     {}
 
@@ -200,26 +203,145 @@ public:
 	ImageAsset FRAME4;
 	ImageAsset FRAME5;
 	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+	ImageAsset FRAME9;
 
 
 };
 
 
 
-struct Kyo_Big_Kick : public Sheet {
+struct Kyo_Jump_Forward : public Sheet {
 
 public:
-    Kyo_Big_Kick() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 116.000000f, 184.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 116.000000f, 0.000000f, 114.000000f, 216.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 230.000000f, 0.000000f, 120.000000f, 214.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 350.000000f, 0.000000f, 148.000000f, 172.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME4("Frame4", 498.000000f, 0.000000f, 204.000000f, 200.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 57.000000f, 52.000000f, 150.000000f, 90.000000f),
-		FRAME5("Frame5", 702.000000f, 0.000000f, 120.000000f, 210.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME6("Frame6", 822.000000f, 0.000000f, 102.000000f, 160.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME7("Frame7", 924.000000f, 0.000000f, 130.000000f, 206.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME8("Frame8", 1054.000000f, 0.000000f, 118.000000f, 206.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_big_kick", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_big_kick.png")
+    Kyo_Jump_Forward() :
+		FRAME0("Frame0", 0.000000f, 290.000000f, 102.000000f, 160.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 88.000000f, 686.000000f, 68.000000f, 282.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 480.000000f, 118.000000f, 196.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 0.000000f, 0.000000f, 128.000000f, 90.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 128.000000f, 0.000000f, 90.000000f, 130.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 0.000000f, 130.000000f, 140.000000f, 110.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 102.000000f, 290.000000f, 120.000000f, 190.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME7("Frame7", 0.000000f, 686.000000f, 88.000000f, 246.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME8("Frame8", 140.000000f, 130.000000f, 102.000000f, 160.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME9("Frame9", 118.000000f, 480.000000f, 118.000000f, 206.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_jump_forward", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Jump/kyo_jump_forward.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+	ImageAsset FRAME9;
+
+
+};
+
+
+
+struct Kyo_Jump_Backward : public Sheet {
+
+public:
+    Kyo_Jump_Backward() :
+		FRAME0("Frame0", 102.000000f, 220.000000f, 102.000000f, 160.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 98.000000f, 576.000000f, 88.000000f, 246.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 380.000000f, 120.000000f, 190.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 0.000000f, 90.000000f, 140.000000f, 110.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 140.000000f, 90.000000f, 90.000000f, 130.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 0.000000f, 0.000000f, 128.000000f, 90.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 120.000000f, 380.000000f, 118.000000f, 196.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME7("Frame7", 0.000000f, 576.000000f, 98.000000f, 216.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME8("Frame8", 186.000000f, 576.000000f, 68.000000f, 282.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME9("Frame9", 0.000000f, 220.000000f, 102.000000f, 160.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_jump_backward", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Jump/kyo_jump_backward.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+	ImageAsset FRAME9;
+
+
+};
+
+
+
+struct Kyo_Jump_Back : public Sheet {
+
+public:
+    Kyo_Jump_Back() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 104.000000f, 186.000000f, 120.000000f, 826.000000f, "kyo_jump_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 0.000000f, 186.000000f, 120.000000f, 222.000000f, 120.000000f, 826.000000f, "kyo_jump_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 408.000000f, 112.000000f, 212.000000f, 120.000000f, 826.000000f, "kyo_jump_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 0.000000f, 620.000000f, 118.000000f, 206.000000f, 120.000000f, 826.000000f, "kyo_jump_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_jump_back", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Jump/kyo_jump_back.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+
+
+};
+
+
+
+struct Kyo_Damage_Taken_Normal : public Sheet {
+
+public:
+    Kyo_Damage_Taken_Normal() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 142.000000f, 218.000000f, 778.000000f, 218.000000f, "kyo_damage_taken_normal", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 142.000000f, 0.000000f, 138.000000f, 216.000000f, 778.000000f, 218.000000f, "kyo_damage_taken_normal", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 280.000000f, 0.000000f, 134.000000f, 214.000000f, 778.000000f, 218.000000f, "kyo_damage_taken_normal", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 414.000000f, 0.000000f, 132.000000f, 210.000000f, 778.000000f, 218.000000f, "kyo_damage_taken_normal", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 546.000000f, 0.000000f, 114.000000f, 210.000000f, 778.000000f, 218.000000f, "kyo_damage_taken_normal", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 660.000000f, 0.000000f, 118.000000f, 206.000000f, 778.000000f, 218.000000f, "kyo_damage_taken_normal", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_damage_taken_normal", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/DamageTake/kyo_damage_taken_normal.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+
+
+};
+
+
+
+struct Kyo_Run : public Sheet {
+
+public:
+    Kyo_Run() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 102.000000f, 160.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 0.000000f, 172.000000f, 126.000000f, 178.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 356.000000f, 210.000000f, 184.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 102.000000f, 0.000000f, 202.000000f, 170.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 126.000000f, 172.000000f, 126.000000f, 180.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 252.000000f, 172.000000f, 218.000000f, 184.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 304.000000f, 0.000000f, 206.000000f, 172.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME7("Frame7", 328.000000f, 356.000000f, 112.000000f, 212.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME8("Frame8", 210.000000f, 356.000000f, 118.000000f, 206.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_run", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Run/kyo_run.png")
 
     {}
 
@@ -251,7 +373,133 @@ public:
 		FRAME6("Frame6", 0.000000f, 632.000000f, 130.000000f, 208.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME7("Frame7", 130.000000f, 632.000000f, 102.000000f, 160.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME8("Frame8", 0.000000f, 840.000000f, 118.000000f, 142.000000f, 256.000000f, 982.000000f, "kyo_crouch_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_crouch_big_fist", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_crouch_big_fist.png")
+		Sheet("kyo_crouch_big_fist", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Hit/kyo_crouch_big_fist.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+
+
+};
+
+
+
+struct Kyo_Crouch_Little_Kick : public Sheet {
+
+public:
+    Kyo_Crouch_Little_Kick() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 124.000000f, 138.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 0.000000f, 138.000000f, 192.000000f, 132.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 270.000000f, 124.000000f, 138.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 124.000000f, 270.000000f, 118.000000f, 142.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_crouch_little_kick", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Hit/kyo_crouch_little_kick.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+
+
+};
+
+
+
+struct Kyo_Crouch_Little_Fist : public Sheet {
+
+public:
+    Kyo_Crouch_Little_Fist() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 126.000000f, 134.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 0.000000f, 134.000000f, 170.000000f, 132.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 266.000000f, 126.000000f, 134.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 126.000000f, 266.000000f, 118.000000f, 142.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_crouch_little_fist", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Hit/kyo_crouch_litttle_fist.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+
+
+};
+
+
+
+struct Kyo_Big_Fist : public Sheet {
+
+public:
+    Kyo_Big_Fist() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 122.000000f, 208.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 122.000000f, 0.000000f, 118.000000f, 200.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 240.000000f, 0.000000f, 120.000000f, 202.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 360.000000f, 0.000000f, 212.000000f, 196.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 572.000000f, 0.000000f, 184.000000f, 206.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 756.000000f, 0.000000f, 122.000000f, 208.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 878.000000f, 0.000000f, 118.000000f, 206.000000f, 996.000000f, 208.000000f, "kyo_big_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_big_fist", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Hit/kyo_big_fist.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+
+
+};
+
+
+
+struct Kyo_Little_Fist : public Sheet {
+
+public:
+    Kyo_Little_Fist() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 130.000000f, 206.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 130.000000f, 0.000000f, 182.000000f, 204.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 312.000000f, 0.000000f, 130.000000f, 206.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 442.000000f, 0.000000f, 118.000000f, 206.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_little_fist", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Hit/kyo_little_fist.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+
+
+};
+
+
+
+struct Kyo_Big_Kick : public Sheet {
+
+public:
+    Kyo_Big_Kick() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 116.000000f, 184.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 116.000000f, 0.000000f, 114.000000f, 216.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 230.000000f, 0.000000f, 120.000000f, 214.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 350.000000f, 0.000000f, 148.000000f, 172.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 498.000000f, 0.000000f, 204.000000f, 200.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 57.000000f, 52.000000f, 150.000000f, 90.000000f),
+		FRAME5("Frame5", 702.000000f, 0.000000f, 120.000000f, 210.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 822.000000f, 0.000000f, 102.000000f, 160.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME7("Frame7", 924.000000f, 0.000000f, 130.000000f, 206.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME8("Frame8", 1054.000000f, 0.000000f, 118.000000f, 206.000000f, 1172.000000f, 216.000000f, "kyo_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_big_kick", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Hit/kyo_big_kick.png")
 
     {}
 
@@ -286,7 +534,7 @@ public:
 		FRAME9("Frame9", 0.000000f, 0.000000f, 152.000000f, 126.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME10("Frame10", 860.000000f, 0.000000f, 124.000000f, 138.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME11("Frame11", 0.000000f, 138.000000f, 118.000000f, 142.000000f, 984.000000f, 308.000000f, "kyo_crouch_big_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_crouch_big_kick", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_crouch_big_kick.png")
+		Sheet("kyo_crouch_big_kick", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Hit/kyo_crouch_big_kick.png")
 
     {}
 
@@ -308,72 +556,6 @@ public:
 
 
 
-struct Kyo_Crouch_Little_Kick : public Sheet {
-
-public:
-    Kyo_Crouch_Little_Kick() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 124.000000f, 138.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 0.000000f, 138.000000f, 192.000000f, 132.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 0.000000f, 270.000000f, 124.000000f, 138.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 124.000000f, 270.000000f, 118.000000f, 142.000000f, 242.000000f, 412.000000f, "kyo_crouch_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_crouch_little_kick", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_crouch_little_kick.png")
-
-    {}
-
-	ImageAsset FRAME0;
-	ImageAsset FRAME1;
-	ImageAsset FRAME2;
-	ImageAsset FRAME3;
-
-
-};
-
-
-
-struct Kyo_Crouch_Little_Fist : public Sheet {
-
-public:
-    Kyo_Crouch_Little_Fist() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 126.000000f, 134.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 0.000000f, 134.000000f, 170.000000f, 132.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 0.000000f, 266.000000f, 126.000000f, 134.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 126.000000f, 266.000000f, 118.000000f, 142.000000f, 244.000000f, 408.000000f, "kyo_crouch_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_crouch_little_fist", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_crouch_litttle_fist.png")
-
-    {}
-
-	ImageAsset FRAME0;
-	ImageAsset FRAME1;
-	ImageAsset FRAME2;
-	ImageAsset FRAME3;
-
-
-};
-
-
-
-struct Kyo_Little_Fist : public Sheet {
-
-public:
-    Kyo_Little_Fist() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 130.000000f, 206.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 130.000000f, 0.000000f, 182.000000f, 204.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 312.000000f, 0.000000f, 130.000000f, 206.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 442.000000f, 0.000000f, 118.000000f, 206.000000f, 560.000000f, 206.000000f, "kyo_little_fist", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_little_fist", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_little_fist.png")
-
-    {}
-
-	ImageAsset FRAME0;
-	ImageAsset FRAME1;
-	ImageAsset FRAME2;
-	ImageAsset FRAME3;
-
-
-};
-
-
-
 struct Kyo_Little_Kick : public Sheet {
 
 public:
@@ -386,7 +568,7 @@ public:
 		FRAME5("Frame5", 788.000000f, 0.000000f, 138.000000f, 212.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME6("Frame6", 926.000000f, 0.000000f, 120.000000f, 206.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME7("Frame7", 1046.000000f, 0.000000f, 118.000000f, 206.000000f, 1164.000000f, 218.000000f, "kyo_little_kick", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_little_kick", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Hit/kyo_little_kick.png")
+		Sheet("kyo_little_kick", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Hit/kyo_little_kick.png")
 
     {}
 
@@ -404,20 +586,16 @@ public:
 
 
 
-struct Kyo_Idle : public Sheet {
+struct Kyo_Move_Forward : public Sheet {
 
 public:
-    Kyo_Idle() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 118.000000f, 206.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 0.000000f, 206.000000f, 122.000000f, 208.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 0.000000f, 414.000000f, 122.000000f, 208.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 0.000000f, 622.000000f, 124.000000f, 206.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME4("Frame4", 0.000000f, 828.000000f, 124.000000f, 204.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME5("Frame5", 0.000000f, 1032.000000f, 122.000000f, 206.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME6("Frame6", 0.000000f, 1238.000000f, 122.000000f, 208.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME7("Frame7", 0.000000f, 1446.000000f, 122.000000f, 208.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME8("Frame8", 0.000000f, 1654.000000f, 120.000000f, 206.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_idle", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Idle/kyo_idle.png")
+    Kyo_Move_Forward() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 94.000000f, 218.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 94.000000f, 0.000000f, 94.000000f, 226.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 188.000000f, 0.000000f, 94.000000f, 232.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 282.000000f, 0.000000f, 104.000000f, 224.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 386.000000f, 0.000000f, 120.000000f, 222.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_move_forward", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Move/kyo_move_forward.png")
 
     {}
 
@@ -426,134 +604,6 @@ public:
 	ImageAsset FRAME2;
 	ImageAsset FRAME3;
 	ImageAsset FRAME4;
-	ImageAsset FRAME5;
-	ImageAsset FRAME6;
-	ImageAsset FRAME7;
-	ImageAsset FRAME8;
-
-
-};
-
-
-
-struct Kyo_Jump : public Sheet {
-
-public:
-    Kyo_Jump() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 102.000000f, 160.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 110.000000f, 958.000000f, 68.000000f, 282.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 118.000000f, 736.000000f, 110.000000f, 222.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 0.000000f, 534.000000f, 148.000000f, 202.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME4("Frame4", 0.000000f, 160.000000f, 154.000000f, 172.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME5("Frame5", 0.000000f, 332.000000f, 148.000000f, 202.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME6("Frame6", 0.000000f, 958.000000f, 110.000000f, 222.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME7("Frame7", 178.000000f, 958.000000f, 68.000000f, 282.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME8("Frame8", 102.000000f, 0.000000f, 102.000000f, 160.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME9("Frame9", 0.000000f, 736.000000f, 118.000000f, 206.000000f, 246.000000f, 1240.000000f, "kyo_jump", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_jump", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Jump/kyo_jump.png")
-
-    {}
-
-	ImageAsset FRAME0;
-	ImageAsset FRAME1;
-	ImageAsset FRAME2;
-	ImageAsset FRAME3;
-	ImageAsset FRAME4;
-	ImageAsset FRAME5;
-	ImageAsset FRAME6;
-	ImageAsset FRAME7;
-	ImageAsset FRAME8;
-	ImageAsset FRAME9;
-
-
-};
-
-
-
-struct Kyo_Jump_Back : public Sheet {
-
-public:
-    Kyo_Jump_Back() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 104.000000f, 186.000000f, 120.000000f, 826.000000f, "kyo_jump_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 0.000000f, 186.000000f, 120.000000f, 222.000000f, 120.000000f, 826.000000f, "kyo_jump_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 0.000000f, 408.000000f, 112.000000f, 212.000000f, 120.000000f, 826.000000f, "kyo_jump_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 0.000000f, 620.000000f, 118.000000f, 206.000000f, 120.000000f, 826.000000f, "kyo_jump_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_jump_back", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Jump/kyo_jump_back.png")
-
-    {}
-
-	ImageAsset FRAME0;
-	ImageAsset FRAME1;
-	ImageAsset FRAME2;
-	ImageAsset FRAME3;
-
-
-};
-
-
-
-struct Kyo_Jump_Backward : public Sheet {
-
-public:
-    Kyo_Jump_Backward() :
-		FRAME0("Frame0", 102.000000f, 220.000000f, 102.000000f, 160.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 98.000000f, 576.000000f, 88.000000f, 246.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 0.000000f, 380.000000f, 120.000000f, 190.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 0.000000f, 90.000000f, 140.000000f, 110.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME4("Frame4", 140.000000f, 90.000000f, 90.000000f, 130.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME5("Frame5", 0.000000f, 0.000000f, 128.000000f, 90.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME6("Frame6", 120.000000f, 380.000000f, 118.000000f, 196.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME7("Frame7", 0.000000f, 576.000000f, 98.000000f, 216.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME8("Frame8", 186.000000f, 576.000000f, 68.000000f, 282.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME9("Frame9", 0.000000f, 220.000000f, 102.000000f, 160.000000f, 254.000000f, 858.000000f, "kyo_jump_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_jump_backward", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Jump/kyo_jump_backward.png")
-
-    {}
-
-	ImageAsset FRAME0;
-	ImageAsset FRAME1;
-	ImageAsset FRAME2;
-	ImageAsset FRAME3;
-	ImageAsset FRAME4;
-	ImageAsset FRAME5;
-	ImageAsset FRAME6;
-	ImageAsset FRAME7;
-	ImageAsset FRAME8;
-	ImageAsset FRAME9;
-
-
-};
-
-
-
-struct Kyo_Jump_Forward : public Sheet {
-
-public:
-    Kyo_Jump_Forward() :
-		FRAME0("Frame0", 0.000000f, 290.000000f, 102.000000f, 160.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 88.000000f, 686.000000f, 68.000000f, 282.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 0.000000f, 480.000000f, 118.000000f, 196.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 0.000000f, 0.000000f, 128.000000f, 90.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME4("Frame4", 128.000000f, 0.000000f, 90.000000f, 130.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME5("Frame5", 0.000000f, 130.000000f, 140.000000f, 110.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME6("Frame6", 102.000000f, 290.000000f, 120.000000f, 190.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME7("Frame7", 0.000000f, 686.000000f, 88.000000f, 246.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME8("Frame8", 140.000000f, 130.000000f, 102.000000f, 160.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME9("Frame9", 118.000000f, 480.000000f, 118.000000f, 206.000000f, 242.000000f, 968.000000f, "kyo_jump_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_jump_forward", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Jump/kyo_jump_forward.png")
-
-    {}
-
-	ImageAsset FRAME0;
-	ImageAsset FRAME1;
-	ImageAsset FRAME2;
-	ImageAsset FRAME3;
-	ImageAsset FRAME4;
-	ImageAsset FRAME5;
-	ImageAsset FRAME6;
-	ImageAsset FRAME7;
-	ImageAsset FRAME8;
-	ImageAsset FRAME9;
 
 
 };
@@ -570,7 +620,7 @@ public:
 		FRAME3("Frame3", 316.000000f, 0.000000f, 90.000000f, 230.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME4("Frame4", 406.000000f, 0.000000f, 88.000000f, 228.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME5("Frame5", 494.000000f, 0.000000f, 90.000000f, 220.000000f, 584.000000f, 230.000000f, "kyo_move_back", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_move_back", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Move/kyo_move_back.png")
+		Sheet("kyo_move_back", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Move/kyo_move_back.png")
 
     {}
 
@@ -580,30 +630,6 @@ public:
 	ImageAsset FRAME3;
 	ImageAsset FRAME4;
 	ImageAsset FRAME5;
-
-
-};
-
-
-
-struct Kyo_Move_Forward : public Sheet {
-
-public:
-    Kyo_Move_Forward() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 94.000000f, 218.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 94.000000f, 0.000000f, 94.000000f, 226.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 188.000000f, 0.000000f, 94.000000f, 232.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 282.000000f, 0.000000f, 104.000000f, 224.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME4("Frame4", 386.000000f, 0.000000f, 120.000000f, 222.000000f, 506.000000f, 232.000000f, "kyo_move_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_move_forward", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Move/kyo_move_forward.png")
-
-    {}
-
-	ImageAsset FRAME0;
-	ImageAsset FRAME1;
-	ImageAsset FRAME2;
-	ImageAsset FRAME3;
-	ImageAsset FRAME4;
 
 
 };
@@ -625,7 +651,7 @@ public:
 		FRAME8("Frame8", 0.000000f, 0.000000f, 102.000000f, 160.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME9("Frame9", 102.000000f, 0.000000f, 104.000000f, 186.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME10("Frame10", 302.000000f, 0.000000f, 118.000000f, 206.000000f, 434.000000f, 726.000000f, "kyo_oryu", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_oryu", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Oryu/kyo_oryu.png")
+		Sheet("kyo_oryu", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Oryu/kyo_oryu.png")
 
     {}
 
@@ -646,6 +672,38 @@ public:
 
 
 
+struct Kyo_Idle : public Sheet {
+
+public:
+    Kyo_Idle() :
+		FRAME0("Frame0", 0.000000f, 0.000000f, 118.000000f, 206.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME1("Frame1", 0.000000f, 206.000000f, 122.000000f, 208.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME2("Frame2", 0.000000f, 414.000000f, 122.000000f, 208.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME3("Frame3", 0.000000f, 622.000000f, 124.000000f, 206.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME4("Frame4", 0.000000f, 828.000000f, 124.000000f, 204.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME5("Frame5", 0.000000f, 1032.000000f, 122.000000f, 206.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME6("Frame6", 0.000000f, 1238.000000f, 122.000000f, 208.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME7("Frame7", 0.000000f, 1446.000000f, 122.000000f, 208.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		FRAME8("Frame8", 0.000000f, 1654.000000f, 120.000000f, 206.000000f, 124.000000f, 1860.000000f, "kyo_idle", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
+		Sheet("kyo_idle", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Idle/kyo_idle.png")
+
+    {}
+
+	ImageAsset FRAME0;
+	ImageAsset FRAME1;
+	ImageAsset FRAME2;
+	ImageAsset FRAME3;
+	ImageAsset FRAME4;
+	ImageAsset FRAME5;
+	ImageAsset FRAME6;
+	ImageAsset FRAME7;
+	ImageAsset FRAME8;
+
+
+};
+
+
+
 struct Kyo_Roll_Backward : public Sheet {
 
 public:
@@ -659,7 +717,7 @@ public:
 		FRAME6("Frame6", 0.000000f, 992.000000f, 160.000000f, 140.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME7("Frame7", 0.000000f, 1132.000000f, 102.000000f, 160.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME8("Frame8", 102.000000f, 1132.000000f, 118.000000f, 206.000000f, 220.000000f, 1338.000000f, "kyo_roll_backward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_roll_backward", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Roll/kyo_roll_backward.png")
+		Sheet("kyo_roll_backward", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Roll/kyo_roll_backward.png")
 
     {}
 
@@ -691,39 +749,7 @@ public:
 		FRAME6("Frame6", 0.000000f, 888.000000f, 188.000000f, 206.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME7("Frame7", 0.000000f, 1094.000000f, 90.000000f, 220.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME8("Frame8", 90.000000f, 1094.000000f, 118.000000f, 206.000000f, 212.000000f, 1314.000000f, "kyo_roll_forward", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_roll_forward", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Roll/kyo_roll_forward.png")
-
-    {}
-
-	ImageAsset FRAME0;
-	ImageAsset FRAME1;
-	ImageAsset FRAME2;
-	ImageAsset FRAME3;
-	ImageAsset FRAME4;
-	ImageAsset FRAME5;
-	ImageAsset FRAME6;
-	ImageAsset FRAME7;
-	ImageAsset FRAME8;
-
-
-};
-
-
-
-struct Kyo_Run : public Sheet {
-
-public:
-    Kyo_Run() :
-		FRAME0("Frame0", 0.000000f, 0.000000f, 102.000000f, 160.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME1("Frame1", 0.000000f, 172.000000f, 126.000000f, 178.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME2("Frame2", 0.000000f, 356.000000f, 210.000000f, 184.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME3("Frame3", 102.000000f, 0.000000f, 202.000000f, 170.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME4("Frame4", 126.000000f, 172.000000f, 126.000000f, 180.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME5("Frame5", 252.000000f, 172.000000f, 218.000000f, 184.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME6("Frame6", 304.000000f, 0.000000f, 206.000000f, 172.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME7("Frame7", 328.000000f, 356.000000f, 112.000000f, 212.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		FRAME8("Frame8", 210.000000f, 356.000000f, 118.000000f, 206.000000f, 510.000000f, 568.000000f, "kyo_run", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_run", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Run/kyo_run.png")
+		Sheet("kyo_roll_forward", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Roll/kyo_roll_forward.png")
 
     {}
 
@@ -764,7 +790,7 @@ public:
 		FRAME15("Frame15", 832.000000f, 284.000000f, 148.000000f, 192.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		FRAME16("Frame16", 870.000000f, 0.000000f, 118.000000f, 206.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
 		IDLE("Idle", 870.000000f, 0.000000f, 118.000000f, 206.000000f, 988.000000f, 514.000000f, "kyo_salute", "RGBA8888", 0.000000f, 0.000000f, 0.000000f, 0.000000f),
-		Sheet("kyo_salute", "/Users/always/CLionProjects/inanna/Resources/Assets/Kyo/Salute/kyo_salute.png")
+		Sheet("kyo_salute", "/home/misterdortnal/CLionProjects/Inanna/Resources/Assets/Kyo/Salute/kyo_salute.png")
 
     {}
 
@@ -792,35 +818,36 @@ public:
 
 struct Resources {
 public:
+	static Pieces PIECES;
 	static Balls BALLS;
 	static Death DEATH;
 	static Fields FIELDS;
-	static Pieces PIECES;
 	static Kyo_Crouch KYO_CROUCH;
-	static Kyo_Big_Fist KYO_BIG_FIST;
-	static Kyo_Big_Kick KYO_BIG_KICK;
+	static Kyo_Jump KYO_JUMP;
+	static Kyo_Jump_Forward KYO_JUMP_FORWARD;
+	static Kyo_Jump_Backward KYO_JUMP_BACKWARD;
+	static Kyo_Jump_Back KYO_JUMP_BACK;
+	static Kyo_Damage_Taken_Normal KYO_DAMAGE_TAKEN_NORMAL;
+	static Kyo_Run KYO_RUN;
 	static Kyo_Crouch_Big_Fist KYO_CROUCH_BIG_FIST;
-	static Kyo_Crouch_Big_Kick KYO_CROUCH_BIG_KICK;
 	static Kyo_Crouch_Little_Kick KYO_CROUCH_LITTLE_KICK;
 	static Kyo_Crouch_Little_Fist KYO_CROUCH_LITTLE_FIST;
+	static Kyo_Big_Fist KYO_BIG_FIST;
 	static Kyo_Little_Fist KYO_LITTLE_FIST;
+	static Kyo_Big_Kick KYO_BIG_KICK;
+	static Kyo_Crouch_Big_Kick KYO_CROUCH_BIG_KICK;
 	static Kyo_Little_Kick KYO_LITTLE_KICK;
-	static Kyo_Idle KYO_IDLE;
-	static Kyo_Jump KYO_JUMP;
-	static Kyo_Jump_Back KYO_JUMP_BACK;
-	static Kyo_Jump_Backward KYO_JUMP_BACKWARD;
-	static Kyo_Jump_Forward KYO_JUMP_FORWARD;
-	static Kyo_Move_Back KYO_MOVE_BACK;
 	static Kyo_Move_Forward KYO_MOVE_FORWARD;
+	static Kyo_Move_Back KYO_MOVE_BACK;
 	static Kyo_Oryu KYO_ORYU;
+	static Kyo_Idle KYO_IDLE;
 	static Kyo_Roll_Backward KYO_ROLL_BACKWARD;
 	static Kyo_Roll_Forward KYO_ROLL_FORWARD;
-	static Kyo_Run KYO_RUN;
 	static Kyo_Salute KYO_SALUTE;
 
 
 	static int SheetCount;
-	static const Sheet Sheets[25];
+	static const Sheet Sheets[26];
 };
 
 

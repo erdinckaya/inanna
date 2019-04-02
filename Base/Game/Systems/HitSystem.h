@@ -20,6 +20,7 @@ namespace Inanna {
         void configure(entityx::EventManager &events) override {
             manager = &events;
             events.subscribe<SpriteAnimEnd>(*this);
+            events.subscribe<AbortEvent>(*this);
         }
 
         void CheckDamage(entityx::EntityManager &entities, std::vector<entityx::Entity> &hits) {
@@ -51,7 +52,7 @@ namespace Inanna {
             entities.each<Character, SpriteAnimation, Hit>(
                     [this, dt, &hits](entityx::Entity entity, Character &character, SpriteAnimation &anim, Hit &hit) {
                         INANNA_REMOVE_COMPONENT(entity, MoveCharacter)
-                        INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, hit.animData);
+                        INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, hit.animData)
                         entity.component<SpriteAnimation>()->stayAtLastFrame = hit.stayAtLastFrame;
                         hits.push_back(entity);
                     });
@@ -62,6 +63,13 @@ namespace Inanna {
         void receive(const SpriteAnimEnd &spriteAnimEnd) {
             SpriteAnimEnd event = spriteAnimEnd;
             if (event.entity.has_component<Hit>()) {
+                manager->emit<HitEnd>(event.entity);
+            }
+        }
+
+        void receive(const AbortEvent &abortEvent) {
+            AbortEvent event = abortEvent;
+            if (event.entity.has_component<Hit>() && abortEvent.level > 0) {
                 manager->emit<HitEnd>(event.entity);
             }
         }

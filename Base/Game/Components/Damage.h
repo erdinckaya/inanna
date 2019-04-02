@@ -1,3 +1,5 @@
+#include <utility>
+
 //
 // Created by Erdınc Kaya on 2019-04-01.
 //
@@ -9,12 +11,12 @@
 
 namespace Inanna {
     struct Damage {
-        explicit Damage(entityx::Entity entity, const float &damage, const bool &source) : entity(entity),
-                                                                                           damage(damage),
-                                                                                           source(source) {}
+        explicit Damage(entityx::Entity source, entityx::Entity destination, const float &damage, SpriteAnimData animData) :
+                damage(damage), source(source), animData(std::move(animData)) {}
 
-        entityx::Entity entity;
-        bool source;
+        entityx::Entity source;
+        entityx::Entity destination;
+        SpriteAnimData animData;
         float damage;
     };
 }

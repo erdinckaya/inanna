@@ -9,6 +9,7 @@
 #include <entityx/Entity.h>
 
 namespace Inanna {
+    // TODO Erdinc add abort levels as BETTER_ENUM!
     struct AbortEvent {
         explicit AbortEvent(entityx::Entity entity, int level = 0) : entity(entity), level(level) {}
 
