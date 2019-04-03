@@ -57,20 +57,23 @@ namespace Inanna {
 
         void receive(const RunEnd &runEnd) {
             RunEnd event = runEnd;
-            INANNA_REMOVE_COMPONENT(event.entity, Run);
-            INANNA_REMOVE_COMPONENT(event.entity, SpriteLoop);
-            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
-            event.entity.component<CharacterState>()->lock = false;
+            OnRunEnd(event.entity);
         }
 
         void receive(const AbortEvent &abortEvent) {
             AbortEvent event = abortEvent;
             if (event.entity.has_component<Run>()) {
-                INANNA_REMOVE_COMPONENT(event.entity, Run);
-                INANNA_REMOVE_COMPONENT(event.entity, SpriteLoop);
-                INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
-                event.entity.component<CharacterState>()->lock = false;
+                OnRunEnd(event.entity);
             }
+        }
+
+        void OnRunEnd(entityx::Entity entity) const {
+            INANNA_REMOVE_COMPONENT(entity, Run);
+            INANNA_REMOVE_COMPONENT(entity, SpriteLoop);
+            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(entity, AnimationData::KYO_IDLE);
+            auto v = entity.component<Velocity>()->value;
+            entity.component<Velocity>()->value = Vecf(0, v.y);
+            entity.component<CharacterState>()->lock = false;
         }
     };
 }

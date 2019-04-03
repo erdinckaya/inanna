@@ -4,6 +4,8 @@
 
 #include "Physics.h"
 
+const float Inanna::Physics::GRAVITY;
+
 float Inanna::Physics::Jump(float v, float t, float g) {
     auto time = v / g;
     bool rising = true;
@@ -24,12 +26,14 @@ float Inanna::Physics::JumpWithDistanceAndTime(float distance, float risingTime,
     return Jump(v, elapsedTime, g);
 }
 
-float Inanna::Physics::PushBack(float v, float t, float a) {
-    return v * t  - a * t * t * 0.5f;
+float Inanna::Physics::Delta(float &v, const float &t, const float &a) {
+    auto dx = v * t + a * t * t * 0.5f;
+    v += a * t;
+    return dx;
 }
 
 float Inanna::Physics::PushBackWithDistanceAndTime(float distance, float time, float elapsedTime) {
     float v  = 2 * distance / time;
-    float g = v / time;
-    return PushBack(v, elapsedTime, g);
+    float g = -v / time;
+    return Delta(v, elapsedTime, g);
 }

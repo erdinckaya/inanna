@@ -20,17 +20,11 @@ namespace Inanna {
         explicit RunSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, Position, Run>(
-                    [this, dt](entityx::Entity entity, Character &character, Position &position, Run &run) {
+            entities.each<Character, Position, Run, Velocity>(
+                    [this, dt](entityx::Entity entity, Character &character, Position &position, Run &run,
+                               Velocity &velocity) {
                         INANNA_REPLACE_SPRITE_ANIM_IF_NOT_LOOP(entity, run.animData);
-
-                        double speed = 1000.0 / run.speed;
-                        if (run.time >= speed) {
-                            run.time = 0;
-                        } else {
-                            run.time += dt;
-                        }
-                        position.position += run.direction * run.speed;
+                        velocity.value = Vecf(35 * run.direction.x, 0);
                     });
         }
 

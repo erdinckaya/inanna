@@ -14,6 +14,7 @@
 #include "../Game/Components/Roll.h"
 #include "../Game/Components/Hit.h"
 #include "../Game/Components/Oryu.h"
+#include "../Game/Components/Velocity.h"
 #include "../Game/Components/Run.h"
 #include "../Game/Components/JumpCharacter.h"
 #include "../Game/Components/CharacterState.h"
@@ -85,6 +86,10 @@ REFLECT_STRUCT_BEGIN(Inanna::Run)
                     REFLECT_STRUCT_MEMBER(time)
                     REFLECT_STRUCT_MEMBER(direction)
                     REFLECT_STRUCT_MEMBER(speed)
+REFLECT_STRUCT_END()
+
+REFLECT_STRUCT_BEGIN(Inanna::Velocity)
+                    REFLECT_STRUCT_MEMBER(value)
 REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::Hit)

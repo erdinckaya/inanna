@@ -33,6 +33,8 @@ namespace Inanna {
 
         bool IsKeyHeld(GameKey key);
 
+        bool WasKeyReleased(GameKey key);
+
         void PrintKeys();
 
         static KeyInput Instance;

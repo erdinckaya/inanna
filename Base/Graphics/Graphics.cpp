@@ -17,6 +17,7 @@
 #include "../Game/Components/Roll.h"
 #include "../Game/Components/Oryu.h"
 #include "../Game/Components/Facing.h"
+#include "../Game/Components/Velocity.h"
 #include "../Game/Components/Hit.h"
 
 
@@ -115,7 +116,7 @@ void Inanna::Graphics::DrawTexture(ImageAsset image, Rectf clip, Rectf destinati
 
 void Inanna::Graphics::Update(float dt) {
 #ifdef MONITORX_DEBUG
-    monitorX->Render<Renderable, Position, Facing, SpriteAnimation, SpriteLoop, CharacterState, UserKeyHistory,
+    monitorX->Render<Renderable, Position, Velocity, Facing, SpriteAnimation, SpriteLoop, CharacterState, UserKeyHistory,
             MoveCharacter, Run, Roll, Oryu, JumpCharacter, Crouch, UserKey, Hit, end_of_list>();
 #endif
     SDL_GL_MakeCurrent(window, context);

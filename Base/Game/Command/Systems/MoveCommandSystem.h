@@ -29,13 +29,14 @@ namespace Inanna {
         }
 
         void Move(entityx::Entity &character, SpriteAnimData &animData, int direction) const {
-            character.replace<MoveCharacter>(Vecf(0.75f, 0) * direction, 5, animData);
+            character.replace<MoveCharacter>(Vecf(1, 0) * direction, 5, animData);
         }
 
         void RemoveMove(entityx::Entity &character) const {
             if (character.has_component<MoveCharacter>()) {
                 INANNA_REMOVE_COMPONENT(character, MoveCharacter);
                 INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(character, AnimationData::KYO_IDLE);
+                character.component<Velocity>()->value = Vecf(0, 0);
             }
         }
 

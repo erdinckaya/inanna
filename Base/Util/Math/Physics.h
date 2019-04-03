@@ -15,10 +15,12 @@ namespace Inanna {
         static float Jump(float v, float t, float g = GRAVITY);
         static float JumpWithDistanceAndTime(float distance, float risingTime, float elapsedTime);
 
-        static float PushBack(float v, float t, float g = GRAVITY);
+        static float Delta(float &v, const float &t, const float &a);
         static float PushBackWithDistanceAndTime(float distance, float time, float elapsedTime);
 
-        static constexpr float GRAVITY = 9.81f;
+
+//        static constexpr float GRAVITY = -9.81f;
+        static constexpr float GRAVITY = -15.81f;
 
     };
 }

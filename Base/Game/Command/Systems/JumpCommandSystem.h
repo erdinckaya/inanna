@@ -47,7 +47,7 @@ namespace Inanna {
             }
 
             cmd.character.replace<SpriteIndex>(cmd.character, 4);
-            cmd.character.replace<JumpCharacter>(animData, 300, 0.4f, 5.0f * direction);
+            cmd.character.replace<JumpCharacter>(animData, 300, 0.4f, 25.0f * direction);
             INANNA_REMOVE_COMPONENT(cmd.character, MoveCharacter);
             cmd.character.component<CharacterState>()->lock = true;
         }
@@ -70,6 +70,8 @@ namespace Inanna {
             JumpEnd event = jumpEnd;
             INANNA_REMOVE_COMPONENT(event.entity, JumpCharacter);
             INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+            auto v = event.entity.component<Velocity>()->value;
+            event.entity.component<Velocity>()->value = Vecf(0, 0);
             event.entity.component<CharacterState>()->lock = false;
         }
     };
