@@ -35,10 +35,11 @@ namespace Inanna {
             if (cmd.destination.has_component<Damage>() || cmd.damage == 0) {
                 return;
             }
-            printf("Handle\n");
 
             cmd.destination.component<CharacterState>()->lock = false;
-            cmd.destination.assign<Damage>(cmd.source, cmd.destination, cmd.damage, AnimationData::KYO_DAMAGE_TAKEN_NORMAL);
+            auto startPos = cmd.destination.component<Position>()->position.x;
+            cmd.destination.assign<Damage>(cmd.source, cmd.destination, cmd.damage,
+                                           AnimationData::KYO_DAMAGE_TAKEN_NORMAL, startPos);
 
             cmd.source.component<SpriteZ>()->z = 1;
             cmd.destination.component<SpriteZ>()->z = 0;

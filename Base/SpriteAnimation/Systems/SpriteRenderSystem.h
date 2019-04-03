@@ -31,7 +31,7 @@ namespace Inanna {
             sprites = from(sprites).orderBy([](const entityx::Entity &ent) {
                 entityx::Entity e = ent;
                 return e.component<SpriteZ>()->z;
-            }).reverse().toVector();
+            }).toVector();
             const int size = static_cast<const int>(sprites.size());
             for (int i = 0; i < size; ++i) {
                 auto ent = sprites[i];

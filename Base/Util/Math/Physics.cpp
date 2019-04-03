@@ -23,3 +23,13 @@ float Inanna::Physics::JumpWithDistanceAndTime(float distance, float risingTime,
     float g = v / risingTime;
     return Jump(v, elapsedTime, g);
 }
+
+float Inanna::Physics::PushBack(float v, float t, float a) {
+    return v * t  - a * t * t * 0.5f;
+}
+
+float Inanna::Physics::PushBackWithDistanceAndTime(float distance, float time, float elapsedTime) {
+    float v  = 2 * distance / time;
+    float g = v / time;
+    return PushBack(v, elapsedTime, g);
+}

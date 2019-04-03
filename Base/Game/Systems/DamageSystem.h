@@ -31,13 +31,21 @@ namespace Inanna {
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, Damage, Health>(
-                    [this](entityx::Entity entity, Character &character, Damage &damage, Health &health) {
+            entities.each<Character, Damage, Health, Position>(
+                    [this, dt](entityx::Entity entity, Character &character, Damage &damage, Health &health,
+                               Position &position) {
                         health.health -= damage.damage;
                         manager->emit<AbortEvent>(entity, 2);
                         if (health.health < 0) {
                             health.health = 0;
                         }
+
+                        damage.animData.speed = damage.animData.keyFrames.size() / damage.pushBackTime;
+                        float x = Physics::PushBackWithDistanceAndTime(damage.pushBackDistance, damage.pushBackTime,
+                                                                       damage.totalTime);
+                        damage.totalTime += dt * 0.001f;
+                        position.position = Vecf(damage.startPos - x, position.position.y);
+
                         INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, damage.animData)
                     });
         }
