@@ -37,28 +37,29 @@ namespace Inanna {
                         if (jump.longJump && Chrono::Now() < jump.startTime + LongJumpTimeLimit &&
                             KeyInput::Instance.WasKeyReleased(GameKey::Up)) {
                             jump.longJump = false;
-//                            jump.distance *= 0.5f;
-//                            jump.risingTime *= 0.9f;
-//                            jump.vX *= 0.5f;
-                            velocity.value = Vecf(velocity.value.x, velocity.value.y * 0.6f);
+                            velocity.value = Vecf(velocity.value.x, velocity.value.y * 0.7f);
                             auto vy = velocity.value.y;
                             INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_JUMP);
-                            anim.animData.speed = 10 * anim.animData.keyFrames.size() / (2 * vy / -Physics::GRAVITY);
+                            auto first =  ((jump.vY + vy) * jump.elapsedTime) * 0.5f;
+                            const float g = Physics::GRAVITY;
+                            float t = velocity.value.y / g;
+                            auto second = g * t * t * 0.5f;
+                            auto rising = first + second;
+                            t += std::sqrt(2 * rising / g) + jump.elapsedTime;
+
+                            anim.animData.speed = 10 * anim.animData.keyFrames.size() / t;
                         }
 
-//                        float y = Physics::JumpWithDistanceAndTime(jump.distance, jump.risingTime, jump.totalTime);
-//                        jump.totalTime += dt * 0.001f;
-//                        auto x = static_cast<float>(dt * 0.1f * jump.vX);
-//                        position.position = Vecf(position.position.x + x, y + FLOOR);
-//
-//
-//                        if (position.position.y < FLOOR) {
-//                            position.position = Vecf(position.position.x - x, FLOOR);
-//                        }
+                        if (jump.started) {
+                            jump.elapsedTime += dt * 0.01f;
+                        }
 
-                        if (jump.startTime == Chrono::Now()) {
+                        if (!jump.started) {
+                            jump.started = true;
+                            jump.startTime = Chrono::Now();
                             auto vy = 100;
-                            anim.animData.speed = 10 * anim.animData.keyFrames.size() / (2 * vy / -Physics::GRAVITY);
+                            jump.vY = vy;
+                            anim.animData.speed = 10 * anim.animData.keyFrames.size() / (2 * vy / Physics::GRAVITY);
                             velocity.value = Vecf(jump.vX, vy);
                         }
                     });

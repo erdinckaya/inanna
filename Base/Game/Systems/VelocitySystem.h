@@ -20,12 +20,8 @@ namespace Inanna {
                         auto t = static_cast<float>(dt * 0.01f);
                         float x = t * velocity.value.x;
                         float vy = velocity.value.y;
-                        if (t == 0) {
-                            printf("12312312\n");
-                        }
-                        float y = Physics::Delta(vy, static_cast<const float &>(t), Physics::GRAVITY);
+                        float y = Physics::Delta(vy, static_cast<const float &>(t), -Physics::GRAVITY);
                         velocity.value = Vecf(velocity.value.x, vy);
-
                         position.position += Vecf(x, y);
 
                         if (position.position.y < FLOOR) {

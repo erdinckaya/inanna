@@ -27,7 +27,7 @@ float Inanna::Physics::JumpWithDistanceAndTime(float distance, float risingTime,
 }
 
 float Inanna::Physics::Delta(float &v, const float &t, const float &a) {
-    auto dx = v * t + a * t * t * 0.5f;
+    auto dx = v * t - a * t * t * 0.5f;
     v += a * t;
     return dx;
 }

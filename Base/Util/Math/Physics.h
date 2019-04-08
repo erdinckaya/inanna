@@ -20,7 +20,7 @@ namespace Inanna {
 
 
 //        static constexpr float GRAVITY = -9.81f;
-        static constexpr float GRAVITY = -15.81f;
+        static constexpr float GRAVITY = 15.81f;
 
     };
 }
