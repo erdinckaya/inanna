@@ -10,6 +10,7 @@
 #include "../Components/SpriteAnimation.h"
 #include "../../World.h"
 #include "../../Game/Components/Facing.h"
+#include "../../Game/Components/Collidable.h"
 
 namespace Inanna {
     // Pivots are bottom left for anims
@@ -24,6 +25,11 @@ namespace Inanna {
                         Vecf size = Vecf(facing.left ? 0 : image.w, image.h);
                         auto pos = Vecf(position.position.x, -position.position.y);
                         position.global = GROUND + pos - size;
+
+                        if (HAS_COMP(entity, Collidable)) {
+                            auto collide = COMP(entity, Collidable);
+                            collide->box = Rectf(Vecf(position.global.x, position.global.y), sprite.Size());
+                        }
                     });
         }
 

@@ -22,7 +22,7 @@ namespace Inanna {
             entities.each<Character, Position, MoveCharacter>(
                     [this, dt](entityx::Entity entity, Character &character, Position &position, MoveCharacter &move) {
                         if (entity.component<SpriteAnimation>()->animData != move.animData) {
-                            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(entity, move.animData);
+                            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(entity, move.animData)
                         }
 
                         double speed = 1000.0 / move.speed;

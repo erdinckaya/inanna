@@ -43,4 +43,9 @@
         link->onExecuted(ent); \
     } \
 
+
+#define HAS_COMP(e, C) ((e).has_component<C>())
+
+#define COMP(e, C) ((e).component<C>())
+
 #endif //INANNA_SPRITEMACRO_H

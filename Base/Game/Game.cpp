@@ -32,6 +32,7 @@
 #include "Components/Facing.h"
 #include "../SpriteAnimation/Systems/SpriteFacingSystem.h"
 #include "Systems/DamageSystem.h"
+#include "Systems/CollisionSystem.h"
 
 
 Inanna::Game* Inanna::Game::Instance = nullptr;
@@ -57,6 +58,7 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<RunSystem>();
     systems.add<RollSystem>();
     systems.add<OryuSystem>();
+    systems.add<CollisionSystem>();
     systems.add<DamageSystem>();
 
 
@@ -91,6 +93,7 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<RunSystem>(dt);
     systems.update<RollSystem>(dt);
     systems.update<OryuSystem>(dt);
+    systems.update<CollisionSystem>(dt);
     systems.update<DamageSystem>(dt);
 
 
@@ -117,6 +120,7 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Player.assign<CharacterState>();
             Player.assign<SpriteZ>(0);
             Player.assign<Health>(100);
+            Player.assign<Collidable>();
 
             break;
         }
@@ -132,6 +136,7 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Rival.assign<CharacterState>();
             Rival.assign<SpriteZ>(1);
             Rival.assign<Health>(100);
+            Rival.assign<Collidable>();
 
             break;
         }
