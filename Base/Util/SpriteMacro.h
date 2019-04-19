@@ -36,6 +36,8 @@
         entity.remove<comp>(); \
     } \
 
+#define INANNA_REPLACE_COMPONENT(entity, comp) entity.replace<comp>();
+
 #define INANNA_COMMAND_EXECUTED(entity) \
     if (entity.has_component<CommandLink>()) { \
         auto link = entity.component<CommandLink>(); \

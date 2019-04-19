@@ -27,14 +27,7 @@ namespace Inanna {
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Character, Position, Roll>(
                     [this, dt](entityx::Entity entity, Character &character, Position &position, Roll &roll) {
-
-                        INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, roll.animData);
-                        double speed = 1000.0 / roll.speed;
-                        if (roll.time >= speed) {
-                            roll.time = 0;
-                        } else {
-                            roll.time += dt;
-                        }
+                        INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, roll.animData)
                         position.position += roll.direction * roll.speed;
                     });
         }

@@ -16,7 +16,7 @@ namespace Inanna {
     // Pivots are bottom left for anims
     struct SpriteFacingSystem : public entityx::System<SpriteFacingSystem> {
 
-        explicit SpriteFacingSystem() {}
+        explicit SpriteFacingSystem() = default;
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             auto player = Game::Instance->Player;
@@ -25,8 +25,18 @@ namespace Inanna {
                 auto pPos = player.component<Position>();
                 auto rPos = rival.component<Position>();
 
+                auto old = player.component<Facing>()->left;
                 player.component<Facing>()->left = pPos->position.x < rPos->position.x;
                 rival.component<Facing>()->left = !player.component<Facing>()->left;
+                if (old != player.component<Facing>()->left) {
+                    if (old) {
+                        pPos->position.x += COMP(player, SpriteAnimation)->KeyFrame().w;
+                        rPos->position.x -= COMP(rival, SpriteAnimation)->KeyFrame().w;
+                    } else {
+                        pPos->position.x -= COMP(player, SpriteAnimation)->KeyFrame().w;
+                        rPos->position.x += COMP(rival, SpriteAnimation)->KeyFrame().w;
+                    }
+                }
             }
 
 

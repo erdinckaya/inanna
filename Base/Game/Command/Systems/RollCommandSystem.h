@@ -39,7 +39,8 @@ namespace Inanna {
             }
 
             auto animData = cmd.forward ? AnimationData::KYO_ROLL_FORWARD : AnimationData::KYO_ROLL_BACKWARD;
-            cmd.character.replace<Roll>(animData, Vecf(1, 0) * direction, 5);
+            cmd.character.replace<Roll>(animData, Vecf(1, 0) * direction, 10);
+            INANNA_REMOVE_COMPONENT(cmd.character, Collidable)
         }
 
 
@@ -59,9 +60,10 @@ namespace Inanna {
         void receive(const RollEnd &rollEnd) {
             RollEnd event = rollEnd;
             INANNA_REMOVE_COMPONENT(event.entity, Roll);
-            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
+            INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE)
             manager->emit<LockInput>(event.entity, false);
             event.entity.replace<CharacterState>(CharacterBehaviour::Idle);
+            INANNA_REPLACE_COMPONENT(event.entity, Collidable)
         }
 
     private:

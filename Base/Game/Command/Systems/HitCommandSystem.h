@@ -12,6 +12,7 @@
 #include "../../../../ThirdParty/boolinq.h"
 #include "../Components/HitCommand.h"
 #include "../../Components/Hit.h"
+#include "../../Components/Collidable.h"
 #include "../../Events/HitEnd.h"
 
 using namespace boolinq;
@@ -84,6 +85,7 @@ namespace Inanna {
 
             if (canHit) {
                 cmd.character.component<CharacterState>()->lock = true;
+                INANNA_REMOVE_COMPONENT(cmd.character, Collidable)
                 cmd.character.assign<Hit>(cmd.userKey.key, animData);
             }
         }
@@ -112,7 +114,8 @@ namespace Inanna {
                     INANNA_REPLACE_SPRITE_ANIM_IF_NOT(event.entity, AnimationData::KYO_CROUCH);
                     manager->emit<SpriteForceKeyFrame>(event.entity, AnimationData::KYO_CROUCH.keyFrames.size() - 1);
                 }
-                INANNA_REMOVE_COMPONENT(event.entity, Hit);
+                INANNA_REMOVE_COMPONENT(event.entity, Hit)
+                INANNA_REPLACE_COMPONENT(event.entity, Collidable)
             }
         }
 

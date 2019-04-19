@@ -35,7 +35,7 @@ namespace Inanna {
 
             const Vecf ground = Vecf(0, SCREEN_HEIGHT);
             auto image = anim->KeyFrame();
-            Vecf size = Vecf(0, image.h);
+            Vecf size = Vecf(face->left ? 0 : image.w, image.h);
             auto pos = Vecf(position->position.x, -position->position.y);
             return Rectf(ground + pos - size, Vecf(image.w, image.h) + anim->boundingBoxOffset);
         }
@@ -66,16 +66,16 @@ namespace Inanna {
         static void Adjust(entityx::ComponentHandle<Position> &posL, const entityx::ComponentHandle<Position> &posR, const Rectf &boxL,
                     const Rectf &boxR, const entityx::ComponentHandle<Facing> &faceL) {
             if (faceL->left) {
-                if (posL->position.x >= posR->position.x + boxR.w * 0.5f) { // jump other size
-                    posL->position.x = posR->position.x + boxR.w;
+                if (posL->position.x >= posR->position.x - boxR.w * 0.5f) { // jump other size
+                    posL->position.x = posR->position.x;
                 } else {
-                    posL->position.x = posR->position.x - boxL.w;
+                    posL->position.x = posR->position.x - boxR.w - boxL.w + 10;
                 }
             } else {
-                if (posL->position.x <= posR->position.x + boxR.w * 0.5f) { // jump other size
-                    posL->position.x = posR->position.x - boxL.w;
+                if (posL->position.x - boxL.w <= posR->position.x + boxR.w * 0.5f) { // jump other size
+                    posL->position.x = posR->position.x - 10;
                 } else {
-                    posL->position.x = posR->position.x + boxR.w;
+                    posL->position.x = posR->position.x + boxR.w + boxL.w - 10;
                 }
             }
         }
@@ -89,7 +89,6 @@ namespace Inanna {
                     auto pair = Rectf::GetIntersect(colL.box, colR.box);
                     if (entL != entR && !(HAS_KEY(entSet, entL) || HAS_KEY(entSet, entR)) && pair.first) {
                         entSet.insert(entL);
-                        printf("1312312\n");
                         AdjustPositions(entL, colL, entR, colR, pair.second);
                     }
                 });
@@ -97,9 +96,9 @@ namespace Inanna {
 
 
             entities.each<Position, SpriteAnimation, Facing>(
-                    [this](entityx::Entity entity, Position &position, SpriteAnimation &sprite, Facing &facing) {
+                    [this](entityx::Entity entity, Position &position, SpriteAnimation &sprite, Facing &face) {
                         auto image = sprite.KeyFrame();
-                        Vecf size = Vecf(0, image.h);
+                        Vecf size = Vecf(face.left ? 0 : image.w, image.h);
                         auto pos = Vecf(position.position.x, -position.position.y);
                         position.global = GROUND + pos - size;
                     });

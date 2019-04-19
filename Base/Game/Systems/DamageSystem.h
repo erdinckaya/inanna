@@ -31,9 +31,9 @@ namespace Inanna {
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Character, Damage, Health, Position>(
+            entities.each<Character, Damage, Health, Position, Facing>(
                     [this, dt](entityx::Entity entity, Character &character, Damage &damage, Health &health,
-                               Position &position) {
+                               Position &position, Facing &face) {
                         health.health -= damage.damage;
                         manager->emit<AbortEvent>(entity, 2);
                         if (health.health < 0) {
@@ -43,6 +43,9 @@ namespace Inanna {
                         damage.animData.speed = damage.animData.keyFrames.size() / damage.pushBackTime;
                         float x = Physics::PushBackWithDistanceAndTime(damage.pushBackDistance, damage.pushBackTime,
                                                                        damage.totalTime);
+                        if (!face.left) {
+                            x = -x;
+                        }
                         damage.totalTime += dt * 0.001f;
                         position.position = Vecf(damage.startPos - x, position.position.y);
 
