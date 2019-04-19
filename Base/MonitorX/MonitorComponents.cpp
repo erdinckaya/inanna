@@ -19,6 +19,7 @@
 #include "../Game/Components/CharacterState.h"
 #include "../Game/Components/Character.h"
 #include "../Game/Components/Crouch.h"
+#include "../Game/Components/Gizmo.h"
 #include "../Game/Components/UserKeyHistory.h"
 
 REFLECT_STRUCT_BEGIN(Inanna::Renderable)
@@ -37,6 +38,10 @@ REFLECT_STRUCT_BEGIN(Inanna::Position)
                     REFLECT_STRUCT_MEMBER(global)
 REFLECT_STRUCT_END()
 
+REFLECT_STRUCT_BEGIN(Inanna::Gizmo)
+                    REFLECT_STRUCT_MEMBER(drawBoundingBox)
+REFLECT_STRUCT_END()
+
 REFLECT_STRUCT_BEGIN(Inanna::SpriteAnimation)
                     REFLECT_STRUCT_MEMBER(animData)
                     REFLECT_STRUCT_MEMBER(time)
@@ -47,6 +52,7 @@ REFLECT_STRUCT_BEGIN(Inanna::SpriteAnimation)
                     REFLECT_STRUCT_MEMBER(reverse)
                     REFLECT_STRUCT_MEMBER(state)
                     REFLECT_STRUCT_MEMBER(stayAtLastFrame)
+                    REFLECT_STRUCT_MEMBER(boundingBoxOffset)
 REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::SpriteLoop)

@@ -5,6 +5,7 @@
 #ifndef INANNA_COLLISIONSYSTEM_H
 #define INANNA_COLLISIONSYSTEM_H
 
+#include <unordered_set>
 
 #include <entityx/System.h>
 #include "../../UI/Components/Position.h"
@@ -22,15 +23,19 @@ namespace Inanna {
         }
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
-            entities.each<Collidable>([&entities, this](entityx::Entity left, Collidable &leftC) {
-                entities.each<Collidable>([&left, &leftC, this](entityx::Entity right, Collidable &rightC) {
-                    if (left != right && leftC.box.IsIntersect(rightC.box)) {
-                        printf("Colliding\n");
-                        manager->emit<CollisionEvent>(left, right);
+            std::unordered_set<entityx::Entity> entSet;
+            entities.each<Collidable>([&entities, this, &entSet](entityx::Entity entL, Collidable &colL) {
+                colL.box = SpritePositionSystem::GetBoundingBox(entL);
+                entities.each<Collidable>([&entL, &colL, this, &entSet](entityx::Entity entR, Collidable &colR) {
+                    colR.box = SpritePositionSystem::GetBoundingBox(entR);
+                    if (entL != entR && !(HAS_KEY(entSet, entL) || HAS_KEY(entSet, entR)) && colL.box.IsIntersect(colR.box)) {
+                        entSet.insert(entL);
+//                        manager->emit<CollisionEvent>(entL, entR);
                     }
                 });
             });
         }
+
 
     private:
         entityx::EventManager *manager;

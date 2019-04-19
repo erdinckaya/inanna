@@ -44,8 +44,30 @@
     } \
 
 
+
 #define HAS_COMP(e, C) ((e).has_component<C>())
 
 #define COMP(e, C) ((e).component<C>())
+
+#define IS_PUSHING(e) (HAS_COMP(e, MoveCharacter) || HAS_COMP(e, JumpCharacter) || HAS_COMP(e, Run) || HAS_COMP(e, JumpBack))
+
+
+#define FOR_I(C) \
+const int size = static_cast<const int>(C.size());\
+for (int i = 0; i < size; ++i) \
+
+#define FOR_IJ(C, J) \
+const int size_J = static_cast<const int>(C.size());\
+for (int J = 0; J < size_J; ++J) \
+
+#define FOR_R(C) \
+const int size = static_cast<const int>(C.size());\
+for (int i = size - 1; i > -1; --i) \
+
+#define FOR_E(C, elem) \
+for (auto& elem : C) \
+
+#define HAS_KEY(m, k) ((m).find((k)) != (m).end())
+
 
 #endif //INANNA_SPRITEMACRO_H

@@ -22,7 +22,6 @@ namespace Inanna {
 
         void configure(entityx::EventManager &events) override {
             manager = &events;
-            events.subscribe<SpriteIndex>(*this);
             events.subscribe<SpriteAnimEnd>(*this);
         }
 
@@ -64,14 +63,6 @@ namespace Inanna {
             }
         }
 
-        void receive(const SpriteIndex &spriteIndex) {
-//            SpriteIndex event = spriteIndex;
-//            if (event.entity.has_component<JumpCharacter>()) {
-//                auto direction = event.entity.component<JumpCharacter>()->direction;
-//                event.entity.component<JumpCharacter>()->direction = Vecf(direction.x, -direction.y);
-//                event.entity.component<JumpState>()->state = JumpStates::FALL_JS;
-//            }
-        }
 
     private:
         const int FLOOR;

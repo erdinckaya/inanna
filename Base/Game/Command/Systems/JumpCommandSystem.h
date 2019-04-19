@@ -47,7 +47,7 @@ namespace Inanna {
             }
 
             cmd.character.replace<SpriteIndex>(cmd.character, 4);
-            cmd.character.replace<JumpCharacter>(animData, 300, 0.4f, 5.0f * direction);
+            cmd.character.replace<JumpCharacter>(animData, 350, 0.4f, 6.0f * direction);
             INANNA_REMOVE_COMPONENT(cmd.character, MoveCharacter);
             cmd.character.component<CharacterState>()->lock = true;
         }

@@ -57,8 +57,8 @@ namespace Inanna {
 
         void receive(const RunEnd &runEnd) {
             RunEnd event = runEnd;
-            INANNA_REMOVE_COMPONENT(event.entity, Run);
-            INANNA_REMOVE_COMPONENT(event.entity, SpriteLoop);
+            INANNA_REMOVE_COMPONENT(event.entity, Run)
+            INANNA_REMOVE_COMPONENT(event.entity, SpriteLoop)
             INANNA_REPLACE_SPRITE_ANIM_WITH_LOOP(event.entity, AnimationData::KYO_IDLE);
             event.entity.component<CharacterState>()->lock = false;
         }

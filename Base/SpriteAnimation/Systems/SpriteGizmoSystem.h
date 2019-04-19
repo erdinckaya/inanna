@@ -8,6 +8,7 @@
 
 #include <entityx/System.h>
 #include "../../UI/Components/Position.h"
+#include "../../Game/Components/Gizmo.h"
 #include "../Components/SpriteAnimation.h"
 #include "../../World.h"
 
@@ -34,10 +35,18 @@ namespace Inanna {
 
                             graphics->DrawRect(pos, {1, 0, 0, 1}, 1);
 
-                            Rectf bound = Rectf(position.global, sprite.Size());
+                            Rectf bound = Rectf(position.global, Vecf(image.w, image.h));
                             graphics->DrawRect(bound, {0, 0, 1, 1}, 2);
                         } else {
                             sprite.hitbox = Rectf(0, 0, 0, 0);
+                        }
+
+                        if (HAS_COMP(entity, Gizmo)) {
+                            auto gizmo = COMP(entity, Gizmo);
+                            if (gizmo->drawBoundingBox) {
+                                Rectf bound = Rectf(position.global, Vecf(image.w, image.h));
+                                graphics->DrawRect(bound, {0, 0, 1, 1}, 2);
+                            }
                         }
                     });
         }

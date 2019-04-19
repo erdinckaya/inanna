@@ -9,11 +9,8 @@
 #include "../../SpriteAnimation/Components/SpriteAnimation.h"
 #include "../Components/Character.h"
 #include "../../Util/SpriteMacro.h"
-#include "../../SpriteAnimation/Event/SpriteAnimEnd.h"
 #include "../../UI/Components/Position.h"
-#include "../../SpriteAnimation/Event/SpriteIndex.h"
 #include "../Components/Run.h"
-#include "../Events/RunEnd.h"
 
 namespace Inanna {
     struct RunSystem : public entityx::System<RunSystem>, entityx::Receiver<RunSystem> {
@@ -22,18 +19,10 @@ namespace Inanna {
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Character, Position, Run>(
                     [this, dt](entityx::Entity entity, Character &character, Position &position, Run &run) {
-                        INANNA_REPLACE_SPRITE_ANIM_IF_NOT_LOOP(entity, run.animData);
-
-                        double speed = 1000.0 / run.speed;
-                        if (run.time >= speed) {
-                            run.time = 0;
-                        } else {
-                            run.time += dt;
-                        }
+                        INANNA_REPLACE_SPRITE_ANIM_IF_NOT_LOOP(entity, run.animData)
                         position.position += run.direction * run.speed;
                     });
         }
-
     };
 }
 

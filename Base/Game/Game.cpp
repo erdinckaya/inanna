@@ -33,6 +33,7 @@
 #include "../SpriteAnimation/Systems/SpriteFacingSystem.h"
 #include "Systems/DamageSystem.h"
 #include "Systems/CollisionSystem.h"
+#include "Components/Gizmo.h"
 
 
 Inanna::Game* Inanna::Game::Instance = nullptr;
@@ -93,6 +94,7 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<RunSystem>(dt);
     systems.update<RollSystem>(dt);
     systems.update<OryuSystem>(dt);
+
     systems.update<CollisionSystem>(dt);
     systems.update<DamageSystem>(dt);
 
@@ -121,6 +123,7 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Player.assign<SpriteZ>(0);
             Player.assign<Health>(100);
             Player.assign<Collidable>();
+            Player.assign<Gizmo>(true);
 
             break;
         }
@@ -129,7 +132,7 @@ void Inanna::Game::Test(SDL_Keycode code) {
             auto comp = Rival.assign<SpriteAnimation>(AnimationData::KYO_IDLE);
             Rival.assign<Time>(0);
             comp->loop = true;
-            Rival.assign<Position>(Vecf(100, 100));
+            Rival.assign<Position>(Vecf(500, 100));
             Rival.assign<Facing>(false);
             Rival.assign<Character>("Kyo");
             Rival.assign<UserKeyHistory>();
@@ -137,6 +140,7 @@ void Inanna::Game::Test(SDL_Keycode code) {
             Rival.assign<SpriteZ>(1);
             Rival.assign<Health>(100);
             Rival.assign<Collidable>();
+            Rival.assign<Gizmo>(true);
 
             break;
         }
