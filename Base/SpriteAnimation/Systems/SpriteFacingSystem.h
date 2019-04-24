@@ -13,7 +13,7 @@
 #include "../../Game/Game.h"
 
 namespace Inanna {
-    // Pivots are bottom left for anims
+    // Pivots are bottom center
     struct SpriteFacingSystem : public entityx::System<SpriteFacingSystem> {
 
         explicit SpriteFacingSystem() = default;
@@ -28,18 +28,7 @@ namespace Inanna {
                 auto old = player.component<Facing>()->left;
                 player.component<Facing>()->left = pPos->position.x < rPos->position.x;
                 rival.component<Facing>()->left = !player.component<Facing>()->left;
-                if (old != player.component<Facing>()->left) {
-                    if (old) {
-                        pPos->position.x += COMP(player, SpriteAnimation)->KeyFrame().w;
-                        rPos->position.x -= COMP(rival, SpriteAnimation)->KeyFrame().w;
-                    } else {
-                        pPos->position.x -= COMP(player, SpriteAnimation)->KeyFrame().w;
-                        rPos->position.x += COMP(rival, SpriteAnimation)->KeyFrame().w;
-                    }
-                }
             }
-
-
         }
     };
 }

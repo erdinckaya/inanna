@@ -18,10 +18,7 @@ namespace Inanna {
 
         void update(entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override {
             entities.each<Character, Crouch>([this, dt](entityx::Entity entity, Character &character, Crouch &crouch) {
-                INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_CROUCH);
-//                if (entity.component<CharacterState>()->oldState == CharacterBehaviour::Crouch) {
-//                    entity.component<SpriteAnimation>()->frameIndex = entity.component<SpriteAnimation>()->LastFrame();
-//                }
+                INANNA_REPLACE_SPRITE_ANIM_IF_NOT(entity, AnimationData::KYO_CROUCH)
                 entity.component<SpriteAnimation>()->stayAtLastFrame = true;
             });
         }
