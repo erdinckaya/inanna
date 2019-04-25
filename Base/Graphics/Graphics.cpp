@@ -23,7 +23,9 @@
 
 Inanna::Graphics::Graphics(unsigned int width, unsigned int height, SDL_WindowFlags flags) : sdl(flags),
                                                                                              window(width, height),
-                                                                                             context(window) {
+                                                                                             context(window),
+                                                                                             width(width),
+                                                                                             height(height) {
     glEnable(GL_TEXTURE_2D);
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glEnable(GL_BLEND);
@@ -154,4 +156,14 @@ void Inanna::Graphics::DrawRect(Inanna::Rectf rect, SDL_Color color, int width) 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     glFlush();
+}
+
+void Inanna::Graphics::SetCameraPos(const Inanna::Vecf &pos) {
+    glViewport((GLint) pos.x, (GLint) pos.y, width, height);
+}
+
+void Inanna::Graphics::SetCameraViewPort(const Inanna::Rectf &port) {
+    width = (unsigned int) port.w;
+    height = (unsigned int) port.h;
+    SetCameraPos(Vecf(port.x, port.y));
 }

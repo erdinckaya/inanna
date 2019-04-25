@@ -34,6 +34,8 @@
 #include "Systems/DamageSystem.h"
 #include "Systems/CollisionSystem.h"
 #include "Components/Gizmo.h"
+#include "Components/Camera.h"
+#include "Systems/CameraSystem.h"
 
 
 Inanna::Game* Inanna::Game::Instance = nullptr;
@@ -68,9 +70,12 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<SpriteFacingSystem>();
     systems.add<SpriteRenderSystem>(graphics);
     systems.add<SpriteGizmoSystem>(graphics);
+    systems.add<CameraSystem>(graphics);
     systems.configure();
 
     Patterns.Init("../Resources/Data/key_patterns.json");
+
+    entities.create().assign<Camera>(Rectf(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
 }
 
 void Inanna::Game::Update(entityx::TimeDelta dt) {
@@ -104,6 +109,8 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<SpriteFacingSystem>(dt);
     systems.update<SpriteRenderSystem>(dt);
     systems.update<SpriteGizmoSystem>(dt);
+
+    systems.update<CameraSystem>(dt);
 }
 
 
@@ -144,6 +151,16 @@ void Inanna::Game::Test(SDL_Keycode code) {
 
             break;
         }
+        case SDLK_o: {
+            printf("123123\n");
+            auto pos = CameraSystem::GetCameraPos();
+            CameraSystem::ChangeCameraPos(Vecf(pos.x + 100, pos.y));
+            break;
+        }
+        case SDLK_p: {
+            break;
+        }
+
         default:
             break;
     }

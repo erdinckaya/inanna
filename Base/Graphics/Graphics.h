@@ -35,6 +35,10 @@ namespace Inanna {
 
         void PassEvent(SDL_Event *event);
 
+        void SetCameraPos(const Vecf &pos);
+
+        void SetCameraViewPort(const Rectf &port);
+
 #ifdef MONITORX_DEBUG
         std::unique_ptr<monitorx::MonitorX> monitorX;
 #endif
@@ -43,6 +47,8 @@ namespace Inanna {
         SDL sdl;
         SDLWindow window;
         SDLContext context;
+        unsigned int width;
+        unsigned int height;
 
         void InitResources();
 
