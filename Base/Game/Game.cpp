@@ -36,11 +36,12 @@
 #include "Components/Gizmo.h"
 #include "Components/Camera.h"
 #include "Systems/CameraSystem.h"
+#include "Systems/TweenAnimSystem.h"
 
 
-Inanna::Game* Inanna::Game::Instance = nullptr;
+Inanna::Game *Inanna::Game::Instance = nullptr;
 
-Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
+Inanna::Game::Game(Graphics *graphics) : graphics(graphics) {
     systems.add<KeyInputSystem>();
     systems.add<HitCommandSystem>();
     systems.add<MoveCommandSystem>();
@@ -70,6 +71,9 @@ Inanna::Game::Game(Graphics* graphics) : graphics(graphics) {
     systems.add<SpriteFacingSystem>();
     systems.add<SpriteRenderSystem>(graphics);
     systems.add<SpriteGizmoSystem>(graphics);
+
+
+    systems.add<TweenAnimSystem>();
     systems.add<CameraSystem>(graphics);
     systems.configure();
 
@@ -110,6 +114,7 @@ void Inanna::Game::Update(entityx::TimeDelta dt) {
     systems.update<SpriteRenderSystem>(dt);
     systems.update<SpriteGizmoSystem>(dt);
 
+    systems.update<TweenAnimSystem>(dt);
     systems.update<CameraSystem>(dt);
 }
 
@@ -152,12 +157,30 @@ void Inanna::Game::Test(SDL_Keycode code) {
             break;
         }
         case SDLK_o: {
-            printf("123123\n");
             auto pos = CameraSystem::GetCameraPos();
-            CameraSystem::ChangeCameraPos(Vecf(pos.x + 100, pos.y));
+
+            auto ent = entities.create();
+            auto tween = tweeny::from(pos.x).to(pos.x + 100.0f).during(1000)
+                    .via(tweeny::easing::backInOutEasing())
+                    .onStep([&pos](tweeny::tween<float> &t, float x) {
+                        CameraSystem::SetCameraPos(x, pos.y);
+                        return false;
+                    });
+            ent.assign<TweenAnim>(tween)->OnStart([](){printf("Start\n");}).OnComplete([](){printf("Complete\n");});
+
             break;
         }
         case SDLK_p: {
+            auto pos = CameraSystem::GetCameraPos();
+
+            auto ent = entities.create();
+            auto tween = tweeny::from(pos.x).to(pos.x - 100.0f).during(1000)
+                    .via(tweeny::easing::backInOutEasing())
+                    .onStep([&pos](tweeny::tween<float> &t, float x) {
+                        CameraSystem::SetCameraPos(x, pos.y);
+                        return false;
+                    });
+            ent.assign<TweenAnim>(tween, [](){printf("Start\n");}, [](){printf("Complete\n");});
             break;
         }
 

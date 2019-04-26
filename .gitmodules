@@ -1,0 +1,3 @@
+[submodule "ThirdParty/tweeny"]
+	path = ThirdParty/tweeny
+	url = https://github.com/mobius3/tweeny.git
