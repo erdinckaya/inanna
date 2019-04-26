@@ -22,12 +22,29 @@ namespace Inanna {
             auto player = Game::Instance->Player;
             auto rival = Game::Instance->Rival;
             if (player.valid() && rival.valid()) {
-                auto pPos = player.component<Position>();
-                auto rPos = rival.component<Position>();
+                auto pPos = COMP(player, Position);
+                auto rPos = COMP(rival, Position);
+                auto pImg = COMP(player, SpriteAnimation)->KeyFrame();
+                auto rImg = COMP(rival, SpriteAnimation)->KeyFrame();
+                auto pFace = COMP(player, Facing)->left;
+                auto rFace = COMP(rival, Facing)->left;
 
-                auto old = player.component<Facing>()->left;
-                player.component<Facing>()->left = pPos->position.x < rPos->position.x;
-                rival.component<Facing>()->left = !player.component<Facing>()->left;
+
+//                auto px = pPos->position.x + pImg.w * (pFace ? 0.5f : -0.5f);
+//                auto rx = rPos->position.x + rImg.w * (rFace ? 0.5f : -0.5f);
+
+                auto px = pPos->position.x;
+                auto rx = rPos->position.x;
+
+                COMP(player, Facing)->left = px < rx;
+                COMP(rival, Facing)->left = !(COMP(player, Facing)->left);
+
+                auto left = COMP(player, Facing)->left;
+                if (pFace != left) {
+
+                    COMP(player, Position)->position.x += left ? -pImg.w : pImg.w;
+                    COMP(rival, Position)->position.x += !left ? -rImg.w : rImg.w;
+                }
             }
         }
     };

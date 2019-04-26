@@ -31,10 +31,11 @@ namespace Inanna {
         static Rectf GetBoundingBox(entityx::Entity ent) {
             auto position = COMP(ent, Position);
             auto anim = COMP(ent, SpriteAnimation);
+            auto face = COMP(ent, Facing);
 
             const Vecf ground = Vecf(0, SCREEN_HEIGHT);
             auto image = anim->KeyFrame();
-            Vecf size = Vecf(image.w * 0.5f, image.h);
+            Vecf size = Vecf(face->left ? 0 : image.w, image.h);
             auto pos = Vecf(position->position.x, -position->position.y);
             return Rectf(ground + pos - size, Vecf(image.w, image.h) + anim->boundingBoxOffset);
         }
@@ -48,22 +49,23 @@ namespace Inanna {
             auto faceR = COMP(right, Facing);
 
             if (IS_PUSHING(left)) {
-                Adjust(posL, posR, intersect);
+                Adjust(left, right, intersect);
             } else if (IS_PUSHING(right)) {
-                Adjust(posR, posL, intersect);
+                Adjust(right, left, intersect);
             } else {
                 if (HAS_COMP(left, CharacterState) && HAS_COMP(left, CharacterState)) {
                     auto lState = COMP(left, CharacterState);
                     auto rState = COMP(right, CharacterState);
                     if (lState->state == CharacterBehaviour::Idle && rState->state == CharacterBehaviour::Idle) {
-                        Adjust(posL, posR, intersect);
+                        Adjust(left, right, intersect);
                     }
                 }
             }
         }
 
-        static void Adjust(entityx::ComponentHandle<Position> &posL, const entityx::ComponentHandle<Position> &posR,
-                           const Rectf &intersect) {
+        static void Adjust(entityx::Entity left, entityx::Entity right, const Rectf &intersect) {
+            auto posL = COMP(left, Position);
+            auto posR = COMP(right, Position);
             posL->position.x += (posR->position.x < intersect.x ? 1 : -1) * intersect.w;
         }
 
@@ -85,7 +87,7 @@ namespace Inanna {
             entities.each<Position, SpriteAnimation, Facing>(
                     [this](entityx::Entity entity, Position &position, SpriteAnimation &sprite, Facing &face) {
                         auto image = sprite.KeyFrame();
-                        Vecf size = Vecf(image.w * 0.5f, image.h);
+                        Vecf size = Vecf(face.left ? 0 : image.w, image.h);
                         auto pos = Vecf(position.position.x, -position.position.y);
                         position.global = GROUND + pos - size;
                     });

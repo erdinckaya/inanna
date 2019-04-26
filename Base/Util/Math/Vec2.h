@@ -105,11 +105,11 @@ namespace Inanna {
         }
 
 
-        friend inline bool operator==(const Vec2& lhs, const Vec2& rhs) {
+        friend inline bool operator==(const Vec2 &lhs, const Vec2 &rhs) {
             return lhs.x == rhs.x && lhs.y == rhs.y;
         }
 
-        friend inline bool operator!=(const Vec2& lhs, const Vec2& rhs) {
+        friend inline bool operator!=(const Vec2 &lhs, const Vec2 &rhs) {
             return !(lhs == rhs);
         }
 
@@ -176,7 +176,6 @@ namespace Inanna {
     typedef Vec2<float> Vecf;
     typedef Vec2<double> Vecd;
     typedef Vec2<int> Veci;
-
 }
 
 #endif
