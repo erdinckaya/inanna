@@ -21,6 +21,7 @@
 #include "../Game/Components/Crouch.h"
 #include "../Game/Components/Gizmo.h"
 #include "../Game/Components/UserKeyHistory.h"
+#include "../Game/Components/Camera.h"
 
 REFLECT_STRUCT_BEGIN(Inanna::Renderable)
                     REFLECT_STRUCT_MEMBER(rotation)
@@ -40,6 +41,10 @@ REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::Gizmo)
                     REFLECT_STRUCT_MEMBER(drawBoundingBox)
+REFLECT_STRUCT_END()
+
+REFLECT_STRUCT_BEGIN(Inanna::Camera)
+                    REFLECT_STRUCT_MEMBER(port)
 REFLECT_STRUCT_END()
 
 REFLECT_STRUCT_BEGIN(Inanna::SpriteAnimation)

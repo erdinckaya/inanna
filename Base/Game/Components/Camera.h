@@ -12,6 +12,8 @@ namespace Inanna {
         explicit Camera(const Rectf &port, const Vecf &posDiff = Vecf(0, 0)) : port(port) {}
 
         Rectf port;
+
+        REFLECT()
     };
 }
 
